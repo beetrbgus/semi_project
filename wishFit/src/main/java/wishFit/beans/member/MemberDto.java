@@ -1,4 +1,4 @@
-package wishFit.beans;
+package wishFit.beans.member;
 
 import java.sql.Date;
 
