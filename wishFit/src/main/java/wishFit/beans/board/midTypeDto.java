@@ -1,7 +1,7 @@
 package wishFit.beans.board;
 
 public class midTypeDto {
-	String midName,lagName;
+	private String midName,lagName;
 
 	public String getMidName() {
 		return midName;

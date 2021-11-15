@@ -3,9 +3,9 @@ package wishFit.beans.member;
 import java.sql.Date;
 
 public class MemberDto {
-	String memId,memPw,memNick,memGrade,memBirth,memGender,memPwQ,memPwA,memName,memPhone;
-	int memReport;
-	Date memJoin;
+	private String memId,memPw,memNick,memGrade,memBirth,memGender,memPwQ,memPwA,memName,memPhone;
+	private int memReport;
+	private Date memJoin;
 	public String getMemId() {
 		return memId;
 	}

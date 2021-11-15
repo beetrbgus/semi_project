@@ -4,9 +4,9 @@ import java.sql.Date;
 
 
 public class BoardDto {
-	int boardNo,boardReply,boardRead,boardLike,boardHate;
-	String midName,lagName,boardWriter,boardTitle,boardPost;
-	String boardDate;
+	private int boardNo,boardReply,boardRead,boardLike,boardHate;
+	private String midName,lagName,boardWriter,boardTitle,boardPost;
+	private String boardDate;
 	public int getBoardNo() {
 		return boardNo;
 	}
