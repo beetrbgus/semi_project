@@ -1,0 +1,35 @@
+@charset "UTF-8";
+.app-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.app-pagination > li {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.app-pagination > li > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-black);
+  font-size: 0.875rem;
+  font-weight: normal;
+  border-radius: var(--border-radius-3);
+  transition: 250ms;
+}
+.app-pagination > li > a:hover {
+  background-color: var(--color-gray-300);
+}
+.app-pagination > li.app-pagination-first > a {
+  color: var(--color-gray-700);
+}
+.app-pagination > li.app-active > a {
+  font-weight: 600;
+  background-color: var(--color-gray-300);
+}
+

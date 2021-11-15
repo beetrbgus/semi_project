@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/* Original file: modules/board/skins/slow/components/article/article-footer.scss */
+.app-article-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.app-article-toolbar {
+  background-color: #f8f9fa;
+  border-top: 1px solid #f1f3f5;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.app-article-toolbar .app-board-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+

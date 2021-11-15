@@ -1,0 +1,48 @@
+@charset "UTF-8";
+.app-extra-form input[type="radio"],
+.app-input-radio {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  margin: -4px 0 0 0;
+  padding: 0 !important;
+  vertical-align: middle;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  border-radius: 50% !important;
+  border: 1px solid var(--color-gray-300);
+  appearance: none;
+  -webkit-appearance: none;
+  transition: .2s ease;
+}
+.app-extra-form input[type="radio"]:focus,
+.app-input-radio:focus {
+  border-color: var(--color-primary);
+}
+.app-extra-form input[type="radio"]:checked,
+.app-input-radio:checked {
+  background-color: #f5f6f7;
+  border-color: var(--color-primary);
+  border-width: 5px;
+}
+.app-extra-form input[type="radio"]:checked:focus,
+.app-input-radio:checked:focus {
+  border-color: var(--color-primary);
+}
+.app-extra-form input[type="radio"] + label,
+.app-input-radio + label {
+  cursor: pointer;
+  color: var(--color-gray-700);
+  font-size: 0.875rem;
+  padding-left: 0.25rem;
+  margin-right: 0.5rem;
+}
+.app-extra-form input[type="radio"]:checked + label,
+.app-input-radio:checked + label {
+  color: var(--color-primary);
+}
+

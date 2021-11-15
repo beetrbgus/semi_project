@@ -1,0 +1,468 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/assets/css/xe_content.scss */
+.xe_content {
+  /* This Source Code Form is subject to the terms of the Mozilla Public
+     * License, v. 2.0. If a copy of the MPL was not distributed with this
+     * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+  /* blocks */
+  /* tables */
+  /* border collapse rules */
+  /* Set hidden if we have 'frame' or 'rules' attribute.
+         Set it on all sides when we do so there's more consistency
+         in what authors should expect */
+  /* Put this first so 'border' and 'frame' rules can override it. */
+  /* 'border' before 'frame' so 'frame' overrides
+          A border with a given value should, of course, pass that value
+          as the border-width in pixels -> attr mapping */
+  /* specificity must beat table:-moz-table-border-nonzero rule above */
+  /* Internal Table Borders */
+  /* 'border' cell borders first */
+  /* collapse only if rules are really specified */
+  /* only specified rules override 'border' settings
+      (increased specificity to achieve this) */
+  /* caption inherits from table not table-outer */
+  /* for XHTML tables without tbody */
+  /* inlines */
+  /* titles */
+  /* lists */
+  /* leafs */
+  /* <hr> noshade and color attributes are handled completely by
+     * the nsHTMLHRElement attribute mapping code
+     */
+  /* hidden elements */
+  /* media elements */
+}
+.xe_content address, .xe_content article, .xe_content aside, .xe_content blockquote, .xe_content body, .xe_content caption, .xe_content center, .xe_content col, .xe_content colgroup, .xe_content dd, .xe_content dir, .xe_content div, .xe_content dl, .xe_content dt, .xe_content fieldset, .xe_content figcaption, .xe_content figure, .xe_content footer, .xe_content form, .xe_content h1, .xe_content h2, .xe_content h3, .xe_content h4, .xe_content h5, .xe_content h6, .xe_content header, .xe_content hgroup, .xe_content hr, .xe_content html, .xe_content legend, .xe_content li, .xe_content listing, .xe_content main, .xe_content marquee, .xe_content menu, .xe_content nav, .xe_content noframes, .xe_content ol, .xe_content p, .xe_content plaintext, .xe_content pre, .xe_content section, .xe_content summary, .xe_content table, .xe_content tbody, .xe_content td, .xe_content tfoot, .xe_content th, .xe_content thead, .xe_content tr, .xe_content ul, .xe_content xmp {
+  unicode-bidi: isolate;
+}
+.xe_content bdi, .xe_content output {
+  unicode-bidi: isolate;
+}
+.xe_content article, .xe_content aside, .xe_content details, .xe_content div, .xe_content dt, .xe_content figcaption, .xe_content footer, .xe_content form, .xe_content header, .xe_content hgroup, .xe_content html, .xe_content main, .xe_content nav, .xe_content section, .xe_content summary {
+  display: block;
+}
+.xe_content body {
+  display: block;
+  margin: 8px;
+}
+.xe_content p, .xe_content dl, .xe_content multicol {
+  display: block;
+}
+.xe_content dd {
+  display: block;
+  margin-inline-start: 40px;
+}
+.xe_content blockquote, .xe_content figure {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+}
+.xe_content address {
+  display: block;
+  font-style: italic;
+}
+.xe_content center {
+  display: block;
+  text-align: -moz-center;
+}
+.xe_content blockquote[type=cite] {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 1em;
+}
+.xe_content span[_moz_quote=true] {
+  color: blue;
+}
+.xe_content pre[_moz_quote=true] {
+  color: blue;
+}
+.xe_content h1 {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+.xe_content h2 {
+  display: block;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+}
+.xe_content h3 {
+  display: block;
+  font-size: 1.17em;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.xe_content h4 {
+  display: block;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+}
+.xe_content h5 {
+  display: block;
+  font-size: 0.83em;
+  font-weight: bold;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+}
+.xe_content h6 {
+  display: block;
+  font-size: 0.67em;
+  font-weight: bold;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+}
+.xe_content listing {
+  display: block;
+  font-family: -moz-fixed;
+  font-size: medium;
+  white-space: pre;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.xe_content xmp, .xe_content pre, .xe_content plaintext {
+  display: block;
+  font-family: -moz-fixed;
+  white-space: pre;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.xe_content table {
+  display: table;
+  border-spacing: 2px;
+  border-collapse: separate;
+  /* XXXldb do we want this if we're border-collapse:collapse ? */
+  box-sizing: border-box;
+  text-indent: 0;
+  border: 1px solid #e9ecef;
+}
+.xe_content table td, .xe_content table th {
+  border: 1px solid #e9ecef;
+}
+.xe_content table[align="left"] {
+  float: left;
+}
+.xe_content table[align="right"] {
+  float: right;
+  text-align: start;
+}
+.xe_content table[rules] {
+  border-width: thin;
+  border-style: hidden;
+}
+.xe_content table[frame] {
+  border: thin hidden;
+}
+.xe_content table[frame="void"] {
+  border-style: hidden;
+}
+.xe_content table[frame="above"] {
+  border-style: outset hidden hidden hidden;
+}
+.xe_content table[frame="below"] {
+  border-style: hidden hidden outset hidden;
+}
+.xe_content table[frame="lhs"] {
+  border-style: hidden hidden hidden outset;
+}
+.xe_content table[frame="rhs"] {
+  border-style: hidden outset hidden hidden;
+}
+.xe_content table[frame="hsides"] {
+  border-style: outset hidden;
+}
+.xe_content table[frame="vsides"] {
+  border-style: hidden outset;
+}
+.xe_content table[frame="box"], .xe_content table[frame="border"] {
+  border-style: outset;
+}
+.xe_content table[rules]:not([rules="none"]):not([rules=""]) {
+  border-collapse: collapse;
+}
+.xe_content table[rules]:not([rules=""]) > tr > td, .xe_content table[rules]:not([rules=""]) > * > tr > td, .xe_content table[rules]:not([rules=""]) > tr > th, .xe_content table[rules]:not([rules=""]) > * > tr > th, .xe_content table[rules]:not([rules=""]) > td, .xe_content table[rules]:not([rules=""]) > th {
+  border-width: thin;
+  border-style: none;
+}
+.xe_content table[rules][rules="none"] > tr > td, .xe_content table[rules][rules="none"] > * > tr > td, .xe_content table[rules][rules="none"] > tr > th, .xe_content table[rules][rules="none"] > * > tr > th, .xe_content table[rules][rules="none"] > td, .xe_content table[rules][rules="none"] > th {
+  border-width: thin;
+  border-style: none;
+}
+.xe_content table[rules][rules="all"] > tr > td, .xe_content table[rules][rules="all"] > * > tr > td, .xe_content table[rules][rules="all"] > tr > th, .xe_content table[rules][rules="all"] > * > tr > th, .xe_content table[rules][rules="all"] > td, .xe_content table[rules][rules="all"] > th {
+  border-width: thin;
+  border-style: solid;
+}
+.xe_content table[rules][rules="rows"] > tr, .xe_content table[rules][rules="rows"] > * > tr {
+  border-block-start-width: thin;
+  border-block-end-width: thin;
+  border-block-start-style: solid;
+  border-block-end-style: solid;
+}
+.xe_content table[rules][rules="cols"] > tr > td, .xe_content table[rules][rules="cols"] > * > tr > td, .xe_content table[rules][rules="cols"] > tr > th, .xe_content table[rules][rules="cols"] > * > tr > th {
+  border-inline-start-width: thin;
+  border-inline-end-width: thin;
+  border-inline-start-style: solid;
+  border-inline-end-style: solid;
+}
+.xe_content table[rules][rules="groups"] > colgroup {
+  border-inline-start-width: thin;
+  border-inline-end-width: thin;
+  border-inline-start-style: solid;
+  border-inline-end-style: solid;
+}
+.xe_content table[rules][rules="groups"] > tfoot, .xe_content table[rules][rules="groups"] > thead, .xe_content table[rules][rules="groups"] > tbody {
+  border-block-start-width: thin;
+  border-block-end-width: thin;
+  border-block-start-style: solid;
+  border-block-start-style: solid;
+}
+.xe_content caption {
+  display: table-caption;
+  text-align: center;
+}
+.xe_content table[align="center"] > caption {
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+.xe_content table[align="center"] > caption[align="left"]:dir(ltr) {
+  margin-inline-end: 0;
+}
+.xe_content table[align="center"] > caption[align="left"]:dir(rtl) {
+  margin-inline-start: 0;
+}
+.xe_content table[align="center"] > caption[align="right"]:dir(ltr) {
+  margin-inline-start: 0;
+}
+.xe_content table[align="center"] > caption[align="right"]:dir(rtl) {
+  margin-inline-end: 0;
+}
+.xe_content tr {
+  display: table-row;
+  vertical-align: inherit;
+}
+.xe_content col {
+  display: table-column;
+}
+.xe_content colgroup {
+  display: table-column-group;
+}
+.xe_content tbody {
+  display: table-row-group;
+  vertical-align: middle;
+}
+.xe_content thead {
+  display: table-header-group;
+  vertical-align: middle;
+}
+.xe_content tfoot {
+  display: table-footer-group;
+  vertical-align: middle;
+}
+.xe_content table > tr {
+  vertical-align: middle;
+}
+.xe_content td {
+  display: table-cell;
+  vertical-align: inherit;
+  text-align: unset;
+  padding: 1px;
+}
+.xe_content th {
+  display: table-cell;
+  vertical-align: inherit;
+  font-weight: bold;
+  padding: 1px;
+}
+.xe_content tr > form:-moz-is-html, .xe_content tbody > form:-moz-is-html, .xe_content thead > form:-moz-is-html, .xe_content tfoot > form:-moz-is-html, .xe_content table > form:-moz-is-html {
+  /* Important: don't show these forms in HTML */
+  display: none !important;
+}
+.xe_content table[bordercolor] > tbody, .xe_content table[bordercolor] > thead, .xe_content table[bordercolor] > tfoot, .xe_content table[bordercolor] > col, .xe_content table[bordercolor] > colgroup, .xe_content table[bordercolor] > tr, .xe_content table[bordercolor] > * > tr, .xe_content table[bordercolor] > tr > td, .xe_content table[bordercolor] > * > tr > td, .xe_content table[bordercolor] > tr > th, .xe_content table[bordercolor] > * > tr > th {
+  border-color: inherit;
+}
+.xe_content q:before {
+  content: open-quote;
+}
+.xe_content q:after {
+  content: close-quote;
+}
+.xe_content b, .xe_content strong {
+  font-weight: bolder;
+}
+.xe_content i, .xe_content cite, .xe_content em, .xe_content var, .xe_content dfn {
+  font-style: italic;
+}
+.xe_content tt, .xe_content code, .xe_content kbd, .xe_content samp {
+  font-family: -moz-fixed;
+}
+.xe_content u, .xe_content ins {
+  text-decoration: underline;
+}
+.xe_content s, .xe_content strike, .xe_content del {
+  text-decoration: line-through;
+}
+.xe_content big {
+  font-size: larger;
+}
+.xe_content small {
+  font-size: smaller;
+}
+.xe_content sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+.xe_content sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+.xe_content nobr {
+  white-space: nowrap;
+}
+.xe_content mark {
+  background: yellow;
+  color: black;
+}
+.xe_content abbr[title], .xe_content acronym[title] {
+  text-decoration: dotted underline;
+}
+.xe_content ul, .xe_content menu, .xe_content dir {
+  display: block;
+  list-style-type: disc;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-left: 30px;
+}
+.xe_content menu[type="context"] {
+  display: none !important;
+}
+.xe_content ul, .xe_content ol, .xe_content menu {
+  counter-reset: list-item;
+  -moz-list-reversed: false;
+}
+.xe_content ol[reversed] {
+  -moz-list-reversed: true;
+}
+.xe_content ol {
+  display: block;
+  list-style-type: decimal;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-left: 30px;
+}
+.xe_content li {
+  display: list-item;
+  text-align: match-parent;
+}
+.xe_content hr {
+  display: block;
+  border: 1px inset;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-inline: auto;
+  color: gray;
+  box-sizing: content-box;
+}
+.xe_content hr[size="1"] {
+  border-style: solid none none none;
+}
+.xe_content img {
+  display: inline-block;
+}
+.xe_content img[usemap], .xe_content object[usemap] {
+  color: blue;
+}
+.xe_content frameset {
+  display: block !important;
+  overflow: -moz-hidden-unscrollable;
+  position: static !important;
+  float: none !important;
+  border: none !important;
+}
+.xe_content link {
+  display: none;
+}
+.xe_content frame {
+  border-radius: 0 !important;
+}
+.xe_content iframe {
+  display: initial;
+  border: 2px inset;
+}
+@media (max-width: 1024px) {
+  .xe_content iframe {
+    display: block;
+    max-width: 100%;
+  }
+}
+.xe_content noframes {
+  display: none;
+}
+.xe_content spacer {
+  position: static !important;
+  float: none !important;
+}
+.xe_content canvas {
+  user-select: none;
+}
+.xe_content base, .xe_content basefont, .xe_content datalist, .xe_content head, .xe_content meta, .xe_content script, .xe_content style, .xe_content title, .xe_content noembed, .xe_content param, .xe_content template {
+  display: none;
+}
+.xe_content area {
+  /* Don't give it frames other than its imageframe */
+  display: none !important;
+}
+.xe_content video {
+  object-fit: contain;
+}
+.xe_content audio:not([controls]) {
+  display: none;
+}
+.xe_content audio[controls] {
+  /* This ensures that intrinsic sizing can reliably shrinkwrap our
+          controls (which are also always horizontal) and produce a
+          reasonable intrinsic size from them. */
+  writing-mode: horizontal-tb !important;
+}
+.xe_content video > .caption-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.xe_content dialog {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  color: black;
+  margin: auto;
+  border-width: initial;
+  border-style: solid;
+  border-color: initial;
+  border-image: initial;
+  padding: 1em;
+  background: white;
+  width: -moz-fit-content;
+}
+.xe_content dialog:not([open]) {
+  display: none;
+}
+.xe_content marquee {
+  inline-size: -moz-available;
+  display: inline-block;
+  vertical-align: text-bottom;
+  text-align: start;
+}
+.xe_content marquee[direction="up"], .xe_content marquee[direction="down"] {
+  block-size: 200px;
+}
+

@@ -1,0 +1,41 @@
+@charset "UTF-8";
+:root {
+  --mobile: 1024px;
+  --color-white: white;
+  --color-black: black;
+  --color-primary: #3f9dff;
+  --color-secondary: #2957ff;
+  --color-success: #2ac558;
+  --color-warning: #f7ba2a;
+  --color-danger: #ff5a57;
+  --color-info: #2957ff;
+  --color-gray-100: #f8f9fa;
+  --color-gray-200: #f1f3f5;
+  --color-gray-300: #e9ecef;
+  --color-gray-400: #dee2e6;
+  --color-gray-500: #ced4da;
+  --color-gray-600: #adb5bd;
+  --color-gray-700: #868e96;
+  --color-gray-800: #495057;
+  --color-gray-900: #343a40;
+  --color-gray-10: #212529;
+  --color-background: #f5f6f7;
+  --color-grouped-content-background: white;
+  --color-text-primary: white;
+  --container-max-width: 1366px;
+  --base-font-family: 'Noto Sans Korean', 'Noto Sans Korea', 'NotoSansKR', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --border-radius-1: 4px;
+  --border-radius-2: 6px;
+  --border-radius-3: 0.5rem;
+  --border-radius-4: 1rem;
+  --box-shadow-1: rgba(0,0,0,0.1) 0 0 8px;
+  --box-shadow-2: rgba(0,0,0,0.05) 0 6px 24px;
+  --card-shadow: rgba(0,0,0,0.05) 0 6px 20px;
+  --bottom-nav-height: 3.5rem;
+  --bottom-nav-ios-padding: 1rem;
+  --aside-side-nav-width: calc(var(--aside-width) + var(--side-nav-width));
+}
+.app-theme-dark {
+  --box-shadow-1: var(--color-gray-500) 0 0 10px -1px;
+}
+

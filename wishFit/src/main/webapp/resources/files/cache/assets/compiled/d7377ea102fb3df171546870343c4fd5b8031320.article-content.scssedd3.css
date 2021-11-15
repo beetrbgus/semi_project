@@ -1,0 +1,431 @@
+@charset "UTF-8";
+/* Original file: modules/board/skins/slow/components/article/article-content.scss */
+.app-article-content .xe_content {
+  /* tables */
+  /* border collapse rules */
+  /* Set hidden if we have 'frame' or 'rules' attribute.
+         Set it on all sides when we do so there's more consistency
+         in what authors should expect */
+  /* Put this first so 'border' and 'frame' rules can override it. */
+  /* 'border' before 'frame' so 'frame' overrides
+          A border with a given value should, of course, pass that value
+          as the border-width in pixels -> attr mapping */
+  /* specificity must beat table:-moz-table-border-nonzero rule above */
+  /* Internal Table Borders */
+  /* 'border' cell borders first */
+  /* collapse only if rules are really specified */
+  /* only specified rules override 'border' settings
+      (increased specificity to achieve this) */
+  /* caption inherits from table not table-outer */
+  /* for XHTML tables without tbody */
+  /* inlines */
+  /* titles */
+  /* lists */
+  /* leafs */
+  /* <hr> noshade and color attributes are handled completely by
+     * the nsHTMLHRElement attribute mapping code
+     */
+  /* hidden elements */
+  /* media elements */
+}
+.app-article-content .xe_content p, .app-article-content .xe_content dl, .app-article-content .xe_content multicol {
+  display: block;
+  margin: 0px 0px 0px 0px;
+  line-height: 160%;
+}
+.app-article-content .xe_content dd {
+  display: block;
+  margin-inline-start: 40px;
+}
+.app-article-content .xe_content blockquote, .app-article-content .xe_content figure {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  color: #868e96;
+  border-left: 2px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+.app-article-content .xe_content blockquote > p, .app-article-content .xe_content figure > p {
+  margin: 0;
+}
+.app-article-content .xe_content address {
+  display: block;
+  font-style: italic;
+}
+.app-article-content .xe_content blockquote[type=cite] {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 1em;
+}
+.app-article-content .xe_content a[href] {
+  color: #3f9dff;
+  text-decoration: none;
+  transition: 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+}
+.app-article-content .xe_content a[href]:hover {
+  border-bottom-color: #3f9dff;
+}
+.app-article-content .xe_content h1 {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+.app-article-content .xe_content h2 {
+  display: block;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+}
+.app-article-content .xe_content h3 {
+  display: block;
+  font-size: 1.17em;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.app-article-content .xe_content h4 {
+  display: block;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+}
+.app-article-content .xe_content h5 {
+  display: block;
+  font-size: 0.83em;
+  font-weight: bold;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+}
+.app-article-content .xe_content h6 {
+  display: block;
+  font-size: 0.67em;
+  font-weight: bold;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+}
+.app-article-content .xe_content listing {
+  display: block;
+  font-size: medium;
+  white-space: pre;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.app-article-content .xe_content xmp, .app-article-content .xe_content pre, .app-article-content .xe_content plaintext {
+  display: block;
+  white-space: pre;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.app-article-content .xe_content pre {
+  padding: 1em 1.25em;
+  border-radius: 4px;
+  color: #2957ff;
+  font-family: 'Noto Sans Korean', 'Noto Sans Korea', 'NotoSansKR', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  background-color: #d6def8;
+}
+.app-article-content .xe_content table {
+  display: table;
+  border-spacing: 0;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  text-indent: 0;
+  border: none;
+}
+.app-article-content .xe_content table td {
+  padding: 0.5em 0.875em;
+  border: 1px solid #e9ecef;
+}
+.app-article-content .xe_content table[align="left"] {
+  float: left;
+}
+.app-article-content .xe_content table[align="right"] {
+  float: right;
+  text-align: start;
+}
+.app-article-content .xe_content table[rules] {
+  border-width: thin;
+  border-style: hidden;
+}
+.app-article-content .xe_content table[frame] {
+  border: thin hidden;
+}
+.app-article-content .xe_content table[frame="void"] {
+  border-style: hidden;
+}
+.app-article-content .xe_content table[frame="above"] {
+  border-style: outset hidden hidden hidden;
+}
+.app-article-content .xe_content table[frame="below"] {
+  border-style: hidden hidden outset hidden;
+}
+.app-article-content .xe_content table[frame="lhs"] {
+  border-style: hidden hidden hidden outset;
+}
+.app-article-content .xe_content table[frame="rhs"] {
+  border-style: hidden outset hidden hidden;
+}
+.app-article-content .xe_content table[frame="hsides"] {
+  border-style: outset hidden;
+}
+.app-article-content .xe_content table[frame="vsides"] {
+  border-style: hidden outset;
+}
+.app-article-content .xe_content table[frame="box"], .app-article-content .xe_content table[frame="border"] {
+  border-style: outset;
+}
+.app-article-content .xe_content table[rules]:not([rules="none"]):not([rules=""]) {
+  border-collapse: collapse;
+}
+.app-article-content .xe_content table[rules]:not([rules=""]) > tr > td, .app-article-content .xe_content table[rules]:not([rules=""]) > * > tr > td, .app-article-content .xe_content table[rules]:not([rules=""]) > tr > th, .app-article-content .xe_content table[rules]:not([rules=""]) > * > tr > th, .app-article-content .xe_content table[rules]:not([rules=""]) > td, .app-article-content .xe_content table[rules]:not([rules=""]) > th {
+  border-width: thin;
+  border-style: none;
+}
+.app-article-content .xe_content table[rules][rules="none"] > tr > td, .app-article-content .xe_content table[rules][rules="none"] > * > tr > td, .app-article-content .xe_content table[rules][rules="none"] > tr > th, .app-article-content .xe_content table[rules][rules="none"] > * > tr > th, .app-article-content .xe_content table[rules][rules="none"] > td, .app-article-content .xe_content table[rules][rules="none"] > th {
+  border-width: thin;
+  border-style: none;
+}
+.app-article-content .xe_content table[rules][rules="all"] > tr > td, .app-article-content .xe_content table[rules][rules="all"] > * > tr > td, .app-article-content .xe_content table[rules][rules="all"] > tr > th, .app-article-content .xe_content table[rules][rules="all"] > * > tr > th, .app-article-content .xe_content table[rules][rules="all"] > td, .app-article-content .xe_content table[rules][rules="all"] > th {
+  border-width: thin;
+  border-style: solid;
+}
+.app-article-content .xe_content table[rules][rules="rows"] > tr, .app-article-content .xe_content table[rules][rules="rows"] > * > tr {
+  border-block-start-width: thin;
+  border-block-end-width: thin;
+  border-block-start-style: solid;
+  border-block-end-style: solid;
+}
+.app-article-content .xe_content table[rules][rules="cols"] > tr > td, .app-article-content .xe_content table[rules][rules="cols"] > * > tr > td, .app-article-content .xe_content table[rules][rules="cols"] > tr > th, .app-article-content .xe_content table[rules][rules="cols"] > * > tr > th {
+  border-inline-start-width: thin;
+  border-inline-end-width: thin;
+  border-inline-start-style: solid;
+  border-inline-end-style: solid;
+}
+.app-article-content .xe_content table[rules][rules="groups"] > colgroup {
+  border-inline-start-width: thin;
+  border-inline-end-width: thin;
+  border-inline-start-style: solid;
+  border-inline-end-style: solid;
+}
+.app-article-content .xe_content table[rules][rules="groups"] > tfoot, .app-article-content .xe_content table[rules][rules="groups"] > thead, .app-article-content .xe_content table[rules][rules="groups"] > tbody {
+  border-block-start-width: thin;
+  border-block-end-width: thin;
+  border-block-start-style: solid;
+  border-block-start-style: solid;
+}
+.app-article-content .xe_content caption {
+  display: table-caption;
+  text-align: center;
+}
+.app-article-content .xe_content table[align="center"] > caption {
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+.app-article-content .xe_content table[align="center"] > caption[align="left"]:dir(ltr) {
+  margin-inline-end: 0;
+}
+.app-article-content .xe_content table[align="center"] > caption[align="left"]:dir(rtl) {
+  margin-inline-start: 0;
+}
+.app-article-content .xe_content table[align="center"] > caption[align="right"]:dir(ltr) {
+  margin-inline-start: 0;
+}
+.app-article-content .xe_content table[align="center"] > caption[align="right"]:dir(rtl) {
+  margin-inline-end: 0;
+}
+.app-article-content .xe_content tr {
+  display: table-row;
+  vertical-align: inherit;
+}
+.app-article-content .xe_content col {
+  display: table-column;
+}
+.app-article-content .xe_content colgroup {
+  display: table-column-group;
+}
+.app-article-content .xe_content tbody {
+  display: table-row-group;
+  vertical-align: middle;
+}
+.app-article-content .xe_content thead {
+  display: table-header-group;
+  vertical-align: middle;
+}
+.app-article-content .xe_content tfoot {
+  display: table-footer-group;
+  vertical-align: middle;
+}
+.app-article-content .xe_content table > tr {
+  vertical-align: middle;
+}
+.app-article-content .xe_content td {
+  display: table-cell;
+  vertical-align: inherit;
+  text-align: unset;
+  padding: 1px;
+}
+.app-article-content .xe_content th {
+  display: table-cell;
+  vertical-align: inherit;
+  font-weight: bold;
+  padding: 1px;
+}
+.app-article-content .xe_content table[bordercolor] > tbody, .app-article-content .xe_content table[bordercolor] > thead, .app-article-content .xe_content table[bordercolor] > tfoot, .app-article-content .xe_content table[bordercolor] > col, .app-article-content .xe_content table[bordercolor] > colgroup, .app-article-content .xe_content table[bordercolor] > tr, .app-article-content .xe_content table[bordercolor] > * > tr, .app-article-content .xe_content table[bordercolor] > tr > td, .app-article-content .xe_content table[bordercolor] > * > tr > td, .app-article-content .xe_content table[bordercolor] > tr > th, .app-article-content .xe_content table[bordercolor] > * > tr > th {
+  border-color: inherit;
+}
+.app-article-content .xe_content q:before {
+  content: open-quote;
+}
+.app-article-content .xe_content q:after {
+  content: close-quote;
+}
+.app-article-content .xe_content b, .app-article-content .xe_content strong {
+  font-weight: bolder;
+}
+.app-article-content .xe_content i, .app-article-content .xe_content cite, .app-article-content .xe_content em, .app-article-content .xe_content var, .app-article-content .xe_content dfn {
+  font-style: italic;
+}
+.app-article-content .xe_content u, .app-article-content .xe_content ins {
+  text-decoration: underline;
+}
+.app-article-content .xe_content s, .app-article-content .xe_content strike, .app-article-content .xe_content del {
+  text-decoration: line-through;
+}
+.app-article-content .xe_content big {
+  font-size: larger;
+}
+.app-article-content .xe_content small {
+  font-size: smaller;
+}
+.app-article-content .xe_content sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+.app-article-content .xe_content sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+.app-article-content .xe_content nobr {
+  white-space: nowrap;
+}
+.app-article-content .xe_content mark {
+  background: yellow;
+  color: black;
+}
+.app-article-content .xe_content abbr[title], .app-article-content .xe_content acronym[title] {
+  text-decoration: dotted underline;
+}
+.app-article-content .xe_content ul, .app-article-content .xe_content menu, .app-article-content .xe_content dir {
+  display: block;
+  list-style-type: disc;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-left: 30px;
+}
+.app-article-content .xe_content menu[type="context"] {
+  display: none !important;
+}
+.app-article-content .xe_content ul, .app-article-content .xe_content ol, .app-article-content .xe_content menu {
+  counter-reset: list-item;
+}
+.app-article-content .xe_content ol {
+  display: block;
+  list-style-type: decimal;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-left: 30px;
+}
+.app-article-content .xe_content li {
+  display: list-item;
+  text-align: match-parent;
+}
+.app-article-content .xe_content hr {
+  display: block;
+  border: none;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  box-sizing: content-box;
+  border-bottom: 1px solid #dee2e6;
+}
+.app-article-content .xe_content hr[size="1"] {
+  border-style: solid none none none;
+}
+.app-article-content .xe_content img[usemap], .app-article-content .xe_content object[usemap] {
+  color: blue;
+}
+.app-article-content .xe_content link {
+  display: none;
+}
+.app-article-content .xe_content iframe {
+  border: none;
+}
+.app-article-content .xe_content noframes {
+  display: none;
+}
+.app-article-content .xe_content spacer {
+  position: static !important;
+  float: none !important;
+}
+.app-article-content .xe_content canvas {
+  user-select: none;
+}
+.app-article-content .xe_content base, .app-article-content .xe_content basefont, .app-article-content .xe_content datalist, .app-article-content .xe_content head, .app-article-content .xe_content meta, .app-article-content .xe_content script, .app-article-content .xe_content style, .app-article-content .xe_content title, .app-article-content .xe_content noembed, .app-article-content .xe_content param, .app-article-content .xe_content template {
+  display: none;
+}
+.app-article-content .xe_content area {
+  /* Don't give it frames other than its imageframe */
+  display: none !important;
+}
+.app-article-content .xe_content video {
+  object-fit: contain;
+}
+.app-article-content .xe_content audio:not([controls]) {
+  display: none;
+}
+.app-article-content .xe_content audio[controls] {
+  /* This ensures that intrinsic sizing can reliably shrinkwrap our
+          controls (which are also always horizontal) and produce a
+          reasonable intrinsic size from them. */
+  writing-mode: horizontal-tb !important;
+}
+.app-article-content .xe_content video > .caption-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.app-article-content .xe_content dialog {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  color: black;
+  margin: auto;
+  border-width: initial;
+  border-style: solid;
+  border-color: initial;
+  border-image: initial;
+  padding: 1em;
+  background: white;
+}
+.app-article-content .xe_content dialog:not([open]) {
+  display: none;
+}
+.app-article-content .xe_content marquee {
+  display: inline-block;
+  vertical-align: text-bottom;
+  text-align: start;
+}
+.app-article-content .xe_content marquee[direction="up"], .app-article-content .xe_content marquee[direction="down"] {
+  block-size: 200px;
+}
+

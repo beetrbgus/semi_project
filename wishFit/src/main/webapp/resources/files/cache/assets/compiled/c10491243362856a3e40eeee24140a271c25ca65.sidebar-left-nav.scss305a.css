@@ -1,0 +1,92 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/sidebar-left/sidebar-left-nav.scss */
+.app-sidebar-left__nav {
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  text-align: left;
+}
+.app-sidebar-left__nav > li {
+  position: relative;
+  border-bottom: 1px solid #f1f3f5;
+}
+.app-sidebar-left__nav > li:last-child {
+  border-bottom: none;
+}
+.app-sidebar-left__nav > li .app-sidebar-left__nav__item {
+  display: flex;
+  align-items: center;
+  border-left: 2px solid transparent;
+}
+.app-sidebar-left__nav > li .app-sidebar-left__nav__item > a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  color: #495057;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 250ms;
+}
+.app-sidebar-left__nav > li .app-sidebar-left__nav__item > a .app-sidebar-left__nav__icon {
+  font-size: 1rem;
+  margin-right: 0.75rem;
+}
+.app-sidebar-left__nav > li .app-sidebar-left__nav__item > .app-sidebar-left__nav__more {
+  cursor: pointer;
+  color: #adb5bd;
+  font-size: 1rem;
+  padding: 0.25rem 1rem;
+  transition: 0.2s ease;
+}
+.app-sidebar-left__nav > li .app-sidebar-left__nav__item:hover {
+  background-color: var(--color-gray-100);
+}
+.app-sidebar-left__nav > li .app-sidebar-left__nav__item:hover > a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.app-sidebar-left__nav > li.active > .app-sidebar-left__nav__item {
+  background-color: #f8f9fa;
+  border-left-color: #3f9dff;
+}
+.app-sidebar-left__nav > li.active > .app-sidebar-left__nav__item > a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.app-sidebar-left__nav > li.open > .app-sidebar-left__nav__item > .app-sidebar-left__nav__more {
+  transform: rotate(180deg);
+}
+.app-sidebar-left__nav > li.open > .app-sidebar-left__nav__child {
+  display: block;
+}
+.app-sidebar-left__nav__child {
+  display: none;
+  padding-top: 0.25rem;
+  padding-left: 1.5rem;
+  padding-right: 1.25rem;
+  padding-bottom: 0.5rem;
+}
+.app-sidebar-left__nav__child.three-depth {
+  padding-left: 1rem;
+}
+.app-sidebar-left__nav__child > li {
+  padding: 0.5rem;
+}
+.app-sidebar-left__nav__child > li > a {
+  display: inline-block;
+  color: var(--color-gray-700);
+  font-size: 0.875rem;
+  border-radius: 4px;
+  border-right: 2px solid transparent;
+  transition: color 250ms, background-color 250ms;
+}
+.app-sidebar-left__nav__child > li.active > a {
+  color: var(--color-black);
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+.app-sidebar-left__nav__child > li > a:hover {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+

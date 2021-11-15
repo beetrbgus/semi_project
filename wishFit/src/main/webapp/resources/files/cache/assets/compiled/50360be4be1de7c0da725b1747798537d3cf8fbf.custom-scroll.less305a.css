@@ -1,0 +1,20 @@
+@charset "UTF-8";
+.app-custom-scroll {
+  overflow-y: overlay;
+}
+.app-custom-scroll::-webkit-scrollbar {
+  width: 12px;
+  transition: 250ms;
+}
+.app-custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  transition: 250ms;
+}
+.app-custom-scroll::-webkit-scrollbar-thumb {
+  background: #adb5bdb6;
+  border-radius: 20px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  transition: 250ms;
+}
+

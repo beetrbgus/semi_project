@@ -1,0 +1,94 @@
+/***********************************************/
+/**                  모바일                   **/
+/***********************************************/
+@media all and (max-width:480px){
+#rank_user_view{display:none;}
+}
+
+
+
+/***********************************************/
+/**                  PC		                  **/
+/***********************************************/
+
+/*기본*/
+#keyword_user_view{overflow:hidden;}
+#keyword_user_view a{text-decoration:none; color:#333;}
+
+
+/*상단메뉴*/
+#keyword_user_view .keyword_user_menu{width:100%; margin:10px 0px 20px 0px; overflow:hidden;}
+#keyword_user_view .keyword_user_menu ul{list-style:none; margin:0px; padding:0px;}
+#keyword_user_view .keyword_user_menu ul li{float:left;}
+#keyword_user_view .keyword_user_menu ul li a{display:inline-block; padding:8px; margin:5px 8px 5px 0px; border:1px solid #ccc; border-radius:4px; transition:0.4s;}
+#keyword_user_view .keyword_user_menu ul li a:hover{background:slategray; color:white;}
+#keyword_user_view .keyword_user_menu .selected{background:slategray; color:white;}
+#keyword_user_view .keyword_user_menu .setting{background:url(../img/setting_b.png) no-repeat center center;}
+#keyword_user_view .keyword_user_menu .setting:hover{background:url(../img/setting_w.png) no-repeat center center;}
+
+/* 날짜 */
+#keyword_user_view .rank_date_wrap{border-bottom:1px solid #ddd; margin-bottom:40px; position:relative; height:10px; text-align:center;}
+#keyword_user_view .rank_date{margin:0; padding:0; font-size:16px; font-weight:bold; color:#666; display:inline-block; padding:0px 10px; background:#fff;}
+
+/*순위목록*/
+#keyword_user_view .popular_keyword_list_table{border-collapse:collapse; white-space:nowrap; width:100%;}
+#keyword_user_view .popular_keyword_list_table .center{text-align:center;}
+#keyword_user_view .popular_keyword_list_table .title{white-space:normal;}
+#keyword_user_view .popular_keyword_list_table .voter{color:tomato; font-weight:bold;}
+#keyword_user_view .popular_keyword_list_table thead{border-bottom:1px solid #ccc; border-top:1px solid #ccc; background:linear-gradient(to bottom,#fff 0%,#fafafa 100%);}
+#keyword_user_view .popular_keyword_list_table tbody{border-bottom:1px solid #ccc;}
+#keyword_user_view .popular_keyword_list_table tbody tr{border-bottom:1px solid #eee; transition:0.1s linear;}
+#keyword_user_view .popular_keyword_list_table tbody tr:last-child{border:none;}
+#keyword_user_view .popular_keyword_list_table th{padding:9px; color:#333;}
+#keyword_user_view .popular_keyword_list_table td{padding:9px; color:#333;}
+#keyword_user_view .popular_keyword_list_table td a{color:#333;}
+#keyword_user_view .popular_keyword_list_table td a:visited{color:#555;}
+#keyword_user_view .popular_keyword_list_table tbody tr:hover{background:#f5f5f5;}
+#keyword_user_view .popular_keyword_list_table img{vertical-align:bottom;}
+#keyword_user_view .popular_keyword_list_table .r_status{display:inline-block; width:25px; text-align:left; color:#777; font-size:11px; font-weight:bold; font-family:Tahoma;}
+
+/* 실시간검색현황 */
+#keyword_user_view .now_search_list ul{background:#f8f8f8; margin:0px; padding:15px; border-radius:5px;}
+#keyword_user_view .now_search_list ul li{list-style:none; padding:10px; margin:10px 0px; background:white; border:1px solid #eee; border-radius:10px; transition:0.3s;}
+#keyword_user_view .now_search_list ul li:hover{background:#FAFCFF;}
+#keyword_user_view .now_search_list ul li a{display:inline-block; text-align:center; vertical-align:middle; margin-right:10px;}
+#keyword_user_view .now_search_list .user_info{margin:10px;}
+#keyword_user_view .now_search_list .user_info img{display:block; width:35px; padding:0 5px;}
+#keyword_user_view .now_search_list .user_info span{display:block;border:1px solid #ddd; border-radius:3px; background:#f1f1f1;}
+#keyword_user_view .now_search_list .user_keyword{font-weight:bold; color:#333;}
+#keyword_user_view .now_search_list .user_target{color:gray;}
+#keyword_user_view .now_search_list .user_time{color:tomato;}
+#keyword_user_view .now_search_list .user_time img{margin-left:3px; vertical-align:middle;}
+#keyword_user_view .now_search_list .user_ip span{color:#bbb;}
+
+
+/* 순위변동그래프 */
+#keyword_user_view #keyword_chart{margin:20px; margin-left:10px;}
+#keyword_user_view .keyword_graph_wrap{background:#fbfbfb; margin:10px; padding:10px; border-radius:5px;}
+#keyword_user_view .keyword_graph_subject{margin:25px; font-size:15px; font-weight:bold; text-align:center;}
+#keyword_user_view .keyword_graph_subject span{color:tomato;}
+#keyword_user_view .keyword_search{text-align:center; margin:20px;}
+#keyword_user_view .keyword_search_input{height:23px; line-height:23px; text-indent:5px; padding:0px; margin:0px; border-radius:3px; border:1px solid #ccc; outline:none; margin-bottom:5px; box-shadow:inset 1px 1px 1px #eee, 1px 1px 1px #eee;}
+
+
+/* 나의검색어 */
+#keyword_user_view .my_keyword_black{display:block; position:absolute; top:7px; left:5px;}
+#keyword_user_view .my_keyword_white{display:none; position:absolute; top:7px; left:5px;}
+#keyword_user_view .my_keyword:hover .my_keyword_black{display:none;}
+#keyword_user_view .my_keyword:hover .my_keyword_white{display:block;}
+#keyword_user_view .selected  .my_keyword_white{display:block;}
+
+
+/*네비게이션*/
+#keyword_user_view .pagination{padding:15px 0;margin:0;text-align:center}
+#keyword_user_view .pagination a:hover{border:1px solid #e7e7e7; background:#f7f7f7;}
+#keyword_user_view .pagination a,
+#keyword_user_view .pagination strong{position:relative;display:inline-block;text-decoration:none;line-height:normal;color:#4d4d4d;margin:0;padding:5px 8px;border-radius:3px;vertical-align:middle; border:1px solid transparent; transition:.2s linear;}
+#keyword_user_view .pagination strong{color:tomato!important;background:#f7f7f7;border:1px solid #e7e7e7}
+#keyword_user_view .pagination a.prev,
+#keyword_user_view .pagination a.prevEnd,
+#keyword_user_view .pagination a.next,
+#keyword_user_view .pagination a.nextEnd{font-weight:normal !important;margin:0 !important;white-space:nowrap;text-decoration:none !important;border:1px solid #e7e7e7;;background-repeat:no-repeat}
+#keyword_user_view .pagination a.prevEnd{padding-left:10px;background-position:left center}
+#keyword_user_view .pagination a.nextEnd{padding-right:10px;background-position:right center}
+

@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/bottom-nav/bottom-nav.scss */
+.app-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 200;
+  width: 100%;
+  min-height: var(--bottom-nav-height);
+  background-color: var(--color-grouped-content-background);
+  backdrop-filter: var(--header-backdrop);
+  -webkit-backdrop-filter: var(--header-backdrop);
+  border-top: 1px solid var(--color-gray-300);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.app-bottom-nav > ul {
+  display: flex;
+  align-items: center;
+  height: var(--bottom-nav-height);
+}
+.app-bottom-nav > ul > li {
+  position: relative;
+  flex: 1;
+  height: 100%;
+}
+.app-bottom-nav > ul > li > a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  color: var(--color-gray-700);
+  font-size: 1.25rem;
+}
+.app-bottom-nav > ul > li > a svg, .app-bottom-nav > ul > li > a i, .app-bottom-nav > ul > li > a ion-icon {
+  font-size: 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+.app-bottom-nav > ul > li > a span.app-bottom-nav-item__text {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+.app-bottom-nav > ul > li > a .app-bottom-nav-item {
+  display: flex;
+  position: relative;
+}
+.app-bottom-nav > ul > li > a .app-bottom-nav-badge {
+  position: absolute;
+  top: -3px;
+  left: 1em;
+  padding: 2px 4px 1px;
+  color: white;
+  line-height: 1;
+  font-size: 0.75rem;
+  background-color: var(--color-danger);
+  border-radius: 99999px;
+}
+.app-bottom-nav > ul > li > a.app-active {
+  color: var(--color-primary);
+  /* border-bottom-color: var(--color-primary); */
+}
+.app-bottom-nav > ul > li > a.app-active .app-avatar {
+  border: 2px solid var(--color-background);
+  box-shadow: var(--color-primary) 0 0 0 2px;
+}
+.app-layout-bottom-nav {
+  display: none;
+  min-height: var(--bottom-nav-height);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+@media (max-width: 1024px) {
+  .app-layout-bottom-nav {
+    display: block;
+  }
+}
+.app-bottom-nav-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: calc(100% - var(--bottom-nav-height));
+  background-color: var(--color-background);
+  overflow-y: auto;
+}
+

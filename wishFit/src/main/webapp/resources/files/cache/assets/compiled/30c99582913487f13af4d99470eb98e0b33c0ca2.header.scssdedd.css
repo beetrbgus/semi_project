@@ -1,0 +1,16 @@
+@charset "UTF-8";
+/* Original file: modules/board/skins/slow/assets/css/base/header.scss */
+.app-board-header {
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+}
+@media (max-width: 1024px) {
+  .app-board-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+.app-board-header .app-board-title {
+  padding-left: 0.25rem;
+}
+
