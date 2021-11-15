@@ -386,13 +386,13 @@ String root = request.getContextPath();
 						});
 				</script>
 				<!-- 로그인 버튼 -->
-				<a href="#" class="app-pc-only app-header-login-link"
-					onclick="toggleDialog('app-login')"> 
+				<a href="#" class="app-pc-only app-header-login-link" style=display:none
+									onclick="toggleDialog('app-login')"> 
 					<i class="el-icon-lock"></i> <span>로그인</span>
 				</a> 
 				<!-- 회원가입 버튼 -->
 				<a class="app-pc-only app-button app-primary app-button-rounded app-button-small"
-					href="index5ab6.html?mid=index&amp;act=dispMemberSignUpForm">회원가입
+					href="index5ab6.html?mid=index&amp;act=dispMemberSignUpForm" style=display:none>회원가입
 				</a>
 				
 				<!-- 로그인 모달 창 -->
