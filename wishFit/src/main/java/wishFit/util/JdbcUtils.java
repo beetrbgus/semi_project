@@ -6,7 +6,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class DbcpUtil {
+public class JdbcUtils {
 	private static DataSource ds;
 	
 	static {
@@ -19,7 +19,7 @@ public class DbcpUtil {
 			e.printStackTrace();
 		}
 	}
-	public static Connection connect() throws Exception{
+	public static Connection connect2() throws Exception{
 		return ds.getConnection();
 	}
 	
