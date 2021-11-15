@@ -5,7 +5,6 @@
 <html>
 <%
 String root = request.getContextPath();
-
 %>
 <head>
 <meta charset="UTF-8">
@@ -255,7 +254,9 @@ String root = request.getContextPath();
 				</a>
 				<!--헤더의 항목 부분-->
 				<ul class="app-header-nav">
-					<li class="active"><a href="index.html"> <span>Now</span>
+					<li class="active">
+					<a href="index.html">
+					<span>Now</span>
 					</a></li>
 					<li><a href="community.html"> <span>커뮤니티</span> <ion-icon
 								class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"
@@ -333,12 +334,13 @@ String root = request.getContextPath();
 				
 				<!-- 검색 아이콘 -->
 				<a class="app-header-item app-icon-button app-icon-button-gray app-search-toggle"
-				> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round"
-							stroke-linejoin="round" stroke-width="2"
-							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+				> 
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round"
+						stroke-linejoin="round" stroke-width="2"
+						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 						/>
-                        </svg>
+                    </svg>
 				</a>
 				<!-- 검색 버튼 클릭시 뜨는 창. -->
 				<div id="app-search" class="app-search">
@@ -489,8 +491,125 @@ String root = request.getContextPath();
 							clip-rule="evenodd"/>
                     </svg>
 				</a>
+				<!-- 알림 아이콘 -->
+				<div class="app-pc-only app-dropdown">
+    				<a class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
+    				  	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        					<path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+   						</svg>
+          			</a>
+	    			<div class="app-dropdown-menu app-right" style="width: 270px">
+      					<div class="app-dropdown-header tw-flex tw-items-center">
+		        			<div class="tw-text-base tw-font-bold">알림</div>
+		        
+		        			<div class="tw-flex-1"></div>
+		        			<a class="tw-text-sm tw-text-gray-700" href="#" onclick="onClickNotiReadAll()">
+		          				<span>모두 삭제</span>
+		        			</a>
+      					</div>
+      
+	      				<div class="tw-text-center tw-py-6 tw-px-4">
+	  						<ion-icon name="notifications" class="tw-text-gray-600 tw-text-2xl tw-mb-4 md hydrated" role="img" aria-label="notifications"></ion-icon>
+							  <div class="tw-text-black tw-font-bold tw-text-sm tw-mb-2">새로운 알림이 없습니다</div>
+							  <div class="tw-text-sm tw-text-gray-700">알림을 받으면 여기에 표시됩니다</div>
+							  <!-- <a href="/index.php?mid=index&amp;act=dispNcenterliteUserConfig" class="app-button primary app-button-rounded app-button-xs">알림 설정하기</a> -->
+						</div>
+						<ul class="app-dropdown-menu-list">
+	  						<li class="tw-border-b tw-border-gray-300 tw-my-2"></li>
+							<li>
+							    <a class="tw-text-center tw-justify-center tw-text-gray-700" href="/index.php?mid=index&amp;act=dispNcenterliteNotifyList">
+							      <span>전체 알림 보기</span>
+							    </a>
+						 	</li>
+						</ul>
+					</div>
+  				</div>
+				<!-- 쪽지 -->
+				<div class="app-pc-only app-dropdown">
+	    			<a class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
+				      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+				        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+				        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+				      </svg>
+	          		</a>
+	  
+	    			<div class="app-dropdown-menu app-right" style="width: 270px">
+		      			<div class="app-dropdown-header tw-text-base tw-font-bold">쪽지</div>
+		      		    <div class="tw-text-center tw-mb-6 tw-px-4">
+		  					<ion-icon name="mail" class="tw-text-gray-600 tw-text-2xl tw-mb-4 md hydrated" role="img" aria-label="mail"></ion-icon>
+			  				<div class="tw-text-black tw-font-bold tw-text-sm tw-mb-2">새로운 쪽지가 없습니다.</div>
+			  				<div class="tw-text-sm tw-text-gray-700 tw-mb-6">쪽지함에서 지금까지 수신한 <br>쪽지를 모두 확인할 수 있습니다.</div>
+		  					<a href="/index.php?mid=index&amp;act=dispCommunicationMessages" class="app-button primary app-button-rounded app-button-xs">쪽지함 보기</a>
+						</div>
+						<ul class="app-dropdown-menu-list">
+						  <li class="tw-border-b tw-border-gray-300 tw-my-2"></li>
+						  <li>
+						    <a class="tw-text-center tw-justify-center tw-text-gray-700" href="/index.php?mid=index&amp;act=dispCommunicationMessages">
+						      <span>전체 쪽지 보기</span>
+						    </a>
+						  </li>
+						</ul>
+					</div>
+	  			</div>
+				<!-- 프로필 사진 -->
+				<div class="app-pc-only app-dropdown">
+				  <a class="app-header-profile app-dropdown-toggle app-avatar" title="닉네임">
+				        <ion-icon name="person-sharp" role="img" class="md hydrated" aria-label="person sharp"></ion-icon>
+			      </a>
+				  <div class="app-dropdown-menu app-right" style="width: 250px">
+				    <div>
+				  <div class="tw-py-4 tw-px-6 tw-border-b tw-border-gray-300">
+				    <div class="tw-font-bold tw-text-sm tw-mb-1">닉네임</div>
+				      </div>
+				  <ul class="app-dropdown-menu-list tw-py-2 app-custom-scroll">
+				                    
+				        <li>
+				      <a href="/index.php?mid=index&amp;act=dispMemberInfo">
+				        <ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
+				        <span>마이페이지</span>
+				      </a>
+				    </li>
+				    <li>
+				      <a href="/index.php?mid=index&amp;act=dispMemberScrappedDocument">
+				        <ion-icon name="bookmark-outline" role="img" class="md hydrated" aria-label="bookmark outline"></ion-icon>
+				        <span>스크랩</span>
+				      </a>
+				    </li>
+				    <li>
+				      <a href="/index.php?mid=index&amp;act=dispMemberOwnDocument">
+				        <ion-icon name="document-text-outline" role="img" class="md hydrated" aria-label="document text outline"></ion-icon>
+				        <span>작성글</span>
+				      </a>
+				    </li>
+				    <li>
+				      <a href="/index.php?mid=index&amp;act=dispMemberOwnComment">
+				        <ion-icon name="chatbox-ellipses-outline" role="img" class="md hydrated" aria-label="chatbox ellipses outline"></ion-icon>
+				        <span>작성댓글</span>
+				      </a>
+				    </li>
+				    <li>
+				      <a onclick="onClickDarkThemeToggle()">
+				        <ion-icon name="contrast-outline" role="img" class="md hydrated" aria-label="contrast outline"></ion-icon>
+				        <span>다크모드 전환</span>
+				      </a>
+				    </li>
+				    <li class="tw-border-b tw-border-gray-300 tw-my-2"></li>
+				    <li>
+				      <a href="/index.php?mid=index&amp;act=dispMemberLogout" class="eq more">
+				        <ion-icon name="lock-open-outline" role="img" class="md hydrated" aria-label="lock open outline"></ion-icon>
+				        <span>로그아웃</span>
+				      </a>
+				    </li>
+				  </ul>
+				</div>  </div>
+				</div>
+				<a class="app-header-item app-header-menu__toggle app-mobile-only app-icon-button app-icon-button-gray">
+			      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+			        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+			      </svg>
+			    </a>
 			</div>
-		</header>
+			</header>
 		<div class="app-header-space"></div>
 		<!--#Meta:layouts/slow/components/header/header-menu/header-menu.scss?$__Context->themeConfig->variables-->
 		
