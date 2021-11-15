@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/sidebar-left/sidebar-left.scss */
+:root {
+  --side-nav-width: 260px;
+}
+.app-layout__sidebar-left {
+  flex: 0 0 auto;
+  width: var(--side-nav-width);
+}
+@media (max-width: 1024px) {
+  .app-layout__sidebar-left {
+    display: none;
+  }
+}
+.app-sidebar-left {
+  position: fixed;
+  top: var(--header-height);
+  z-index: 2;
+  width: var(--side-nav-width);
+  height: calc(100vh - var(--header-height));
+  padding: 2rem 2rem 2rem 0;
+}
+@media (max-width: 1024px) {
+  .app-sidebar-left {
+    padding-right: 1rem;
+  }
+}
+

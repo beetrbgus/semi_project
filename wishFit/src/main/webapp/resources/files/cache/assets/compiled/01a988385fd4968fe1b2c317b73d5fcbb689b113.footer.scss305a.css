@@ -1,0 +1,24 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/footer/footer.scss */
+.app-footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: var(--color-gray-600);
+  font-size: 0.75rem;
+}
+.app-footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.app-footer ul > li {
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+.app-footer ul > li > a {
+  cursor: pointer;
+}
+.app-footer ul > li > a:hover {
+  color: var(--color-black);
+}
+

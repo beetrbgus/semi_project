@@ -1,0 +1,62 @@
+@charset "UTF-8";
+/* Original file: modules/board/skins/slow/components/article/article-vote/article-vote.scss */
+.app-article-vote > button {
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100px;
+  padding: 0.75rem 1rem;
+  margin-right: 0.5rem;
+  color: #868e96;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid #e9ecef;
+  outline: none;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: 0.2s ease;
+}
+.app-article-vote > button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.app-article-vote > button span {
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+.app-article-vote > button:hover {
+  color: #495057;
+  border-color: #dee2e6;
+  background-color: #f8f9fa;
+}
+.app-article-vote > button:active {
+  color: black;
+  border-color: #dee2e6;
+  background-color: #f1f3f5;
+}
+.app-article-vote > .app-article-vote__up {
+  color: #ff5a57;
+  border-color: #ffd0cf;
+  background-color: #ffefee;
+}
+.app-article-vote > .app-article-vote__up:hover {
+  color: #ff5a57;
+  border-color: #ffbcbb;
+  background-color: #fddedc;
+}
+.app-article-vote > .app-article-vote__up:active {
+  color: #ff5a57;
+  border-color: #faadab;
+  background-color: #f7cdca;
+}
+.app-article-vote > .app-article-vote__up.active {
+  color: white;
+  background-color: #ff5a57;
+  border-color: #ff5a57;
+}
+.app-article-vote > .app-article-vote__down.active {
+  color: #3f9dff;
+}
+

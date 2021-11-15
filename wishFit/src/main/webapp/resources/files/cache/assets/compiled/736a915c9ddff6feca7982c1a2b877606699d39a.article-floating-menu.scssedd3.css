@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/* Original file: modules/board/skins/slow/components/article/article-floating-menu/article-floating-menu.scss */
+.app-article-floating-menu__wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+@media (max-width: 1024px) {
+  .app-article-floating-menu__wrap {
+    display: none;
+  }
+}
+.app-article-floating-menu {
+  position: fixed;
+  top: calc(var(--header-height) + 100px);
+  margin-right: -49px;
+  z-index: 1;
+}
+@media (max-width: 1216px) {
+  .app-article-floating-menu {
+    right: 1.25rem;
+    margin-right: 0;
+  }
+}
+.app-article-floating-menu > li {
+  margin-bottom: 0.5rem;
+}
+.app-article-floating-menu > li > button {
+  display: block;
+  padding: 0.5rem;
+  border-radius: var(--border-radius-2);
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 2px 12px, rgba(0, 0, 0, 0.025) 0 4px 32px;
+  color: #495057;
+}
+.app-article-floating-menu > li > button:hover {
+  color: #3f9dff;
+}
+.app-article-floating-menu > li > button svg {
+  width: 1rem;
+  height: 1rem;
+}
+

@@ -1,0 +1,24 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/sidebar-left/sidebar-left-profile.scss */
+.app-sidebar-profile {
+  display: flex;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.app-sidebar-profile__image {
+  width: 40px;
+  height: 40px;
+  margin-right: 0.75rem;
+}
+.app-sidebar-profile__image > ion-icon {
+  font-size: 40px;
+}
+.app-sidebar-profile__body {
+  flex: 1;
+}
+.app-sidebar-profile__nickname {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+

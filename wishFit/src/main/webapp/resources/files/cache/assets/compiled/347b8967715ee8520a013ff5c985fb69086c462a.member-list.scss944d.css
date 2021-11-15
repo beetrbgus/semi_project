@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* Original file: modules/member/skins/slow/css/common/member-list.scss */
+.app-member-list {
+  margin-bottom: 1rem;
+}
+.app-member-list > li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-gray-300);
+  transition: 0.3s;
+}
+.app-member-list > li:hover {
+  background-color: var(--color-gray-100);
+}
+.app-member-list > li > a {
+  display: block;
+  color: var(--color-black);
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+.app-member-list > li .app-member-list-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  color: var(--color-gray-700);
+}
+.app-member-list > li .app-member-list-meta > div {
+  margin-right: 0.5rem;
+}
+

@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/assets/css/base/tab.scss */
+.app-tab {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+.app-tab > li > a {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid transparent;
+  color: var(--color-gray-700);
+  font-size: 0.875rem;
+}
+.app-tab > li.active > a {
+  color: var(--color-primary);
+  font-weight: bold;
+  border-color: var(--color-primary);
+}
+

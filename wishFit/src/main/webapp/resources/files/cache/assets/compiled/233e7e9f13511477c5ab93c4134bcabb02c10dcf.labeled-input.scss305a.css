@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/common/labeled-input/labeled-input.scss */
+.app-labeled-input {
+  position: relative;
+  display: block;
+}
+.app-labeled-input__title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 0.75rem;
+  padding-left: 1rem;
+  color: #868e96;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.app-labeled-input input {
+  padding-top: 2.5rem;
+  padding-left: 1rem;
+  padding-bottom: 1.25rem;
+  color: black;
+  font-size: 0.875rem;
+  background-color: transparent;
+}
+.app-labeled-input input:placeholder {
+  color: #adb5bd;
+}
+.app-labeled-input input:focus {
+  outline: none !important;
+}
+

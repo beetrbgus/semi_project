@@ -1,0 +1,37 @@
+.dis_func_link {
+	background: #c9dcff;
+	color: black;
+	text-decoration: none;
+	padding: 1px 20px 1px 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 90%;
+	float: left;
+}
+.xi-info-circle{
+	margin-left : 5px;
+	font-size : 0.92rem !important;
+	vertical-align : text-bottom;
+}
+.dis_info_lp{
+	position:absolute;
+	display:inline;
+}
+.dis_info_lp_in{
+	position: absolute;
+	bottom: 5px;
+	right: 15px;
+	font-size: 0.68rem;
+	font-weight: normal;
+	color: #666;
+	text-align: left;
+	line-height: 1.45;
+	white-space: normal;
+	padding: 5px;
+	margin: 3px 0 0 0;
+	border-radius: 2px;
+	border: 1px solid rgba(0,0,0,0.1);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+	background-color: #f1f1fb;
+}

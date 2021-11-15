@@ -1,0 +1,113 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/common/confirm/confirm.scss */
+.app-confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  user-select: none;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.app-confirm .app-confirm__container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+  padding: 1rem;
+}
+.app-confirm .app-confirm__box {
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 16px 40px;
+}
+.app-confirm.active {
+  opacity: 1;
+  visibility: visible;
+  user-select: initial;
+  pointer-events: initial;
+}
+.app-confirm__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5em;
+}
+.app-confirm__body .app-confirm__icon {
+  color: #868e96;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+.app-confirm__body .app-confirm__title {
+  color: black;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+.app-confirm__body .app-confirm__description {
+  color: #868e96;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+.app-confirm__footer {
+  display: flex;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  border-top: 1px solid #e9ecef;
+}
+.app-confirm__footer > button {
+  flex: 1;
+  cursor: pointer;
+  display: block;
+  padding: 1em;
+  margin: 0;
+  color: #868e96;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  transition: 0.2s ease;
+}
+.app-confirm__footer > button:hover {
+  color: #495057;
+  background-color: #f8f9fa;
+}
+.app-confirm__footer > button:active {
+  color: #343a40;
+  background-color: #f1f3f5;
+}
+.app-confirm__footer > button[type="submit"] {
+  color: white;
+  font-weight: 600;
+  background-color: #3f9dff;
+}
+.app-confirm__footer > button[type="submit"]:hover {
+  background-color: #398de6;
+}
+.app-confirm__footer > button[type="submit"]:active {
+  background-color: #327ecc;
+}
+.app-confirm--danger .app-confirm__footer > button[type="submit"] {
+  color: #ff5a57;
+  background-color: transparent;
+  border-left: 1px solid #f1f3f5;
+}
+.app-confirm--danger .app-confirm__footer > button[type="submit"]:hover {
+  background-color: #f8f9fa;
+}
+.app-confirm--danger .app-confirm__footer > button[type="submit"]:active {
+  background-color: #f1f3f5;
+}
+

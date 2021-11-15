@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/* Original file: modules/board/skins/slow/templates/table/table.scss */
+.app-board-template-table {
+  width: 100%;
+  font-size: 13px;
+  border-collapse: collapse;
+}
+.app-board-template-table tr {
+  border-top: 1px solid var(--color-gray-300);
+  border-bottom: 1px solid var(--color-gray-300);
+  border-left: 3px solid transparent;
+}
+.app-board-template-table tr:last-child {
+  border-bottom: none;
+}
+.app-board-template-table tr.app-active {
+  border-left-color: var(--color-primary);
+}
+.app-board-template-table tr th, .app-board-template-table tr td {
+  color: var(--color-black);
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+}
+.app-board-template-table tr th {
+  width: 75px;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+}
+.app-board-template-table tr th:first-child {
+  padding-left: 0.875rem;
+}
+.app-board-template-table tr th:last-child {
+  padding-right: 0.75rem;
+}
+.app-board-template-table tr th.app-voted-count {
+  color: #ff4a57;
+}
+.app-board-template-table tr td {
+  font-weight: normal;
+}
+.app-board-template-table tr td.app-voted-count.active {
+  color: #ff4a57;
+}
+.app-board-template-table thead tr {
+  border-top: none;
+}
+.app-board-template-table thead tr th {
+  border: none;
+  color: var(--color-gray-700);
+  font-size: 0.8125rem;
+}
+.app-board-template-table tbody tr {
+  /* .no, .author, .time, .readNum, .voteNum, .check  */
+  /* .no, .time, .readNum, .voteNum, .check {
+        color: var(--color-black);
+      } */
+}
+.app-board-template-table tbody tr td {
+  vertical-align: middle;
+  line-height: 1;
+}
+.app-board-template-table tbody tr td.title {
+  text-align: left;
+}
+.app-board-template-table tbody tr td:last-child {
+  padding-right: 1em;
+}
+.app-board-template-table tbody tr:hover {
+  background-color: var(--color-gray-100);
+  border-left: var(--color-gray-100);
+}
+.app-board-template-table tbody tr.notice {
+  background-color: var(--color-gray-100);
+  border-left: var(--color-gray-100);
+}
+.app-board-template-table tbody tr td, .app-board-template-table tbody tr th {
+  color: var(--color-gray-700);
+  white-space: nowrap;
+  text-align: center;
+}
+.app-board-template-table tbody tr .notice {
+  color: var(--color-primary);
+  font-weight: bold;
+  min-width: 60px;
+  text-align: center;
+  white-space: nowrap;
+}
+.app-board-template-table .app-table-checkbox {
+  width: 44px;
+}
+.app-board-template-table .title {
+  width: 100%;
+  white-space: normal;
+  overflow: hidden;
+  padding: 0.5rem 1rem;
+}
+.app-board-template-table .title a {
+  color: var(--color-black);
+  text-decoration: none !important;
+  line-height: 1.6;
+}
+.app-board-template-table .title a > .title-link {
+  border-bottom: 1px solid transparent;
+  margin-right: 3px;
+  transition: 0.2s;
+}
+.app-board-template-table .title a:visited > .title-link {
+  color: var(--color-gray-800);
+}
+.app-board-template-table .title:hover a > .title-link {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+.app-board-template-table .author {
+  padding-right: 0.75rem;
+  min-width: 0;
+  overflow: hidden;
+  max-width: 200px !important;
+  width: 150px !important;
+  min-width: 110px;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+.app-board-template-table .author > a > * {
+  display: inline;
+}
+

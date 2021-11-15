@@ -1,0 +1,83 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/common/dialog/dialog.scss */
+.app-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.app-dialog .app-dialog-bg {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.app-dialog .app-dialog-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  max-width: 25rem;
+  width: 100%;
+  padding: 1rem;
+}
+.app-dialog .app-dialog-container .app-dialog-box {
+  width: 100%;
+  background-color: var(--color-grouped-content-background);
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 30px;
+}
+.app-dialog .app-dialog-container .app-dialog-box .app-dialog-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.25rem 0;
+  border-bottom: var(--color-gray-300);
+}
+.app-dialog .app-dialog-container .app-dialog-box .app-dialog-header h3 {
+  flex: 1;
+  color: var(--color-black);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.app-dialog .app-dialog-container .app-dialog-box .app-dialog-body {
+  padding: 1.25rem;
+}
+.app-dialog .app-dialog-container .app-dialog-box .app-dialog-body > div {
+  display: block !important;
+}
+.app-dialog-close {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-black);
+  font-size: 1rem;
+  background-color: var(--color-gray-200);
+  border-radius: 100%;
+  transition: background-color 250ms;
+}
+.app-dialog-close:hover {
+  background-color: var(--color-gray-300);
+}
+.app-dialog {
+  opacity: 0;
+  visibility: hidden;
+  user-select: none;
+  pointer-events: none;
+}
+.app-dialog.active {
+  opacity: 1;
+  visibility: visible;
+  user-select: initial;
+  pointer-events: initial;
+}
+

@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/common/select/select.scss */
+.app-select {
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  min-width: 142px;
+  height: 40px;
+  background: none;
+  border: 1px solid #e9ecef;
+  background-color: white;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+.app-select > select {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  padding-left: 16px;
+  padding-right: 36px;
+  outline: none !important;
+  border: none;
+  background-color: white;
+  border-radius: 6px;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: 0.2s ease;
+}
+.app-select > select::-ms-expand {
+  display: none;
+}
+.app-select > select:disabled {
+  cursor: no-drop;
+  opacity: 0.7;
+}
+.app-select i, .app-select ion-icon {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #adb5bd;
+  font-size: 1rem;
+  transition: 250ms ease;
+  pointer-events: none;
+}
+.app-select:hover {
+  border-color: #dee2e6;
+}
+.app-select:focus-within, .app-select.isEnabled {
+  border-color: #3f9dff;
+  box-shadow: 0 0 0 3px rgba(63, 157, 255, 0.2);
+  background-color: white;
+}
+.app-select:focus-within select, .app-select.isEnabled select {
+  background-color: white;
+}
+.app-select.app-expand {
+  width: 100% !important;
+}
+

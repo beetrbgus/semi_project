@@ -1,0 +1,48 @@
+@charset "UTF-8";
+/* Original file: widgets/content/skins/slow/assets/css/widget.scss */
+ul.app-widget-tab {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  height: 2.875rem;
+  padding: 0 1rem;
+  margin: 0 !important;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+ul.app-widget-tab > li {
+  margin-right: 0.875rem;
+}
+ul.app-widget-tab > li > a {
+  display: inline-flex;
+  align-items: center;
+  height: 2.875rem;
+  color: var(--color-gray-700);
+  font-size: 0.875rem;
+  font-weight: 400;
+  outline: none;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: 0.3s;
+}
+ul.app-widget-tab > li > a:hover {
+  color: var(--color-gray-800);
+}
+ul.app-widget-tab > li.active > a {
+  color: #3f9dff;
+  font-weight: bold;
+  border-bottom-color: #3f9dff;
+}
+ul.app-widget-content {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 !important;
+}
+.app-widget-tab-content .app-widget-tab-item {
+  display: none;
+  margin: 0;
+}
+.app-widget-tab-content .app-widget-tab-item.active {
+  display: block;
+}
+

@@ -1,0 +1,161 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/main-banner/main-banner.scss */
+.app-main-banner {
+  background-color: #ced4da;
+  width: 100%;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  /* Fix of Webkit flickering */
+  z-index: 1;
+  border-radius: 8px;
+}
+.app-main-banner .swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+.app-main-banner-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.app-main-banner-body {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  padding-top: 3rem;
+  padding-bottom: 6.25rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  color: white;
+}
+@media (max-width: 1024px) {
+  .app-main-banner-body {
+    padding-bottom: 5rem;
+  }
+}
+.app-main-banner-body .app-subtitle {
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+.app-main-banner-body .app-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.app-main-banner-body .app-slide-button {
+  display: inline-block;
+  padding: 0.375rem 1.5rem;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 400;
+  border: 2px solid white;
+  border-radius: 500px;
+}
+.app-main-banner__content {
+  max-width: 22rem;
+  word-break: keep-all;
+}
+.app-main-banner__footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  padding-bottom: 1.5rem;
+}
+@media (max-width: 1024px) {
+  .app-main-banner__footer {
+    padding-bottom: 1.25rem;
+  }
+}
+.app-main-banner__footer .app-main-banner__container {
+  display: flex;
+  align-items: center;
+}
+.app-main-banner__footer .app-main-banner__container .app-divider {
+  flex: 1;
+}
+.app-main-banner .app-main-banner__pagination {
+  flex: 0 0 auto;
+  width: auto;
+  margin-right: 1rem;
+  color: white;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+.app-main-banner .app-main-banner__pagination .swiper-pagination-current {
+  font-weight: 600;
+}
+.app-main-banner .app-main-banner__indicator {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.app-main-banner .app-main-banner__indicator .swiper-scrollbar-drag {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: white;
+  left: 0;
+  top: 0;
+}
+@media (max-width: 1024px) {
+  .app-main-banner .app-main-banner__indicator {
+    flex: 1;
+    width: auto;
+  }
+}
+.app-main-banner__arrow {
+  display: flex;
+  align-items: center;
+}
+.app-main-banner__arrow > button {
+  cursor: pointer;
+  display: flex;
+  padding: 0.5rem;
+  margin: 0;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: 0.2s ease;
+}
+.app-main-banner__arrow > button:hover {
+  color: black;
+  background-color: white;
+}
+.app-main-banner__arrow > button:active {
+  opacity: 0.7;
+}
+.app-main-banner__arrow > button:first-child {
+  margin-right: 0.5rem;
+}
+.app-main-banner__container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+

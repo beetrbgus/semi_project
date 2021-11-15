@@ -1,0 +1,48 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/assets/css/base/layout.scss */
+.app-layout {
+  display: flex;
+  max-width: 1366px;
+  max-width: 1366px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  margin: 0 auto;
+}
+@media (max-width: 1024px) {
+  .app-layout {
+    display: block;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.app-layout > .app-content {
+  display: block;
+  flex: 1;
+  max-width: calc(100% - var(--side-nav-width) - var(--aside-width));
+  padding: 2rem 0 2rem 0;
+}
+@media (max-width: 1216px) {
+  .app-layout > .app-content {
+    max-width: calc(100% - var(--side-nav-width));
+    padding-right: 3rem;
+  }
+}
+@media (max-width: 1024px) {
+  .app-layout > .app-content {
+    padding: 1rem;
+    max-width: 100%;
+  }
+}
+.app-layout .app-layout-aside {
+  flex: 0 0 auto;
+  width: var(--aside-width);
+  min-height: 100vh;
+  border-left: 1px solid var(--color-gray-300);
+  margin-left: 2rem;
+}
+@media (max-width: 1216px) {
+  .app-layout .app-layout-aside {
+    display: none;
+  }
+}
+

@@ -1,0 +1,66 @@
+@charset "UTF-8";
+.app-input-toggle,
+.app-toggle {
+  display: none;
+}
+.app-input-toggle + label,
+.app-toggle + label {
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  color: #adb5bd;
+  font-size: 14px;
+  line-height: 21px;
+}
+.app-input-toggle + label::before,
+.app-input-toggle + label::after,
+.app-toggle + label::before,
+.app-toggle + label::after {
+  content: "";
+}
+.app-input-toggle + label::before,
+.app-toggle + label::before {
+  display: inline-block;
+  width: 35px;
+  height: 20px;
+  margin-right: 4px;
+  border-radius: 500px;
+  background-color: #f1f3f5;
+  transition: 0.4s ease-in-out;
+  -o-transition: 0.4s ease-in-out;
+  -moz-transition: 0.4s ease-in-out;
+  -webkit-transition: 0.4s ease-in-out;
+}
+.app-input-toggle + label::after,
+.app-toggle + label::after {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 500px;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+  -moz-transition: 0.2s ease-in-out;
+  -webkit-transition: 0.2s ease-in-out;
+}
+.app-input-toggle + label:hover::after,
+.app-toggle + label:hover::after {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.app-input-toggle:checked + label::before,
+.app-toggle:checked + label::before {
+  border-color: #3f9dff;
+  box-shadow: 0 0 0 20px #3f9dff inset;
+}
+.app-input-toggle:checked + label::after,
+.app-toggle:checked + label::after {
+  transform: translateX(15px);
+}
+.app-input-toggle:checked + label div,
+.app-toggle:checked + label div {
+  color: #3f9dff;
+}
+

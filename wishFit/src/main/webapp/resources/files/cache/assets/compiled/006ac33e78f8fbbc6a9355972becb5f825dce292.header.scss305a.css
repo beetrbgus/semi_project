@@ -1,0 +1,114 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/header/header.scss */
+:root {
+  --header-height: 4.5rem;
+  --header-background: #f5f6f7;
+}
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 58px;
+  }
+}
+.app-theme-dark {
+  --header-background: #212529;
+}
+.app-header-space {
+  position: relative;
+  height: var(--header-height);
+}
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--header-background);
+  border-bottom: 1px solid var(--color-gray-400);
+}
+.app-header .app-header-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 1366px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 1024px) {
+  .app-header .app-header-container {
+    max-width: calc(100% - var(--side-nav-width));
+  }
+}
+@media (max-width: 1024px) {
+  .app-header .app-header-container {
+    max-width: 100%;
+    padding-left: 1.25rem;
+    padding-right: 0.5rem;
+  }
+}
+.app-header .app-header-item {
+  margin-right: 0.5rem;
+}
+.app-header .app-header-logo {
+  display: flex;
+  align-items: center;
+  height: var(--header-height);
+  padding: 0;
+  margin: 0 2rem 0 0;
+  color: black;
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+@media (max-width: 1024px) {
+  .app-header .app-header-logo {
+    font-size: 1.25rem;
+  }
+}
+.app-header .app-header-logo > img {
+  display: block;
+  width: auto;
+  height: 1.75rem;
+}
+@media (max-width: 1024px) {
+  .app-header .app-header-logo > img {
+    height: 1.75rem;
+  }
+}
+.app-header .app-header-logo > ion-icon {
+  color: black;
+  font-size: 5rem;
+  height: 2rem;
+}
+.app-header-login-link {
+  color: var(--color-gray-700);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-right: 1.25rem;
+}
+.app-header-login-link i {
+  font-size: 1rem;
+  margin-right: 0.25rem;
+}
+.app-header-login-link:hover {
+  color: var(--color-black);
+}
+.app-header-item-badge {
+  position: absolute;
+  top: 0;
+  left: 1.5em;
+  padding: 2px 4px 1px;
+  color: white;
+  line-height: 1;
+  font-size: 0.75rem;
+  background-color: var(--color-danger);
+  border-radius: 99999px;
+}
+.app-header-profile {
+  margin-left: 0.5rem;
+}
+

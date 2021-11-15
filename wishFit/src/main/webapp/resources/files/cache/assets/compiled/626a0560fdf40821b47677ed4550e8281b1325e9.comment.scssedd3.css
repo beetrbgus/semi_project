@@ -1,0 +1,113 @@
+@charset "UTF-8";
+/* Original file: modules/board/skins/slow/components/comment/comment.scss */
+.app-board-comment {
+  position: relative;
+}
+.app-board-comment-target {
+  position: absolute;
+  top: calc(var(--header-height) * -1);
+  left: 0;
+}
+.app-board-comment .app-comment-header {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-gray-300);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+@media (max-width: 1366px) {
+  .app-board-comment .app-comment-header {
+    position: relative;
+    top: auto;
+    z-index: inherit;
+    border-radius: 0;
+  }
+}
+@keyframes comment-item-active {
+  from {
+    /* background-color: var(--color-gray-100); */
+  }
+  to {
+    background-color: #3f9dff !important;
+  }
+}
+.app-board-comment-list .app-comment-item {
+  position: relative;
+}
+.app-board-comment-list .app-comment-item {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+.app-board-comment-list .app-comment-item .app-comment-profile-image {
+  position: relative;
+  flex: 0 0 auto;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.app-board-comment-list .app-comment-item .app-comment-profile-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.app-board-comment-list .app-comment-item .app-comment-item__head-badge {
+  padding: 0.25rem 0.5rem 0.25rem;
+  margin-left: 0.25rem;
+  color: white;
+  font-size: 0.75rem;
+  line-height: 1;
+  background-color: var(--color-primary);
+  border-radius: 5rem;
+}
+.app-board-comment-list .app-comment-item .app-comment-item__head-badge.app--mycomment {
+  background-color: var(--color-success);
+}
+.app-board-comment-list .app-comment-item.app-comment-depth {
+  padding-left: 1.75rem;
+  background-color: var(--color-gray-100);
+}
+.app-board-comment-list .app-comment-item.app-comment-depth .app-comment-profile-image-wrap {
+  position: relative;
+  top: -2rem;
+}
+.app-board-comment-list .app-comment-item.app-comment-depth .app-comment-profile-image {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--color-gray-100);
+}
+.app-board-comment-list .app-comment-item.app-comment-depth .app-comment-profile-image.app-owner-profile {
+  position: relative;
+  top: -0.5rem;
+}
+.app-board-comment-list .app-comment-item.active {
+  background-color: #ecf5ff;
+  border-left: 3px solid #3f9dff;
+}
+/* 댓글 작성 폼 */
+.app-comment-write {
+  padding: 1rem;
+}
+.app-recomment-form {
+  padding-left: 4.75rem;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+.app-comment-vote.app-active {
+  color: var(--color-success);
+}
+.app-comment-blame.app-active {
+  color: var(--color-danger);
+}
+.app-comment-content .xe_content a {
+  color: #3f9dff;
+  word-break: break-all;
+}
+.app-comment-content .xe_content a:hover {
+  text-decoration: underline;
+}
+

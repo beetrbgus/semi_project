@@ -1,0 +1,72 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/assets/css/base/input.scss */
+.app-input, .app-member-form input[type="text"], .app-member-form input[type="date"], .app-member-form input[type="url"], .app-member-form input[type="email"], .app-member-form input[type="password"] {
+  padding-left: 1rem;
+  height: 2.5rem;
+  color: black;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  background-color: white;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: 0.2s ease;
+}
+.app-input::-webkit-input-placeholder, .app-member-form input[type="text"]::-webkit-input-placeholder, .app-member-form input[type="date"]::-webkit-input-placeholder, .app-member-form input[type="url"]::-webkit-input-placeholder, .app-member-form input[type="email"]::-webkit-input-placeholder, .app-member-form input[type="password"]::-webkit-input-placeholder {
+  color: #adb5bd;
+}
+.app-input:-ms-input-placeholder, .app-member-form input[type="text"]:-ms-input-placeholder, .app-member-form input[type="date"]:-ms-input-placeholder, .app-member-form input[type="url"]:-ms-input-placeholder, .app-member-form input[type="email"]:-ms-input-placeholder, .app-member-form input[type="password"]:-ms-input-placeholder {
+  color: #adb5bd;
+}
+.app-input:hover, .app-member-form input[type="text"]:hover, .app-member-form input[type="date"]:hover, .app-member-form input[type="url"]:hover, .app-member-form input[type="email"]:hover, .app-member-form input[type="password"]:hover {
+  border-color: #dee2e6;
+}
+.app-input:focus, .app-member-form input[type="text"]:focus, .app-member-form input[type="date"]:focus, .app-member-form input[type="url"]:focus, .app-member-form input[type="email"]:focus, .app-member-form input[type="password"]:focus {
+  outline: none !important;
+  border-color: #3f9dff;
+  box-shadow: 0 0 0 3px rgba(63, 157, 255, 0.2);
+}
+.app-input-xs, .app-member-form input[type="text"]-xs, .app-member-form input[type="date"]-xs, .app-member-form input[type="url"]-xs, .app-member-form input[type="email"]-xs, .app-member-form input[type="password"]-xs {
+  height: 2rem;
+  padding-left: 0.5rem;
+  font-size: 0.75rem;
+}
+.app-input.app-input-expand {
+  display: block;
+  width: 100%;
+}
+.app-textarea, .app-extra-form textarea, .app-member-form textarea, .app-member-form textarea.rx_editor_textarea {
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  color: black;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  background-color: #f8f9fa;
+}
+.app-textarea:placeholder, .app-extra-form textarea:placeholder, .app-member-form textarea:placeholder, .app-member-form textarea.rx_editor_textarea:placeholder {
+  color: #adb5bd;
+}
+.app-textarea:focus, .app-extra-form textarea:focus, .app-member-form textarea:focus, .app-member-form textarea.rx_editor_textarea:focus {
+  outline: none !important;
+  border-color: #3f9dff;
+}
+.app-textarea::-webkit-scrollbar, .app-extra-form textarea::-webkit-scrollbar, .app-member-form textarea::-webkit-scrollbar, .app-member-form textarea.rx_editor_textarea::-webkit-scrollbar {
+  width: 12px;
+  transition: 250ms;
+}
+.app-textarea::-webkit-scrollbar-track, .app-extra-form textarea::-webkit-scrollbar-track, .app-member-form textarea::-webkit-scrollbar-track, .app-member-form textarea.rx_editor_textarea::-webkit-scrollbar-track {
+  background: transparent;
+  transition: 250ms;
+}
+.app-textarea::-webkit-scrollbar-thumb, .app-extra-form textarea::-webkit-scrollbar-thumb, .app-member-form textarea::-webkit-scrollbar-thumb, .app-member-form textarea.rx_editor_textarea::-webkit-scrollbar-thumb {
+  background: #adb5bdb6;
+  border-radius: 20px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  transition: 250ms;
+}
+

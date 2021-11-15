@@ -1,0 +1,210 @@
+@charset "UTF-8";
+/* Original file: layouts/slow/components/header/header-menu/header-menu.scss */
+.app-header-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease;
+}
+.app-header-menu__close {
+  cursor: pointer;
+  display: inline-flex;
+  padding: 0.5rem;
+  margin: 0 0 1rem;
+  border: none;
+  outline: none;
+  color: black;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 2px 12px, rgba(0, 0, 0, 0.025) 0 4px 32px;
+  font-size: 1.5rem;
+  transition: 0.2s ease;
+}
+.app-header-menu__close:hover {
+  opacity: 0.8;
+}
+.app-header-menu__close:active {
+  opacity: 0.7;
+}
+.app-header-menu__auth {
+  padding-top: 1rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+.app-header-menu__auth .app-login {
+  display: block;
+  color: #495057;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 0.25rem;
+}
+.app-header-menu__auth .app-signup {
+  color: #3f9dff;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+.app-header-menu__content {
+  flex: 0 0 auto;
+  text-align: right;
+  max-width: 270px;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #f5f6f7;
+}
+.app-header-menu__outside {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.app-header-menu-nav {
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+.app-header-menu-nav > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.app-header-menu-nav > ul > li {
+  margin-bottom: 0.25rem;
+}
+.app-header-menu-nav > ul > li > .app-header-menu-nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+.app-header-menu-nav > ul > li > .app-header-menu-nav-item:hover {
+  background-color: #f1f3f5;
+}
+.app-header-menu-nav > ul > li[is-divider] {
+  border-bottom: 1px solid #e9ecef;
+  padding: 0;
+  margin: 0.75rem 0;
+}
+.app-header-menu-nav > ul > li[is-divider] > .app-header-menu-nav-item, .app-header-menu-nav > ul > li[is-divider] > ul {
+  display: none;
+}
+.app-header-menu-nav > ul > li > .app-header-menu-nav-item > a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: #343a40;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.app-header-menu-nav > ul > li > .app-header-menu-nav-item > a > ion-icon {
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+  --ionicon-stroke-width: 2.5rem;
+}
+.app-header-menu-nav > ul > li .app-header-menu-nav-more {
+  cursor: pointer;
+  flex: 0 0 auto;
+  padding-left: 0.25rem;
+  color: #adb5bd;
+  font-size: 0.875rem;
+  --ionicon-stroke-width: 100px;
+}
+.app-header-menu-nav > ul > li.active > div > a {
+  color: #3f9dff;
+}
+.app-header-menu-nav-child {
+  display: none;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+}
+.app-header-menu-nav-child.active {
+  display: block;
+}
+.app-header-menu-nav-child > ul {
+  list-style-type: none;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #f1f3f5;
+  border-radius: 4px;
+}
+.app-header-menu-nav-child > ul > li {
+  padding: 0.5rem;
+  margin-bottom: 0.25rem;
+  border-radius: 4px;
+  transition: 0.2s ease;
+}
+.app-header-menu-nav-child > ul > li:last-child {
+  margin-bottom: 0;
+}
+.app-header-menu-nav-child > ul > li[is-divider] {
+  border-bottom: 1px solid #e9ecef;
+  padding: 0;
+  margin: 0.75rem 0;
+}
+.app-header-menu-nav-child > ul > li[is-divider] > a {
+  display: none;
+}
+.app-header-menu-nav-child > ul > li > a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: #343a40;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+.app-header-menu-nav-child > ul > li > a > ion-icon {
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+  --ionicon-stroke-width: 2.5rem;
+}
+.app-header-menu-nav-child > ul > li:hover {
+  background-color: #e9ecef;
+}
+.app-header-menu-nav-child > ul > li.active > a {
+  color: #3f9dff;
+}
+.app-header-menu {
+  opacity: 0;
+  visibility: hidden;
+  user-select: none;
+  pointer-events: none;
+}
+.app-header-menu .app-header-menu__content {
+  transform: translateX(100%);
+  transition: 0.4s ease;
+}
+.app-header-menu .app-header-menu__close {
+  transform: scale(0.8) rotate(-45deg);
+  transition: 0.5s ease;
+}
+.app-header-menu .app-header-menu-nav {
+  transform: translateY(-1rem);
+  transition: 0.6s ease;
+}
+.app-header-menu.active {
+  opacity: 1;
+  visibility: visible;
+  user-select: initial;
+  pointer-events: initial;
+}
+.app-header-menu.active .app-header-menu__content {
+  transform: translateX(0);
+}
+.app-header-menu.active .app-header-menu__close {
+  transform: scale(1);
+}
+.app-header-menu.active .app-header-menu-nav {
+  transform: translateY(0);
+}
+

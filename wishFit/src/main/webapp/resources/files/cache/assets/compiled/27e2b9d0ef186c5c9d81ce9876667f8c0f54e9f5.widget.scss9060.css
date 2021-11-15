@@ -1,0 +1,38 @@
+@charset "UTF-8";
+/* Original file: widgets/slow_comment/skins/default/assets/css/widget.scss */
+.app-widget-comment {
+  padding: 0;
+  margin: 0 !important;
+  overflow: hidden;
+  border-bottom-left-radius: var(--border-radius-3);
+  border-bottom-right-radius: var(--border-radius-3);
+}
+.app-widget-comment > li {
+  border-bottom: 1px solid var(--color-gray-200);
+}
+.app-widget-comment > li:last-child {
+  border-bottom: none;
+}
+.app-widget-comment > li > a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.app-widget-comment > li > a .app-widget-comment-body {
+  flex: 1;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.app-widget-comment > li > a:hover {
+  background-color: var(--color-gray-100);
+}
+.app-theme-dark .app-widget-comment > li > a:hover {
+  background-color: var(--color-gray-10);
+}
+

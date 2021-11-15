@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/* Original file: modules/member/skins/slow/css/signup-form.scss */
+.app-agreement {
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+.app-agreement .app-agreement-title {
+  color: var(--color-black);
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.app-agreement .app-agreement-body {
+  max-height: 300px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  overflow: auto;
+  border-radius: var(--border-radius-3);
+  background-color: var(--color-gray-200);
+}
+.app-agreement .app-agreement-body h2, .app-agreement .app-agreement-body h3, .app-agreement .app-agreement-body h5 {
+  font-weight: bold;
+}
+.app-agreement .app-agreement-body h2 {
+  font-size: 1.25rem;
+}
+.app-agreement .app-agreement-body h5 {
+  font-size: 1rem;
+}
+.app-agreement .app-agreement-body p {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+.app-agreement .app-agreement-body hr {
+  border-color: var(--color-gray-400);
+  margin-bottom: 0.5rem;
+}
+

@@ -1,0 +1,85 @@
+@charset "UTF-8";
+.app-button,
+.app-member-form button,
+.app-member-form input[type="button"],
+.app-member-form input[type="button"] {
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  color: var(--color-black);
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  outline: none;
+  border-radius: var(--border-radius-2);
+  background-color: var(--color-gray-200);
+}
+.app-button:focus,
+.app-member-form button:focus,
+.app-member-form input[type="button"]:focus,
+.app-member-form input[type="button"]:focus {
+  outline: none !important;
+}
+.app-button i,
+.app-button ion-icon,
+.app-member-form button i,
+.app-member-form button ion-icon,
+.app-member-form input[type="button"] i,
+.app-member-form input[type="button"] ion-icon,
+.app-member-form input[type="button"] i,
+.app-member-form input[type="button"] ion-icon {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+.app-button svg,
+.app-member-form button svg,
+.app-member-form input[type="button"] svg,
+.app-member-form input[type="button"] svg {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+.app-button.app-button-rounded,
+.app-member-form button.app-button-rounded,
+.app-member-form input[type="button"].app-button-rounded,
+.app-member-form input[type="button"].app-button-rounded {
+  border-radius: 5rem;
+}
+.app-button.app-button-small,
+.app-member-form button.app-button-small,
+.app-member-form input[type="button"].app-button-small,
+.app-member-form input[type="button"].app-button-small {
+  height: 2.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.app-button.app-button-xs,
+.app-member-form button.app-button-xs,
+.app-member-form input[type="button"].app-button-xs,
+.app-member-form input[type="button"].app-button-xs {
+  height: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.75rem;
+}
+.app-button.primary,
+.app-button.app-primary {
+  color: var(--color-text-primary);
+  background-color: var(--color-primary);
+}
+.app-button.black {
+  color: var(--color-white);
+  background-color: var(--color-black);
+}
+.app-button.gray-primary {
+  color: var(--color-primary);
+}
+.app-button.app-button-expand {
+  display: flex;
+  width: 100%;
+}
+
