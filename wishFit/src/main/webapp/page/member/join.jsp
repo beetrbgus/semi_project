@@ -370,14 +370,14 @@
         </div>  
         <ul class="app-member-form">
           <li>
-            <label for="email_address">
+            <label for="user_id">
               <em>*</em>
-              <span>이메일 주소</span>
+              <span>아이디</span>
             </label>
-            <input type="email" name="email_address" id="email_address" value="" required="">
+            <input type="text" name="mem_id" id="user_id" value="" required="">
             
             <div class="app-error">
-              인증 메일이 발송되니 정확하게 입력해 주시기 바랍니다. 
+              특수문자를 제외한 영어 소문자, 숫자 포함한 6자리~20자리
              </div>
              </li>
   
@@ -386,43 +386,96 @@
               <em>*</em>
               <span>비밀번호</span>
             </label>
-            <input class="hi input input-default" type="password" name="password" id="password" value="" required="">
-            <p class="app-error">비밀번호는 6자리 이상이어야 하며 영문과 숫자를 반드시 포함해야 합니다.</p>
+            <input class="hi input input-default" type="password" name="mem_pw" id="password" value="" required="">
+            <p class="app-error">영어 대/소문자, 숫자, 특수문자를 포함한 8자리 ~ 30자리</p>
           </li>
+          
           <li>
             <label for="password2">
               <em>*</em>
               <span>비밀번호 확인</span>
             </label>
-            <input type="password" name="password2" id="password2" value="" required="">
+            <input type="password" name="mem_pw2" id="password2" value="" required="">
           </li>
+          
           <li>
-            <label for="user_id">
-                            <span>아이디</span>
+            <label for="password_Q">
+              <em>*</em>
+              <span>비밀번호 찾기 질문</span>
             </label>
-                          <input type="text" name="user_id" id="user_id" value=""> 
+            <select name="mem_pwQ" id="pw_question">
+	                                <option value="01">아버지의 성함은?</option>
+	                                <option value="02">어머니의 성함은?</option>
+	                                <option value="03">자신의 생일은?</option>
+	                                <option value="04">출신 초등학교는?</option>
+	                                <option value="05">감명깊게 읽은 책 이름은?</option>
+	                            </select>
+          </li>
+          
+          <li>
+          	<label for="password_A">
+          		<em>*</em>
+          		<span>비밀번호 찾기 답변</span>
+          	</label>
+          		<input type="text" name="mem_pwA" id="pw_answer">
+          		<p class="app-error">선택한 질문에 대한 답변을 남겨주십시오.</p>
+          </li>
+          
+          <li>
+            <label for="user_name">
+            				<em>*</em>
+                            <span>성함</span>
+            </label>
+                          <input type="text" name="mem_name" id="user_name" value="" required=""> 
                           </li><li>
-            <label for="nick_name">
+          
+          <li>
+            <label for="user_nick">
+            				<em>*</em>
                             <span>닉네임</span>
             </label>
-                          <input type="text" name="nick_name" id="nick_name" value="">
+                          <input type="text" name="mem_nick" id="user_nick" value="" required=""> 
                           </li><li>
+                          
+            <label for="user_birth">
+            				<em>*</em>
+                            <span>생년월일</span>
+            </label>
+                          <input type="date" name="mem_birth" id="user_birth" value="" required="">
+                          </li><li>
+                          
+            
+            <label for="user_gender">
+            				<em>*</em>
+                            <span>성별</span>
+            </label>
+                          <input type="radio" name="mem_gender" id="user_gender" value="female"> 여자
+                          <input type="radio" name="mem_gender" id="user_gender" value="male"> 남자
+                          </li><li>
+                          
+            <label for="user_phone">
+                            <span>전화번호</span>
+            </label>
+                          <input type="text" name="mem_phone" id="user_phone"  value=""> 
+                          <p class="app-error">
+                          전화번호는 - 을 제외한 11자리 숫자를 입력해주십시오.</p>
+                          </li><li>
+                          
             <label for="profile_image">
                             <span>프로필 사진</span>
             </label>
-                          <input type="hidden" name="__profile_image_exist" value="false">
+                          <input type="hidden" name="attach" value="false">
                           <input type="file" name="profile_image" id="profile_image" value="" accept="image/*" data-max-filesize="102400" 
                           																										data-max-filesize-error="파일이 너무 큽니다. 용량 제한은 %s입니다.">
                           <p class="help-block">파일 용량 제한: 100.0KB, 가로 제한 길이: 50px, 세로 제한 길이: 50px</p>
-						  </li><li>       
+						      
                   </ul>
                   
         <div class="tw-flex tw-justify-end tw-pt-3">
           <button class="app-button primary" type="submit">등록</button>
         </div>
-        
       </form>
-    </div>
+    </div>  
   </div>
 </div>
 </section>
