@@ -261,10 +261,12 @@
 			</div>
 		</div>
 	</div>
+	<!-- 푸터 -->
+<jsp:include page="/template/footer.jsp"></jsp:include>
 </main>
 
 <!--  우측 사이드 -->
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
+<jsp:include page="/template/bottomNav.jsp"></jsp:include>
 
-<!-- 푸터 -->
-<jsp:include page="/template/footer.jsp"></jsp:include>
+
