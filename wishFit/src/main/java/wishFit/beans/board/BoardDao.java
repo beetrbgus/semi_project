@@ -34,8 +34,8 @@ public class BoardDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setInt(1, boardDto.getBoardNo());
-		ps.setString(2, boardDto.getLagName());
-		ps.setString(3, boardDto.getMidName());
+		ps.setString(2, boardDto.getBoardLargeName());
+		ps.setString(3, boardDto.getBoardMiddleName());
 		ps.setString(4, boardDto.getBoardWriter());
 		ps.setString(5, boardDto.getBoardTitle());
 		ps.setString(6, boardDto.getBoardPost());
@@ -61,8 +61,8 @@ public class BoardDao {
 			boardDto = new BoardDto();
 
 			boardDto.setBoardNo(rs.getInt("board_no"));
-			boardDto.setLagName(rs.getString("board_large_name"));
-			boardDto.setMidName(rs.getString("board_middle_name"));
+			boardDto.setBoardLargeName(rs.getString("board_large_name"));
+			boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
 			boardDto.setBoardWriter(rs.getString("board_writer"));
 			boardDto.setBoardTitle(rs.getString("board_title"));
 			boardDto.setBoardPost(rs.getString("board_post"));
@@ -91,8 +91,8 @@ public class BoardDao {
 		ps.setString(1, boardDto.getBoardTitle());
 		ps.setString(2, boardDto.getBoardPost());
 		ps.setString(3, boardDto.getBoardDate());
-		ps.setString(4, boardDto.getLagName());
-		ps.setString(5, boardDto.getMidName());
+		ps.setString(4, boardDto.getBoardLargeName());
+		ps.setString(5, boardDto.getBoardMiddleName());
 		ps.setInt(6, boardDto.getBoardNo());
 
 		int result = ps.executeUpdate();
@@ -117,8 +117,8 @@ public class BoardDao {
 			boardDto.setBoardWriter(rs.getString("board_writer"));
 			boardDto.setBoardRead(rs.getInt("board_read"));
 			boardDto.setBoardReply(rs.getInt("board_reply"));
-//			boardDto.setLagName(rs.getString("board_large_name"));
-			boardDto.setMidName(rs.getString("board_middle_name"));
+//			boardDto.setBoardLargeName(rs.getString("board_large_name"));
+			boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
 
 			list.add(boardDto);
 		}
@@ -142,8 +142,8 @@ public class BoardDao {
 			boardDto.setBoardTitle(rs.getString("board_title"));
 			boardDto.setBoardPost(rs.getString("board_post"));
 			boardDto.setBoardDate(rs.getString("board_date"));
-			boardDto.setLagName(rs.getString("board_large_name"));
-			boardDto.setMidName(rs.getString("board_middle_name"));
+			boardDto.setBoardLargeName(rs.getString("board_large_name"));
+			boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
 			boardDto.setBoardWriter(rs.getString("board_writer"));
 			boardDto.setBoardRead(rs.getInt("board_read"));
 			boardDto.setBoardReply(rs.getInt("board_reply"));
