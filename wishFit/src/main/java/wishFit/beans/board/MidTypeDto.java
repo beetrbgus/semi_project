@@ -1,6 +1,6 @@
 package wishFit.beans.board;
 
-public class midTypeDto {
+public class MidTypeDto {
 	private String midName,lagName;
 
 	public String getMidName() {
@@ -19,7 +19,7 @@ public class midTypeDto {
 		this.lagName = lagName;
 	}
 
-	public midTypeDto() {
+	public MidTypeDto() {
 		super();
 	}
 	

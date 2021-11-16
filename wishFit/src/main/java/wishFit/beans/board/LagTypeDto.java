@@ -1,6 +1,6 @@
 package wishFit.beans.board;
 
-public class lagTypeDto {
+public class LagTypeDto {
 	private String lagName;
 
 	public String getLagName() {
@@ -11,7 +11,7 @@ public class lagTypeDto {
 		this.lagName = lagName;
 	}
 
-	public lagTypeDto() {
+	public LagTypeDto() {
 		super();
 	}
 	
