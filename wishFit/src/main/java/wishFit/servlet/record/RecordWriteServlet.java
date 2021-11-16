@@ -1,4 +1,4 @@
-package wishFit.servlet.board;
+package wishFit.servlet.record;
 
 import java.io.IOException;
 
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
 
-@WebServlet(urlPatterns = "/asdasfgge")
-public class BoardWriteServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/record_write.kh")
+public class RecordWriteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

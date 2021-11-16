@@ -21,8 +21,8 @@ public class BoardEditServlet extends HttpServlet{
 			boardDto.setBoardTitle(req.getParameter("boardTitle"));
 			boardDto.setBoardPost(req.getParameter("boardPost"));
 			boardDto.setBoardDate(req.getParameter("boardDate"));
-			boardDto.setMidName(req.getParameter("midName"));
-			boardDto.setLagName(req.getParameter("lagName"));
+			boardDto.setBoardMiddleName(req.getParameter("midName"));
+			boardDto.setBoardLargeName(req.getParameter("lagName"));
 			
 			
 			
