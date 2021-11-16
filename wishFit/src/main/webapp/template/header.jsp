@@ -8,6 +8,7 @@ String root = request.getContextPath();
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/667a9524d72c3d7bdb2c48b2d4c5271c0988e0b2.rhymix.less.minefb7.css?20210415220507" />
 <link rel="stylesheet"
@@ -143,13 +144,16 @@ String root = request.getContextPath();
 					}, 1);
 		}
 	</script>
-	<!-- 앱 중간에 뜨는 화면. 경고창. -->
+	<!-- 앱 중간에 뜨는 화면. 경고창. 알림 모두삭제 클릭시 에 뜸. -->
+	<!--  비활성화 = app-confirm
+			활성화 = app-confirm app-confirm--danger active -->
 	<div id="app-confirm" class="app-confirm">
 		<div class="app-confirm__container">
 			<div class="app-confirm__box">
 				<div class="app-confirm__body">
 					<ion-icon class="app-confirm__icon"
 						name="information-circle-outline"></ion-icon>
+					<!-- 안 읽은 알림 삭제 -->
 					<div class="app-confirm__title"></div>
 					<div class="app-confirm__description"></div>
 				</div>
@@ -402,8 +406,7 @@ String root = request.getContextPath();
 				</a>
 				<!-- 알림 아이콘 -->
 				<div class="app-pc-only app-dropdown">
-					<a
-						class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
+					<a class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 							fill="currentColor">
         					<path
@@ -450,8 +453,10 @@ String root = request.getContextPath();
 				        <path
 								d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
 				      </svg>
+				      <span class="app-header-item-badge">1</span>
+        
 					</a>
-
+					<!-- active 클래스 붙으면 창이 열림 -->
 					<div class="app-dropdown-menu app-right" style="width: 270px">
 						<div class="app-dropdown-header tw-text-base tw-font-bold">쪽지</div>
 						<div class="tw-text-center tw-mb-6 tw-px-4">
