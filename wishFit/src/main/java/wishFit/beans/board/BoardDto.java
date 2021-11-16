@@ -98,5 +98,10 @@ public class BoardDto {
 	public BoardDto() {
 		super();
 	}
+	
+	// 댓글표시 메소드
+	public boolean isReplyExist() {
+		return this.boardReply > 0;
+	}
 
 }

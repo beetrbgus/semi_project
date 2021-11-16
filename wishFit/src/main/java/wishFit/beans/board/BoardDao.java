@@ -275,7 +275,7 @@ public class BoardDao {
 		return result > 0;
 	}
 
-	// 페이징이 가능한 목록(전체 + 조회 종류별로)
+	// 페이징이 가능한 목록(전체)
 	public List<BoardDto> listByRownum(int begin, int end) throws Exception {
 		Connection con = JdbcUtils.connect2();
 
@@ -309,6 +309,47 @@ public class BoardDao {
 
 		return list;
 	}
+	
+	// 페이징 목록(조회)
+	public List<BoardDto> searchByRownum(String column, String keyword, int begin, int end) throws Exception{
+		Connection con = JdbcUtils.connect2();
+		
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select * from board where instr(#1,?) > 0 order by board_no desc) TMP"
+				+ ") where rn between ? and ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
+		ResultSet rs = ps.executeQuery();
+		
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		
+		while(rs.next()) {
+			BoardDto boardDto = new BoardDto();
+			
+			boardDto.setBoardNo(rs.getInt("board_no"));
+			boardDto.setLagName(rs.getString("board_large_name"));
+			boardDto.setMidName(rs.getString("board_middle_name"));
+			boardDto.setBoardWriter(rs.getString("board_writer"));
+			boardDto.setBoardTitle(rs.getString("board_title"));
+			boardDto.setBoardPost(rs.getString("board_post"));
+			boardDto.setBoardDate(rs.getString("board_date"));
+			boardDto.setBoardReply(rs.getInt("board_reply"));
+			boardDto.setBoardRead(rs.getInt("board_read"));
+			boardDto.setBoardLike(rs.getInt("board_like"));
+			boardDto.setBoardHate(rs.getInt("board_hate"));
+			
+			list.add(boardDto);
+		}
+		con.close();
+		
+		return list;
+	}
+	
+	
 
 	// 페이징에서 마지막 블록을 구하기위하여 게시글 개수를 구하는 기능(전체/검색조회별로)
 	public int count() throws Exception {
