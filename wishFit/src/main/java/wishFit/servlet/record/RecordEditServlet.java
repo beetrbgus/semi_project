@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wishFit.beans.board.RecordBoardDao;
-import wishFit.beans.board.RecordBoardDto;
+import wishFit.beans.board.BoardDao;
+import wishFit.beans.board.BoardDto;
 
 @WebServlet(urlPatterns = "/record_edit.kh")
 public class RecordEditServlet extends HttpServlet{
@@ -17,17 +17,17 @@ public class RecordEditServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			//입력 : BoardDto(boardNo + boardTitle + boardContent)
-			RecordBoardDto boardDto = new RecordBoardDto();
+			BoardDto boardDto = new BoardDto();
 			boardDto.setBoardTitle(req.getParameter("boardTitle"));
 			boardDto.setBoardPost(req.getParameter("boardPost"));
 			boardDto.setBoardDate(req.getParameter("boardDate"));
-			boardDto.setMidName(req.getParameter("midName"));
-			boardDto.setLagName(req.getParameter("lagName"));
+			boardDto.setBoardMiddleName(req.getParameter("boardMiddleName"));
+			boardDto.setBoardLargeName(req.getParameter("boardLargeName"));
 			
 			
 			
 			//처리
-			RecordBoardDao boardDao = new RecordBoardDao();
+			BoardDao boardDao = new BoardDao();
 			boolean success = boardDao.edit(boardDto);
 			
 			//출력 : detail.jsp
