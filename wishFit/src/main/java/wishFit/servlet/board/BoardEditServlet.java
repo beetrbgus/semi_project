@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
 
-@WebServlet(urlPatterns = "/board/edit.kh")
+
+@WebServlet(urlPatterns = "/abcsd")
 public class BoardEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

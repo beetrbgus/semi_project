@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import wishFit.beans.board.BoardDao;
 
-@WebServlet(urlPatterns = "/board/delete.kh")
+
+@WebServlet(urlPatterns = "/abcde")
 public class BoardDeleteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
