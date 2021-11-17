@@ -303,7 +303,7 @@ String root = request.getContextPath();
 									});
 				</script>
 				<!-- 로그인 버튼 -->
-				<a href="#" class="app-pc-only app-header-login-link"
+				<a href="" class="app-pc-only app-header-login-link"
 					onclick="toggleDialog('app-login')"> <i class="el-icon-lock"></i>
 					<span>로그인</span>
 				</a>

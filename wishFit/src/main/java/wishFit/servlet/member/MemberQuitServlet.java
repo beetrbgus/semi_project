@@ -9,27 +9,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import wishFit.beans.member.MemberDao;
-import wishFit.beans.member.MemberDto;
 
-@WebServlet(urlPatterns="/page/member/login.kh")
-public class MemberLoginServlet extends HttpServlet{
+@WebServlet(urlPatterns="/page/member/quit.kh")
+public class MemberQuitServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			req.setCharacterEncoding("UTF-8");
-			String memId = req.getParameter("memId");
+			String memId = (String)req.getSession().getAttribute("ses");
 			String memPw = req.getParameter("memPw");
 			
 			MemberDao memberDao = new MemberDao();
-			MemberDto memberDto = memberDao.get(memId);
+			boolean success = memberDao.quit(memId, memPw);
 			
-			boolean login = false;
-			if(memberDto != null && memberDto.getMemPw().equals(memPw)) {
-				req.getSession().setAttribute("ses", memId);
-				req.getSession().setAttribute("grade", memberDto.getMemGrade());
-				resp.sendRedirect(req.getContextPath()+"/index.jsp");
-			} else {
-				resp.sendRedirect("login.jsp?error");
+			if(success) {
+				req.getSession().removeAttribute("ses");
+				resp.sendRedirect("quit_success.jsp"); //탈퇴 메시지?
+			}
+			else {
+				resp.sendRedirect("quit.jsp?error");
 			}
 		}	catch(Exception e) {
 			e.printStackTrace();

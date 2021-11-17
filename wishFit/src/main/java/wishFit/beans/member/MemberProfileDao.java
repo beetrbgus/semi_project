@@ -7,7 +7,7 @@ import wishFit.beans.JdbcUtils;
 
 public class MemberProfileDao {
 	public void insert(MemberProfileDto memberProfileDto) throws Exception {
-		Connection con = JdbcUtils.connect("wishfit", "wishfit");
+		Connection con = JdbcUtils.connect2();
 		
 		String sql = "insert into member_profile values(mp_seq.nextval, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -20,3 +20,4 @@ public class MemberProfileDao {
 		con.close();
 	}
 }
+ 

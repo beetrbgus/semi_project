@@ -6,9 +6,9 @@
     <%	String root = request.getContextPath();%>
     <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/255b6902485612c74d806c3142450a55116bc82e.signup-form.scssb2cb.css"/>
-<link rel="stylesheet"
+	<link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/347b8967715ee8520a013ff5c985fb69086c462a.member.scss944d.css"/>
-<link rel="stylesheet"
+	<link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/347b8967715ee8520a013ff5c985fb69086c462a.member-form.scss944d.css"/>
 
 
@@ -26,13 +26,7 @@
     <div class="app-member-card-body">
       <p class="tw-mb-3 tw-text-gray-700">별표<em style="color:red">*</em>가 있는 항목은 필수 항목입니다.</p>
       
-      <form id="rx_insert_member" action="https://wishfit.co.kr/" method="post" enctype="multipart/form-data" class="">
-      <input type="hidden" name="error_return_url" value="/?mid=freeboard&amp;document_srl=460&amp;act=dispMemberSignUpForm">
-      <input type="hidden" name="mid" value="freeboard"><input type="hidden" name="ruleset" value="@insertMember">
-        <input type="hidden" name="act" value="procMemberInsert">
-        <input type="hidden" name="xe_validator_id" value="modules/member/skins">
-        <input type="hidden" name="success_return_url" value="index55ee.html?mid=freeboard&amp;document_srl=460&amp;act=dispMemberInfo">
-        
+      <form action="join.kh" method="post" enctype="multipart/form-data">
         <div class="app-agreement">
           
           <div class="app-agreement-title">
@@ -262,7 +256,7 @@
 
 <p>본 약관은 2021년 4월 3일부터 시행합니다.</p>          </div>
           <div class="confirm">
-            <input type="checkbox" name="accept_agreement[1]" value="Y" id="accept_agreement_1" class="app-input-checkbox">
+            <input type="checkbox" value="Y" id="accept_agreement_1" class="app-input-checkbox">
             <label for="accept_agreement_1">위의 내용을 모두 읽었으며 동의합니다.</label>
           </div>
         </div><div class="app-agreement">
@@ -364,17 +358,19 @@
 
 
           <div class="confirm">
-            <input type="checkbox" name="accept_agreement[2]" value="Y" id="accept_agreement_2" class="app-input-checkbox">
+            <input type="checkbox" value="Y" id="accept_agreement_2" class="app-input-checkbox">
             <label for="accept_agreement_2">위의 내용을 모두 읽었으며 동의합니다.</label>
           </div>
         </div>  
+         
+      
         <ul class="app-member-form">
           <li>
             <label for="user_id">
               <em>*</em>
               <span>아이디</span>
             </label>
-            <input type="text" name="mem_id" id="user_id" value="" required="">
+            <input type="text" name="memId" id="user_id" value="" required="">
             
             <div class="app-error">
               특수문자를 제외한 영어 소문자, 숫자 포함한 6자리~20자리
@@ -386,7 +382,7 @@
               <em>*</em>
               <span>비밀번호</span>
             </label>
-            <input class="hi input input-default" type="password" name="mem_pw" id="password" value="" required="">
+            <input class="hi input input-default" type="password" name="memPw" id="password" value="" required="">
             <p class="app-error">영어 대/소문자, 숫자, 특수문자를 포함한 8자리 ~ 30자리</p>
           </li>
           
@@ -395,7 +391,7 @@
               <em>*</em>
               <span>비밀번호 확인</span>
             </label>
-            <input type="password" name="mem_pw2" id="password2" value="" required="">
+            <input type="password" id="password2" value="" required="">
           </li>
           
           <li>
@@ -403,7 +399,7 @@
               <em>*</em>
               <span>비밀번호 찾기 질문</span>
             </label>
-            <select name="mem_pwQ" id="pw_question">
+            <select name="memPwQ" id="pw_question">
 	                                <option value="01">아버지의 성함은?</option>
 	                                <option value="02">어머니의 성함은?</option>
 	                                <option value="03">자신의 생일은?</option>
@@ -417,7 +413,7 @@
           		<em>*</em>
           		<span>비밀번호 찾기 답변</span>
           	</label>
-          		<input type="text" name="mem_pwA" id="pw_answer">
+          		<input type="text" name="memPwA" id="pw_answer">
           		<p class="app-error">선택한 질문에 대한 답변을 남겨주십시오.</p>
           </li>
           
@@ -426,7 +422,7 @@
             				<em>*</em>
                             <span>성함</span>
             </label>
-                          <input type="text" name="mem_name" id="user_name" value="" required=""> 
+                          <input type="text" name="memName" id="user_name" value="" required=""> 
                           </li><li>
           
           <li>
@@ -434,14 +430,14 @@
             				<em>*</em>
                             <span>닉네임</span>
             </label>
-                          <input type="text" name="mem_nick" id="user_nick" value="" required=""> 
+                          <input type="text" name="memNick" id="user_nick" value="" required=""> 
                           </li><li>
                           
             <label for="user_birth">
             				<em>*</em>
                             <span>생년월일</span>
             </label>
-                          <input type="date" name="mem_birth" id="user_birth" value="" required="">
+                          <input type="date" name="memBirth" id="user_birth" value="" required="">
                           </li><li>
                           
             
@@ -449,14 +445,14 @@
             				<em>*</em>
                             <span>성별</span>
             </label>
-                          <input type="radio" name="mem_gender" id="user_gender" value="female"> 여자
-                          <input type="radio" name="mem_gender" id="user_gender" value="male"> 남자
+                          <input type="radio" name="memGender" id="user_gender" value="female"> 여자
+                          <input type="radio" name="memGender" id="user_gender" value="male"> 남자
                           </li><li>
                           
             <label for="user_phone">
                             <span>전화번호</span>
             </label>
-                          <input type="text" name="mem_phone" id="user_phone"  value=""> 
+                          <input type="text" name="memPhone" id="user_phone"  value=""> 
                           <p class="app-error">
                           전화번호는 - 을 제외한 11자리 숫자를 입력해주십시오.</p>
                           </li><li>
@@ -464,13 +460,11 @@
             <label for="profile_image">
                             <span>프로필 사진</span>
             </label>
-                          <input type="hidden" name="attach" value="false">
-                          <input type="file" name="profile_image" id="profile_image" value="" accept="image/*" data-max-filesize="102400" 
-                          																										data-max-filesize-error="파일이 너무 큽니다. 용량 제한은 %s입니다.">
+                          <input type="file" name="attach" accept="image/*">
                           <p class="help-block">파일 용량 제한: 100.0KB, 가로 제한 길이: 50px, 세로 제한 길이: 50px</p>
 						      
                   </ul>
-                  
+                 
         <div class="tw-flex tw-justify-end tw-pt-3">
           <button class="app-button primary" type="submit">등록</button>
         </div>

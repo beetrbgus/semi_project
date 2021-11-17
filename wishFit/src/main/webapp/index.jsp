@@ -267,6 +267,6 @@
 
 <!--  우측 사이드 -->
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
-<jsp:include page="/template/bottomNav.jsp"></jsp:include>
+<jsp:include page="/template/bottomNav.jsp"></jsp:include> 
 
 
