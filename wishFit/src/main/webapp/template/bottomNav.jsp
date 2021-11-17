@@ -1,8 +1,9 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-	String root = request.getContextPath();
+String root = request.getContextPath();
 %>
 <!-- 화면 모바일로 줄면 나오는 하단 Nav 버튼 -->
 <div class="app-layout-bottom-nav">
@@ -39,16 +40,13 @@
 					</div> <span class="app-bottom-nav-item__text">쪽지</span>
 			</a></li>
 
-			<li data-menu-id="usermenu">
-				<a class="app-bottom-nav__auto">
-					<!-- 아이콘 없어서 추가해야됨. --> 
-					<img
-						src="<%=root%>/resources/files/attach/xeicon/ic_profile_default.png"
-						alt="포카리스웻티" class="eq border-circle text-middle" width="24px"
-						height="24px"  style="border-radius : 70px" >
-					<span class="app-bottom-nav-item__text">로그인</span>
-				</a>
-			</li>
+			<li data-menu-id="usermenu"><a class="app-bottom-nav__auto">
+					<!-- 아이콘 없어서 추가해야됨. --> <img
+					src="<%=root%>/resources/files/attach/xeicon/ic_profile_default.png"
+					alt="포카리스웻티" class="eq border-circle text-middle" width="24px"
+					height="24px" style="border-radius: 70px"> <span
+					class="app-bottom-nav-item__text">로그인</span>
+			</a></li>
 		</ul>
 	</div>
 	<!-- 모바일(작은 화면)에서 로그인 선택시 나오는 화면. 비로그인 전용-->
@@ -107,8 +105,7 @@
 			<div class="tw-text-sm tw-text-center tw-text-gray-700">
 				<span class="eq text-muted">아직 회원이 아니신가요?</span> <a
 					href="index5ab6.html?mid=index&amp;act=dispMemberSignUpForm"
-					class="tw-text-primary tw-text-bold" tabindex="6">회원가입
-					하기</a>
+					class="tw-text-primary tw-text-bold" tabindex="6">회원가입 하기</a>
 			</div>
 			<div class="app-social-login-group">
 				<a class="app-social-kakao"
@@ -222,5 +219,8 @@
 <div id="rhymix_debug_button"></div>
 
 </body>
+
+
+
 
 </html>
