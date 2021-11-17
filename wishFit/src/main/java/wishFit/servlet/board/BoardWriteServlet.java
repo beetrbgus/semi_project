@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
 
-@WebServlet(urlPatterns = "")
+//@WebServlet(urlPatterns = "")
 public class BoardWriteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,8 +22,8 @@ public class BoardWriteServlet extends HttpServlet{
 			boardDto.setBoardTitle(req.getParameter("boardTitle"));
 			boardDto.setBoardPost(req.getParameter("boardPost"));
 			boardDto.setBoardDate(req.getParameter("boardDate"));
-			boardDto.setMidName(req.getParameter("midName"));
-			boardDto.setLagName(req.getParameter("lagName"));
+			boardDto.setBoardMiddleName(req.getParameter("boardMiddleName"));
+			boardDto.setBoardLargeName(req.getParameter("boardLargeName"));
 			//아이디 : 세션에서
 			boardDto.setBoardWriter((String)req.getSession().getAttribute("ses"));
 			

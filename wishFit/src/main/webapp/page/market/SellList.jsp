@@ -43,6 +43,7 @@ List<BoardDto> list = marketDao.list();
 			<td><%=boardDto.getBoardWriter()%></td>
 			<td><%=boardDto.getBoardRead()%></td>
 			<td align="left">
+			<!-- boardNo로 boardTitle 클릭 태그 만듬 -->
 				<a href="detail.jsp?boardNo=<%=boardDto.getBoardNo()%>"><%=boardDto.getBoardTitle()%></a>
 			</td>
 		</tr>

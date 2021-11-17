@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class BoardDto {
 	private int boardNo, boardReply, boardRead, boardLike, boardHate;
-	private String midName, lagName, boardWriter, boardTitle, boardPost;
+	private String boardMiddleName, boardLargeName, boardWriter, boardTitle, boardPost;
 	private String boardDate;
 
 	public int getBoardNo() {
@@ -47,20 +47,20 @@ public class BoardDto {
 		this.boardHate = boardHate;
 	}
 
-	public String getMidName() {
-		return midName;
+	public String getBoardMiddleName() {
+		return boardMiddleName;
 	}
 
-	public void setMidName(String midName) {
-		this.midName = midName;
+	public void setBoardMiddleName(String boardMiddleName) {
+		this.boardMiddleName = boardMiddleName;
 	}
 
-	public String getLagName() {
-		return lagName;
+	public String getBaordLargeName() {
+		return boardLargeName;
 	}
 
-	public void setLagName(String lagName) {
-		this.lagName = lagName;
+	public void setBoardLargeName(String BoardLargeName) {
+		this.boardLargeName = boardLargeName;
 	}
 
 	public String getBoardWriter() {
