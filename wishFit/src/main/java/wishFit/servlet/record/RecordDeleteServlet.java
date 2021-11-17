@@ -1,4 +1,4 @@
-package wishFit.servlet.board;
+package wishFit.servlet.record;
 
 import java.io.IOException;
 
@@ -10,12 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import wishFit.beans.board.BoardDao;
 
-<<<<<<< HEAD
-//@WebServlet(urlPatterns = "")
-=======
-@WebServlet(urlPatterns = "/abcde")
->>>>>>> refs/remotes/origin/master
-public class BoardDeleteServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/record_delete.kh")
+public class RecordDeleteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

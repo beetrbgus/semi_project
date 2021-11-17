@@ -1,4 +1,4 @@
-package wishFit.servlet.board;
+package wishFit.servlet.record;
 
 import java.io.IOException;
 
@@ -11,12 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
 
-<<<<<<< HEAD
-//@WebServlet(urlPatterns = "")
-=======
-@WebServlet(urlPatterns = "/abcsd")
->>>>>>> refs/remotes/origin/master
-public class BoardEditServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/record_edit.kh")
+public class RecordEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -25,8 +21,8 @@ public class BoardEditServlet extends HttpServlet{
 			boardDto.setBoardTitle(req.getParameter("boardTitle"));
 			boardDto.setBoardPost(req.getParameter("boardPost"));
 			boardDto.setBoardDate(req.getParameter("boardDate"));
-			boardDto.setBoardMiddleName(req.getParameter("midName"));
-			boardDto.setBoardLargeName(req.getParameter("lagName"));
+			boardDto.setBoardMiddleName(req.getParameter("boardMiddleName"));
+			boardDto.setBoardLargeName(req.getParameter("boardLargeName"));
 			
 			
 			

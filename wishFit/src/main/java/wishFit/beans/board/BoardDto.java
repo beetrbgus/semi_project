@@ -3,8 +3,16 @@ package wishFit.beans.board;
 import java.sql.Date;
 
 public class BoardDto {
-	private int boardNo, boardReply, boardRead, boardLike, boardHate;
-	private String boardMiddleName, boardLargeName, boardWriter, boardTitle, boardPost;
+	private int boardNo;
+	private int boardReply;
+	private int boardRead;
+	private int boardLike;
+	private int boardHate;
+	private String boardMiddleName;
+	private String boardLargeName;
+	private String boardWriter;
+	private String boardTitle;
+	private String boardPost;
 	private String boardDate;
 
 	public int getBoardNo() {
@@ -55,11 +63,11 @@ public class BoardDto {
 		this.boardMiddleName = boardMiddleName;
 	}
 
-	public String getBaordLargeName() {
+	public String getBoardLargeName() {
 		return boardLargeName;
 	}
 
-	public void setBoardLargeName(String BoardLargeName) {
+	public void setBoardLargeName(String boardLargeName) {
 		this.boardLargeName = boardLargeName;
 	}
 
@@ -96,7 +104,7 @@ public class BoardDto {
 	}
 
 	public BoardDto() {
-		super();
+
 	}
 
 }
