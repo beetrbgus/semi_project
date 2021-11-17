@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import wishFit.beans.JdbcUtils;
 
@@ -101,12 +103,14 @@ public class BoardDao {
 		return result > 0;
 	}
 
-	// 게시글 조회(전체 조회)/large_name만 분류
+	// 기록 게시글 조회(전체 조회)
 	public List<BoardDto> listByRecord() throws Exception {
 		Connection con = JdbcUtils.connect2();
 		String sql = "select * from board where board_large_name='기록' order by board_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
+		
+		
 		List<BoardDto> list = new ArrayList<>();
 		while (rs.next()) {
 			BoardDto boardDto = new BoardDto();
@@ -117,7 +121,6 @@ public class BoardDao {
 			boardDto.setBoardWriter(rs.getString("board_writer"));
 			boardDto.setBoardRead(rs.getInt("board_read"));
 			boardDto.setBoardReply(rs.getInt("board_reply"));
-//			boardDto.setBoardLargeName(rs.getString("board_large_name"));
 			boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
 
 			list.add(boardDto);
@@ -130,7 +133,7 @@ public class BoardDao {
 	// 게시글 조회 (카테고리 o, 칼럼/키워드x)/lagName과 midName 분류
 	public List<BoardDto> searchByMid(String lagName, String midName) throws Exception {
 		Connection con = JdbcUtils.connect2();
-		String sql = "select * from board where board_large_name=? and board_middle_name=? order by board_no desc";
+		String sql = "select * from board where board_large_name='기록' and board_middle_name=? order by board_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, lagName);
 		ps.setString(2, midName);
@@ -165,7 +168,52 @@ public class BoardDao {
 		con.close();
 		return result > 0;
 	}
+	// 기록 게시글 조회(전체 조회)/기록용		//String datedjwjrh
+	public List<BoardDto> listByRecord(String startMonthOfDay,String endMonthOfDay) throws Exception {
+		Connection con = JdbcUtils.connect2();
+		String sql = "select * from board where board_large_name='기록' and board_date between to_date(?,'yyyy-MM-dd') and to_date(?,'yyyy-MM-dd') order by board_date asc";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, startMonthOfDay);
+		ps.setString(2, endMonthOfDay);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		
+		List<BoardDto> list = new ArrayList<>();
+		Map<Integer, List<BoardDto>> mapList= new TreeMap<Integer, List<BoardDto>>();
+		int startDay  = 1;
+		int lastDay = 30;
+		
+		for(int i=1; i<=lastDay;i++ ) {
+			
+			if(!mapList.containsValue(i)) {//i 일에 기록이 없다면
+				list.add(null);
+			}
+			else {//i 일에 기록(저장된 데이터가)있다면
+				while (rs.next()) {
+					
+					BoardDto boardDto = new BoardDto();
+					boardDto.setBoardNo(rs.getInt("board_no"));
+					boardDto.setBoardTitle(rs.getString("board_title"));
+					boardDto.setBoardPost(rs.getString("board_post"));
+					boardDto.setBoardDate(rs.getDate("board_date").toString());
+					boardDto.setBoardWriter(rs.getString("board_writer"));
+					boardDto.setBoardRead(rs.getInt("board_read"));
+					boardDto.setBoardReply(rs.getInt("board_reply"));
+					boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
+		
+					list.add(boardDto);
+					
+					mapList.put(i, list);
+					
+				}
+			}
+		}
+		con.close();
+		return list;
 
+	}
 	
 	//여기까지 기록
 }
