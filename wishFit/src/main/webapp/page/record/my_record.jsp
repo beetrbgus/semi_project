@@ -51,6 +51,20 @@
 		</h1>
 	</div>
 	<div class="row"><a href= "#" class="btn">기록 작성</a></div>
+	<div class= "row">
+	<a href="my_record.jsp" class="btn">
+		<label>전체</label>
+		</a>
+		<a href="?boardMiddleName=일자별" class="btn">
+		<label>일자별</label>
+		</a>
+		<a href="?boardMiddleName=소모임" class="btn">
+		<label>소모임</label>
+		</a>
+		<a href="?boardMiddleName=식단" class="btn">
+		<label>식단</label>
+		</a>
+	</div>
 	<div class="row">
  	<table  class="table" style="width:100%">
 			<thead style="height:25px">
