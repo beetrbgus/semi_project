@@ -345,5 +345,38 @@ public class BoardDao {
 
 		return count;
 	}
+	
+	// 마이페이지 - 작성 글 목록 보기
+	public List<BoardDto> boardMine(String boardWriter) throws Exception{
+		Connection con = JdbcUtils.connect2();
+		
+		String sql = "select * from board where board_writer = ? order by board_no desc";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, boardWriter);
+		ResultSet rs = ps.executeQuery();
+		
+		List<BoardDto> list = new ArrayList<>();
+		while (rs.next()) {
+			BoardDto boardDto = new BoardDto();
 
+			boardDto.setBoardNo(rs.getInt("board_no"));
+			boardDto.setLagName(rs.getString("board_large_name"));
+			boardDto.setMidName(rs.getString("board_middle_name"));
+			boardDto.setBoardWriter(rs.getString("board_writer"));
+			boardDto.setBoardTitle(rs.getString("board_title"));
+			boardDto.setBoardPost(rs.getString("board_post"));
+			boardDto.setBoardDate(rs.getString("board_date"));
+			boardDto.setBoardReply(rs.getInt("board_reply"));
+			boardDto.setBoardRead(rs.getInt("board_read"));
+			boardDto.setBoardLike(rs.getInt("board_like"));
+			boardDto.setBoardHate(rs.getInt("board_hate"));
+
+
+			list.add(boardDto);
+		}
+		con.close();
+
+		return list;
+	}
 }

@@ -29,9 +29,9 @@
     <div class="app-member-card app-member-menu">
   <ul>
     <li class="app-active">
-      <a href="<%=root%>/">내 정보 보기</a>
+      <a href="<%=root%>/page/member/mypage.jsp">내 정보 보기</a>
     </li><li>
-      <a href="<%=root%>/">작성 게시글 보기</a>
+      <a href="<%=root%>/page/member/note_post.jsp">작성 게시글 보기</a>
     </li><li>
       <a href="<%=root%>/">작성 댓글 보기</a>
     </li><li>

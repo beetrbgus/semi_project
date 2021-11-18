@@ -4,7 +4,7 @@
 	<table>
 	<caption>비밀번호 찾기</caption>
 		<tr>
-			<td><input type="text" name="memName" placeholder="이름을 입력하세요"></td>
+			<td><input type="text" name="memId" placeholder="아이디를 입력하세요"></td>
 		</tr>
 		<tr>
 			<td><select name="memPwQ" id="pw_question">
@@ -20,7 +20,7 @@
 		</tr>
 		<tr>
 			<td align="center">
-			<input type="submit" value="아이디 찾기"></td>
+			<input type="submit" value="비밀번호 찾기"></td>
 		</tr>
 	</table>
 </form>
