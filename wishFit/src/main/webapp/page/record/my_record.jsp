@@ -55,13 +55,13 @@
 	<a href="my_record.jsp" class="btn">
 		<label>전체</label>
 		</a>
-		<a href="?boardMiddleName=일자별" class="btn">
+		<a href="my_record.jsp?boardMiddleName=일자별" class="btn">
 		<label>일자별</label>
 		</a>
-		<a href="?boardMiddleName=소모임" class="btn">
+		<a href="my_record.jsp?boardMiddleName=소모임" class="btn">
 		<label>소모임</label>
 		</a>
-		<a href="?boardMiddleName=식단" class="btn">
+		<a href="my_record.jsp?boardMiddleName=식단" class="btn">
 		<label>식단</label>
 		</a>
 	</div>
