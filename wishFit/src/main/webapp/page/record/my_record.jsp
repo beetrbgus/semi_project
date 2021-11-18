@@ -16,10 +16,20 @@
    		int month = now.getMonthValue();
    		//현재 일
    		int dayOfMonth = now.getDayOfMonth();
+   		
+   		//파라미터로 boardMiddleName 을 가져올 경우
+   		String middleName = request.getParameter("boardMiddleName");
+   		boolean isMidName = middleName != null && !middleName.isEmpty();
     %>
     <%
 		BoardDao boardDao = new BoardDao();
-		Map<String,List<BoardDto>> mapList = boardDao.monthlyList(year, month);
+    	System.out.println(isMidName);
+    	Map<String,List<BoardDto>> mapList;
+    	if(isMidName){
+    		 mapList = boardDao.monthlyListMiddle(year,month,middleName);
+    	}else{
+			mapList = boardDao.monthlyList(year, month);
+    	}
     	
     %>
 <link rel = "stylesheet" type="text/css" href="../css/commons.cs"> 
@@ -84,7 +94,6 @@
 			</tfoot>
 		</table>
 	</div>
-	<div class="row"></div>
 
 </div>
 

@@ -254,11 +254,14 @@ public class BoardDao {
 		}
 		return map;
 	}
+	
 	//하루치 목록 조회 메소드
 	public List<BoardDto> dailyList(String time,String nextTime) throws Exception {
 		Connection con = JdbcUtils.connect2();
 //		String sql = "select * from board where board_large_name='기록' and board_date = to_date(?, 'yyyy-mm-dd')";
-		String sql = "select * from board where board_large_name='기록' and board_date >= to_date(?, 'yyyy-mm-dd') and board_date < to_date(?, 'yyyy-mm-dd')";
+		String sql = "select * from board "
+				+ "where board_large_name='기록' and board_date >= to_date(?, 'yyyy-mm-dd') and board_date < to_date(?, 'yyyy-mm-dd') "
+				+ "order by board_middle_name asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, time);
 		ps.setString(2, nextTime);
@@ -285,6 +288,74 @@ public class BoardDao {
 		con.close();
 		return list;
 	}
+	//월별 조회2(중분류=> board_middle_name 파라미터존재시) = 하루치 목록 조회 * 날짜수
+			public Map<String, List<BoardDto>> monthlyListMiddle(int year, int month,String middleName) throws Exception {
+				Calendar c = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
+				int max = c.getActualMaximum(Calendar.DATE);
+				
+				Map<String, List<BoardDto>> map = new HashMap<>();
+				for(int date = 1; date <= max; date++) {
+//					String time = year + "-" + month + "-" + date;//ex ) time ="2021-11-1"/...
+					String time = "";
+					
+					if(date < 10) {
+						time = year + "-" + month + "-" + "0"+date;
+					}else {
+						time = year + "-" + month + "-" + date;
+					}
+					//내일날짜 구하기
+					Date timeToDate = sdf.parse(time);
+					c.setTime(timeToDate);
+					c.add(Calendar.DATE, 1);
+					String resultDate = sdf.format(c.getTime());
+					String nextYear = resultDate.substring(0,5);
+					String nextMonth = resultDate.substring(5,7);
+					String nextDay = resultDate.substring(7,10);
+					String nextTime = nextYear+nextMonth+nextDay;
+					
+					List<BoardDto> list = dailyList(time,nextTime,middleName);
+					map.put(time, list);
+				}
+				return map;
+			}
+	//하루치 목록 조회 메소드 (middleName 존재시)
+		public List<BoardDto> dailyList(String time,String nextTime,String middleName) throws Exception {
+			Connection con = JdbcUtils.connect2();
+//			String sql = "select * from board where board_large_name='기록' and board_date = to_date(?, 'yyyy-mm-dd')";
+			String sql = "select * from board "
+					+ "where board_large_name='기록' and board_date >= to_date(?, 'yyyy-mm-dd') and board_date < to_date(?, 'yyyy-mm-dd') "
+					+ "and board_middle_name=? "
+					+ "order by board_middle_name asc";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, time);
+			ps.setString(2, nextTime);
+			ps.setString(3, middleName);
+			
+			
+			ResultSet rs = ps.executeQuery();
+			List<BoardDto> list = new ArrayList<>();
+			
+			while(rs.next()) {
+				BoardDto boardDto = new BoardDto();
+				boardDto.setBoardNo(rs.getInt("board_no"));
+				boardDto.setBoardTitle(rs.getString("board_title"));
+				boardDto.setBoardPost(rs.getString("board_post"));
+				boardDto.setBoardDate(rs.getString("board_date").substring(0,10));
+				boardDto.setBoardWriter(rs.getString("board_writer"));
+				boardDto.setBoardRead(rs.getInt("board_read"));
+				boardDto.setBoardReply(rs.getInt("board_reply"));
+				boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
+				
+				list.add(boardDto);
+				
+			}
+			
+			con.close();
+			return list;
+		}
+		
 	
 	
 	
