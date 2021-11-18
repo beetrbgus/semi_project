@@ -26,7 +26,7 @@ public class MemberLoginServlet extends HttpServlet{
 			boolean login = false;
 			if(memberDto != null && memberDto.getMemPw().equals(memPw)) {
 				req.getSession().setAttribute("ses", memId);
-				req.getSession().setAttribute("grade", memberDto.getMemGrade());
+				req.getSession().setAttribute("grade", memberDto.getMemGrade()); //관리자
 				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 			} else {
 				resp.sendRedirect("login.jsp?error");

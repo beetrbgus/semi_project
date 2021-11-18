@@ -15,7 +15,7 @@ public class MemberDao {
 	// 회원가입
 	
 	public void join(MemberDto memberDto) throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		
 		String sql = "insert into member( "
 				+ "mem_id, mem_pw, "
@@ -43,9 +43,9 @@ public class MemberDao {
 		con.close();
 	}
 
-	// 로그인
+	// 회원 상세
 	public MemberDto get(String memId) throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		
 		String sql = "select * from member where mem_id=?";
 		ps = con.prepareStatement(sql);
@@ -53,8 +53,9 @@ public class MemberDao {
 		rs = ps.executeQuery();
 		
 		MemberDto memberDto;
-		
-		if (rs.next()) {
+		boolean result = rs.next();
+		System.out.println(result);
+		if (result) {
 			
 			memberDto = new MemberDto();
 			
@@ -80,7 +81,7 @@ public class MemberDao {
 
 	// 회원 탈퇴
 	public boolean quit(String memId, String memPw) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		
 		String sql="delect member where mem_id=? and mem_pw=?";
 		ps = con.prepareStatement(sql);
@@ -96,7 +97,7 @@ public class MemberDao {
 
 	//정보 수정
 	public boolean edit(MemberDto memberDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		
 		String sql="update member "
 				+ "set mem_pw=?,"
@@ -119,7 +120,7 @@ public class MemberDao {
 	
 	// 아이디 찾기 (이름, 전화번호)
 	public String findId(MemberDto memberDto) throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		
 		String sql = "select mem_id from member where mem_name=? and mem_phone=?";
 		ps = con.prepareStatement(sql);
@@ -139,7 +140,7 @@ public class MemberDao {
 	
 	// 비밀번호 찾기(아이디, 질문, 답변)
 	public String findPw(MemberDto memberDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		
 		String sql = "select mem_pw from member "
 				+ "where mem_id=? and mem_pw_q=? and mem_pw_a=?";

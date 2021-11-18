@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%String memPw = request.getParameter("mem_pw"); %>
 <% if(memPw == null){ %>
-	<h2>ÇØ´çÇÏ´Â È¸¿øÀÌ ¾ø½À´Ï´Ù.</h2>
+	<h2>í•´ë‹¹í•˜ëŠ” íšŒì›ì´ ì—†ìŠµë‹ˆë‹¤.</h2>
 	<%} else{%>
-	<h2>°á°ú <%=memPw %></h2>
+	<h2>ê²°ê³¼ <%=memPw %></h2>
 	<%} %>

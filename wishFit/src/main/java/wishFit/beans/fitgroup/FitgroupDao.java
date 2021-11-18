@@ -11,9 +11,9 @@ import wishFit.beans.JdbcUtils;
 // 마이페이지 - 작성 글 목록 보기
 public class FitgroupDao {
 	public List<FitgroupDto> fitgroupMine(String fgId) throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		
-		String sql = "select * from fitgroup where fg_id order by fit_no desc";
+		String sql = "select * from fitgroup where fg_id = ? order by fg_no desc";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, fgId);

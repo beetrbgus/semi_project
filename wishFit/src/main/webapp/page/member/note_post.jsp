@@ -3,8 +3,8 @@
 <%@page import="wishFit.beans.board.BoardDto"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.board.BoardDao"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%
     	String boardWriter = request.getParameter("boardWriter");
     
@@ -12,20 +12,20 @@
     	List<BoardDto> boardMine = boardDao.boardMine(boardWriter);
     %>
     <%
-    	String fitgroupWriter = request.getParameter("fgId");
+    	String fgId = request.getParameter("fgId");
     	
     	FitgroupDao fitgroupDao = new FitgroupDao();
     	List<FitgroupDto> fitgroupMine = fitgroupDao.fitgroupMine(fgId);
     %>
     
 
-<h2>ÀÛ¼º ±Û ¸ñ·Ïº¸±â</h2>
+<h2>ìž‘ì„± ê¸€ ëª©ë¡ë³´ê¸°</h2>
 <table>
 	<thead>
 		<tr>
-			<th>¹øÈ£</th>
-			<th width="50%">Á¦¸ñ</th>
-			<th>ÀÛ¼ºÀÏ</th>
+			<th>ë²ˆí˜¸</th>
+			<th width="50%">ì œëª©</th>
+			<th>ìž‘ì„±ì¼</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -40,7 +40,7 @@
 			<tr>
 				<td><%=fitgroupDto.getFgNo() %></td>
 				<td><%=fitgroupDto.getFgTitle() %></td>
-				<td><%=fitgroupDto.getFgStarttime()%></td> <!-- ÀÛ¼ºÀÏ ? -->
+				<td><%=fitgroupDto.getFgStarttime()%></td> <!-- ìž‘ì„±ì¼ ? -->
 			</tr>
 		<%} %>
 		</tbody>

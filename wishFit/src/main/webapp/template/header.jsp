@@ -305,7 +305,7 @@ String root = request.getContextPath();
 				<!-- 로그인 버튼 -->
 				<a href="" class="app-pc-only app-header-login-link"
 					onclick="toggleDialog('app-login')"> <i class="el-icon-lock"></i>
-					<span>로그인</span>
+					<span>로그인</span>toggleDialog
 				</a>
 				<!-- 회원가입 버튼 -->
 				<a

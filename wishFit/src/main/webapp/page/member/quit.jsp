@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
-    <h2>ȸ�� Ż��</h2>
+    <h2>회원 탈퇴</h2>
     
     <form action="quit.kh" method="post">
     	<table>
     		<tbody>
 			<tr>
-				<th>��й�ȣ</th>
+				<th>비밀번호</th>
 				<td>
 					<input type="password" name="memPw" required>
 				</td>
@@ -16,12 +16,12 @@
 		<tfoot>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="ȸ�� Ż��">
+					<input type="submit" value="회원 탈퇴">
 				</td>
 			</tr>
 		</tfoot>
     	</table>
     </form>
     <%if(request.getParameter("error") != null){ %>
-	<h4><font color="red">�Է��Ͻ� ������ ��ġ���� �ʽ��ϴ�</font></h4>
+	<h4><font color="red">입력하신 정보가 일치하지 않습니다</font></h4>
 <%} %>

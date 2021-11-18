@@ -1,6 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    
+<%@page import="wishFit.beans.member.MemberDto"%>
+<%@page import="wishFit.beans.member.MemberDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String memId = (String)session.getAttribute("ses");
+
+	MemberDao memberDao = new MemberDao();
+	MemberDto memberDto = memberDao.get(memId);
+%>
     <jsp:include page="/template/header.jsp"></jsp:include>
     <%	String root = request.getContextPath();%>
     <link rel="stylesheet"
@@ -17,6 +24,8 @@
 	href="<%=root%>/resources/files/cache/assets/compiled/e2e20d8f11c73881fc0c04415f616eca07d780f1.tab.scss305a.css"/>
 	<link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/255b6902485612c74d806c3142450a55116bc82e.signup-form.scssb2cb.css"/>
+	<link rel="stylesheet" 
+	href = "<%=root%>/resources/files/cache/assets/compiled/member-info.css">
     
     <jsp:include page="/template/leftSide.jsp"></jsp:include> 
     
@@ -31,25 +40,28 @@
  <div class="app-member-card app-member-menu">
    <ul>
     <li class="app-active">
-      <a href="/">³» Á¤º¸ º¸±â</a>
+      <a href="/">ë‚´ ì •ë³´ ë³´ê¸°</a>
     </li><li>
-      <a href="/">ÀÛ¼º °Ô½Ã±Û º¸±â</a>
+      <a href="/">ìž‘ì„± ê²Œì‹œê¸€ ë³´ê¸°</a>
     </li><li>
-      <a href="/">ÀÛ¼º ´ñ±Û º¸±â</a>
+      <a href="/">ìž‘ì„± ëŒ“ê¸€ ë³´ê¸°</a>
     </li><li>
-      <a href="/">Ä£±¸ ¸ñ·Ï</a>
+      <a href="/">ì¹œêµ¬ ëª©ë¡</a>
     </li><li>
-      <a href="/">·Î±×¾Æ¿ô</a>
+      <a href="/">ë¡œê·¸ì•„ì›ƒ</a>
     </li> 
     </ul>
 </div></div>
 
-<!-- Á¤º¸ ¼öÁ¤ -->
+
+<!-- ì •ë³´ ìˆ˜ì • -->
 <div class="app-member-content">
 	<div class="app-member-card">
 		<div class="app-member-card-header">
-			<h1>Á¤º¸ ¼öÁ¤</h1>
+			<h1>ì •ë³´ ìˆ˜ì •</h1>
 		</div>
+
+
 	</div>
 </div>
 

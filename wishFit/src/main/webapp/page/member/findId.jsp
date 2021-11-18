@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <form action="findId.kh" method="post">
 	<table>
-	<caption>���̵� ã��</caption>
+	<caption>아이디 찾기</caption>
 		<tr>
-			<td><input type="text" name="memName" placeholder="�̸��� �Է��ϼ���"></td>
+			<td><input type="text" name="memName" placeholder="이름을 입력하세요"></td>
 		</tr>
 		<tr>
-			<td><input type="text" name="memPhone" placeholder="��ȭ��ȣ�� �Է��ϼ���"></td>
+			<td><input type="text" name="memPhone" placeholder="전화번호를 입력하세요"></td>
 		</tr>
 		<tr>
 			<td align="center">
-			<input type="submit" value="���̵� ã��"></td>
+			<input type="submit" value="아이디 찾기"></td>
 		</tr>
 	</table>
 </form>
