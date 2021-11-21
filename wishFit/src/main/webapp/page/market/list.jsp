@@ -7,10 +7,10 @@
 
 <link rel="stylesheet" type="text/css" href="../css/commons.css">
 <!-- 헤더 -->
-<jsp:include page="/template/header.jsp"></jsp:include>
+<%-- <jsp:include page="/template/header.jsp"></jsp:include>--%>
 
 <!-- 좌측 사이드 -->
-<jsp:include page="/template/leftSide.jsp"></jsp:include>
+<%-- <jsp:include page="/template/leftSide.jsp"></jsp:include>--%>
 
 <!-- 입력 -->
 
@@ -27,6 +27,15 @@ List<BoardDto> list = marketDao.list();
 
 
 <div class="container-700 container-center">
+<h2 align="center">판매리스트</h2>
+<select>
+<option>제목</option>
+<option>작성자</option>
+<option>내용</option>
+<option>전체</option>
+</select>
+<input type="search" name="keyword" placehoder="검색어 입력" required >
+<input type="submit" value="검색">
 <table  border="1">
 <thead>
 <tr>
@@ -55,9 +64,9 @@ List<BoardDto> list = marketDao.list();
 <a href="write.jsp">글쓰기</a>
 
 <!-- 푸터 -->
-<jsp:include page="/template/footer.jsp"></jsp:include>
+<%-- <jsp:include page="/template/footer.jsp"></jsp:include>--%>
 
 <!--  우측 사이드 -->
-<jsp:include page="/template/rightSide.jsp"></jsp:include>
+<%-- <jsp:include page="/template/rightSide.jsp"></jsp:include>--%>
 
 

@@ -11,11 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
 
-<<<<<<< HEAD
-//@WebServlet(urlPatterns = "")
-=======
-@WebServlet(urlPatterns = "/abcsd")
->>>>>>> refs/remotes/origin/master
+//@WebServlet(urlPatterns = "/page/record/edit.kh")
 public class BoardEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,9 +34,7 @@ public class BoardEditServlet extends HttpServlet{
 			if(success) {
 				resp.sendRedirect("detail.jsp?boardNo="+boardDto.getBoardNo());
 			}
-			else {
-				resp.sendError(404);
-			}
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();

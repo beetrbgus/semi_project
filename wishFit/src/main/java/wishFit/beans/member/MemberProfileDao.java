@@ -3,11 +3,11 @@ package wishFit.beans.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import wishFit.beans.JdbcUtils;
+import wishFit.util.JdbcUtils;
 
 public class MemberProfileDao {
 	public void insert(MemberProfileDto memberProfileDto) throws Exception {
-		Connection con = JdbcUtils.connect("wishfit", "wishfit");
+		Connection con = JdbcUtils.connect();
 		
 		String sql = "insert into member_profile values(mp_seq.nextval, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);

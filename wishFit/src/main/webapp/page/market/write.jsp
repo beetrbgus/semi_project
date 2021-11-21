@@ -67,7 +67,7 @@
 </head>
 
 <body>
-    <form action="write.kh" method="post">
+    <form action="write.kh" method="post" enctype="multipart/form-data">
         <div class="container-700 container-center">
             <div class="row center">
                 <h1>마켓</h1>
@@ -86,7 +86,7 @@
             </div>
             <div class="row">
                 <label class="form-block">첨부파일</label>
-                <input type="file" name="" class="form-input form-inline">
+                <input type="file" name="attach" accept="image/*" class="form-input form-inline">
             </div>
             <div class="row">
                 <input type="submit" value="등록" class="form-button">

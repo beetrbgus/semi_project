@@ -1,15 +1,9 @@
-<%@page import="wishFit.beans.board.RecordBoardDto"%>
-<%@page import="wishFit.beans.board.RecordBoardDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%--입력 --%>
 <%
 int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-%>
-<%--처리 --%>
-<%
-RecordBoardDao boardDao = new RecordBoardDao();
-	RecordBoardDto boardDto = boardDao.detail(boardNo);
 %>
 
 
@@ -18,18 +12,18 @@ RecordBoardDao boardDao = new RecordBoardDao();
 <h2>게시글 수정</h2>
 
 <form action="edit.kh" method="post" border="0">
-<input type = "hidden" name="boardNo" value="<%=boardDto.getBoardNo()%>">
+<input type = "hidden" name="boardNo" value="">
 
 <table>
 	<tbody>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="boardTitle" required value= "<%=boardDto.getBoardTitle()%>"></td>
+			<td><input type="text" name="boardTitle" required value= ""></td>
 		</tr>
 		<tr>
 			<th valign="top">내용
 			</th>
-			<td><textarea rows="10" cols="50" name="boardPost" placeholder="내용 입력"><%=boardDto.getBoardPost()%></textarea></td>
+			<td><textarea rows="10" cols="50" name="boardPost" placeholder="내용 입력"></textarea></td>
 		</tr>
 	</tbody>
 	<tfoot>

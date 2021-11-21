@@ -21,8 +21,8 @@ List<BoardDto> list2 = marketDao.list2();
 
 
 
-
-<table border="1">
+<h2 align="center">구매 리스트</h2>
+<table border="1" align="center">
 <thead>
 <tr>
 <td>번호</td>
@@ -37,12 +37,16 @@ List<BoardDto> list2 = marketDao.list2();
 			<td><%=boardDto.getBoardNo()%></td>
 			<td><%=boardDto.getBoardWriter()%></td>
 			<td><%=boardDto.getBoardRead()%></td>
-			<td ><%=boardDto.getBoardTitle() %></td>
-			<a href="detail.jsp?boanrdNo="<%=boardDto.getBoardNo() %>><%=boardDto.getBoardTitle() %></a>
+			<td align="left">
+			<!-- boardNo로 boardTitle 클릭 태그 만듬 -->
+				<a href="detail.jsp?boardNo=<%=boardDto.getBoardNo()%>"><%=boardDto.getBoardTitle()%></a>
+			</td>
 		</tr>
 		<%} %>
 		</tbody>
 </table>
+<br>
+<a href="write.jsp">글쓰기</a>
 
 <!-- 푸터 -->
 <%--<jsp:include page="/template/footer.jsp"></jsp:include>--%>

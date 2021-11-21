@@ -1,8 +1,16 @@
-package wishFit.beans.image;
+package wishFit.beans.market;
 
-public class imageDto {
-	private int imageNo,boardNo,boardSize;
-	private String boardUpload,boardSave,boardType;
+public class MarketFileDto {
+	private int imageNo;
+	private int boardNo;
+	private String boardUpload;
+	private String boardSave;
+	private long boardSize;
+	private String boardType;
+	public MarketFileDto() {
+		super();
+		
+	}
 	public int getImageNo() {
 		return imageNo;
 	}
@@ -14,12 +22,6 @@ public class imageDto {
 	}
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
-	}
-	public int getBoardSize() {
-		return boardSize;
-	}
-	public void setBoardSize(int boardSize) {
-		this.boardSize = boardSize;
 	}
 	public String getBoardUpload() {
 		return boardUpload;
@@ -33,14 +35,17 @@ public class imageDto {
 	public void setBoardSave(String boardSave) {
 		this.boardSave = boardSave;
 	}
+	public long getBoardSize() {
+		return boardSize;
+	}
+	public void setBoardSize(long boardSize) {
+		this.boardSize = boardSize;
+	}
 	public String getBoardType() {
 		return boardType;
 	}
 	public void setBoardType(String boardType) {
 		this.boardType = boardType;
-	}
-	public imageDto() {
-		super();
 	}
 	
 	

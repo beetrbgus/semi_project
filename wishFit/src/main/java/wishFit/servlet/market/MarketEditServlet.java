@@ -1,4 +1,4 @@
-package wishFit.servlet.record;
+package wishFit.servlet.market;
 
 import java.io.IOException;
 
@@ -8,27 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
-
-//@WebServlet(urlPatterns = "/record_edit.kh")
-public class RecordEditServlet extends HttpServlet{
+import wishFit.beans.market.MarketDao;
+//@WebServlet(urlPatterns="/page/market/edit.kh")
+public class MarketEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			//입력 : BoardDto(boardNo + boardTitle + boardContent)
+			//입력 : boardDto에 제목,내용,중분류 필요
+			req.setCharacterEncoding("UTF-8");
 			BoardDto boardDto = new BoardDto();
+			boardDto.setBoardNo(Integer.parseInt(req.getParameter("boardNo")));
+			boardDto.setBoardMiddleName(req.getParameter("boardMiddleName"));
 			boardDto.setBoardTitle(req.getParameter("boardTitle"));
 			boardDto.setBoardPost(req.getParameter("boardPost"));
-			boardDto.setBoardDate(req.getParameter("boardDate"));
-			boardDto.setBoardMiddleName(req.getParameter("boardMiddleName"));
-			boardDto.setBoardLargeName(req.getParameter("boardLargeName"));
-			
-			
 			
 			//처리
-			BoardDao boardDao = new BoardDao();
-			boolean success = boardDao.edit(boardDto);
+			MarketDao marketDao = new MarketDao();
+			boolean success = marketDao.edit(boardDto);
 			
 			//출력 : detail.jsp
 			if(success) {
@@ -38,7 +35,9 @@ public class RecordEditServlet extends HttpServlet{
 				resp.sendError(404);
 			}
 			
-		}catch(Exception e) {
+			
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}

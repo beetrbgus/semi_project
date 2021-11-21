@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import wishFit.beans.JdbcUtils;
+import wishFit.util.JdbcUtils;
 
 public class BoardDao {
 	//기록파트
@@ -14,7 +14,7 @@ public class BoardDao {
 	// 세션 생성
 	public int getSeq() throws Exception {
 
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		String sql = "select board_seq.nextval from dual";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -29,7 +29,7 @@ public class BoardDao {
 
 	// 게시글 작성
 	public void write(BoardDto boardDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		String sql = "insert into board values(?,?,?,?,?,?,?,0,0,0,0)";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -49,7 +49,7 @@ public class BoardDao {
 
 	// 게시글 단일 조회(상세 페이지) (게시글번호)
 	public BoardDto detail(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		String sql = "select * from board where board_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -83,7 +83,7 @@ public class BoardDao {
 
 	// 게시글 수정
 	public boolean edit(BoardDto boardDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		String sql = "update board " + "set board_title=?, board_post=? , board_date=? , "
 				+ "board_large_name=?,board_middle_name=? " + "where board_no = ?";
 
@@ -103,7 +103,7 @@ public class BoardDao {
 
 	// 게시글 조회(전체 조회)/large_name만 분류
 	public List<BoardDto> listByRecord() throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		String sql = "select * from board where board_large_name='기록' order by board_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
@@ -129,7 +129,7 @@ public class BoardDao {
 
 	// 게시글 조회 (카테고리 o, 칼럼/키워드x)/lagName과 midName 분류
 	public List<BoardDto> searchByMid(String lagName, String midName) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		String sql = "select * from board where board_large_name=? and board_middle_name=? order by board_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, lagName);
@@ -157,7 +157,7 @@ public class BoardDao {
 
 	// 게시글 삭제
 	public boolean delete(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		String sql = "delete board where board_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, boardNo);

@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import wishFit.beans.JdbcUtils;
+import wishFit.util.JdbcUtils;
 
 public class MemberDao {
 
 	// 회원가입
 	
 	public void join(MemberDto memberDto) throws Exception{
-		Connection con = JdbcUtils.connect("wishfit", "wishfit");
+		Connection con = JdbcUtils.connect();
 		
 		String sql = "insert into member( "
 				+ "mem_id, mem_pw, mem_nick, mem_birth, mem_gender,,"
@@ -35,7 +35,7 @@ public class MemberDao {
 
 	// 로그인
 	public MemberDto get(String mem_id) throws Exception{
-		Connection con = JdbcUtils.connect("wishfit", "wishfit");
+		Connection con = JdbcUtils.connect();
 		
 		String sql = "select * from member where mem_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);

@@ -12,7 +12,7 @@ import wishFit.util.JdbcUtils;
 public class MarketDao {
 	// 판매 목록 조회
 	public List<BoardDto> list() throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 
 		String sql = "select * from board where board_middle_name='판매' order by board_no desc";// 최신순
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -38,7 +38,7 @@ public class MarketDao {
 
 	// 구매 목록 조회
 	public List<BoardDto> list2() throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 
 
 		String sql = "select * from board where board_middle_name='구매' order by board_no desc";// 최신순
@@ -65,7 +65,7 @@ public class MarketDao {
 
 	// 상세보기 기능
 	public BoardDto get(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 
 
 		String sql = "select * from board where board_no = ?";
@@ -96,7 +96,7 @@ public class MarketDao {
 
 	// 글 등록 기능
 	public void write(BoardDto boardDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 
 
 		String sql = "insert into board values(?,'마켓',?,?,?,?,sysdate,0,0,0,0)";
@@ -113,7 +113,7 @@ public class MarketDao {
 	}
 	//글 삭제 기능
 	public boolean delete(int boardNo)throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 
 		
 		String sql =  "delete board where board_no=?";
@@ -129,7 +129,7 @@ public class MarketDao {
 	//글 등록할 때에 번호 부여
 
 	public int getSequence() throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = JdbcUtils.connect();
 		
 		String sql="select board_seq.nextval from dual";
 		
@@ -145,5 +145,22 @@ public class MarketDao {
 		
 		
 	}
+	//글 수정 기능
+	public boolean edit(BoardDto boardDto)throws Exception{
+		Connection con = JdbcUtils.connect();
+		
+		String sql="update board set board_title=?,board_post=?where board_no=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, boardDto.getBoardTitle());
+		ps.setString(2, boardDto.getBoardPost());
+		ps.setInt(3, boardDto.getBoardNo());
+		int result= ps.executeUpdate();
+		
+		con.close();
+		
+		return result>0;
+		
+		}
 	
 }
