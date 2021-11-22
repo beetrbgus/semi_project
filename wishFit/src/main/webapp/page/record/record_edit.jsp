@@ -13,7 +13,7 @@
 <%
 //boardNo의 정보 불러오기
 	BoardDao boardDao = new BoardDao();
-	BoardDto boardDto = boardDao.detail(boardNo,boardWriter);
+	//BoardDto boardDto = boardDao.detail(boardNo);
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
@@ -27,7 +27,7 @@
 	<div class="container-700 container-center">
 		<div class="row">
 			<label>제목</label>
-			<input type = "text" name="boardTitle" required value="<%=boardDto.getBoardTitle() %>" > 
+<%-- 			<input type = "text" name="boardTitle" required value="<%=boardDto.getBoardTitle() %>" >  --%>
 		</div>
 		<div class="row">
 			<label>분류</label>
@@ -39,7 +39,7 @@
 		</div>
 		<div class="row">
 			<label>내용</label>
-			<textarea cols="50" rows="10" name="boardPost" ><%=boardDto.getBoardPost() %></textarea>
+<%-- 			<textarea cols="50" rows="10" name="boardPost" ><%=boardDto.getBoardPost() %></textarea> --%>
 		</div>
 		<div class="row">
 			<label>첨부파일</label>

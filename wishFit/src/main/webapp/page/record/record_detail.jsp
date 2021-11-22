@@ -14,7 +14,7 @@
  <%
  //상세 페이지 불러오기
    	BoardDao boardDao = new BoardDao();
-   	BoardDto boardDto = boardDao.detail(boardNo,boardWriter);
+   	//BoardDto boardDto = boardDao.detail(boardNo);
  %>
 
 <main class="app-content app-clearfix">
@@ -22,17 +22,17 @@
 <h1 style="font-size : 20px" align="center">상세페이지</h1>
 <div class="container-700 container-center">
 	<div class="row center">
-		<h5>제목 : <%=boardDto.getBoardTitle() %></h5>
-		<h5>분류 : <%=boardDto.getBoardMiddleName() %></h5>
+<%-- 		<h5>제목 : <%=boardDto.getBoardTitle() %></h5> --%>
+<%-- 		<h5>분류 : <%=boardDto.getBoardMiddleName() %></h5> --%>
 	</div>
 	<div class="row center">
 		<label>내용</label>
-		<pre><%=boardDto.getBoardPost() %></pre>
+<%-- 		<pre><%=boardDto.getBoardPost() %></pre> --%>
 	</div>
 	<div class="row">
 		<a href="my_record.jsp">목록으로</a>
-		<a href="record_edit.jsp?boardNo=<%=boardDto.getBoardNo()%>">수정하기</a>
-		<a href="record_delete.kh?boardNo=<%=boardDto.getBoardNo()%>">삭제하기</a>
+<%-- 		<a href="record_edit.jsp?boardNo=<%=boardDto.getBoardNo()%>">수정하기</a> --%>
+<%-- 		<a href="record_delete.kh?boardNo=<%=boardDto.getBoardNo()%>">삭제하기</a> --%>
 	</div>
 	
 </div>

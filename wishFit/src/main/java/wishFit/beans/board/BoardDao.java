@@ -109,4 +109,5 @@ public class BoardDao {
 		return result>0;
 	}
 	
+	
 }

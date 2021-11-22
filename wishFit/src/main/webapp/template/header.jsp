@@ -1,3 +1,4 @@
+<%-- <%@page import="wishFit.beans.message.MessageDao"%> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -46,7 +47,7 @@ String root = request.getContextPath();
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/eed2de429c4945bb8c660fddf82bd812095c4bc9.utils.lessdedd.css?20210328011802" />
 <link rel="stylesheet"
-	href="<%=root%>/resources/layouts/slow/dist/tailwinda57e.css?20210328005042" />
+	href="<%=root%>/resources/layouts/slow/dist/tailwinda57e.css" />
 <link rel="stylesheet"
 	href="<%=root%>/resources/layouts/slow/dist/tailwind.css?20210328005042" />
 <link rel="stylesheet"
@@ -127,23 +128,28 @@ String root = request.getContextPath();
 	margin-left: 2rem;
 }
 </style>
+<script>
+function modal_on(){
+	$("#app-login").addClass('active');
+}
+function modal_off(){
+	$("#app-login").removeClass('active');
+}
+/* 알림 , 메세지 창 , 프로필 클릭시 자식 화면 화면에 보이기. */
+$(document).ready(function(){
+	$(".app-pc-only.app-dropdown a").click(function(e){ 
+		e.preventDefault();
+		$(this).parent().toggleClass("active");
+	});	
+});
+
+</script>
 <!-- COMMON JS VARIABLES -->
 </head>
 <!-- BODY START -->
 
 <body>
-	<!-- PAGE CONTENT -->
-	<input type="hidden" name="slow_version" value="2.1.2">
-	<script>
-		if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)
-				&& /Windows NT 10/.test(navigator.userAgent)) {
-			window.location = 'microsoft-edge:' + window.location;
-			setTimeout(
-					function() {
-						window.location = 'https://go.microsoft.com/fwlink/?linkid=2135547';
-					}, 1);
-		}
-	</script>
+
 	<!-- 앱 중간에 뜨는 화면. 경고창. 알림 모두삭제 클릭시 에 뜸. -->
 	<!--  비활성화 = app-confirm
 			활성화 = app-confirm app-confirm--danger active -->
@@ -237,8 +243,7 @@ String root = request.getContextPath();
 				<!-- 헤더 오른쪽 부분. 검색 , 로그인 ,회원가입 아이콘 -->
 
 				<!-- 검색 아이콘 -->
-				<a
-					class="app-header-item app-icon-button app-icon-button-gray app-search-toggle">
+				<a class="app-header-item app-icon-button app-icon-button-gray app-search-toggle">
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none"
 						viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round"
@@ -250,23 +255,23 @@ String root = request.getContextPath();
 				<div id="app-search" class="app-search">
 					<!-- 실질적 검색 창 -->
 					<div class="app-search__container">
-						<form class="app-search-form" action="https://sweatee.co.kr/"
+						<form class="app-search-form" action="/search.kh"
 							method="get">
 							<!-- 검색에 필요한 항목 넣기 -->
-							<input type="hidden" name="error_return_url" value="/" />
+							<input type="hidden" value="/" />
 							<!-- 검색 창안의 돋보기 아이콘 -->
 							<div class="app-search-form__icon">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none"
 									viewBox="0 0 24 24" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round"
 										stroke-width="2"
-										d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+										d="M21 f21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 								</svg>
 							</div>
 							<!-- 전달할 값 -->
-							<input type="hidden" name="vid" value="" /> <input type="hidden"
-								name="mid" value="index" /> <input type="hidden" name="act"
-								value="IS" />
+							<input type="hidden" name="vid" value="" /> 
+							<input type="hidden" name="mid" value="index" /> 
+							<input type="hidden" name="act" value="IS" />
 							<!-- 검색어 -->
 							<input type="text" name="is_keyword" placeholder="검색" value=""
 								class="app-search-form__input" />
@@ -278,39 +283,29 @@ String root = request.getContextPath();
 				</div>
 
 				<script>
-					jQuery(document)
-							.ready(
-									function($) {
-										/* index페이지 헤더의 검색창 누를 때. 검색창 영역 보이게.*/
-										$('.app-search-toggle')
-												.on(
-														'click',
-														function() {
-															$('#app-search')
-																	.toggleClass(
-																			'app-search--active');
-														});
-										/* 닫기 버튼 누를 때나 , 영역 밖 누를 때 hidden 됨.*/
-										$(
-												'.app-search__background, .app-search__close')
-												.on(
-														'click',
-														function() {
-															$('#app-search')
-																	.removeClass(
-																			'app-search--active');
-														});
-									});
+					jQuery(document).ready(
+						function($) {
+							/* 헤더의 검색창 누를 때. 검색창 영역 보이게.*/
+							$('.app-search-toggle').on('click', function() { 
+								$('#app-search').toggleClass('app-search--active');
+							});
+							/* 닫기 버튼 누를 때나 , 영역 밖 누를 때 hidden 됨.*/
+							$('.app-search__background, .app-search__close').on('click', function() {
+								$('#app-search').removeClass('app-search--active');
+							});
+						}
+					);
 				</script>
+				
 				<!-- 로그인 버튼 -->
 				<a href="#" class="app-pc-only app-header-login-link"
-					onclick="toggleDialog('app-login')"> <i class="el-icon-lock"></i>
+					onclick="modal_on()"> <i class="el-icon-lock"></i>
 					<span>로그인</span>
 				</a>
 				<!-- 회원가입 버튼 -->
 				<a
 					class="app-pc-only app-button app-primary app-button-rounded app-button-small"
-					href="index5ab6.html?mid=index&amp;act=dispMemberSignUpForm">회원가입
+					href="join.jsp">회원가입
 				</a>
 
 				<!-- 로그인 모달 창 -->
@@ -355,7 +350,7 @@ String root = request.getContextPath();
 													data-lang="브라우저를 닫더라도 로그인이 계속 유지될 수 있습니다. 로그인 유지 기능을 사용할 경우 다음 접속부터는 로그인할 필요가 없습니다. 단, PC방, 학교, 도서관 등 공공장소에서 이용 시 개인정보가 유출될 수 있으니 꼭 로그아웃을 해주세요."
 													value="Y" tabindex="3" />
 												<!-- 세션 처리 유무로. -->
-												<label for="keep_signed">로그인 상태 유지</label>
+												
 											</div>
 
 											<div class="tw-flex-1"></div>
@@ -373,30 +368,17 @@ String root = request.getContextPath();
 								<!-- 로그인 창 하단 부분.  -->
 								<div class="tw-text-sm tw-text-center tw-text-gray-700">
 									<span class="eq text-muted">아직 회원이 아니신가요?</span> <a
-										href="index5ab6.html?mid=index&amp;act=dispMemberSignUpForm"
+										href="join.jsp"
 										class="tw-text-primary tw-text-bold" tabindex="6">회원가입 하기</a>
-								</div>
-
-								<!-- 간편로그인. 필요없다면 지움.  -->
-								<div class="app-social-login-group">
-									<a class="app-social-kakao"
-										href="https://kauth.kakao.com/oauth/authorize?response_type=code&amp;client_id=fd430a466b5a1711ae0da68106c5da17&amp;redirect_uri=https%3A%2F%2Fsweatee.co.kr%2Findex.php%3Fmodule%3Dsocialxe%26act%3DprocSocialxeCallback%26service%3Dkakao&amp;state=be319fecea269f0b393528320b096ab6">
-										<img src="layouts/slow/assets/images/ic_brand_kakao.svg"
-										alt="ic_brand_kakao.svg" width="14" height="14"> <span>카카오로
-											계속하기</span>
-									</a> <a class="app-social-naver"
-										href="https://nid.naver.com/oauth2.0/authorize?response_type=code&amp;client_id=x14s8tzdAe4Yg8qaZaPg&amp;redirect_uri=https%3A%2F%2Fsweatee.co.kr%2Findex.php%3Fmodule%3Dsocialxe%26act%3DprocSocialxeCallback%26service%3Dnaver&amp;state=c900324e9055cf8d6fba320377beab64">
-										<img src="layouts/slow/assets/images/ic_brand_naver.svg"
-										alt="ic_brand_naver.svg" width="14" height="14"> <span>네이버로
-											계속하기</span>
-									</a>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!--  로그인 모달 창 배경영역 -->
+					<div class="app-dialog-bg" onclick="modal_off()"></div>
 				</div>
-				<a
-					class="app-header-item app-header-menu__toggle app-mobile-only app-icon-button app-icon-button-gray">
+				<!--  검색 버튼 -->
+				<a class="app-header-item app-header-menu__toggle app-mobile-only app-icon-button app-icon-button-gray">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 						fill="currentColor">
                             <path fill-rule="evenodd"
@@ -422,70 +404,39 @@ String root = request.getContextPath();
 								onclick="onClickNotiReadAll()"> <span>모두 삭제</span>
 							</a>
 						</div>
-
-						<div class="tw-text-center tw-py-6 tw-px-4">
-							<ion-icon name="notifications"
-								class="tw-text-gray-600 tw-text-2xl tw-mb-4 md hydrated"
-								role="img" aria-label="notifications"></ion-icon>
-							<div class="tw-text-black tw-font-bold tw-text-sm tw-mb-2">새로운
-								알림이 없습니다</div>
-							<div class="tw-text-sm tw-text-gray-700">알림을 받으면 여기에 표시됩니다</div>
-							<!-- <a href="/index.php?mid=index&amp;act=dispNcenterliteUserConfig" class="app-button primary app-button-rounded app-button-xs">알림 설정하기</a> -->
-						</div>
-						<ul class="app-dropdown-menu-list">
-							<li class="tw-border-b tw-border-gray-300 tw-my-2"></li>
-							<li><a
-								class="tw-text-center tw-justify-center tw-text-gray-700"
-								href="/index.php?mid=index&amp;act=dispNcenterliteNotifyList">
-									<span>전체 알림 보기</span>
-							</a></li>
-						</ul>
+						<!-- 알림 있을 때 없을 때 모듈화. -->
+						<jsp:include page="/page/headerNav/notification.jsp"></jsp:include>
 					</div>
 				</div>
-				<!-- 쪽지 -->
+				
+				<% 
+					//MessageDao messageDao = new MessageDao();
+					//int newMessage = messageDao.getNotReadCount("test2");
+ 				%>
+ 				<!-- 쪽지 -->
 				<div class="app-pc-only app-dropdown">
-					<a
-						class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
+					<a class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 							fill="currentColor">
-				        <path
-								d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-				        <path
-								d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-				      </svg>
-				      <span class="app-header-item-badge">1</span>
+					        <path
+									d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+					        <path
+									d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+				      	</svg>
+				      	<%-- 알림 있을 때 갯수 뽑아줌. --%>
+<%-- 				      	<span class="app-header-item-badge"><%= newMessage %></span> --%>
         
 					</a>
-					<!-- active 클래스 붙으면 창이 열림 -->
+					<!-- 쪽지 목록 창. -->
 					<div class="app-dropdown-menu app-right" style="width: 270px">
-						<div class="app-dropdown-header tw-text-base tw-font-bold">쪽지</div>
-						<div class="tw-text-center tw-mb-6 tw-px-4">
-							<ion-icon name="mail"
-								class="tw-text-gray-600 tw-text-2xl tw-mb-4 md hydrated"
-								role="img" aria-label="mail"></ion-icon>
-							<div class="tw-text-black tw-font-bold tw-text-sm tw-mb-2">새로운
-								쪽지가 없습니다.</div>
-							<div class="tw-text-sm tw-text-gray-700 tw-mb-6">
-								쪽지함에서 지금까지 수신한 <br>쪽지를 모두 확인할 수 있습니다.
-							</div>
-							<a href="/index.php?mid=index&amp;act=dispCommunicationMessages"
-								class="app-button primary app-button-rounded app-button-xs">쪽지함
-								보기</a>
-						</div>
-						<ul class="app-dropdown-menu-list">
-							<li class="tw-border-b tw-border-gray-300 tw-my-2"></li>
-							<li><a
-								class="tw-text-center tw-justify-center tw-text-gray-700"
-								href="/index.php?mid=index&amp;act=dispCommunicationMessages">
-									<span>전체 쪽지 보기</span>
-							</a></li>
-						</ul>
+<%-- 						<jsp:include page="/page/headerNav/message.jsp"></jsp:include> --%>
 					</div>
 				</div>
 				<!-- 프로필 사진 누르면 나오는 드롭박스  -->
 				<div class="app-pc-only app-dropdown">
 					<a class="app-header-profile app-dropdown-toggle app-avatar"
-						title="닉네임"> <ion-icon name="person-sharp" role="img"
+						title="닉네임"> 
+						<ion-icon name="person-sharp" role="img"
 							class="md hydrated" aria-label="person sharp"></ion-icon>
 					</a>
 					<div class="app-dropdown-menu app-right" style="width: 250px">
@@ -547,10 +498,6 @@ String root = request.getContextPath();
 				<!-- 
 						로그인 안했을때 app-header-menu__auth
 						로그인 했을때 tw-py-5 tw-px-5  
-						
-						
-						
-						
 				-->
 				
 				<!--  로그인 했을 떄  -->
@@ -589,7 +536,7 @@ String root = request.getContextPath();
 
 					<a class="app-login" onclick="onClickHeaderMenuLogin()">로그인이
 						필요합니다.</a> <a class="app-signup"
-						href="index5ab6.html?mid=index&amp;act=dispMemberSignUpForm">회원가입</a>
+						href="join.jsp">회원가입</a>
 				</div>
 				<nav>
 					<ul class="app-card app-sidebar-left__nav">
