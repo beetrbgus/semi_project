@@ -34,6 +34,9 @@ public class BoardEditServlet extends HttpServlet{
 			if(success) {
 				resp.sendRedirect("detail.jsp?boardNo="+boardDto.getBoardNo());
 			}
+			else {
+				resp.sendError(404);
+			}
 			
 			
 		}catch(Exception e) {
