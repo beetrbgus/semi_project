@@ -126,7 +126,7 @@
                                     <h3>로그인</h3>
                                 </div>
                                 <div class="app-dialog-body">
-                                    <form class="tw-mb-5" action="https://sweatee.co.kr/" method="post"
+                                    <form class="tw-mb-5" action="<%=request.getContextPath() %>/page/member/login.wishfit" method="post"
                                         autocomplete="off">
                                         <input type="hidden" name="error_return_url" value="/" />
                                         <input type="hidden" name="mid" value="index" />

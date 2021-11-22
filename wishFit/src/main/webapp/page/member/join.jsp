@@ -26,7 +26,7 @@
     <div class="app-member-card-body">
       <p class="tw-mb-3 tw-text-gray-700">별표<em style="color:red">*</em>가 있는 항목은 필수 항목입니다.</p>
       
-      <form id="rx_insert_member" action="https://wishfit.co.kr/" method="post" enctype="multipart/form-data" class="">
+      <form id="rx_insert_member" action="<%=request.getContextPath() %>/member/join.wishfit" method="post" enctype="multipart/form-data" class="">
       <input type="hidden" name="error_return_url" value="/?mid=freeboard&amp;document_srl=460&amp;act=dispMemberSignUpForm">
       <input type="hidden" name="mid" value="freeboard"><input type="hidden" name="ruleset" value="@insertMember">
         <input type="hidden" name="act" value="procMemberInsert">

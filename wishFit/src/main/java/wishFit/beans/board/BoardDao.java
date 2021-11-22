@@ -6,14 +6,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import wishFit.beans.JdbcUtils;
 
 public class BoardDao {
 
 	// 세션 생성
 	public int getSeq() throws Exception {
 
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select board_seq.nextval from dual";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -28,7 +27,7 @@ public class BoardDao {
 
 	// 게시글 작성
 	public void write(BoardDto boardDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "insert into board values(?,?,?,?,?,?,?,0,0,0,0)";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -48,7 +47,7 @@ public class BoardDao {
 
 	// 게시글 단일 조회(상세 페이지) (게시글번호)
 	public BoardDto detail(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from board where board_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -82,7 +81,7 @@ public class BoardDao {
 
 	// 게시글 수정
 	public boolean edit(BoardDto boardDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "update board " + "set board_title=?, board_post=? , board_date=? , "
 				+ "board_large_name=?,board_middle_name=? " + "where board_no = ?";
 
@@ -102,7 +101,7 @@ public class BoardDao {
 
 	// 게시글 조회(전체 조회)
 	public List<BoardDto> list() throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from board order by board_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -129,7 +128,7 @@ public class BoardDao {
 
 	// 게시글 조회 (카테고리 o, 칼럼/키워드x)
 	public List<BoardDto> searchByMid(String lagName, String midName) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from board where board_large_name=? and board_middle_name=? order by board_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, lagName);
@@ -157,7 +156,7 @@ public class BoardDao {
 
 	// 게시글 조회 (카테고리 x , 칼럼/키워드 o)
 	public List<BoardDto> searchByKey(String column, String keyword) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from board where instr(#1,?)>0 order by board_no desc";
 		sql = sql.replace("#1", column);
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -185,7 +184,7 @@ public class BoardDao {
 
 	// 게시글 조회(카테고리 o , 칼럼/키워드o)
 	public List<BoardDto> searchDetail(String lagName, String midName, String column, String keyword) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from (select * from board where board_large_name=? and board_middle_name=?) where instr(#1,?)>0 order by board_no desc";
 		sql = sql.replace("#1", column);
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -215,7 +214,7 @@ public class BoardDao {
 
 	// 게시글 삭제
 	public boolean delete(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "delete board where board_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, boardNo);
@@ -231,7 +230,7 @@ public class BoardDao {
 
 	// 조회수 증가 기능
 	public boolean readUpSelf(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 
 		String sql = "update board set board_read = board_read + 1 where board_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -245,7 +244,7 @@ public class BoardDao {
 
 	// 자기 작성글 제외 조회수 증가 기능
 	public boolean readUp(int boardNo, String memId) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 
 		String sql = "update board " + "set board_read = board_read + 1 " + "where board_no = ? and board_writer != ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -260,7 +259,7 @@ public class BoardDao {
 
 	// 댓글 수 갱신 기능
 	public boolean replyCount(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 
 		String sql = "update board "
 				+ "set board_reply = (select (*) count from reply where board_no = ?) where board_no = ?";
@@ -277,7 +276,7 @@ public class BoardDao {
 
 	// 페이징이 가능한 목록(전체)
 	public List<BoardDto> listByRownum(int begin, int end) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 
 		String sql = "select * from (" + "select rownum rn, TMP.* from (" + "select * from board order by board_no desc"
 				+ ")TMP" + ") where rn between ? and ?";
@@ -312,7 +311,7 @@ public class BoardDao {
 	
 	// 페이징 목록(조회)
 	public List<BoardDto> searchByRownum(String column, String keyword, int begin, int end) throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		
 		String sql = "select * from ("
 				+ "select rownum rn, TMP.* from ("
@@ -353,9 +352,9 @@ public class BoardDao {
 
 	// 페이징에서 마지막 블록을 구하기위하여 게시글 개수를 구하는 기능(전체/검색조회별로)
 	public int count() throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 
-		String sql = "select * count(*) from board";
+		String sql = "select count(*) from board";
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ResultSet rs = ps.executeQuery();
@@ -370,7 +369,7 @@ public class BoardDao {
 	}
 
 	public int count(String column, String keyword) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 
 		String sql = "select count(*) from board where instr(#1, ?) > 0";
 		sql = sql.replace("#1", column);
