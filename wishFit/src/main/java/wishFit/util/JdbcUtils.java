@@ -1,13 +1,16 @@
 package wishFit.util;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class JdbcUtils {
+	
 	private static DataSource ds;
+	
 	
 	static {
 		try {
@@ -19,7 +22,7 @@ public class JdbcUtils {
 			e.printStackTrace();
 		}
 	}
-	public static Connection connect2() throws Exception{
+	public static Connection connect() throws Exception{
 		return ds.getConnection();
 	}
 	

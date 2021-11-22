@@ -1,12 +1,11 @@
-package wishFit.beans;
+package wishFit.beans.admin;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import wishFit.beans.board.BoardDao;
-import wishFit.beans.board.BoardDto;
-
+import wishFit.beans.admin.MemoDao;
+import wishFit.beans.admin.MemoDto;
 
 public class Pagination {
 	
@@ -36,18 +35,18 @@ public class Pagination {
 	private int begin, end; 
 	private int startBlock, finishBlock, lastBlock;
 
-	private List<BoardDto> list;
+	private List<MemoDto> list;
 	
 	
 	
 	public void calculate() throws Exception{
 		
-		BoardDao BoardDao = new BoardDao();
+		MemoDao memoDao = new MemoDao();
 		if(isSearch()) {
-			this.count = BoardDao.count(column, keyword);
+			this.count = memoDao.count(column, keyword);
 		}
 		else {
-			this.count = BoardDao.count();
+			this.count = memoDao.count();
 		}
 		
 		// 로우넘
@@ -61,10 +60,10 @@ public class Pagination {
 		
 		
 		if(this.isSearch()) {
-			this.list = BoardDao.searchByRownum(column, keyword, begin, end);
+			this.list = memoDao.searchByRownum(column, keyword, begin, end);
 		}
 		else {
-			this.list = BoardDao.listByRownum(begin, end);
+			this.list = memoDao.listByRownum(begin, end);
 		}
 	}
 	
@@ -142,6 +141,7 @@ public class Pagination {
 		return this.startBlock - 1;
 	}
 	
+	
 	public int getNextBlock() {
 		return this.finishBlock + 1;
 	}
@@ -183,8 +183,9 @@ public class Pagination {
 	}
 
 
-	public List<BoardDto> getList() {
+	public List<MemoDto> getList() {
 		return list;
 	}
+	
 	
 }
