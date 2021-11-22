@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import wishFit.beans.JdbcUtils;
+import wishFit.util.JdbcUtils;
 
 public class ReplyDao {
 	//댓글 조회(게시글 번호 참조)
 	public List<ReplyDto> list (int boardNo) throws Exception{
-		Connection con =JdbcUtils.connect2();
+		Connection con =wishFit.util.JdbcUtils.connect();
 		String sql  ="select * from reply where board_no=? order by reply_no asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1,boardNo);
@@ -34,7 +34,7 @@ public class ReplyDao {
 	}
 	//댓글 삭제
 	public boolean delete(int replyNo) throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "delete reply where reply_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, replyNo);
@@ -46,7 +46,7 @@ public class ReplyDao {
 	}
 	//댓글 수정
 	public boolean edit(ReplyDto replyDto) throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "update set reply_post=? where reply_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, replyDto.getReplyPost());
@@ -59,7 +59,7 @@ public class ReplyDao {
 	}
 	//댓글 작성
 	public void replyWrite(ReplyDto replyDto) throws Exception{
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "insert into reply values(reply_seq.nextval,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, replyDto.getReplyId());
