@@ -75,7 +75,7 @@ public class BoardWriteServlet extends HttpServlet{
 			//만약 getContextPath가 들어온 주소대로 market/commu를 구분해서 나타내 준다면
 			//if문 없이 그냥 바로 한개만 쓰면 될듯?
 			
-			if(mRequest.getParameter("board_large_name").equals("마켓")) {//위의 largeName이 market이라면
+			if(req.getParameter("board_large_name").equals("마켓")) {//위의 largeName이 market이라면
 				//resp.sendRedirect(req.getContextPath()+"/market/list.jsp?boardNo="+boardDto.getBoardNo());
 				resp.sendRedirect(req.getContextPath()+"/list.jsp?boardNo="+boardDto.getBoardNo());
 				

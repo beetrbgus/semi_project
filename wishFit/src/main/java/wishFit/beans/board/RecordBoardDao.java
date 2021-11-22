@@ -6,15 +6,17 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import wishFit.beans.image.ImageDto;
+import wishFit.util.GetSeq;
+import wishFit.util.JdbcUtils;
 
 public class RecordBoardDao {
 	//기록조회파트
+	private Connection conn;
+	private GetSeq getSeq;
 	
 	
 	//월별 조회 = 하루치 목록 조회 * 날짜수

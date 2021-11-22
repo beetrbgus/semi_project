@@ -1,17 +1,82 @@
 package wishFit.beans.image;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import wishFit.util.GetSeq;
+import wishFit.util.JdbcUtils;
+
 public class ImageDao {
-
-	public void insert(ImageDto imageDto) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	private Connection conn;
+	private GetSeq getSeq;
 	//Image 등록 처리
-	
-	//Image 수정 처리? ( 수정페이지에서 존재하는걸 삭제 / 존재하는걸 변경( 존재하는걸 삭제 후 새로운거 등록) / 없는 파일 등록 ) 인데 update써야하나..?
-	
-	//Image 삭제 처리
-	
-	//Image 읽기 처리
+	public void insert(ImageDto imageDto) throws Exception{
+		conn=JdbcUtils.connect();
+		String sql = "insert into image values(?,?,?,?,?,?)";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, imageDto.getImageNo());
+		ps.setInt(2, imageDto.getBoardNo());
+		ps.setString(3, imageDto.getBoardUpload());
+		ps.setString(4, imageDto.getBoardSave());
+		ps.setLong(5, imageDto.getBoardSize());
+		ps.setString(6, imageDto.getBoardType());
+		
+		ps.execute();
+		
+		conn.close();
+	}
+	//Image 단일 조회
+	public ImageDto search(int imageNo) throws Exception{
+		conn=JdbcUtils.connect();
+		String sql = "select * from image where image_no=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, imageNo);
+		ResultSet rs = ps.executeQuery();
+		
+		//있는지 확인
+		ImageDto imageDto;
+		if(rs.next()) {
+			imageDto = new ImageDto();
+			
+			imageDto.setImageNo(rs.getInt("imageNo"));
+			imageDto.setBoardNo(rs.getInt("boardNo"));
+			imageDto.setBoardUpload(rs.getString("boardUpload"));
+			imageDto.setBoardSave(rs.getString("boardSave"));
+			imageDto.setBoardSize(rs.getLong("boardSize"));
+			imageDto.setBoardType(rs.getString("boardType"));
+		}else {
+			imageDto=null;
+		}
+		conn.close();
+		return imageDto;
+			
+	}
+	public List<ImageDto> find(int boardNo) throws Exception{
+		conn = JdbcUtils.connect();
+		String sql = "select B.*,I.image_no "
+				+ "from board B left outer join image I on B.board_no=I.board_no "
+				+ "where B.board_no = ? "
+				+ "order by B.board_no;";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, boardNo);
+		ResultSet rs = ps.executeQuery();
+		List<ImageDto> list = new ArrayList<>();
+		while(rs.next()) {
+			ImageDto imageDto = new ImageDto();
+			
+			imageDto.setImageNo(rs.getInt("imageNo"));
+			imageDto.setBoardNo(rs.getInt("boardNo"));
+			imageDto.setBoardUpload(rs.getString("boardUpload"));
+			imageDto.setBoardSave(rs.getString("boardSave"));
+			imageDto.setBoardSize(rs.getLong("boardSize"));
+			imageDto.setBoardType(rs.getString("boardType"));
+			
+			list.add(imageDto);
+		}
+		conn.close();
+		return list;
+	}
 }

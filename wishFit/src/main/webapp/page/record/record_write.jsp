@@ -9,12 +9,13 @@
 <%
 	//boardWriter= 세션에서 받아오기
 	//String boardWriter = (String)session.getAttribute("ses");
-	String boardWriter= "testmember2";
+	String boardWriter= "testmember1";
 %>
 
 <h1>기록 작성</h1>
-<form action = "record_write.kh" method="post">
+<form action = "record_write.kh" method="post" enctype="multipart/form-data">
 <input type="hidden" name="boardWriter" value="<%=boardWriter %>">
+<input type="hidden" name="boardLargeName" value="기록">
 	<!-- 넘겨야 하는 목록 : 글번호,제목,내용,작성일,중분류, -->
 	<table>
 		<tbody>
@@ -35,6 +36,10 @@
 				<th>글 내용</th>
 				<td><textarea rows="10" cols="50" name="boardPost"></textarea>
 				 
+			</tr>
+			<tr>
+				<th>첨부</th>
+				<td><input type="file" name="attach">
 			</tr>
 			<tr>
 				<th>날짜</th>

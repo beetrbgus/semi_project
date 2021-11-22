@@ -14,11 +14,14 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
+import wishFit.beans.board.RecordBoardDao;
 import wishFit.beans.image.ImageDao;
 import wishFit.beans.image.ImageDto;
+import wishFit.util.GetSeq;
 
 @WebServlet(urlPatterns = "/page/board/record_write.kh")
 public class RecordWriteServlet extends HttpServlet{
+	private GetSeq getSeq;
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -39,6 +42,7 @@ public class RecordWriteServlet extends HttpServlet{
 			boardDto.setBoardPost(req.getParameter("boardPost"));
 			boardDto.setBoardMiddleName(req.getParameter("boardMiddleName"));
 			boardDto.setBoardDate(req.getParameter("boardDate"));
+			boardDto.setBoardLargeName(req.getParameter("boardLargeName"));
 
 			
 			//처리
@@ -48,9 +52,10 @@ public class RecordWriteServlet extends HttpServlet{
 			boardDto.setBoardWriter(req.getParameter("boardWriter"));
 			
 			
-			int boardNo = boardDao.boardSeq();
+			//int boardNo = boardDao.boardSeq();
+			int boardNo = GetSeq.getSequence("board_seq");
 			boardDto.setBoardNo(boardNo);
-			boardDao.write(boardDto);
+			boardDao.recordWrite(boardDto);
 			
 			if(mRequest.getFile("attach")!=null) {//파일 attach란 이름으로 업로드가 이루어졌다면
 				ImageDto imageDto = new ImageDto();
@@ -61,6 +66,9 @@ public class RecordWriteServlet extends HttpServlet{
 				
 				File target = mRequest.getFile("attach");//파일을 꺼내기
 				imageDto.setBoardSize(target == null ? 0L : target.length());//파일크기
+				//이미지 번호 시퀀스 미리 구해서 부여하기
+				int imageNo = GetSeq.getSequence("image_seq");
+				imageDto.setImageNo(imageNo);
 				
 				/*정보 설정...*/
 				ImageDao imageDao = new ImageDao();
