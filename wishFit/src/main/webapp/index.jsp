@@ -5,13 +5,11 @@
 <!-- 헤더 -->
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-
 <!-- 좌측 사이드 -->
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
 
 <!-- 화면 중간. 본문 -->
 <main class="app-content app-clearfix">
-	<!--#Meta:layouts/slow/components/main-banner/main-banner.scss?$__Context->themeConfig->variables-->
 	<!-- 배너 부분. 인덱스 부분만 필요. -->
 	<div class="app-main-banner swiper-container">
 		<div class="swiper-wrapper">
@@ -97,7 +95,7 @@
 												<img
 													src="files/thumbnails/061/001/100x75.cropfa77.jpg?20210424151650"
 													srcset="https://sweatee.co.kr/files/thumbnails/061/001/200x150.crop.jpg?20210424151640 2x"
-													alt="주말 아침 라이딩 완료" width="100" height="75" style=""
+													alt="글 제목" width="100" height="75" style=""
 												>
 												<!--  -->
 											</div>
@@ -162,6 +160,7 @@
 		<div class="rhymix_content xe_content xe-widget-wrapper "
 			style="float: left; width: 100%; border-width: 0px; border-style: solid; border-color: rgb(0, 0, 0); margin: 0px 3px 15px; background-image: none; background-repeat: repeat; background-position: 0% 0%; min-height: 0px !important; height: auto !important;"
 		>
+			<!-- 광고 쪽인 듯. 나중에 삭제. -->
 			<div style="padding: 0px 0px 0px 0px !important;">
 				<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
 				<!-- SWEATEE 메인 -->
@@ -175,7 +174,7 @@
 			</div>
 		</div>
 
-		<!-- 영역 3 -->
+		<!-- 새로운 소식 -->
 		<div class="xe-widget-wrapper xe-widget"
 			style="float: left; width: 49%; border-width: 0px; border-style: solid; border-color: rgb(0, 0, 0); margin: 0px 0px 15px; background-image: none; background-repeat: repeat; background-position: 0% 0%;"
 		>
@@ -220,7 +219,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- 영역 4 -->
+		<!-- 스위티 마켓 -->
 		<div class="xe-widget-wrapper xe-widget"
 			style="float: right; width: 49%; border-width: 0px; border-style: solid; border-color: rgb(0, 0, 0); margin: 0px 0px 15px; background-image: none; background-repeat: repeat; background-position: 0% 0%;"
 		>
