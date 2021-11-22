@@ -1,0 +1,22 @@
+.table {
+	border:1px solid #BDBDBD;
+	text-align:center;
+	width:10%;
+	font-size:12px;
+}
+.nextyear, .beforeyear{
+	font-size:1%;
+	color:#B3B6B3;
+
+}
+.acc-color-sun{
+	color : #FF9090;
+}
+.acc-color-sat{
+	color : #7ED5E4;
+}
+.container-left{
+	margin-top : 20px;
+	margin-left : 20px;
+	position : relative;
+}
