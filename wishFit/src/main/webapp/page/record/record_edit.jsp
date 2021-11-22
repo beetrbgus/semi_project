@@ -1,8 +1,19 @@
+<%@page import="wishFit.beans.board.BoardDao"%>
+<%@page import="wishFit.beans.board.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%
-	
+//파라미터 가져오기
+	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+	//아이디 가져오기
+	String boardWriter = (String)request.getAttribute("boardWriter");
+%>
+
+<%
+//boardNo의 정보 불러오기
+	BoardDao boardDao = new BoardDao();
+	BoardDto boardDto = boardDao.detail(boardNo,boardWriter);
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
@@ -16,11 +27,11 @@
 	<div class="container-700 container-center">
 		<div class="row">
 			<label>제목</label>
-			<input type = "text" name="boardTitle" required <%--value= boardDto.getBoardNo() --%> > 
+			<input type = "text" name="boardTitle" required value="<%=boardDto.getBoardTitle() %>" > 
 		</div>
 		<div class="row">
 			<label>분류</label>
-			<select name="boardMiddleName" <%--value= boardDto.getBoardMiddleName() --%> >
+			<select name="boardMiddleName">
 				<option>일자별</option>
 				<option>소모임</option>
 				<option>식단</option>
@@ -28,7 +39,7 @@
 		</div>
 		<div class="row">
 			<label>내용</label>
-			<textarea cols="50" rows="10" name="boardPost" <%--value= boardDto.getBoardPost() --%> ></textarea>
+			<textarea cols="50" rows="10" name="boardPost" ><%=boardDto.getBoardPost() %></textarea>
 		</div>
 		<div class="row">
 			<label>첨부파일</label>
@@ -36,6 +47,7 @@
 		</div>
 		<div class="row">
 			<input type="submit" value="수정 완료">
+			<a href = "my_record.jsp">취소</a>
 		</div>
 	
 	</div>

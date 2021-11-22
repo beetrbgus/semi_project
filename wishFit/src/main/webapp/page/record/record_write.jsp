@@ -6,37 +6,49 @@
  
 
 <main class="app-content app-clearfix">
+<%
+	//boardWriter= 세션에서 받아오기
+	//String boardWriter = (String)session.getAttribute("ses");
+	String boardWriter= "testmember2";
+%>
 
 <h1>기록 작성</h1>
 <form action = "record_write.kh" method="post">
-	<div class="container-700 container-center">
-		<div class="row">
-			<label>제목</label>
-			<input type = "text" name="boardTitle" required>
-		</div>
-		<div class="row">
-			<label>분류</label>
-			<select name="boardMiddleName" required>
-				<option>일자별</option>
-				<option>소모임</option>
-				<option>식단</option>
-			</select>
-		</div>
-		<div class="row">
-			<label>내용</label>
-			<textarea cols="50" rows="10" name="boardPost"></textarea>
-		</div>
-		<div class="row">
-			<label>첨부파일</label>
-			<input type="file" name="attach">
-		</div>
-		<div class="row">
-			<input type="submit" value="게시글 등록">
-		</div>
-	
-	</div>
-
+<input type="hidden" name="boardWriter" value="<%=boardWriter %>">
+	<!-- 넘겨야 하는 목록 : 글번호,제목,내용,작성일,중분류, -->
+	<table>
+		<tbody>
+			<tr>
+				<th>글 </th>
+				<td><input type="text" name="boardTitle" required></td>
+			</tr>
+			<tr>
+				<th>분류</th>
+				<td>
+				<select name="boardMiddleName">
+					<option>일자별</option>
+					<option>소모임</option>
+					<option>식단</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>글 내용</th>
+				<td><textarea rows="10" cols="50" name="boardPost"></textarea>
+				 
+			</tr>
+			<tr>
+				<th>날짜</th>
+				<td><input type="date" name="boardDate" required></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="게시글작성"></td>
+				<td><a href = "my_record.jsp" ><label>취소</label></a>
+			</tr>
+			
+		</tbody>
+	</table>
 </form>
+
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
