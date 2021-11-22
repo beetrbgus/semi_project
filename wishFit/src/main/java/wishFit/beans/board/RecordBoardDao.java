@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import wishFit.beans.JdbcUtils;
+import wishFit.util.JdbcUtils;
 
 public class BoardDao {
 	//기록파트
@@ -19,7 +19,7 @@ public class BoardDao {
 	// 세션 생성
 	public int getSeq() throws Exception {
 
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select board_seq.nextval from dual";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -32,19 +32,17 @@ public class BoardDao {
 		return seq;
 	}
 
-	// 게시글 작성
+	// 기록 게시글 작성
 	public void write(BoardDto boardDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
-		String sql = "insert into board values(?,?,?,?,?,?,?,0,0,0,0)";
+		Connection con = wishFit.util.JdbcUtils.connect();
+		String sql = "insert into board values(?,'기록',?,?,?,?,?,0,0,0,0)";
 		PreparedStatement ps = con.prepareStatement(sql);
-
 		ps.setInt(1, boardDto.getBoardNo());
-		ps.setString(2, boardDto.getBoardLargeName());
-		ps.setString(3, boardDto.getBoardMiddleName());
-		ps.setString(4, boardDto.getBoardWriter());
-		ps.setString(5, boardDto.getBoardTitle());
-		ps.setString(6, boardDto.getBoardPost());
-		ps.setString(7, boardDto.getBoardDate());
+		ps.setString(2, boardDto.getBoardMiddleName());
+		ps.setString(3, boardDto.getBoardWriter());
+		ps.setString(4, boardDto.getBoardTitle());
+		ps.setString(5, boardDto.getBoardPost());
+		ps.setString(6, boardDto.getBoardDate());
 
 		ps.execute();
 
@@ -53,8 +51,8 @@ public class BoardDao {
 	}
 
 	// 게시글 단일 조회(상세 페이지) (게시글번호)
-	public BoardDto detail(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
+	public BoardDto detail(int boardNo,String boardWriter) throws Exception {
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from board where board_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -68,7 +66,6 @@ public class BoardDao {
 			boardDto.setBoardNo(rs.getInt("board_no"));
 			boardDto.setBoardLargeName(rs.getString("board_large_name"));
 			boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
-			boardDto.setBoardWriter(rs.getString("board_writer"));
 			boardDto.setBoardTitle(rs.getString("board_title"));
 			boardDto.setBoardPost(rs.getString("board_post"));
 			boardDto.setBoardDate(rs.getString("board_date"));
@@ -88,7 +85,7 @@ public class BoardDao {
 
 	// 게시글 수정
 	public boolean edit(BoardDto boardDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "update board " + "set board_title=?, board_post=? , board_date=? , "
 				+ "board_large_name=?,board_middle_name=? " + "where board_no = ?";
 
@@ -106,36 +103,9 @@ public class BoardDao {
 		return result > 0;
 	}
 
-	// 기록 게시글 조회(전체 조회)
-//	public List<BoardDto> listByRecord() throws Exception {
-//		Connection con = JdbcUtils.connect2();
-//		String sql = "select * from board where board_large_name='기록' order by board_no desc";
-//		PreparedStatement ps = con.prepareStatement(sql);
-//		ResultSet rs = ps.executeQuery();
-//		
-//		
-//		List<BoardDto> list = new ArrayList<>();
-//		while (rs.next()) {
-//			BoardDto boardDto = new BoardDto();
-//			boardDto.setBoardNo(rs.getInt("board_no"));
-//			boardDto.setBoardTitle(rs.getString("board_title"));
-//			boardDto.setBoardPost(rs.getString("board_post"));
-//			boardDto.setBoardDate(rs.getString("board_date"));
-//			boardDto.setBoardWriter(rs.getString("board_writer"));
-//			boardDto.setBoardRead(rs.getInt("board_read"));
-//			boardDto.setBoardReply(rs.getInt("board_reply"));
-//			boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
-//
-//			list.add(boardDto);
-//		}
-//		con.close();
-//		return list;
-//
-//	}
-
 	// 게시글 조회 (카테고리 o, 칼럼/키워드x)/lagName과 midName 분류
 	public List<BoardDto> searchByMid(String lagName, String midName) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from board where board_large_name='기록' and board_middle_name=? order by board_no desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, lagName);
@@ -163,7 +133,7 @@ public class BoardDao {
 
 	// 게시글 삭제
 	public boolean delete(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "delete board where board_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, boardNo);
@@ -173,7 +143,7 @@ public class BoardDao {
 	}
 	// 기록 게시글 조회(전체 조회)/기록용냅두기
 	public List<BoardDto> listByRecord(String startDay,String endDay,int lastDay) throws Exception {
-		Connection con = JdbcUtils.connect2();
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from board where board_large_name='기록' and board_date=to_date(?,'YYYY-MM-DD') order by board_date asc";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -198,46 +168,34 @@ public class BoardDao {
 			boardDto.setBoardReply(rs.getInt("board_reply"));
 			boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
 		
-			list.add(boardDto);
-					
+			list.add(boardDto);	
 		}
-		
-		
+
 		con.close();
 		return list;
 
 	}
-	/*
-	 * 1. 홈페이지를 열 때. 현재 월의 첫 번째 날짜 / 마지막 날짜를 계산하여 페이지에 전체목록(middleName구분없이) 날짜 순으로 표시.
-	 * 2. 그러려면 날짜 순으로 데이터를 저장한  List가 있는지 부터 파악 돼야 한다.
-	 * 3. Map의 key 부분을 구하여 첫날 부터 마지막 날 까지 구하고.
-	 * 		- Key가 그럼 형식은 아마 'yyyymmdd'or 'yyyy-mm-dd'가 되어야 한다. 그런데 for문을 하려면 Integer로 변환을 해야하지 않은가 싶다.
-	 * 4. key(날짜형식)의 날짜로 sql조회를 하여 날짜에 맞는 List가 있다면 map.put 을 진행한다.
-	 * 		- 
-	 * 5. 이렇게 key를 첫날 부터 마지막 날까지 for문을 사용하여 map.put 을 하고.
-	 * 6. 마지막날까지 다 완료 하였다면 jsp에서 표시를 한다.
-	 * 7. 표시의 방법은 map.get(i)로 하여 첫 날 부터 마지막날까지 for문을 사용하여 모든 key의 value값을 list로 뽑아낸다.
-	 * 
-	 * */
-	
-
 	
 	//월별 조회 = 하루치 목록 조회 * 날짜수
 	public Map<String, List<BoardDto>> monthlyList(int year, int month) throws Exception {
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+		c.add(Calendar.MONTH, month-1);
 		int max = c.getActualMaximum(Calendar.DATE);
 		
 		Map<String, List<BoardDto>> map = new HashMap<>();
 		for(int date = 1; date <= max; date++) {
-//			String time = year + "-" + month + "-" + date;//ex ) time ="2021-11-1"/...
 			String time = "";
-			
-			if(date < 10) {
-				time = year + "-" + month + "-" + "0"+date;
+			String monthSt = "";
+			if(month<10) {//월이 10 미만이라면
+				monthSt = "0"+month;
 			}else {
-				time = year + "-" + month + "-" + date;
+				monthSt = Integer.toString(month);
+			}
+			if(date < 10) {//날짜가 10 미만이라면 0 붙이기
+					time = year + "-" + monthSt + "-" + "0"+date;
+			}else {
+					time = year + "-" + monthSt + "-" +date;
 			}
 			//내일날짜 구하기
 			Date timeToDate = sdf.parse(time);
@@ -257,10 +215,9 @@ public class BoardDao {
 	
 	//하루치 목록 조회 메소드
 	public List<BoardDto> dailyList(String time,String nextTime) throws Exception {
-		Connection con = JdbcUtils.connect2();
-//		String sql = "select * from board where board_large_name='기록' and board_date = to_date(?, 'yyyy-mm-dd')";
+		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from board "
-				+ "where board_large_name='기록' and board_date >= to_date(?, 'yyyy-mm-dd') and board_date < to_date(?, 'yyyy-mm-dd') "
+				+ "where board_large_name='기록' and board_writer=? and board_date >= to_date(?, 'yyyy-mm-dd') and board_date < to_date(?, 'yyyy-mm-dd') "
 				+ "order by board_middle_name asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, time);
@@ -289,49 +246,125 @@ public class BoardDao {
 		return list;
 	}
 	//월별 조회2(중분류=> board_middle_name 파라미터존재시) = 하루치 목록 조회 * 날짜수
-			public Map<String, List<BoardDto>> monthlyListMiddle(int year, int month,String middleName) throws Exception {
-				Calendar c = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		public Map<String, List<BoardDto>> monthlyListMiddle(int year, int month,String middleName) throws Exception {
+			Calendar c = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			c.add(Calendar.MONTH, month-1);
+			int max = c.getActualMaximum(Calendar.DATE);
+			
+			Map<String, List<BoardDto>> map = new HashMap<>();
+			for(int date = 1; date <= max; date++) {
+				String time = "";
 				
-				int max = c.getActualMaximum(Calendar.DATE);
-				
-				Map<String, List<BoardDto>> map = new HashMap<>();
-				for(int date = 1; date <= max; date++) {
-//					String time = year + "-" + month + "-" + date;//ex ) time ="2021-11-1"/...
-					String time = "";
-					
-					if(date < 10) {
-						time = year + "-" + month + "-" + "0"+date;
+				if(date < 10) {
+					if(month<10) {
+						time = year + "-0" + month + "-" + "0"+date;
 					}else {
-						time = year + "-" + month + "-" + date;
+						time = year + "-" + month + "-" + "0"+date;
 					}
-					//내일날짜 구하기
-					Date timeToDate = sdf.parse(time);
-					c.setTime(timeToDate);
-					c.add(Calendar.DATE, 1);
-					String resultDate = sdf.format(c.getTime());
-					String nextYear = resultDate.substring(0,5);
-					String nextMonth = resultDate.substring(5,7);
-					String nextDay = resultDate.substring(7,10);
-					String nextTime = nextYear+nextMonth+nextDay;
-					
-					List<BoardDto> list = dailyList(time,nextTime,middleName);
-					map.put(time, list);
+				}else {
+					if(month<10) {
+						time = year + "-0" + month + "-" +date;
+					}else {
+						time = year + "-" + month + "-" +date;
+					}
 				}
-				return map;
+				//내일날짜 구하기
+				Date timeToDate = sdf.parse(time);
+				c.setTime(timeToDate);
+				c.add(Calendar.DATE, 1);
+				String resultDate = sdf.format(c.getTime());
+				String nextYear = resultDate.substring(0,5);
+				String nextMonth = resultDate.substring(5,7);
+				String nextDay = resultDate.substring(7,10);
+				String nextTime = nextYear+nextMonth+nextDay;
+					
+				List<BoardDto> list = dailyList(time,nextTime,middleName);
+				map.put(time, list);
 			}
+			return map;
+		}
 	//하루치 목록 조회 메소드 (middleName 존재시)
 		public List<BoardDto> dailyList(String time,String nextTime,String middleName) throws Exception {
-			Connection con = JdbcUtils.connect2();
-//			String sql = "select * from board where board_large_name='기록' and board_date = to_date(?, 'yyyy-mm-dd')";
+			Connection con = wishFit.util.JdbcUtils.connect();
 			String sql = "select * from board "
-					+ "where board_large_name='기록' and board_date >= to_date(?, 'yyyy-mm-dd') and board_date < to_date(?, 'yyyy-mm-dd') "
+					+ "where board_large_name='기록' "
+					+ "and board_date >= to_date(?, 'yyyy-mm-dd') and board_date < to_date(?, 'yyyy-mm-dd') "
 					+ "and board_middle_name=? "
 					+ "order by board_middle_name asc";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, time);
 			ps.setString(2, nextTime);
 			ps.setString(3, middleName);
+		
+			
+			ResultSet rs = ps.executeQuery();
+			List<BoardDto> list = new ArrayList<>();
+			
+			while(rs.next()) {
+				BoardDto boardDto = new BoardDto();
+				boardDto.setBoardNo(rs.getInt("board_no"));
+				boardDto.setBoardTitle(rs.getString("board_title"));
+				boardDto.setBoardPost(rs.getString("board_post"));
+				boardDto.setBoardDate(rs.getString("board_date").substring(0,10));
+				boardDto.setBoardWriter(rs.getString("board_writer"));
+				boardDto.setBoardRead(rs.getInt("board_read"));
+				boardDto.setBoardReply(rs.getInt("board_reply"));
+				boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
+				
+				list.add(boardDto);
+				
+			}
+			
+			con.close();
+			return list;
+		}
+		//월별 조회 = 하루치 목록 조회 * 날짜수(11-22 변경중)
+		public Map<String, List<BoardDto>> monthlyList(String year, String month) throws Exception {
+			Calendar c = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			c.add(Calendar.MONTH, month-1);
+			int max = c.getActualMaximum(Calendar.DATE);
+			
+			Map<String, List<BoardDto>> map = new HashMap<>();
+			for(int date = 1; date <= max; date++) {
+				String time = "";
+				String monthSt = "";
+				if(month<10) {//월이 10 미만이라면
+					monthSt = "0"+month;
+				}else {
+					monthSt = Integer.toString(month);
+				}
+				if(date < 10) {//날짜가 10 미만이라면 0 붙이기
+						time = year + "-" + monthSt + "-" + "0"+date;
+				}else {
+						time = year + "-" + monthSt + "-" +date;
+				}
+				//내일날짜 구하기
+				Date timeToDate = sdf.parse(time);
+				c.setTime(timeToDate);
+				c.add(Calendar.DATE, 1);
+				String resultDate = sdf.format(c.getTime());
+				String nextYear = resultDate.substring(0,5);
+				String nextMonth = resultDate.substring(5,7);
+				String nextDay = resultDate.substring(7,10);
+				String nextTime = nextYear+nextMonth+nextDay;
+				
+				List<BoardDto> list = dailyList(time,nextTime);
+				map.put(time, list);
+			}
+			return map;
+		}
+		
+		//하루치 목록 조회 메소드
+		public List<BoardDto> dailyList(String time,String nextTime) throws Exception {
+			Connection con = wishFit.util.JdbcUtils.connect();
+			String sql = "select * from board "
+					+ "where board_large_name='기록' and board_writer=? and board_date >= to_date(?, 'yyyy-mm-dd') and board_date < to_date(?, 'yyyy-mm-dd') "
+					+ "order by board_middle_name asc";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, time);
+			ps.setString(2, nextTime);
 			
 			
 			ResultSet rs = ps.executeQuery();
@@ -355,9 +388,4 @@ public class BoardDao {
 			con.close();
 			return list;
 		}
-		
-	
-	
-	
-	//여기까지 기록
 }
