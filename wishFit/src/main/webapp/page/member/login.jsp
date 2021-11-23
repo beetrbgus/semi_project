@@ -115,7 +115,7 @@
                 height: 20px;
             }
         </style>
-  <a href="#" class="app-pc-only app-header-login-link" onclick="toggleDialog('app-login')"> <i
+  <a href="<%=request.getContextPath() %>/page/member/islogin.kh" class="app-pc-only app-header-login-link" onclick="toggleDialog('app-login')"> <i
                             class="el-icon-lock"></i> <span>로그인</span>
                     </a> <a class="app-pc-only app-button app-primary app-button-rounded app-button-small"
                         href="index5ab6.html?mid=index&amp;act=dispMemberSignUpForm">회원가입</a>
@@ -126,7 +126,7 @@
                                     <h3>로그인</h3>
                                 </div>
                                 <div class="app-dialog-body">
-                                    <form class="tw-mb-5" action="<%=request.getContextPath() %>/page/member/login.wishfit" method="post"
+                                    <form class="tw-mb-5" action="<%=request.getContextPath() %>/page/member/islogin.kh" method="post"
                                         autocomplete="off">
                                         <input type="hidden" name="error_return_url" value="/" />
                                         <input type="hidden" name="mid" value="index" />
@@ -139,7 +139,7 @@
                                             <div class="tw-mb-3">
                                                 <div class="app-labeled-input" label="이메일 주소">
                                                     <div class="app-labeled-input__title">이메일 주소</div>
-                                                    <input class="app-input app-input-expand" type="text" name="user_id"
+                                                    <input class="app-input app-input-expand" type="text" name="mem_id"
                                                         placeholder="user@email.com" required tabindex="1" />
                                                 </div>
                                             </div>
@@ -147,7 +147,7 @@
                                             <div class="app-labeled-input tw-mb-3" label="비밀번호">
                                                 <div class="app-labeled-input__title">비밀번호</div>
                                                 <input class="app-input app-input-expand" type="password"
-                                                    name="password" placeholder="•••••••••" required tabindex="2" />
+                                                    name="mem_pw" placeholder="•••••••••" required tabindex="2" />
                                             </div>
 
                                             <div class="tw-flex tw-items-center tw-mb-4">

@@ -13,11 +13,12 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
 
-<link rel="stylesheet" type="text/css" href="../css/commons.css">
+<!-- <link rel="stylesheet" type="text/css" href="../css/commons.css"> -->
 <script>
 
 </script>
-	 
+	
+<main class="app-content app-clearfix">
 <div class="container-1000 container-center">
 	<div class="row center">
 		<h1 style="font-size: 2rem;">관리자페이지</h1>
@@ -132,9 +133,11 @@
 		<input type="submit" value="등록" class="form-btn form-inline">
 		</form>
 	</div>
+</div>	 
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>
-</div>
+
+</main>
 
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>

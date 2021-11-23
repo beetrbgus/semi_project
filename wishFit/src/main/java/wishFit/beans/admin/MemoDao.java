@@ -132,7 +132,12 @@ public class MemoDao {
 	//페이징 검색
 		public List<MemoDto> searchByRownum(String column, String keyword, int begin, int end) throws Exception {
 			Connection con = JdbcUtils.connect();
-			
+//			String  a = 
+//								"select * from ( "
+//							+	 "		select rownum rn, TMP.* from (  "
+//							+	 "			select * from" + tableName + "where instr(#1,?) >0 order by "+sortstandard+"desc"
+//							+ 	" 		)TMP "
+//							+ ") where rn between ? and ?"; 
 			String sql = "select * from ("
 									+ "select rownum rn, TMP.* from ("
 										+ "select * from admin_memo where instr(#1, ?) > 0 order by memo_no desc"

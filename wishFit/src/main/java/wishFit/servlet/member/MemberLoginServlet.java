@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.member.MemberDao;
 import wishFit.beans.member.MemberDto;
 
-@WebServlet(urlPatterns="/page/member/login.wishfit")
+@WebServlet(urlPatterns="/page/member/login.kh")
 public class MemberLoginServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

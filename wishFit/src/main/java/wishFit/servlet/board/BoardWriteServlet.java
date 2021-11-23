@@ -12,25 +12,26 @@ import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
 
 
-@WebServlet(urlPatterns = "/asdasfgge")
+@WebServlet(urlPatterns = "/board/write.kh")
 public class BoardWriteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			resp.setCharacterEncoding("UTF-8");
 			//기록글 작성 서블릿 
 			//입력 : 제목/내용/작성일/대분류/중분류/게시글번호(시퀀스)/작성자아이디(세션이용)
 			BoardDto boardDto = new BoardDto();
-			boardDto.setBoardTitle(req.getParameter("boardTitle"));
-			boardDto.setBoardPost(req.getParameter("boardPost"));
-			boardDto.setBoardDate(req.getParameter("boardDate"));
-			boardDto.setBoardMiddleName(req.getParameter("boardMiddleName"));
-			boardDto.setBoardLargeName(req.getParameter("boardLargeName"));
+			boardDto.setBoardTitle(req.getParameter("board_title"));
+			boardDto.setBoardPost(req.getParameter("board_post"));
+			boardDto.setBoardDate(req.getParameter("board_Date"));
+			boardDto.setBoardMiddleName(req.getParameter("board_Middle_Name"));
+			boardDto.setBoardLargeName(req.getParameter("board_Large_Name"));
 			//아이디 : 세션에서
 			boardDto.setBoardWriter((String)req.getSession().getAttribute("ses"));
 			
 			//처리
 			BoardDao boardDao = new BoardDao();
-			int boardNo=boardDao.getSeq();
+			int boardNo=boardDao.boardSeq();
 			boardDto.setBoardNo(boardNo);
 			
 			boardDao.write(boardDto);

@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@page import="wishFit.beans.message.MessageDao"%>
+<%-- <%@page import="wishFit.beans.message.MessageDao"%> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -412,10 +409,10 @@ $(document).ready(function(){
 					</div>
 				</div>
 				
-				<% 
-					MessageDao messageDao = new MessageDao();
-					int newMessage = messageDao.getNotReadCount("test2");
- 				%>
+<%-- 				<%  --%>
+<!-- // 					MessageDao messageDao = new MessageDao(); -->
+<!-- // 					int newMessage = messageDao.getNotReadCount("test2"); -->
+<%--  				%> --%>
  				<!-- 쪽지 -->
 				<div class="app-pc-only app-dropdown">
 					<a class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
@@ -427,12 +424,12 @@ $(document).ready(function(){
 									d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
 				      	</svg>
 				      	<%-- 알림 있을 때 갯수 뽑아줌. --%>
-				      	<span class="app-header-item-badge"><%= newMessage %></span>
+<%-- 				      	<span class="app-header-item-badge"><%= newMessage %></span> --%>
         
 					</a>
 					<!-- 쪽지 목록 창. -->
 					<div class="app-dropdown-menu app-right" style="width: 270px">
-						<jsp:include page="/page/headerNav/message.jsp"></jsp:include>
+<%-- 						<jsp:include page="/page/headerNav/message.jsp"></jsp:include> --%>
 					</div>
 				</div>
 				<!-- 프로필 사진 누르면 나오는 드롭박스  -->

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 // jsp, wishfit 확장자에 대한 인코딩 방식을 UTF-8로 설정
 
-@WebFilter(urlPatterns = {"*.jsp", "*.wishfit"})
+@WebFilter(urlPatterns = {"*.jsp", "*.kh"})
 public class EncodingFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

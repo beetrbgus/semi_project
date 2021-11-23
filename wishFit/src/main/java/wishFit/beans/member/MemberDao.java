@@ -32,12 +32,14 @@ public class MemberDao {
 		con.close();
 	}
 
-	// 로그인
+	// 상세보기
 	public MemberDto get(String mem_id) throws Exception{
 		Connection con = wishFit.util.JdbcUtils.connect();
 		
-		String sql = "select * from member where mem_id=?";
+		String sql = "select * from member where mem_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mem_id);
+
 		ResultSet rs = ps.executeQuery();
 		
 		MemberDto memberDto;

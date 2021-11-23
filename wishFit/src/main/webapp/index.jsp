@@ -10,6 +10,7 @@
 
 <!-- 화면 중간. 본문 -->
 <main class="app-content app-clearfix">
+<a href="<%=request.getContextPath() %>/page/member/testLogin.jsp"  class="btn">로그인</a>
 	<!-- 배너 부분. 인덱스 부분만 필요. -->
 	<div class="app-main-banner swiper-container">
 		<div class="swiper-wrapper">
