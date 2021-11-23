@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import wishFit.beans.JdbcUtils;
+import wishFit.util.JdbcUtils;
 
 // 마이페이지 - 작성 글 목록 보기
 public class FitgroupDao {

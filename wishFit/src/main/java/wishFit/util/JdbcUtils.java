@@ -19,7 +19,7 @@ public class JdbcUtils {
 			e.printStackTrace();
 		}
 	}
-	public static Connection connect2() throws Exception{
+	public static Connection connect() throws Exception{
 		return ds.getConnection();
 	}
 	

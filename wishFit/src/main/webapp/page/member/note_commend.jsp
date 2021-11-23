@@ -1,3 +1,5 @@
+<%@page import="wishFit.beans.member.MemberProfileDto"%>
+<%@page import="wishFit.beans.member.MemberProfileDao"%>
 <%@page import="wishFit.beans.reply.ReplyDto"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.reply.ReplyDao"%>
@@ -6,18 +8,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-String memId = (String) session.getAttribute("ses");
+String uid = (String) session.getAttribute("uid");
 // 처리
 MemberDao memberDao = new MemberDao();
-MemberDto memberDto = memberDao.get(memId);
-
-System.out.print(memberDto.getMemName());
+MemberDto memberDto = memberDao.get(uid);
 %>
 <%
-	String replyId= request.getParameter("replyWriter");
-
 	ReplyDao replyDao = new ReplyDao();
-	List<ReplyDto> replyMine = replyDao.replyMine(replyId);
+	List<ReplyDto> replyMine = replyDao.replyMine("reply_id", uid);
+	
+	// 프로필 이미지 조회
+	MemberProfileDao memberProfileDao = new MemberProfileDao();
+	MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 %>
 <!-- 헤더 -->
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -40,6 +42,23 @@ String root = request.getContextPath();
       <div class="app-clearfix">
         <section class="app-member">
         <div class="app-member-side">
+        <div class="app-member-card app-member-profile">
+					<div class="app-member-card-body">
+						<div class="app-avatar tw-mb-2">
+							<%if(memberProfileDto == null){ %>
+								<img src="<%=request.getContextPath()%>/resources/image/profile-user.png">
+							<%} else{ %>
+								<img src="<%=root %>/profile.kh?mpNo=<%=memberProfileDto.getMpNo() %>">
+							<%} %>
+						</div>
+
+						<div>
+							<span class="tw-text-primary tw-text-xs tw-mb-1"><%=memberDto.getMemGrade()%></span>
+
+							<div class="tw-font-bold tw-mb-1"><%=memberDto.getMemNick()%></div>
+						</div>
+					</div>
+				</div>
 		    <div class="app-member-card app-member-menu">
 				  <ul>
 				    <li class="app-active">

@@ -15,7 +15,72 @@
      <!-- 좌측 사이드 -->
     <jsp:include page="/template/leftSide.jsp"></jsp:include> 
     
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+    // 아이디 중복 가능 script
+    	$(function(){
+    		$("input[name=memId]").on("input",function(){
+    			var input = $("input[name=memId]").val();
+    			$.ajaxf({
+    				url = "";
+    				type : "post";
+    				data:{
+    					memId : inputId
+    				},
+    				// 완료 처리
+    				success : function(resp){
+    					if(resp == "NNNNY"){
+    						$("input[name=memId]").next().text("아이디 사용 가능");
+    					} else if(resp == "NNNNN"){
+    						$("input[name=memId]").next().text("아이디 사용 불가능");
+    					}
+    				},
+    				error : function(error){
+    					
+    				}
+    			});
+    		});
+    	});
+    // 닉네임 중복 확인
+    		$(function(){
+    			$("input[name=memNick]").on("input",function(){
+    				var input = $("input[name=memNick]").val();
+    				$.ajax({
+    					ur="";
+    					type:"post";
+    					data:{
+    						memNick: inputNick
+    					},
+    					success: function(resp){
+    						if(resp == "NNNNY"){
+    							$("input[name=memNick]").next().text("닉네임 사용 가능");
+    						} else if{
+    							$("input[name=memNick]").next().text("닉네임 중복 불가능");
+    						}
+    					},
+    					error : function(errror){
+    						
+    					}
+    				});
+    			});
+    		});
     
+    	// 비밀번호 확인
+    	function pw2check(){
+    		var pwInput = document.querySelector("input[name=memPw]");
+        	var pw2Input = document.querySelector("input[name=memPw2]");
+        	var notice = pw2Input.nextElementSibling;
+        	
+        	if(pwInput.values.Iength > 0 && pwInput.value == pw2Input.value){
+        		notice.textContent = "";
+        		return true;
+        	}
+        	else{
+        		notice.textContent = "비밀번호가 일치하지 않습니다.";
+        		return false;
+        	}
+    	}
+    </script>
     
     <section class="app-member">
     <div class="app-member-content tw-pl-0">
@@ -382,7 +447,7 @@
               <em>*</em>
               <span>비밀번호</span>
             </label>
-            <input class="hi input input-default" type="password" name="memPw" id="password" value="" required="">
+            <input class="hi input input-default" type="password" name="memPw" id="password" value="" required="" onblur="pwCheck()">
             <p class="app-error">영어 대/소문자, 숫자, 특수문자를 포함한 8자리 ~ 30자리</p>
           </li>
           
@@ -391,7 +456,7 @@
               <em>*</em>
               <span>비밀번호 확인</span>
             </label>
-            <input type="password" id="password2" value="" required="">
+            <input type="password" id="password2" name="memPw2" value="" required="" onblur="pw2Check()">
           </li>
           
           <li>
@@ -445,8 +510,8 @@
             				<em>*</em>
                             <span>성별</span>
             </label>
+            			  <input type="radio" name="memGender" id="user_gender" value="male"> 남자
                           <input type="radio" name="memGender" id="user_gender" value="female"> 여자
-                          <input type="radio" name="memGender" id="user_gender" value="male"> 남자
                           </li><li>
                           
             <label for="user_phone">
@@ -454,7 +519,7 @@
             </label>
                           <input type="text" name="memPhone" id="user_phone"  value=""> 
                           <p class="app-error">
-                          전화번호는 - 을 제외한 11자리 숫자를 입력해주십시오.</p>
+                          전화번호는 - 을 포함한 13자리 숫자를 입력해주십시오.</p>
                           </li><li>
                           
             <label for="profile_image">

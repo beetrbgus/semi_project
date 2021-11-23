@@ -1,11 +1,9 @@
 package wishFit.beans.member;
 
-import java.sql.Date;
-
 public class FriendDto {
 	private int friendNo;
 	private String friendId, friendNick;
-	private Date friendDate;
+	private String friendDate;
 	public FriendDto() {
 		super();
 
@@ -33,10 +31,10 @@ public class FriendDto {
 	public void setFriendNick(String friendNick) {
 		this.friendNick = friendNick;
 	}
-	public Date getFriendDate() {
+	public String getFriendDate() {
 		return friendDate;
 	}
-	public void setFriendDate(Date friendDate) {
+	public void setFriendDate(String friendDate) {
 		this.friendDate = friendDate;
 	}
 }

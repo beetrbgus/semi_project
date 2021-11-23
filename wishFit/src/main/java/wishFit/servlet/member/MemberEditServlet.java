@@ -19,7 +19,7 @@ public class MemberEditServlet extends HttpServlet{
 			req.setCharacterEncoding("UTF-8");
 			
 			MemberDto memberDto = new MemberDto();
-			memberDto.setMemId((String)req.getSession().getAttribute("ses"));
+			memberDto.setMemId((String)req.getSession().getAttribute("uid"));
 			memberDto.setMemPw(req.getParameter("memPw"));
 			memberDto.setMemNick(req.getParameter("memNick"));
 			memberDto.setMemPhone(req.getParameter("memPhone"));

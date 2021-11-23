@@ -35,7 +35,7 @@ public class MemberFindIdServlet extends HttpServlet{
 				
 			}	else {
 				memId = "검색 결과가 없습니다.";
-				resp.sendRedirect("findId_result.jsp?mem_id="+memId);
+				/* resp.sendRedirect("findId_result.jsp?mem_id="+memId); */
 			}
 		}	catch(Exception e) {
 			e.printStackTrace();

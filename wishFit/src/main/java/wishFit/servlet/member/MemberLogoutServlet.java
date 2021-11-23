@@ -13,7 +13,7 @@ public class MemberLogoutServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			req.getSession().removeAttribute("ses");
+			req.getSession().removeAttribute("uid");
 			req.getSession().removeAttribute("grade");
 			resp.sendRedirect(req.getContextPath());
 			

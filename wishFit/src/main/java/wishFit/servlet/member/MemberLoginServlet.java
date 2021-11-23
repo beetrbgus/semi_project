@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.member.MemberDao;
 import wishFit.beans.member.MemberDto;
 
-@WebServlet(urlPatterns="/page/member/login.kh")
+@WebServlet(urlPatterns="/login.kh")
 public class MemberLoginServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,19 +21,22 @@ public class MemberLoginServlet extends HttpServlet{
 			String memPw = req.getParameter("memPw");
 			
 			MemberDao memberDao = new MemberDao();
-			MemberDto memberDto = memberDao.get(memId);
+			MemberDto memberDto = new MemberDto();
+			memberDto = memberDao.login(memId, memPw);
 			
-			boolean login = false;
-			if(memberDto != null && memberDto.getMemPw().equals(memPw)) {
-				req.getSession().setAttribute("ses", memId);
+			 
+			boolean login = memberDto.getMemId() !=null || !memberDto.getMemId().equals("");
+			if(login) {
+
+				req.getSession().setAttribute("uid", memId);
 				req.getSession().setAttribute("grade", memberDto.getMemGrade()); //관리자
-				resp.sendRedirect(req.getContextPath()+"/index.jsp");
-			} else {
-				resp.sendRedirect("login.jsp?error");
-			}
+				
+				resp.getWriter().write(memId);
+			} 
 		}	catch(Exception e) {
 			e.printStackTrace();
-			resp.sendError(500);
+			
 		}
+		
 	}
 }

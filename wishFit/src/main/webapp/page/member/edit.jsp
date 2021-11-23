@@ -3,10 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String memId = (String)session.getAttribute("ses");
+	String uid = (String)session.getAttribute("uid");
 
 	MemberDao memberDao = new MemberDao();
-	MemberDto memberDto = memberDao.get(memId);
+	MemberDto memberDto = memberDao.get(uid);
 %>
 <!-- 헤더 -->
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -24,6 +24,7 @@ String root = request.getContextPath();
 <!-- 좌측 사이드 -->
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
 
+
 <main class="app-content app-clearfix">
       <div class="app-clearfix">
         <section class="app-member">
@@ -31,14 +32,8 @@ String root = request.getContextPath();
   <div class="app-member-card-header">
     <h1>회원정보 수정</h1>
   </div>
-    
-  <script>
-    xe.lang.deleteProfileImage = '선택한 항목을 삭제합니다.';
-    xe.lang.deleteImageMark = '선택한 항목을 삭제합니다.';
-    xe.lang.deleteImageName = '선택한 항목을 삭제합니다.';
-  </script>
   
-  <form id="fo_insert_member" action="/" method="post" enctype="multipart/form-data" class="app-member-card-body"><input type="hidden" name="error_return_url" value="/index.php?mid=index&amp;act=dispMemberModifyInfo"><input type="hidden" name="mid" value="index"><input type="hidden" name="ruleset" value="@insertMember">
+  <form id="fo_insert_member" action="edit.kh" method="post" enctype="multipart/form-data" class="app-member-card-body"><input type="hidden" name="error_return_url" value="/index.php?mid=index&amp;act=dispMemberModifyInfo"><input type="hidden" name="mid" value="index"><input type="hidden" name="ruleset" value="@insertMember">
     <input type="hidden" name="act" value="procMemberModifyInfo">
     <input type="hidden" name="module" value="member">
     <input type="hidden" name="member_srl" value="1118">
@@ -64,11 +59,15 @@ String root = request.getContextPath();
         </li>
       <li>
         <label for="user_id"><em style="color:red">*</em> 비밀번호 확인</label>
-        <div><input type="password" name="password2" required=""></div> 
+        <div><input type="password" id="memPw2" required=""></div> 
         </li>
       <li>
         <label for="nick_name"><em style="color:red">*</em> 닉네임</label>
         <div><input type="text" name="memNick" id="nick_name" value="<%=memberDto.getMemNick()%>"></div>
+      </li>
+      <li>
+        <label for="user_phone">전화번호</label>
+        <div><input type="text" name="memPhone" id="user_phone" value="<%=memberDto.getMemPhone()%>"></div>
       </li>
       <li>
         <label for="user_grade">
@@ -77,7 +76,8 @@ String root = request.getContextPath();
       </label>
         <div>
           <input type="hidden" name="memGrade" value="<%=memberDto.getMemGrade() %>">
-          <input type="text" name="memGrade" id="user_grade" value="<%=memberDto.getMemGrade() %>" disabled="disabled" class="app-input app-input-expand">
+          <input type="text" name="memGrade" id="user_grade" value="<%=memberDto.getMemGrade() %>" 
+          				disabled="disabled" class="app-input app-input-expand">
         </div>
       </li>
       <li>
@@ -93,7 +93,7 @@ String root = request.getContextPath();
       <li>
         <label for="profile_image">프로필 사진</label>
         <div><input type="hidden" name="__profile_image_exist" value="false">
-        <input type="file" name="profile_image" id="profile_image" value="" accept="image/*" 
+        <input type="file" name="attach" id="profile_image" value="" accept="image/*" 
         data-max-filesize="102400" data-max-filesize-error="파일이 너무 큽니다. 용량 제한은 %s입니다.">
         <p class="help-block">파일 용량 제한: 100.0KB, 가로 제한 길이: 50px, 세로 제한 길이: 50px</p></div> 
        </li>      
@@ -115,34 +115,9 @@ String root = request.getContextPath();
     
     <div class="tw-text-right tw-pt-6">
       <a class="app-button tw-mr-1" href="mypage.jsp">취소</a>
-      <button type="submit" class="app-button primary">등록</button>
+      <button type="submit" class="app-button primary">수정</button>
     </div>
   <input type="hidden" name="_rx_csrf_token" value="dALfXx8EwiEO2GYj"></form>
-  
-  <script>
-    jQuery(function($) {
-      // 프로필 이미지 클릭 이벤트 전이
-      $('#profile_imagetag').bind('click', function(e) {
-        $(this).next('input[type=file]').trigger('click')
-      })
-      const option = {
-        changeMonth: true,
-        changeYear: true,
-        gotoCurrent: false,
-        yearRange:'-100:+10',
-        dateFormat:'yy-mm-dd',
-        onSelect: function() {
-          $(this).prev('input[type="hidden"]').val(this.value.replace(/-/g, ''));
-        }
-      }
-      $.extend(option, $.datepicker.regional['ko']);
-      $(".inputDate").datepicker(option);
-      $(".dateRemover").click(function() {
-        $(this).prevAll('input').val('');
-        return false;
-      });
-    })
-  </script>
 </div>
 </section>
 </div>

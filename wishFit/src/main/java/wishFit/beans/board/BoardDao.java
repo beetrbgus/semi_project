@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import wishFit.beans.JdbcUtils;
+import wishFit.util.JdbcUtils;
 
 public class BoardDao {
 	//기록파트
@@ -289,13 +289,13 @@ public class BoardDao {
 	}
 	
 	// 마이페이지 - 작성 글 목록 보기
-	public List<BoardDto> boardMine(String boardWriter) throws Exception{
+	public List<BoardDto> boardMine(String column, String keyword) throws Exception{
 		Connection con = JdbcUtils.connect();
 		
-		String sql = "select * from board where board_writer = ? order by board_no desc";
-		
+		String sql = "select * from board where #1= ? order by board_no desc";
+		sql = sql.replace("#1",	 column);
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, boardWriter);
+		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
 		
 		List<BoardDto> list = new ArrayList<>();

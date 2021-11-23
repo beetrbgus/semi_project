@@ -6,16 +6,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	String boardWriter = request.getParameter("boardWriter");
+    	String uid = (String)session.getAttribute("uid");
     
     	BoardDao boardDao = new BoardDao();
-    	List<BoardDto> boardMine = boardDao.boardMine(boardWriter);
+    	List<BoardDto> boardMine = boardDao.boardMine("board_writer",uid);
     %>
     <%
-    	String fgId = request.getParameter("fgId");
-    	
     	FitgroupDao fitgroupDao = new FitgroupDao();
-    	List<FitgroupDto> fitgroupMine = fitgroupDao.fitgroupMine(fgId);
+    	List<FitgroupDto> fitgroupMine = fitgroupDao.fitgroupMine(uid);
     %>
     
 

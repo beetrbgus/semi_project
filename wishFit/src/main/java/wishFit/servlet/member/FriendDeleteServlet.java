@@ -8,21 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wishFit.beans.member.MemberDao;
-
-@WebServlet(urlPatterns="/page/member/friendfind.kh")
-public class MemberFindServlet extends HttpServlet{
+import wishFit.beans.member.FriendDao;
+@WebServlet(urlPatterns="/member/friend/delete.kh")
+public class FriendDeleteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			req.setCharacterEncoding("UTF-8");
+			int friendNo = Integer.parseInt(req.getParameter("friendNo"));
 			
-			String memId = req.getParameter("memId");
-			if(memId == null || memId.equals("")) {
-				resp.getWriter().write(-1);
-			} else if(new MemberDao().registerChek(memId) == 0) {
-				
-			}
+			FriendDao friendDao = new FriendDao();
+			boolean success = friendDao.delete(friendNo);
+			
+			resp.sendRedirect("friend_list.jsp");
 		}	catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
