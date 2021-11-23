@@ -15,11 +15,11 @@ import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
 
 
-// 타인이 게시글을 수정ㆍ삭제 하지 못하도록 거르는 필터
+// 게시판에서 본인확인
 
 
 @WebFilter(urlPatterns = {"/board/edit.jsp",
-		"/board/edit.wishfit","/board/delete.wishfit"
+		"/board/edit.kh","/board/delete.kh"
 })
 public class SelfCheck implements Filter{
 	@Override

@@ -11,20 +11,35 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// jsp, kh 확장자에 대한 인코딩 방식을 UTF-8로 설정
+// 비회원 쳐내기
 
-@WebFilter(urlPatterns = {"*.jsp", "*.kh"})
-public class EncodingFilter implements Filter{
+@WebFilter(urlPatterns = {
+		"/member/*",
+		"/record/*",
+		"/fitgroup/*",
+		"/market/*",
+		"/notice/*",
+		"/community/*",
+		"/inquiry/*"
+})
+public class MemberFilter implements Filter{	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-			
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		
-		req.setCharacterEncoding("UTF-8");
+		String memId = (String)req.getSession().getAttribute("ses");
+		boolean login = memId != null;
 		
-		chain.doFilter(request, response);
+		if(login) {
+			chain.doFilter(request, response);
+		}
+		else {
+			resp.sendRedirect(req.getContextPath()+"/member/login.jsp");
+		}
+		
+		
 		
 	}
 }
