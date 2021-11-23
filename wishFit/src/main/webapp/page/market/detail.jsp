@@ -21,6 +21,17 @@
 
 	// });
 </script>
+<script>
+	$(function(){
+		$(".replyModifyBtn").click(function(e){
+			e.preventDefault();
+			console.log("들어았음 버튼 클릭 ");
+			 $(this).closest("form").submit();
+			
+		});
+	});
+	
+	</script>
 <!-- 헤더 -->
 <%-- <jsp:include page="/template/header.jsp"></jsp:include>--%>
 
@@ -63,7 +74,7 @@ String memberId = (String)session.getAttribute("ses");   -->
 		<tr>
 			<td>제목</td>
 			<td width="70%"><%=boardDto.getBoardTitle()%></td>
-			<td>작성일자 :<%=boardDto.getBoardDate()%></td>
+			<td>작성일자 :<%=boardDto.getBoardDate().substring(0,10)%></td>
 			<td>조회수:<%=boardDto.getBoardRead()%></td>
 			<td>댓글수:<%=boardDto.getBoardReply()%></td>
 		</tr>
@@ -74,9 +85,7 @@ String memberId = (String)session.getAttribute("ses");   -->
 				if (!marketFileList.isEmpty()) {
 				%> <%
  for (MarketFileDto marketFileDto : marketFileList) {
- %>
-
-				<img src="download.kh?imageNo=<%=marketFileDto.getImageNo()%>"
+ %> <img src="download.kh?imageNo=<%=marketFileDto.getImageNo()%>"
 				width="500" height="500"> <%
  }
  %> <%
@@ -97,6 +106,8 @@ String memberId = (String)session.getAttribute("ses");   -->
 <form action="edit.jsp?boardNo=<%=boardDto.getBoardNo()%>" method="post">
 	<input type="submit" value="수정">
 </form>
+<a href="list.jsp"> 판매 목록으로</a>
+<a href="buyList.jsp">구매목록으로</a>
 <br>
 <br>
 <h3>댓글란</h3>
@@ -107,38 +118,43 @@ String memberId = (String)session.getAttribute("ses");   -->
 		for (ReplyVo reply : replyList) {
 		%>
 		<tr>
-			<td><input type="hidden" name="replyNo" value="<%=reply.getReplyNo()%>">
-			<input type="hidden" name="boardNo" value="<%=boardDto.getBoardNo()%>">
-			<%=reply.getMpUpload()%></td>
+			<td><input type="hidden" name="replyNo"
+				value="<%=reply.getReplyNo()%>"> <input type="hidden"
+				name="boardNo" value="<%=boardDto.getBoardNo()%>">
+			<td>프사:<%=reply.getMpUpload()%></td>
 			<td>작성자 :<%=reply.getMemNick()%></td>
 			<td>작성일 : <%=reply.getReplyDate()%></td>
 			<td>내용 : <%=reply.getReplyPost()%></td>
 
 			<td>
-				
-				<%--댓글 삭제 --%>
-				
-					<a href="reply_delete.kh?replyNo=<%=reply.getReplyNo()%>">삭제</a>
-				
+				<%--댓글 삭제 --%> <a
+				href="reply_delete.kh?boardNo=<%=boardDto.getBoardNo()%>&replyNo=<%=reply.getReplyNo()%>">삭제</a>
+
 			</td>
 
 			<td>
 				<%--댓글 수정 --%>
-			
-	<input type="hidden" name="boardNo" value="<%=boardDto.getBoardNo()%>">
-	 <input type="hidden" name="replyNo" value="<%=reply.getReplyNo()%>">
+				<form class="replyModify" action="reply_edit.kh" method="post">
+					<input type="hidden" name="boardNo"
+						value="<%=boardDto.getBoardNo()%>"> <input type="hidden"
+						name="replyNo" value="<%=reply.getReplyNo()%>">
 					<button class="create-btn"></button>
 					<textarea name="replyPost" required rows="4" cols="80">
- <%=reply.getReplyPost()%>
- </textarea>
-					
-					<a href="reply_edit.kh?replyNo=<%=reply.getReplyNo() %>">수정</a>
-					
-				
+ 							<%=reply.getReplyPost()%>
+ 					</textarea>
+
+					<button class="replyModifyBtn">수정</button>
+				</form>
+
+
+
 			</td>
 		</tr>
-		<% }%>		
+		<%
+		}
+		%>
 	</tbody>
+
 </table>
 <br>
 <br>

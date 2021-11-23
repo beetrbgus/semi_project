@@ -1,5 +1,6 @@
 package wishFit.beans.reply;
 
+// 댓글 테이블에 있는 정보 
 public class ReplyDto {
 	private int replyNo,boardNo;
 	private String replyId,replyPost,replyDate;

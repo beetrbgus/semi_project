@@ -13,12 +13,12 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 
-import wishFit.beans.board.BoardDao;
+import wishFit.beans.board.BoardDao2;
 import wishFit.beans.board.BoardDto;
 import wishFit.beans.market.MarketDao;
 import wishFit.beans.market.MarketFileDao;
 import wishFit.beans.market.MarketFileDto;
-@WebServlet(urlPatterns="/page/market/write.kh")
+//@WebServlet(urlPatterns="/page/market/write.kh")
 public class MarketWriteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

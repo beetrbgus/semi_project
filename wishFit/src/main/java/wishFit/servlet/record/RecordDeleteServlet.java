@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wishFit.beans.board.BoardDao;
+import wishFit.beans.board.BoardDao2;
 
 //@WebServlet(urlPatterns = "/page/record/delete.kh")
 public class RecordDeleteServlet extends HttpServlet{
@@ -19,7 +19,7 @@ public class RecordDeleteServlet extends HttpServlet{
 			int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 			
 			//처리
-			BoardDao boardDao = new BoardDao();
+			BoardDao2 boardDao = new BoardDao2();
 			boolean success = boardDao.delete(boardNo);
 			
 			//출력

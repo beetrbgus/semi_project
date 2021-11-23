@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wishFit.beans.board.BoardDao;
+import wishFit.beans.board.BoardDao2;
 import wishFit.beans.board.BoardDto;
 
 //@WebServlet(urlPatterns = "/record_edit.kh")
@@ -27,7 +27,7 @@ public class RecordEditServlet extends HttpServlet{
 			
 			
 			//처리
-			BoardDao boardDao = new BoardDao();
+			BoardDao2 boardDao = new BoardDao2();
 			boolean success = boardDao.edit(boardDto);
 			
 			//출력 : detail.jsp

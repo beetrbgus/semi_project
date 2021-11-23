@@ -1,5 +1,6 @@
 package wishFit.beans.reply;
 
+// 댓글 목록에 보여지는 정보들에 대한 VO
 public class ReplyVo {
 	private int replyNo;
 	private String memNick;

@@ -1,3 +1,4 @@
+<%@page import="wishFit.beans.board.BoardDao"%>
 <%@page import="wishFit.beans.board.BoardDto"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.market.MarketDao"%>
@@ -18,7 +19,10 @@
 MarketDao marketDao = new MarketDao();
 List<BoardDto> list2 = marketDao.list2();
 %>
-
+<!-- 글 전체 처리 -->
+<%
+BoardDao boardDao = new BoardDao();
+%>
 
 
 <h2 align="center">구매 리스트</h2>
@@ -28,6 +32,7 @@ List<BoardDto> list2 = marketDao.list2();
 <td>번호</td>
 <td>글쓴이</td>
 <td>조회수</td>
+<td>작성일</td>
 <td width="70%">제목</td>
 </tr>
 </thead>
@@ -37,6 +42,7 @@ List<BoardDto> list2 = marketDao.list2();
 			<td><%=boardDto.getBoardNo()%></td>
 			<td><%=boardDto.getBoardWriter()%></td>
 			<td><%=boardDto.getBoardRead()%></td>
+			<td><%=boardDto.getBoardDate().substring(0,10)%></td>
 			<td align="left">
 			<!-- boardNo로 boardTitle 클릭 태그 만듬 -->
 				<a href="detail.jsp?boardNo=<%=boardDto.getBoardNo()%>"><%=boardDto.getBoardTitle()%></a>

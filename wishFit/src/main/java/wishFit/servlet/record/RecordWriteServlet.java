@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wishFit.beans.board.BoardDao;
+import wishFit.beans.board.BoardDao2;
 import wishFit.beans.board.BoardDto;
 
 @WebServlet(urlPatterns = "/record_write.kh")
@@ -28,7 +28,7 @@ public class RecordWriteServlet extends HttpServlet{
 			boardDto.setBoardWriter((String)req.getSession().getAttribute("ses"));
 			
 			//처리
-			BoardDao boardDao = new BoardDao();
+			BoardDao2 boardDao = new BoardDao2();
 			int boardNo=boardDao.getSeq();
 			boardDto.setBoardNo(boardNo);
 			

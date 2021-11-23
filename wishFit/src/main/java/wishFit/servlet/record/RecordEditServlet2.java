@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import wishFit.beans.board.BoardDao;
+import wishFit.beans.board.BoardDao2;
 import wishFit.beans.board.BoardDto;
 @WebServlet(urlPatterns="/page/record/edit.kh")
 public class RecordEditServlet2 extends HttpServlet{
@@ -26,7 +26,7 @@ public class RecordEditServlet2 extends HttpServlet{
 			
 			
 			//처리
-			BoardDao boardDao = new BoardDao();
+			BoardDao2 boardDao = new BoardDao2();
 			boolean success = boardDao.edit(boardDto); //커뮤랑 마켓도 edit로 했는데 기록도 edit인지 아니면 edit2인지 아니면 다른이름인지
 			
 		

@@ -27,6 +27,7 @@ public class MarketDao {
 			boardDto.setBoardTitle(rs.getString("board_title"));
 			boardDto.setBoardRead(rs.getInt("board_read"));
 			boardDto.setBoardReply(rs.getInt("board_reply"));
+			boardDto.setBoardDate(rs.getString("board_date"));
 
 			list.add(boardDto);
 		}
@@ -54,6 +55,7 @@ public class MarketDao {
 			boardDto.setBoardTitle(rs.getString("board_title"));
 			boardDto.setBoardRead(rs.getInt("board_read"));
 			boardDto.setBoardReply(rs.getInt("board_reply"));
+			boardDto.setBoardDate(rs.getString("board_date"));
 
 			list2.add(boardDto);
 		}

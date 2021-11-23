@@ -68,6 +68,7 @@
 
 <body>
     <form action="write.kh" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="boardLargeName" value="마켓">
         <div class="container-700 container-center">
             <div class="row center">
                 <h1>마켓</h1>

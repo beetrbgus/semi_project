@@ -19,8 +19,7 @@ public class ReplyDeleteServlet extends HttpServlet{
 			//입력 : 게시글번호, 몇번댓글
 			//내가 로그인을 하면 세션이란 데에 저장을 해놓고  다시 로그인 안해도 되게 세션이란 데에서 로그인 한 정보를 가져온다. 
 			HttpSession session = req.getSession();
-//			String uid = (String) session.getAttribute("uid");
-			String uid = "testuser";
+			String uid = (String) session.getAttribute("uid");
 			
 			int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 			int replyNo = Integer.parseInt(req.getParameter("replyNo"));
@@ -29,7 +28,7 @@ public class ReplyDeleteServlet extends HttpServlet{
 			ReplyDao replyDao = new ReplyDao();
 			boolean success = replyDao.delete(uid, replyNo);
 			
-			//출력
+			// 페이지 이동
 			resp.sendRedirect("detail.jsp?boardNo="+boardNo);
 			
 		}

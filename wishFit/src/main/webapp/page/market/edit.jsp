@@ -1,3 +1,4 @@
+<%@page import="wishFit.beans.board.BoardDao"%>
 <%@page import="wishFit.beans.market.MarketFileDto"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.market.MarketFileDao"%>
@@ -18,9 +19,14 @@ int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 %>
 <!-- 처리 -->
 <%
-MarketDao marketDao = new MarketDao();
-BoardDto boardDto = marketDao.get(boardNo);
+//MarketDao marketDao = new MarketDao();
+//BoardDto boardDto = marketDao.get(boardNo);
 
+%>
+<!-- 전체 보드디에이오로 처리 -->
+<%
+BoardDao boardDao = new BoardDao();
+BoardDto boardDto = boardDao.get(boardNo);
 %>
 
 <link rel="stylesheet"  href="<%=root %>/resources/files/cache/assets/board_edit/board_edit_file_container_style.css">
@@ -105,16 +111,16 @@ BoardDto boardDto = marketDao.get(boardNo);
 
 						<div class="tw-flex tw-items-center sm:tw-block tw-mb-6">
 							<div class="app-select sm:tw-mb-3 sm:tw-w-full tw-mr-3">
-								<select name="category_srl">
-									<option value="">분류</option>
-									<option value="333">수영 (6)</option>
-									<option value="334">자전거 (2)</option>
-									<option value="335">달리기 (1)</option>
-									<option value="336">피트니스 (0)</option>
-									<option value="337">필라테스/요가 (0)</option>
-									<option value="338">스케이트 (0)</option>
-									<option value="339">골프 (0)</option>
-									<option value="340">그외종목 (1)</option>
+							<% System.out.println(boardDto.getBoardMiddleName()); %>
+								<select name="boardMiddleName" >
+								<%if(boardDto.getBoardMiddleName().equals("판매")){ %>
+									<option selected>판매</option>
+									<option >구매</option>
+								<%}else{ %>
+								    <option>판매</option>
+									<option selected>구매</option>
+								<%} %>
+									
 								</select>
 
 								<ion-icon name="chevron-down-outline" role="img"
@@ -122,7 +128,8 @@ BoardDto boardDto = marketDao.get(boardNo);
 							</div>
 
 							<input type="hidden" name="boardNo"
-								value="<%=boardDto.getBoardNo()%>"> <input type="text"
+								value="<%=boardDto.getBoardNo()%>">
+								 <input type="text"
 								name="boardTitle" class="app-input tw-flex-1 sm:tw-w-full"
 								value="<%=boardDto.getBoardTitle()%>" autocomplete="off">
 						</div>
