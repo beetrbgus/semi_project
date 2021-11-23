@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
@@ -11,27 +11,27 @@
 <main>
 <div class="container-800 container-center" > 
 	
-    <form action="<%=request.getContextPath()%>/board/write.kh" method="post">
+    <form action="comu_write.kh"  method="post"  enctype="multipart/form-data">
     	<div class="row">
-    		<input type="text" name="mem_id" value="testuser">
+    		<input type="text" name="boardWriter" value="testuser">
     	</div>
     	<div class="row">
-    		<input type="text" name="board_large_type"  value="Ä¿¹Â´ÏÆ¼">
+    		<input type="text" name="boardLargeName"  value="ì»¤ë®¤ë‹ˆí‹°">
     	</div>
     	<div class="row">
-    		<input type="text" name="board_middle_type" value="À¯¸Ó">
+    		<input type="text" name="boardMiddleName" value="ì¶”ì²œê¸€">
     	</div>
     	<div class="row">
-    		<input type="text" name="board_title" placeholder="Á¦¸ñ">
+    		<input type="text" name="boardTitle" placeholder="ì œëª©">
     	</div>
     	<div class="row">
-    		<input type="text" name="board_post" placeholder="³»¿ë">
+    		<input type="text" name="boardPost" placeholder="ë‚´ìš©">
     	</div>
     	<div class="row">
     		<input type="file" name="attach">
     	</div>
     	<div class="row">
-    		<input type="submit" value="µî·Ï" class="btn">
+    		<input type="submit" value="ë“±ë¡" class="btn">
     	</div>
     </form>
 </div>

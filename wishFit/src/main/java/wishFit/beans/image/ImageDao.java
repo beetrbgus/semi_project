@@ -9,7 +9,7 @@ import java.util.List;
 import wishFit.beans.board.BoardImageVO;
 import wishFit.util.JdbcUtils;
 
-public class imageDao {
+public class ImageDao {
 	private Connection conn;
 	
 	public int imageSeq() throws Exception{
@@ -28,7 +28,8 @@ public class imageDao {
 	      return seq;
 	   }
 	   //Image 등록 처리
-	   public void insert(imageDto imageDto) throws Exception{
+	   public void insert(ImageDto imageDto) throws Exception{
+		   System.out.println("imageDao In");
 	      conn=JdbcUtils.connect();
 	      String sql = "insert into image values(?,?,?,?,?,?)";
 	      PreparedStatement ps = conn.prepareStatement(sql);
@@ -40,7 +41,7 @@ public class imageDao {
 	      ps.setString(6, imageDto.getBoardType());
 	      
 	      ps.execute();
-	      
+	      System.out.println("imageDao out");
 	      conn.close();
 	   }
 	   //Image 단일 조회
