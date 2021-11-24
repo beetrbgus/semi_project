@@ -17,7 +17,7 @@ import wishFit.beans.board.BoardDto;
 import wishFit.beans.image.ImageDao;
 import wishFit.beans.image.ImageDto;
 
-@WebServlet(urlPatterns = {"/page/commu/write.kh","/page/market/write.kh"})
+@WebServlet(urlPatterns = {"/page/community/write.kh","/page/market/write.kh"})
 public class BoardWriteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,11 +37,10 @@ public class BoardWriteServlet extends HttpServlet{
 			
 			//입력 : 대분류(이건 )
 			BoardDto boardDto = new BoardDto();
-			boardDto.setBoardLargeName(mRequest.getParameter("board_large_name"));
-			boardDto.setBoardMiddleName(mRequest.getParameter("board_middle_name"));
-			boardDto.setBoardTitle(mRequest.getParameter("board_title"));
-			boardDto.setBoardPost(mRequest.getParameter("board_post"));
-			boardDto.setBoardDate(mRequest.getParameter("board_date"));
+			boardDto.setBoardLargeName(mRequest.getParameter("boardLargeName"));
+			boardDto.setBoardMiddleName(mRequest.getParameter("boardMiddleName"));
+			boardDto.setBoardTitle(mRequest.getParameter("boardTitle"));
+			boardDto.setBoardPost(mRequest.getParameter("boardPost"));
 			
 			//아이디는 세션으로 가져옴
 			boardDto.setBoardWriter((String)req.getSession().getAttribute("uid"));
@@ -51,6 +50,8 @@ public class BoardWriteServlet extends HttpServlet{
 			int boardNo = boardDao.boardSeq();
 			boardDto.setBoardNo(boardNo);
 			
+			//글작성 처리
+			boardDao.write(boardDto);
 
 			if(mRequest.getFile("attach")!=null) {//파일 attach란 이름으로 업로드가 이루어졌다면
 				ImageDto imageDto = new ImageDto();
@@ -62,14 +63,12 @@ public class BoardWriteServlet extends HttpServlet{
 				File target = mRequest.getFile("attach");//파일을 꺼내기
 				imageDto.setBoardSize(target == null ? 0L : target.length());//파일크기
 				
-				/*정보 설정...*/
 				ImageDao imageDao = new ImageDao();
 				imageDao.insert(imageDto);
 				
 			}
 			
-			//글작성 처리
-			boardDao.write(boardDto);
+			
 			
 			//글작성 완료 후 행당 글 상세 페이지로 이동
 			//만약 getContextPath가 들어온 주소대로 market/commu를 구분해서 나타내 준다면

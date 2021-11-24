@@ -6,12 +6,29 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import wishFit.beans.board.BoardImageVO;
 import wishFit.util.GetSeq;
 import wishFit.util.JdbcUtils;
 
 public class ImageDao {
 	private Connection conn;
 	private GetSeq getSeq;
+	
+	public int imageSeq() throws Exception{
+		conn = JdbcUtils.connect();
+		String sql = "select image_seq.nextval from dual";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery(sql);
+		
+		
+		rs.next();
+		//다음 시퀀스 번호를 seq에 저장
+		int seq = rs.getInt("nextval");
+		
+		conn.close();
+		
+		return seq;
+	}
 	//Image 등록 처리
 	public void insert(ImageDto imageDto) throws Exception{
 		conn=JdbcUtils.connect();
@@ -29,7 +46,7 @@ public class ImageDao {
 		conn.close();
 	}
 	//Image 단일 조회
-	public ImageDto search(int imageNo) throws Exception{
+	public BoardImageVO search(int imageNo) throws Exception{
 		conn=JdbcUtils.connect();
 		String sql = "select * from image where image_no=?";
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -37,24 +54,25 @@ public class ImageDao {
 		ResultSet rs = ps.executeQuery();
 		
 		//있는지 확인
-		ImageDto imageDto;
+		BoardImageVO boardImageVO;
 		if(rs.next()) {
-			imageDto = new ImageDto();
+			boardImageVO = new BoardImageVO();
 			
-			imageDto.setImageNo(rs.getInt("imageNo"));
-			imageDto.setBoardNo(rs.getInt("boardNo"));
-			imageDto.setBoardUpload(rs.getString("boardUpload"));
-			imageDto.setBoardSave(rs.getString("boardSave"));
-			imageDto.setBoardSize(rs.getLong("boardSize"));
-			imageDto.setBoardType(rs.getString("boardType"));
+			boardImageVO.setImageNo(rs.getInt("image_no"));
+			boardImageVO.setBoardNo(rs.getInt("board_no"));
+			boardImageVO.setBoardUpload(rs.getString("board_upload"));
+			boardImageVO.setBoardSave(rs.getString("board_save"));
+			boardImageVO.setBoardSize(rs.getLong("board_size"));
+			boardImageVO.setBoardType(rs.getString("board_type"));
 		}else {
-			imageDto=null;
+			boardImageVO=null;
 		}
 		conn.close();
-		return imageDto;
+		return boardImageVO;
 			
 	}
-	public List<ImageDto> find(int boardNo) throws Exception{
+	//이미지 list조회
+	public List<BoardImageVO> find(int boardNo) throws Exception{
 		conn = JdbcUtils.connect();
 		String sql = "select B.*,I.image_no "
 				+ "from board B left outer join image I on B.board_no=I.board_no "
@@ -63,18 +81,18 @@ public class ImageDao {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, boardNo);
 		ResultSet rs = ps.executeQuery();
-		List<ImageDto> list = new ArrayList<>();
+		List<BoardImageVO> list = new ArrayList<>();
 		while(rs.next()) {
-			ImageDto imageDto = new ImageDto();
+			BoardImageVO boardImageVO = new BoardImageVO();
 			
-			imageDto.setImageNo(rs.getInt("imageNo"));
-			imageDto.setBoardNo(rs.getInt("boardNo"));
-			imageDto.setBoardUpload(rs.getString("boardUpload"));
-			imageDto.setBoardSave(rs.getString("boardSave"));
-			imageDto.setBoardSize(rs.getLong("boardSize"));
-			imageDto.setBoardType(rs.getString("boardType"));
+			boardImageVO.setImageNo(rs.getInt("imageNo"));
+			boardImageVO.setBoardNo(rs.getInt("boardNo"));
+			boardImageVO.setBoardUpload(rs.getString("boardUpload"));
+			boardImageVO.setBoardSave(rs.getString("boardSave"));
+			boardImageVO.setBoardSize(rs.getLong("boardSize"));
+			boardImageVO.setBoardType(rs.getString("boardType"));
 			
-			list.add(imageDto);
+			list.add(boardImageVO);
 		}
 		conn.close();
 		return list;
