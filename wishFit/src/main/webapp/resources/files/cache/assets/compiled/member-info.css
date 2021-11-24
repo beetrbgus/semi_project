@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/* Original file: modules/member/skins/slow/css/member-info.scss */
+.app-member-info-list > li {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+.app-member-info-list > li > label {
+  display: block;
+  color: var(--color-gray-700);
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+.app-member-info-list > li > label .app-required {
+  color: var(--color-danger);
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+}
+.app-member-info-list > li > div {
+  font-size: 0.875rem;
+  padding-bottom: 1rem;
+}
+.app-member-info-list > li > label[for="profile_image"] + div img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  overflow: hidden;
+}
