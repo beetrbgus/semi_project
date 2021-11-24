@@ -44,6 +44,11 @@
             		nowYear= yearInt;
             		nowMonth = monthInt;
             	}
+            	System.out.println("nowYear = "+nowYear);
+            	System.out.println("nowMonth = "+nowMonth);
+            	
+            	
+           		
 	%>       		
   	<%     	//회원아이디 세션으로 가져오기
             	//String memId = (String)session.getAttribute("ses");
