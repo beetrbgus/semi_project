@@ -1,113 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <script src = "http://code.jquery.com/jquery-3.6.0.js"></script>
- <style>
-        table
-        {
-            border:1px solid #BDBDBD;
-            text-align:center;
-            width:10%;
-            font-size:12px;
-        }
-        .nextyear, .beforeyear{
-            font-size:1%;
-            color:#B3B6B3;
-
-        }
-        .acc-color-sun{
-            color : #FF9090;
-        }
-        .acc-color-sat{
-            color : #7ED5E4;
-        }
-        .container-left{
-            margin-top : 20px;
-            margin-left : 20px;
-            position : relative;
-        }
-    </style>
+<script src = "../css/widget.js"></script>
+<link rel = "stylesheet" type="text/css" href="../css/widget.css">
+ 
     
-    <script>
-        var today = new Date(); // 오늘 날짜
-        var date = new Date();
     
-        //이전 달 누르면 넘어가기
-        $(function(){
-            $("#before").click(function(){
-                today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-                build(); //만들기
-            });
-        });
-        //다음 달 누르면 넘어가기
-        $(function(){
-            $("#next").click(function(){
-                today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-                build();
-            });
-        });
-        function build()
-        {
-            var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
-            var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
-            var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
-            var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
-            yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
-            
-            if(today.getMonth()+1==12) //  눌렀을 때 월이 넘어가는 곳
-            {
-                before.innerHTML=(today.getMonth())+"월";
-                next.innerHTML="1월";
-            }
-            else if(today.getMonth()+1==1) //  1월 일 때
-            {
-            before.innerHTML="12월";
-            next.innerHTML=(today.getMonth()+2)+"월";
-            }
-            else //   12월 일 때
-            {
-                before.innerHTML=(today.getMonth())+"월";
-                next.innerHTML=(today.getMonth()+2)+"월";
-            }
-            
-        
-            // 남은 테이블 줄 삭제
-            while (tbcal.rows.length > 2) 
-            {
-                tbcal.deleteRow(tbcal.rows.length - 1);
-            }
-            var row = null;
-            row = tbcal.insertRow();
-            var cnt = 0;
-    
-            // 1일 시작칸 찾기
-            for (i = 0; i < nMonth.getDay(); i++) 
-            {
-                cell = row.insertCell();
-                cnt = cnt + 1;
-            }
-    
-            // 달력 출력
-            for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
-            { 
-                cell = row.insertCell();
-                cell.innerHTML = i;
-                cnt = cnt + 1;
-                if (cnt % 7 == 1) {//일요일 계산
-                    cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
-                }
-                if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-                    cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
-                    row = calendar.insertRow();// 줄 추가
-                }
-                if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
-                {
-                    cell.bgColor = "#BCF1B1"; //오늘날짜배경색
-                }
-            
-            }
-    
-        }
-    </script>
 <!-- 왼쪽 사이드 바 -->
 <div class="app-layout">
    <!--#Meta:layouts/slow/components/sidebar-left/sidebar-left.scss?$__Context->themeConfig->variables-->
@@ -126,7 +24,7 @@
                </li>
                <li class="">
                   <div class="app-sidebar-left__nav__item">
-                     <a href="community.html"> <span>내 기록</span>
+                     <a href="my_record.jsp"> <span>내 기록</span>
                      </a>
                      <ion-icon name="chevron-down-outline" class="app-sidebar-left__nav__more md hydrated" role="img" aria-label="chevron down outline">
                         <div class="icon-inner">
@@ -136,12 +34,9 @@
                   </div>
 
                   <ul class="app-sidebar-left__nav__child">
-                     <li><a href="best.html">추천글게시판</a></li>
-                     <li><a href="certifyboard.html">운동인증</a></li>
-                     <li><a href="coordiboard.html">운동코디</a></li>
-                     <li><a href="freeboard.html">자유게시판</a></li>
-                     <li><a href="humorboard.html">유머게시판</a></li>
-                     <li><a href="qna.html">질문게시판</a></li>
+                     <li><a href="my_record.jsp?boardMiddleName=일자별">일자별</a></li>
+                     <li><a href="my_record.jsp?boardMiddleName=소모임">소모임</a></li>
+                     <li><a href="my_record.jsp?boardMiddleName=식단">식단</a></li>
                   </ul>
                </li>
                <li class="">
@@ -212,11 +107,10 @@
                </li>
             </ul>
          </nav>
-         <div class="tw-mb-5">
-            <div class="widget-box widget-img">
-               <body onload="build();">
+         <div class="tw-mb-5 app-card app-sidebar-left__nav" style="margin:0px 0px 0px ">
+            <div class="">
 				    <div>
-				        <table id="calendar" >
+				        <table id="calendar" style="width:100%;height:30%">
 				            <tr>
 				                <td class="beforeyear"><label id="before"></label></td>
 				                <td colspan="5" id="yearmonth"></td>
@@ -232,15 +126,11 @@
 				                <td class="acc-color-sat week-head">토</td>
 				            </tr>
 				        </table>
-				    </div>
-				    <div>
-				        <a href = "<%=request.getContextPath() %>/page/record/record_write.jsp" class="btn">
+				        <a href = "<%=request.getContextPath() %>/page/record/record_write.jsp" class="btn" style="width:49%;height:50%;">
 				        기록 작성</a>
+				        <a href = "<%=request.getContextPath() %>/page/record/my_record.jsp" class="btn" style="width:49%;height:50%;">
+				        기록 목록</a>
 				    </div>
-    
-    
-			</body>
-               </a>
             </div>
             <br>
          </div>
