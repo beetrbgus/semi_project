@@ -3,12 +3,14 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="hydrated">
-<%
-String root = request.getContextPath();
-%>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<% 
+String root = request.getContextPath();
+String uid = (String)request.getSession().getAttribute("uid");
+%>
 <style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/667a9524d72c3d7bdb2c48b2d4c5271c0988e0b2.rhymix.less.minefb7.css?20210415220507" />
@@ -129,18 +131,39 @@ String root = request.getContextPath();
 }
 </style>
 <script>
+
+
 function modal_on(){
 	$("#app-login").addClass('active');
 }
 function modal_off(){
 	$("#app-login").removeClass('active');
 }
-/* 알림 , 메세지 창 , 프로필 클릭시 자식 화면 화면에 보이기. */
+
 $(document).ready(function(){
+	/* 헤더의 검색창 누를 때. 검색창 영역 보이게.*/
+	$('.app-search-toggle').on('click', function() { 
+		$('#app-search').toggleClass('app-search--active');
+	});
+	/* 닫기 버튼 누를 때나 , 영역 밖 누를 때 hidden 됨.*/
+	$('.app-search__background, .app-search__close').on('click', function() {
+		$('#app-search').removeClass('app-search--active');
+	});
+	
+	/* 알림 , 메세지 창 , 프로필 클릭시 자식 화면 화면에 보이기. */
 	$(".app-pc-only.app-dropdown a").click(function(e){ 
-		e.preventDefault();
+		/* e.preventDefault(); */
 		$(this).parent().toggleClass("active");
 	});	
+	/* 알림 ,메세지의 갯수가 없으면 빨간 숫자 없어짐. */
+	$(".app-header-item-badge").each(function(){
+		let newCount = $(this).text(); 
+		
+		if(newCount == 0){
+			$(this).hide();	
+		}
+	});
+	
 });
 
 </script>
@@ -285,14 +308,7 @@ $(document).ready(function(){
 				<script>
 					jQuery(document).ready(
 						function($) {
-							/* 헤더의 검색창 누를 때. 검색창 영역 보이게.*/
-							$('.app-search-toggle').on('click', function() { 
-								$('#app-search').toggleClass('app-search--active');
-							});
-							/* 닫기 버튼 누를 때나 , 영역 밖 누를 때 hidden 됨.*/
-							$('.app-search__background, .app-search__close').on('click', function() {
-								$('#app-search').removeClass('app-search--active');
-							});
+
 						}
 					);
 				</script>
@@ -394,6 +410,7 @@ $(document).ready(function(){
         					<path
 								d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
    						</svg>
+   						<span id="notiCount"class="app-header-item-badge">2</span>
 					</a>
 					<div class="app-dropdown-menu app-right" style="width: 270px">
 						<div class="app-dropdown-header tw-flex tw-items-center">
@@ -409,22 +426,22 @@ $(document).ready(function(){
 					</div>
 				</div>
 				
+				<!--  안 읽은 메세지 갯수 출력 -->
 				<% 
 					MessageDao messageDao = new MessageDao();
-					int newMessage = messageDao.getNotReadCount("test2");
+					int notRead= messageDao.getNotReadCount(uid);
+					
  				%>
  				<!-- 쪽지 -->
 				<div class="app-pc-only app-dropdown">
 					<a class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 							fill="currentColor">
-					        <path
-									d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-					        <path
-									d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+					        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+					        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
 				      	</svg>
 				      	<%-- 알림 있을 때 갯수 뽑아줌. --%>
-				      	<span class="app-header-item-badge"><%= newMessage %></span>
+				      	<span id="msgCount"class="app-header-item-badge"><%= notRead %></span>
         
 					</a>
 					<!-- 쪽지 목록 창. -->
@@ -544,9 +561,7 @@ $(document).ready(function(){
 							<div class="app-sidebar-left__nav__item">
 								<a href="/index"> <span>Now</span>
 								</a>
-
 							</div>
-
 						</li>
 						<li>
 							<div class="app-sidebar-left__nav__item">

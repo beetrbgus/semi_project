@@ -16,6 +16,7 @@ public class BoardWriteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
 			//기록글 작성 서블릿 
 			//입력 : 제목/내용/작성일/대분류/중분류/게시글번호(시퀀스)/작성자아이디(세션이용)
 			BoardDto boardDto = new BoardDto();
