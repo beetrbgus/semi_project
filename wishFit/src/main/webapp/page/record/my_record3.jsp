@@ -46,8 +46,8 @@
             	}
 	%>       		
   	<%     	//회원아이디 세션으로 가져오기
-            	//String memId = (String)session.getAttribute("ses");
-            	String boardWriter = "testmember2";
+            	//String boardWriter = (String)session.getAttribute("ses");
+            	String boardWriter = "testmember1";
             	
             	//파라미터로 boardMiddleName 을 가져올 경우
            		String middleName = request.getParameter("boardMiddleName");
@@ -76,30 +76,30 @@
  
 
 <main class="app-content app-clearfix">
-<!-- 기록은 자기 글만 볼 수 있으니 session 으로 memId를 hidden으로 보내기 -->
+<!-- 기록은 자기 글만 볼 수 있으니 session 으로 boardWriter를 hidden으로 보내기 -->
 <input type="hidden" name="boardWriter" value="<%=boardWriter%>">
 <div class="container-center container-700">
 	<div class=" row"><h1 style="font-size:30px">[내 기록]</h1></div>
 	<div class="row">
 		<h1 class="left" style="font-size: 20px">
-		<a href= "my_record.jsp?year=<%=nowYear %>&month=<%=(nowMonth-1) %>" class="btn">이전 달</a>
-		<a href= "my_record.jsp?year=<%=nowYear %>&month=<%=nowMonth%>"><%=nowYear %>년<%=nowMonth %>월</a>
-		<a href= "my_record.jsp?year=<%=nowYear %>&month=<%=(nowMonth+1) %>" class="btn">다음 달</a>
+		<a href= "my_record3.jsp?year=<%=nowYear %>&month=<%=(nowMonth-1) %>" class="btn">이전 달</a>
+		<a href= "my_record3.jsp?year=<%=nowYear %>&month=<%=nowMonth%>"><%=nowYear %>년<%=nowMonth %>월</a>
+		<a href= "my_record3.jsp?year=<%=nowYear %>&month=<%=(nowMonth+1) %>" class="btn">다음 달</a>
 		</h1>
 	</div>
 	
 	<div class="row"><a href= "record_write.jsp" class="btn">기록 작성</a></div>
 	<div class= "row">
-		<a href="my_record.jsp" class="btn">
+		<a href="my_record3.jsp" class="btn">
 		<label>전체</label>
 		</a>
-		<a href="my_record.jsp?boardMiddleName=일자별" class="btn">
+		<a href="my_record3.jsp?boardMiddleName=일자별" class="btn">
 		<label>일자별</label>
 		</a>
-		<a href="my_record.jsp?boardMiddleName=소모임" class="btn">
+		<a href="my_record3.jsp?boardMiddleName=소모임" class="btn">
 		<label>소모임</label>
 		</a>
-		<a href="my_record.jsp?boardMiddleName=식단" class="btn">
+		<a href="my_record3.jsp?boardMiddleName=식단" class="btn">
 		<label>식단</label>
 		</a>
 	</div>
@@ -130,11 +130,13 @@
 						<%if(k==0){//첫번째 칸이라면 %>
 							<td style="border : 1px solid black" ><%=list.get(k).getBoardDate()%></td>
 						<%}else{//두번째 칸 이상이라면 %>
-							<td style="border : 1px solid black" ></td>
+							<td style="border : 1px solid black" >
+							<img src = "<%=request.getContextPath() %>/resources/image/right-arrow.png" style="width:20px;height:20px;">
+							</td>
 						<%} %>
 							<td style="border : 1px solid black"><%=list.get(k).getBoardMiddleName()%></td>
 							<td style="border : 1px solid black">
-							<a href="record_detail.jsp?boardNo=<%=list.get(k).getBoardNo()%>"><%=list.get(k).getBoardTitle()%></a>
+							<a href="record_detail.jsp?boardNo=<%=list.get(k).getBoardNo()%>" align="left"><%=list.get(k).getBoardTitle()%></a>
 							</td>
 						</tr>
 					<%} %>
@@ -158,7 +160,6 @@
 	
 
 </div>
-
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
 </main>

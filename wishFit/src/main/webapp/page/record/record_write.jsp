@@ -15,7 +15,6 @@
 <h1>기록 작성</h1>
 <form action = "record_write.kh" method="post" enctype="multipart/form-data">
 <input type="hidden" name="boardWriter" value="<%=boardWriter %>">
-<input type="hidden" name="boardLargeName" value="기록">
 	<!-- 넘겨야 하는 목록 : 글번호,제목,내용,작성일,중분류, -->
 	<table>
 		<tbody>
@@ -43,7 +42,7 @@
 			</tr>
 			<tr>
 				<th>날짜</th>
-				<td><input type="date" name="boardDate" required></td>
+				<td><input type="date" name="boardDate" required class="currentDate"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="게시글작성"></td>
@@ -52,6 +51,9 @@
 			
 		</tbody>
 	</table>
+	<script>
+  		document.querySelector(".currentDate").value= new Date().toISOString().slice(0, 10);
+	</script>
 </form>
 
 
