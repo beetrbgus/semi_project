@@ -11,32 +11,31 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.member.MemberDao;
 import wishFit.beans.member.MemberDto;
 
-@WebServlet(urlPatterns="/login.kh")
-public class MemberLoginServlet extends HttpServlet{
+@WebServlet(urlPatterns="/page/member/edit.kh")
+public class MemberEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			req.setCharacterEncoding("UTF-8");
-			String memId = req.getParameter("memId");
-			String memPw = req.getParameter("memPw");
+			
+			MemberDto memberDto = new MemberDto();
+			memberDto.setMemId((String)req.getSession().getAttribute("uid"));
+			memberDto.setMemPw(req.getParameter("memPw"));
+			memberDto.setMemNick(req.getParameter("memNick"));
+			memberDto.setMemPhone(req.getParameter("memPhone"));
 			
 			MemberDao memberDao = new MemberDao();
-			MemberDto memberDto = new MemberDto();
-			memberDto = memberDao.login(memId, memPw);
+			boolean success = memberDao.edit(memberDto);
 			
-			 
-			boolean login = memberDto.getMemId() !=null || !memberDto.getMemId().equals("");
-			if(login) {
-
-				req.getSession().setAttribute("uid", memId);
-				req.getSession().setAttribute("grade", memberDto.getMemGrade()); //관리자
-				
-				resp.getWriter().write(memId);
-			} 
+			if(success) {
+				resp.sendRedirect("mypage.jsp");  //마이페이지로 돌아가기?
+			}
+			else {
+				resp.sendRedirect("edit.jsp?error");
+			}
 		}	catch(Exception e) {
 			e.printStackTrace();
-			
+			resp.sendError(500);
 		}
-		
 	}
 }

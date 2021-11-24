@@ -1,478 +1,537 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
-    <!-- Çì´õ -->
+    <!-- í—¤ë” -->
     <jsp:include page="/template/header.jsp"></jsp:include>
     <%	String root = request.getContextPath();%>
     <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/255b6902485612c74d806c3142450a55116bc82e.signup-form.scssb2cb.css"/>
-<link rel="stylesheet"
+	<link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/347b8967715ee8520a013ff5c985fb69086c462a.member.scss944d.css"/>
-<link rel="stylesheet"
+	<link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/347b8967715ee8520a013ff5c985fb69086c462a.member-form.scss944d.css"/>
 
 
-     <!-- ÁÂÃø »çÀÌµå -->
+     <!-- ì¢Œì¸¡ ì‚¬ì´ë“œ -->
     <jsp:include page="/template/leftSide.jsp"></jsp:include> 
     
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+    // ì•„ì´ë”” ì¤‘ë³µ ê°€ëŠ¥ script
+    	$(function(){
+    		$("input[name=memId]").on("input",function(){
+    			var input = $("input[name=memId]").val();
+    			$.ajaxf({
+    				url = "ajax_id_check.kh";
+    				type : "post";
+    				data:{
+    					memId : inputId
+    				},
+    				// ì™„ë£Œ ì²˜ë¦¬
+    				success : function(resp){
+    					if(resp == "NNNNY"){
+    						$("input[name=memId]").next().text("ì•„ì´ë”” ì‚¬ìš© ê°€ëŠ¥");
+    					} else if(resp == "NNNNN"){
+    						$("input[name=memId]").next().text("ì•„ì´ë”” ì‚¬ìš© ë¶ˆê°€ëŠ¥");
+    					}
+    				},
+    				error : function(error){
+    					
+    				}
+    			});
+    		});
+    	});
+    // ë‹‰ë„¤ìž„ ì¤‘ë³µ í™•ì¸
+    		$(function(){
+    			$("input[name=memNick]").on("input",function(){
+    				var input = $("input[name=memNick]").val();
+    				$.ajax({
+    					ur="";
+    					type:"post";
+    					data:{
+    						memNick: inputNick
+    					},
+    					success: function(resp){
+    						if(resp == "NNNNY"){
+    							$("input[name=memNick]").next().text("ë‹‰ë„¤ìž„ ì‚¬ìš© ê°€ëŠ¥");
+    						} else if{
+    							$("input[name=memNick]").next().text("ë‹‰ë„¤ìž„ ì¤‘ë³µ ë¶ˆê°€ëŠ¥");
+    						}
+    					},
+    					error : function(errror){
+    						
+    					}
+    				});
+    			});
+    		});
     
+    	// ë¹„ë°€ë²ˆí˜¸ í™•ì¸
+    	function pw2Check(){
+    		var pwInput = document.querySelector("input[name=memPw]");
+        	var pw2Input = document.querySelector("input[name=memPw2]");
+        	var notice = pw2Input.nextElementSibling;
+        	
+        	if(pwInput.values.Iength > 0 && pwInput.value == pw2Input.value){
+        		notice.textContent = "";
+        		return true;
+        	}
+        	else{
+        		notice.textContent = "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
+        		return false;
+        	}
+    	}
+    </script>
     
     <section class="app-member">
     <div class="app-member-content tw-pl-0">
   <div class="app-member-card">
     <div class="app-member-card-header">
-      <h1>È¸¿ø°¡ÀÔ</h1>
+      <h1>íšŒì›ê°€ìž…</h1>
     </div>
     <div class="app-member-card-body">
-      <p class="tw-mb-3 tw-text-gray-700">º°Ç¥<em style="color:red">*</em>°¡ ÀÖ´Â Ç×¸ñÀº ÇÊ¼ö Ç×¸ñÀÔ´Ï´Ù.</p>
+      <p class="tw-mb-3 tw-text-gray-700">ë³„í‘œ<em style="color:red">*</em>ê°€ ìžˆëŠ” í•­ëª©ì€ í•„ìˆ˜ í•­ëª©ìž…ë‹ˆë‹¤.</p>
       
-      <form id="rx_insert_member" action="https://wishfit.co.kr/" method="post" enctype="multipart/form-data" class="">
-      <input type="hidden" name="error_return_url" value="/?mid=freeboard&amp;document_srl=460&amp;act=dispMemberSignUpForm">
-      <input type="hidden" name="mid" value="freeboard"><input type="hidden" name="ruleset" value="@insertMember">
-        <input type="hidden" name="act" value="procMemberInsert">
-        <input type="hidden" name="xe_validator_id" value="modules/member/skins">
-        <input type="hidden" name="success_return_url" value="index55ee.html?mid=freeboard&amp;document_srl=460&amp;act=dispMemberInfo">
-        
+      <form action="join.kh" method="post" enctype="multipart/form-data">
         <div class="app-agreement">
           
           <div class="app-agreement-title">
             <em style="color:red">*</em>
-            <span>¼­ºñ½º ÀÌ¿ë¾à°ü (ÇÊ¼ö)</span>
+            <span>ì„œë¹„ìŠ¤ ì´ìš©ì•½ê´€ (í•„ìˆ˜)</span>
                       </div>
           <div class="app-agreement-body">
-            <p><b>Á¦1Á¶ ¸ñÀû</b></p>
+            <p><b>ì œ1ì¡° ëª©ì </b></p>
 
-<p>1. ÀÌ ÀÌ¿ë¾à°ü(ÀÌÇÏ "º» ¾à°ü"ÀÌ¶ó ÇÕ´Ï´Ù)Àº "wishfit"(www.wishfit.co.kr)¿¡¼­ Á¦°øÇÏ´Â ÀÎÅÍ³Ý »çÀÌÆ® "wishfit" ¼­ºñ½º(ÀÌÇÏ "¼­ºñ½º"¶ó ÇÕ´Ï´Ù)¸¦ ÀÌ¿ëÇÔ¿¡ ÀÖ¾î "wishfit"¿Í È¸¿ø °£ÀÇ ±Ç¸®, ÀÇ¹« ¹× Ã¥ÀÓ»çÇ×À» ±ÔÁ¤ÇÔÀ» ¸ñÀûÀ¸·Î ÇÕ´Ï´Ù.</p>
+<p>1. ì´ ì´ìš©ì•½ê´€(ì´í•˜ "ë³¸ ì•½ê´€"ì´ë¼ í•©ë‹ˆë‹¤)ì€ "wishfit"(www.wishfit.co.kr)ì—ì„œ ì œê³µí•˜ëŠ” ì¸í„°ë„· ì‚¬ì´íŠ¸ "wishfit" ì„œë¹„ìŠ¤(ì´í•˜ "ì„œë¹„ìŠ¤"ë¼ í•©ë‹ˆë‹¤)ë¥¼ ì´ìš©í•¨ì— ìžˆì–´ "wishfit"ì™€ íšŒì› ê°„ì˜ ê¶Œë¦¬, ì˜ë¬´ ë° ì±…ìž„ì‚¬í•­ì„ ê·œì •í•¨ì„ ëª©ì ìœ¼ë¡œ í•©ë‹ˆë‹¤.</p>
 
-<p>2. È¸¿øÀÌ µÇ°íÀÚ ÇÏ´Â ÀÚ°¡ "wishfit"¿¡¼­ Á¤ÇÑ ¼ÒÁ¤ÀÇ ÀýÂ÷¸¦ °ÅÃÄ¼­ "¾à°üµ¿ÀÇ" ´ÜÃß¸¦ ´©¸£¸é º» ¾à°ü¿¡ µ¿ÀÇÇÏ´Â °ÍÀ¸·Î °£ÁÖÇÕ´Ï´Ù. º» ¾à°ü¿¡ Á¤ÇÏ´Â ÀÌ¿ÜÀÇ È¸¿ø°ú "wishfit"ÀÇ ±Ç¸®, ÀÇ¹« ¹× Ã¥ÀÓ»çÇ×¿¡ °üÇØ¼­´Â Àü±âÅë½Å»ç¾÷¹ý ±âÅ¸ ´ëÇÑ¹Î±¹ÀÇ °ü·Ã ¹ý·É°ú »ó°ü½À¿¡ ÀÇÇÕ´Ï´Ù.</p>
-
-<p>&nbsp;</p>
-
-<p><strong>Á¦2Á¶ ¿ë¾î Á¤ÀÇ</strong></p>
-
-<p>1. È¸¿ø: "wishfit"¿¡ Á¢¼ÓÇÏ¿© º» ¾à°ü¿¡ µû¶ó "wishfit" È¸¿øÀ¸·Î °¡ÀÔÇÏ¿© "wishfit"¿¡¼­ Á¦°øÇÏ´Â ¼­ºñ½º¸¦ ¹Þ´Â ÀÚ¸¦ ¸»ÇÕ´Ï´Ù.</p>
-
-<p>2. ±âÅ¸ ¾à°ü¿¡¼­ Á¤ÇÏÁö ¾Æ´ÏÇÑ ¿ë¾î´Â °ü°è ¹ý·É ¹× ÀÏ¹Ý °ü·Ê¿¡ µû¸¨´Ï´Ù.</p>
+<p>2. íšŒì›ì´ ë˜ê³ ìž í•˜ëŠ” ìžê°€ "wishfit"ì—ì„œ ì •í•œ ì†Œì •ì˜ ì ˆì°¨ë¥¼ ê±°ì³ì„œ "ì•½ê´€ë™ì˜" ë‹¨ì¶”ë¥¼ ëˆ„ë¥´ë©´ ë³¸ ì•½ê´€ì— ë™ì˜í•˜ëŠ” ê²ƒìœ¼ë¡œ ê°„ì£¼í•©ë‹ˆë‹¤. ë³¸ ì•½ê´€ì— ì •í•˜ëŠ” ì´ì™¸ì˜ íšŒì›ê³¼ "wishfit"ì˜ ê¶Œë¦¬, ì˜ë¬´ ë° ì±…ìž„ì‚¬í•­ì— ê´€í•´ì„œëŠ” ì „ê¸°í†µì‹ ì‚¬ì—…ë²• ê¸°íƒ€ ëŒ€í•œë¯¼êµ­ì˜ ê´€ë ¨ ë²•ë ¹ê³¼ ìƒê´€ìŠµì— ì˜í•©ë‹ˆë‹¤.</p>
 
 <p>&nbsp;</p>
 
-<p><strong>Á¦3Á¶ ÀÌ¿ë¾à°üÀÇ È¿·Â ¹× º¯°æ</strong></p>
+<p><strong>ì œ2ì¡° ìš©ì–´ ì •ì˜</strong></p>
 
-<p>1. ÀÌ ¾à°üÀº ¼­ºñ½º¸¦ ÀÌ¿ëÇÏ°íÀÚ ÇÏ´Â ¸ðµç È¸¿ø¿¡ ´ëÇÏ¿© ±× È¿·ÂÀ» ¹ß»ýÇÕ´Ï´Ù.</p>
+<p>1. íšŒì›: "wishfit"ì— ì ‘ì†í•˜ì—¬ ë³¸ ì•½ê´€ì— ë”°ë¼ "wishfit" íšŒì›ìœ¼ë¡œ ê°€ìž…í•˜ì—¬ "wishfit"ì—ì„œ ì œê³µí•˜ëŠ” ì„œë¹„ìŠ¤ë¥¼ ë°›ëŠ” ìžë¥¼ ë§í•©ë‹ˆë‹¤.</p>
 
-<p>2. ÀÌ ¾à°üÀÇ ³»¿ëÀº È¸¿øÀÌ ÀÌ¿¡ µ¿ÀÇÇÏ¿© ¼­ºñ½º¿¡ °¡ÀÔÇÔÀ¸·Î½á È¿·ÂÀÌ ¹ß»ýÇÕ´Ï´Ù.</p>
-
-<p>3. ¾à°ü¿¡ ´ëÇÑ µ¿ÀÇ´Â ÀÌ¿ë ½ÅÃ»½Ã È­¸é »óÀÇ 'È¸¿ø °¡ÀÔ ¾à°ü' - 'À§ÀÇ ³»¿ëÀ» ¸ðµÎ ÀÐ¾úÀ¸¸ç µ¿ÀÇÇÕ´Ï´Ù.' Ç×¸ñ¿¡ Ã¼Å©¸¦ ÇÔÀ¸·Î½á ÀÌ·ç¾îÁö´Â °ÍÀ¸·Î °£ÁÖÇÕ´Ï´Ù. ±âÁ¸ °¡ÀÔ È¸¿øÀÇ µ¿ÀÇ ¿©ºÎ´Â Á¦4Ç×¿¡ ÀÇÇÕ´Ï´Ù.</p>
-
-<p>4. È¸¿øÀº º¯°æµÈ ¾à°ü¿¡ ´ëÇÏ¿© µ¿ÀÇÇÏÁö ¾ÊÀ» °æ¿ì ¼­ºñ½º ÀÌ¿ëÀ» Áß´ÜÇÏ°í ÀÌ¿ë °è¾àÀ» ÇØÁö(È¸¿ø Å»Åð)ÇÒ ¼ö ÀÖÀ¸¸ç, ¸¸¾à º¯°æµÈ ¾à°üÀÇ Àû¿ë ÀÌÈÄ¿¡µµ ¼­ºñ½º¸¦ °è¼Ó ÀÌ¿ëÇÏ´Â °æ¿ì¿¡´Â ¾à°üÀÇ º¯°æ »çÇ×¿¡ µ¿ÀÇÇÑ °ÍÀ¸·Î °£ÁÖÇÕ´Ï´Ù.</p>
-
-<p>5. "wishfit"´Â ÇÊ¿äÇÑ »çÀ¯°¡ ¹ß»ýÇÒ °æ¿ì °ü·Ã ¹ý·É¿¡ À§¹èµÇÁö ¾Ê´Â ¹üÀ§ ¾È¿¡¼­ ¾à°üÀ» °³Á¤ÇÒ ¼ö ÀÖ½À´Ï´Ù. °³Á¤ »ç½ÇÀº °øÁö¸¦ ÅëÇØ °íÁöµÇ¸ç °³Á¤µÈ ¾à°üÀº °Ô½ÃµÈ Áö 7ÀÏ ÈÄºÎÅÍ È¿·ÂÀ» ¹ßÈÖÇÕ´Ï´Ù.</p>
+<p>2. ê¸°íƒ€ ì•½ê´€ì—ì„œ ì •í•˜ì§€ ì•„ë‹ˆí•œ ìš©ì–´ëŠ” ê´€ê³„ ë²•ë ¹ ë° ì¼ë°˜ ê´€ë¡€ì— ë”°ë¦…ë‹ˆë‹¤.</p>
 
 <p>&nbsp;</p>
 
-<p><strong>Á¦4Á¶ È¸¿ø °¡ÀÔ</strong></p>
+<p><strong>ì œ3ì¡° ì´ìš©ì•½ê´€ì˜ íš¨ë ¥ ë° ë³€ê²½</strong></p>
 
-<p>1. È¸¿øÀÌ µÇ°íÀÚ ÇÏ´Â ÀÚ´Â "wishfit"¿¡¼­ Á¤ÇÑ °¡ÀÔ ¾ç½Ä¿¡ µû¶ó È¸¿øÁ¤º¸¸¦ ±âÀÔÇÏ°í "µî·Ï" ¹öÆ°À» ´©¸£´Â ¹æ¹ýÀ¸·Î È¸¿ø °¡ÀÔÀ» ½ÅÃ»ÇÕ´Ï´Ù.</p>
+<p>1. ì´ ì•½ê´€ì€ ì„œë¹„ìŠ¤ë¥¼ ì´ìš©í•˜ê³ ìž í•˜ëŠ” ëª¨ë“  íšŒì›ì— ëŒ€í•˜ì—¬ ê·¸ íš¨ë ¥ì„ ë°œìƒí•©ë‹ˆë‹¤.</p>
 
-<p>2. "wishfit"´Â Á¦1Ç×°ú °°ÀÌ È¸¿øÀ¸·Î °¡ÀÔÇÒ °ÍÀ» ½ÅÃ»ÇÑ ÀÚ°¡ ´ÙÀ½ °¢ È£¿¡ ÇØ´çÇÏÁö ¾Ê´Â ÇÑ ½ÅÃ»ÇÑ ÀÚ¸¦ È¸¿øÀ¸·Î ÀÎÁ¤ÇÕ´Ï´Ù.</p>
+<p>2. ì´ ì•½ê´€ì˜ ë‚´ìš©ì€ íšŒì›ì´ ì´ì— ë™ì˜í•˜ì—¬ ì„œë¹„ìŠ¤ì— ê°€ìž…í•¨ìœ¼ë¡œì¨ íš¨ë ¥ì´ ë°œìƒí•©ë‹ˆë‹¤.</p>
 
-<p>¨ç µî·Ï ³»¿ë¿¡ ÇãÀ§, ±âÀç´©¶ô, ¿À±â°¡ ÀÖ´Â °æ¿ì</p>
+<p>3. ì•½ê´€ì— ëŒ€í•œ ë™ì˜ëŠ” ì´ìš© ì‹ ì²­ì‹œ í™”ë©´ ìƒì˜ 'íšŒì› ê°€ìž… ì•½ê´€' - 'ìœ„ì˜ ë‚´ìš©ì„ ëª¨ë‘ ì½ì—ˆìœ¼ë©° ë™ì˜í•©ë‹ˆë‹¤.' í•­ëª©ì— ì²´í¬ë¥¼ í•¨ìœ¼ë¡œì¨ ì´ë£¨ì–´ì§€ëŠ” ê²ƒìœ¼ë¡œ ê°„ì£¼í•©ë‹ˆë‹¤. ê¸°ì¡´ ê°€ìž… íšŒì›ì˜ ë™ì˜ ì—¬ë¶€ëŠ” ì œ4í•­ì— ì˜í•©ë‹ˆë‹¤.</p>
 
-<p>¨è ´ÙÁß °èÁ¤À» ÀÌ¿ë ÇÒ °æ¿ì</p>
+<p>4. íšŒì›ì€ ë³€ê²½ëœ ì•½ê´€ì— ëŒ€í•˜ì—¬ ë™ì˜í•˜ì§€ ì•Šì„ ê²½ìš° ì„œë¹„ìŠ¤ ì´ìš©ì„ ì¤‘ë‹¨í•˜ê³  ì´ìš© ê³„ì•½ì„ í•´ì§€(íšŒì› íƒˆí‡´)í•  ìˆ˜ ìžˆìœ¼ë©°, ë§Œì•½ ë³€ê²½ëœ ì•½ê´€ì˜ ì ìš© ì´í›„ì—ë„ ì„œë¹„ìŠ¤ë¥¼ ê³„ì† ì´ìš©í•˜ëŠ” ê²½ìš°ì—ëŠ” ì•½ê´€ì˜ ë³€ê²½ ì‚¬í•­ì— ë™ì˜í•œ ê²ƒìœ¼ë¡œ ê°„ì£¼í•©ë‹ˆë‹¤.</p>
 
-<p>¨é ¹ý·ü ¶Ç´Â ¾à°ü À§¹Ý, ±âÅ¸ È¸¿øÀÇ ±ÍÃ¥»çÀ¯, Á¦7Á¶ Á¦2Ç×¿¡ ÀÇÇÏ¿© È¸¿ø ÀÚ°ÝÀÇ Á¤Áö ¹× È¸¿ø ÀÚ°ÝÀÇ »ó½Ç °æÇèÀÌ ÀÖ´Â È¸¿øÀÌ ´Ù½Ã ½ÅÃ»ÇÏ´Â °æ¿ì</p>
-
-<p>¨ê ±âÅ¸ È¸¿øÀ¸·Î µî·ÏÇÏ´Â °ÍÀÌ "wishfit"ÀÇ ¼­ºñ½º ¿î¿µ¿¡ ÇöÀúÈ÷ ÁöÀåÀÌ ÀÖ´Ù°í ÆÇ´ÜµÇ´Â °æ¿ì</p>
-
-<p>3. È¸¿ø°¡ÀÔ°è¾àÀÇ ¼º¸³½Ã±â´Â "wishfit"ÀÇ È¸¿ø µî·Ï¿Ï·áÇÑ ½ÃÁ¡À¸·Î ÇÕ´Ï´Ù.</p>
-
-<p>4. È¸¿ø°¡ÀÔ°è¾àÀÌ ¼º¸³µÈ ÀÌÈÄ¶óµµ Á¦2Ç× °¢ È£¿¡ µû¸¥ »çÀ¯ ¹ß°ß½Ã ÀÌ¿ë ½Â³«À» Ã¶È¸ÇÒ ¼ö ÀÖÀ¸¸ç ÇØ´ç È¸¿øÀº ¼­ºñ½º ÀÌ¿ë°ú °ü·ÃÇÏ¿© ¾Æ¹«·± ±Ç¸®¸¦ ÁÖÀåÇÒ ¼ö ¾ø½À´Ï´Ù.</p>
+<p>5. "wishfit"ëŠ” í•„ìš”í•œ ì‚¬ìœ ê°€ ë°œìƒí•  ê²½ìš° ê´€ë ¨ ë²•ë ¹ì— ìœ„ë°°ë˜ì§€ ì•ŠëŠ” ë²”ìœ„ ì•ˆì—ì„œ ì•½ê´€ì„ ê°œì •í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤. ê°œì • ì‚¬ì‹¤ì€ ê³µì§€ë¥¼ í†µí•´ ê³ ì§€ë˜ë©° ê°œì •ëœ ì•½ê´€ì€ ê²Œì‹œëœ ì§€ 7ì¼ í›„ë¶€í„° íš¨ë ¥ì„ ë°œíœ˜í•©ë‹ˆë‹¤.</p>
 
 <p>&nbsp;</p>
 
-<p><strong>Á¦5Á¶ ¼­ºñ½ºÀÇ Á¦°ø ¹× º¯°æ</strong></p>
+<p><strong>ì œ4ì¡° íšŒì› ê°€ìž…</strong></p>
 
-<p>1. "wishfit"´Â È¸¿ø¿¡°Ô ¾Æ·¡¿Í °°Àº ¼­ºñ½º¸¦ Á¦°øÇÕ´Ï´Ù.</p>
+<p>1. íšŒì›ì´ ë˜ê³ ìž í•˜ëŠ” ìžëŠ” "wishfit"ì—ì„œ ì •í•œ ê°€ìž… ì–‘ì‹ì— ë”°ë¼ íšŒì›ì •ë³´ë¥¼ ê¸°ìž…í•˜ê³  "ë“±ë¡" ë²„íŠ¼ì„ ëˆ„ë¥´ëŠ” ë°©ë²•ìœ¼ë¡œ íšŒì› ê°€ìž…ì„ ì‹ ì²­í•©ë‹ˆë‹¤.</p>
 
-<p>¨ç »çÀÌÆ® ³»ÀÇ ÄÁÅÙÃ÷¿Í ÀÌ¸ÞÀÏ Á¤º¸ Á¦°ø</p>
+<p>2. "wishfit"ëŠ” ì œ1í•­ê³¼ ê°™ì´ íšŒì›ìœ¼ë¡œ ê°€ìž…í•  ê²ƒì„ ì‹ ì²­í•œ ìžê°€ ë‹¤ìŒ ê° í˜¸ì— í•´ë‹¹í•˜ì§€ ì•ŠëŠ” í•œ ì‹ ì²­í•œ ìžë¥¼ íšŒì›ìœ¼ë¡œ ì¸ì •í•©ë‹ˆë‹¤.</p>
 
-<p>¨è ±âÅ¸ "wishfit"¿¡¼­ ÀÚÃ¼ °³¹ßÇÏ°Å³ª ´Ù¸¥ È¸»ç¿ÍÀÇ Çù·Â°è¾à µîÀ» ÅëÇØ È¸¿øµé¿¡°Ô Á¦°øÇÒ ÀÏÃ¼ÀÇ ¼­ºñ½º</p>
+<p>â‘  ë“±ë¡ ë‚´ìš©ì— í—ˆìœ„, ê¸°ìž¬ëˆ„ë½, ì˜¤ê¸°ê°€ ìžˆëŠ” ê²½ìš°</p>
 
-<p>2. "wishfit"´Â ±× º¯°æµÉ ¼­ºñ½ºÀÇ ³»¿ë ¹× Á¦°øÀÏÀÚ¸¦ Á¦8Á¶¿¡¼­ Á¤ÇÑ ¹æ¹ýÀ¸·Î È¸¿ø¿¡°Ô ÅëÁöÇÒ ¼ö ÀÖ½À´Ï´Ù.</p>
+<p>â‘¡ ë‹¤ì¤‘ ê³„ì •ì„ ì´ìš© í•  ê²½ìš°</p>
 
-<p>&nbsp;</p>
+<p>â‘¢ ë²•ë¥  ë˜ëŠ” ì•½ê´€ ìœ„ë°˜, ê¸°íƒ€ íšŒì›ì˜ ê·€ì±…ì‚¬ìœ , ì œ7ì¡° ì œ2í•­ì— ì˜í•˜ì—¬ íšŒì› ìžê²©ì˜ ì •ì§€ ë° íšŒì› ìžê²©ì˜ ìƒì‹¤ ê²½í—˜ì´ ìžˆëŠ” íšŒì›ì´ ë‹¤ì‹œ ì‹ ì²­í•˜ëŠ” ê²½ìš°</p>
 
-<p><b>Á¦6Á¶ ¼­ºñ½ºÀÇ Áß´Ü</b></p>
+<p>â‘£ ê¸°íƒ€ íšŒì›ìœ¼ë¡œ ë“±ë¡í•˜ëŠ” ê²ƒì´ "wishfit"ì˜ ì„œë¹„ìŠ¤ ìš´ì˜ì— í˜„ì €ížˆ ì§€ìž¥ì´ ìžˆë‹¤ê³  íŒë‹¨ë˜ëŠ” ê²½ìš°</p>
 
-<p>1. "wishfit"´Â ÄÄÇ»ÅÍ µî Á¤º¸Åë½Å¼³ºñÀÇ º¸¼öÁ¡°Ë¡¤±³Ã¼ ¹× °íÀå, Åë½ÅÀÇ µÎÀý µîÀÇ »çÀ¯°¡ ¹ß»ýÇÑ °æ¿ì¿¡´Â ¼­ºñ½ºÀÇ Á¦°øÀ» ÀÏ½ÃÀûÀ¸·Î Áß´ÜÇÒ ¼ö ÀÖ°í, »õ·Î¿î ¼­ºñ½º·ÎÀÇ ±³Ã¼³ª ±âÅ¸ "wishfit"°¡ ÀûÀýÇÏ´Ù°í ÆÇ´ÜÇÏ´Â »çÀ¯¿¡ ±âÇÏ¿© ÇöÀç Á¦°øµÇ´Â ¼­ºñ½º¸¦ ¿ÏÀüÈ÷ Áß´ÜÇÒ ¼ö ÀÖ½À´Ï´Ù.&nbsp;</p>
+<p>3. íšŒì›ê°€ìž…ê³„ì•½ì˜ ì„±ë¦½ì‹œê¸°ëŠ” "wishfit"ì˜ íšŒì› ë“±ë¡ì™„ë£Œí•œ ì‹œì ìœ¼ë¡œ í•©ë‹ˆë‹¤.</p>
 
-<p>2. Á¦1Ç×¿¡ ÀÇÇÑ ¼­ºñ½º Áß´ÜÀÇ °æ¿ì¿¡´Â "wishfit"´Â Á¦8Á¶ Á¦2Ç×¿¡¼­ Á¤ÇÑ ¹æ¹ýÀ¸·Î È¸¿ø¿¡°Ô ÅëÁöÇÕ´Ï´Ù. ´Ù¸¸, "wishfit"¿¡¼­ ÅëÁ¦ÇÒ ¼ö ¾ø´Â »çÀ¯·Î ÀÎÇÑ ¼­ºñ½ºÀÇ Áß´Ü(½Ã½ºÅÛ °ü¸®ÀÚÀÇ °íÀÇ, °ú½ÇÀÌ ¾ø´Â µð½ºÅ© Àå¾Ö, ½Ã½ºÅÛ ´Ù¿î µî)À¸·Î ÀÎÇÏ¿© »çÀü ÅëÁö°¡ ºÒ°¡´ÉÇÑ °æ¿ì¿¡´Â ±×·¯ÇÏÁö ¾Æ´ÏÇÕ´Ï´Ù.&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p><b>Á¦7Á¶ È¸¿ø Å»Åð ¹× ÀÚ°Ý »ó½Ç µî</b></p>
-
-<p>1. È¸¿øÀº "wishfit"¿¡ ¾ðÁ¦µçÁö ÀÚ½ÅÀÇ È¸¿ø µî·ÏÀ» ¸»¼ÒÇØ ÁÙ °Í(È¸¿ø Å»Åð)À» ¿äÃ»ÇÒ ¼ö ÀÖÀ¸¸ç "wishfit"´Â °³ÀÎÁ¤º¸Ãë±Þ¹æÄ§¿¡ µû¶ó ÇØ´ç È¸¿øÀÇ È¸¿ø µî·Ï ¸»¼Ò¸¦ À§ÇÑ ÀýÂ÷¸¦ ¹â½À´Ï´Ù.&nbsp;</p>
-
-<p>2. È¸¿øÀÌ ´ÙÀ½ °¢ È£ÀÇ »çÀ¯¿¡ ÇØ´çÇÏ´Â °æ¿ì, "wishfit"´Â È¸¿øÀÇ È¸¿øÀÚ°ÝÀ» ÀûÀýÇÑ ¹æ¹ýÀ¸·Î Á¦ÇÑ ¹× Á¤Áö ¶Ç´Â »ó½Ç½ÃÅ³ ¼ö ÀÖ½À´Ï´Ù.&nbsp;</p>
-
-<p>¨ç °øÁö»çÇ× ¶Ç´Â °¢ °Ô½ÃÆÇ °øÁö»çÇ×¿¡ À§¹ÝÇÏ´Â È°µ¿À» ÇÏ´Â °æ¿ì</p>
-
-<p>¨è °¡ÀÔ ½ÅÃ» ½Ã¿¡ ÇãÀ§ ³»¿ëÀ» µî·ÏÇÑ °æ¿ì&nbsp;</p>
-
-<p>¨é ´Ù¸¥ »ç¶÷ÀÇ "¼­ºñ½º" ÀÌ¿ëÀ» ¹æÇØÇÏ°Å³ª ±× Á¤º¸¸¦ µµ¿ëÇÏ´Â µî "¼­ºñ½º"»ó À§Çù¿¡ ÇØ´çÇÏ´Â Çàµ¿ÀÇ °æ¿ì</p>
-
-<p>&nbsp;¨ê ¹ý·É°ú º» ¾à°üÀÌ ±ÝÁöÇÏ°Å³ª °ø¼­¾ç¼Ó¿¡ ¹ÝÇÏ´Â ÇàÀ§¸¦ ÇÏ´Â °æ¿ì&nbsp;</p>
-
-<p>3. "wishfit"´Â È¸¿øÀÇ È¸¿øÀÚ°ÝÀ» »ó½Ç½ÃÅ°±â·Î °áÁ¤ÇÑ °æ¿ì¿¡´Â È¸¿øµî·ÏÀ» ¸»¼ÒÇÕ´Ï´Ù.</p>
-
-<p>4. È¸¿ø Å»Åð°¡ ÀÌ·ç¾îÁø °æ¿ì °Ô½ÃÆÇ¿¡ µî·ÏµÈ °Ô½Ã±Û ¹× ´ñ±ÛÀº »èÁ¦µÇÁö ¾ÊÀ¸¸ç, ÀÛ¼ºÇÑ °Ô½Ã¹° µîÀÇ »èÁ¦¸¦ ¿øÇÏ½Ã´Â °æ¿ì¿¡´Â ¹Ýµå½Ã Á÷Á¢ »èÁ¦ÇÏ½Å ÈÄ, Å»ÅðÇØ ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.</p>
-
-<p>5. ÀÛ¼ºÇÑ °Ô½Ã±Û ¹× ´ñ±Û¿¡ ³²¾ÆÀÖ´Â °³ÀÎÁ¤º¸ Ä§ÇØ »çÀ¯ ³»¿ëÀº, Å»Åð ÀÌÈÄ¶óµµ ÀÛ¼ºÀÚ º»ÀÎÀÓÀ» È®ÀÎÇÒ ¼ö ÀÖ´Â Áõ¸íÀÚ·á, °ü·Ã »çÀ¯, Ã·ºÎ ÀÚ·á¸¦ °³ÀÎÁ¤º¸Ãë±Þ¹æÄ§ »ó °³ÀÎÁ¤º¸º¸È£ ´ã´çºÎ¼­¿¡ ¿äÃ»ÇÏ¸é ½ÉÀÇ ÈÄ °³º°ÀûÀ¸·Î »èÁ¦µÉ ¼ö ÀÖ½À´Ï´Ù.</p>
-
-<p>6. È¸¿øÀÌ º» ¾à°ü¿¡ ÀÇÇØ¼­ È¸¿ø °¡ÀÔ ÈÄ ¼­ºñ½º¸¦ ÀÌ¿ëÇÏ´Â µµÁß, ¿¬¼ÓÇÏ¿© 1³â µ¿¾È ¼­ºñ½º¸¦ ÀÌ¿ëÇÏ±â À§ÇÑ ·Î±×ÀÎ ±â·ÏÀÌ ¾ø´Â °æ¿ì, ÈÞ¸é°èÁ¤À¸·Î Ãë±Þ µÉ ¼ö ÀÖÀ¸¸ç, "wishfit"´Â È¸¿øÀÇ È¸¿øÀÚ°ÝÀ» »ó½Ç½ÃÅ³ ¼ö ÀÖ½À´Ï´Ù.</p>
+<p>4. íšŒì›ê°€ìž…ê³„ì•½ì´ ì„±ë¦½ëœ ì´í›„ë¼ë„ ì œ2í•­ ê° í˜¸ì— ë”°ë¥¸ ì‚¬ìœ  ë°œê²¬ì‹œ ì´ìš© ìŠ¹ë‚™ì„ ì² íšŒí•  ìˆ˜ ìžˆìœ¼ë©° í•´ë‹¹ íšŒì›ì€ ì„œë¹„ìŠ¤ ì´ìš©ê³¼ ê´€ë ¨í•˜ì—¬ ì•„ë¬´ëŸ° ê¶Œë¦¬ë¥¼ ì£¼ìž¥í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</p>
 
 <p>&nbsp;</p>
 
-<p><b>Á¦8Á¶ È¸¿ø¿¡ ´ëÇÑ ÅëÁö</b></p>
+<p><strong>ì œ5ì¡° ì„œë¹„ìŠ¤ì˜ ì œê³µ ë° ë³€ê²½</strong></p>
 
-<p>1. "wishfit"´Â Æ¯Á¤ È¸¿ø¿¡°Ô ´ëÇÑ ÅëÁö¸¦ ÇÏ´Â °æ¿ì "wishfit"ÀÇ È¸¿øÁ¤º¸¿¡ ±âÀçµÈ E-mail ¹× °øÁö»çÇ× °Ô½ÃÆÇ ¶Ç´Â °ü·Ã °Ô½ÃÆÇ ¹× ÂÊÁö·Î ÅëÁö ÇÒ ¼ö ÀÖ½À´Ï´Ù.</p>
+<p>1. "wishfit"ëŠ” íšŒì›ì—ê²Œ ì•„ëž˜ì™€ ê°™ì€ ì„œë¹„ìŠ¤ë¥¼ ì œê³µí•©ë‹ˆë‹¤.</p>
 
-<p>2. "wishfit"´Â ºÒÆ¯Á¤´Ù¼ö È¸¿ø¿¡ ´ëÇÑ ÅëÁö¸¦ ÇÏ´Â °æ¿ì "wishfit"ÀÇ °øÁö»çÇ× °Ô½ÃÆÇ ¹× °ü·Ã °Ô½ÃÆÇ¿¡ °Ô½ÃÇÔÀ¸·Î½á °³º° ÅëÁö¿¡ °¥À½ÇÒ ¼ö ÀÖ½À´Ï´Ù.&nbsp;</p>
+<p>â‘  ì‚¬ì´íŠ¸ ë‚´ì˜ ì»¨í…ì¸ ì™€ ì´ë©”ì¼ ì •ë³´ ì œê³µ</p>
 
-<p>&nbsp;</p>
+<p>â‘¡ ê¸°íƒ€ "wishfit"ì—ì„œ ìžì²´ ê°œë°œí•˜ê±°ë‚˜ ë‹¤ë¥¸ íšŒì‚¬ì™€ì˜ í˜‘ë ¥ê³„ì•½ ë“±ì„ í†µí•´ íšŒì›ë“¤ì—ê²Œ ì œê³µí•  ì¼ì²´ì˜ ì„œë¹„ìŠ¤</p>
 
-<p><b>Á¦9Á¶ È¸¿øÀÇ °³ÀÎÁ¤º¸º¸È£</b></p>
-
-<p>1. "wishfit"´Â °ü·Ã¹ý·ÉÀÌ Á¤ÇÏ´Â ¹Ù¿¡ µû¶ó¼­ È¸¿ø µî·ÏÁ¤º¸¸¦ Æ÷ÇÔÇÑ È¸¿øÀÇ °³ÀÎÁ¤º¸¸¦ º¸È£ÇÏ±â À§ÇÏ¿© ³ë·ÂÇÕ´Ï´Ù.</p>
-
-<p>2. È¸¿øÀÇ °³ÀÎÁ¤º¸º¸È£¿¡ °üÇØ¼­´Â °ü·Ã¹ý·É ¹× "wishfit"¿¡¼­ Á¤ÇÏ´Â "°³ÀÎÁ¤º¸Ãë±Þ¹æÄ§"¿¡ Á¤ÇÑ ¹Ù¿¡ ÀÇÇÕ´Ï´Ù.&nbsp;</p>
+<p>2. "wishfit"ëŠ” ê·¸ ë³€ê²½ë  ì„œë¹„ìŠ¤ì˜ ë‚´ìš© ë° ì œê³µì¼ìžë¥¼ ì œ8ì¡°ì—ì„œ ì •í•œ ë°©ë²•ìœ¼ë¡œ íšŒì›ì—ê²Œ í†µì§€í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</p>
 
 <p>&nbsp;</p>
 
-<p><b>Á¦10Á¶ "wishfit"ÀÇ ÀÇ¹«</b></p>
+<p><b>ì œ6ì¡° ì„œë¹„ìŠ¤ì˜ ì¤‘ë‹¨</b></p>
 
-<p>1. "wishfit"´Â ¹ý·É°ú º» ¾à°üÀÌ ±ÝÁöÇÏ°Å³ª °ø¼­¾ç¼Ó¿¡ ¹ÝÇÏ´Â ÇàÀ§¸¦ ÇÏÁö ¾ÊÀ¸¸ç º» ¾à°üÀÌ Á¤ÇÏ´Â ¹Ù¿¡ µû¶ó Áö¼ÓÀûÀÌ°í, ¾ÈÁ¤ÀûÀ¸·Î ¼­ºñ½º¸¦ Á¦°øÇÏ±â À§ÇØ¼­ ³ë·ÂÇÕ´Ï´Ù.&nbsp;</p>
+<p>1. "wishfit"ëŠ” ì»´í“¨í„° ë“± ì •ë³´í†µì‹ ì„¤ë¹„ì˜ ë³´ìˆ˜ì ê²€Â·êµì²´ ë° ê³ ìž¥, í†µì‹ ì˜ ë‘ì ˆ ë“±ì˜ ì‚¬ìœ ê°€ ë°œìƒí•œ ê²½ìš°ì—ëŠ” ì„œë¹„ìŠ¤ì˜ ì œê³µì„ ì¼ì‹œì ìœ¼ë¡œ ì¤‘ë‹¨í•  ìˆ˜ ìžˆê³ , ìƒˆë¡œìš´ ì„œë¹„ìŠ¤ë¡œì˜ êµì²´ë‚˜ ê¸°íƒ€ "wishfit"ê°€ ì ì ˆí•˜ë‹¤ê³  íŒë‹¨í•˜ëŠ” ì‚¬ìœ ì— ê¸°í•˜ì—¬ í˜„ìž¬ ì œê³µë˜ëŠ” ì„œë¹„ìŠ¤ë¥¼ ì™„ì „ížˆ ì¤‘ë‹¨í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.&nbsp;</p>
 
-<p>2. "wishfit"´Â È¸¿øÀÌ ¿øÇÏÁö ¾Ê´Â ¿µ¸®¸ñÀûÀÇ ±¤°í¼º ÀüÀÚ¿ìÆíÀ» ¹ß¼ÛÇÏÁö ¾Ê½À´Ï´Ù.&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p><b>Á¦11Á¶ È¸¿øÀÇ ID ¹× ºñ¹Ð¹øÈ£¿¡ ´ëÇÑ ÀÇ¹«</b></p>
-
-<p>1. "wishfit"´Â °ü°è¹ý·É, "°³ÀÎÁ¤º¸Ãë±Þ¹æÄ§"¿¡ ÀÇÇØ¼­ ±× Ã¥ÀÓÀ» Áö´Â °æ¿ì¸¦ Á¦¿ÜÇÏ°í, ÀÚ½ÅÀÇ ID¿Í ºñ¹Ð¹øÈ£¿¡ °üÇÑ °ü¸®Ã¥ÀÓÀº °¢ È¸¿ø¿¡°Ô ÀÖ½À´Ï´Ù.&nbsp;</p>
-
-<p>2. È¸¿øÀº ÀÚ½ÅÀÇ ID ¹× ºñ¹Ð¹øÈ£¸¦ Á¦3ÀÚ¿¡°Ô ÀÌ¿ëÇÏ°Ô ÇØ¼­´Â ¾ÈµË´Ï´Ù.&nbsp;</p>
-
-<p>3. È¸¿øÀº ÀÚ½ÅÀÇ ID ¹× ºñ¹Ð¹øÈ£¸¦ µµ³­´çÇÏ°Å³ª Á¦3ÀÚ°¡ »ç¿ëÇÏ°í ÀÖÀ½À» ÀÎÁöÇÑ °æ¿ì¿¡´Â ¹Ù·Î "wishfit"¿¡ Åëº¸ÇÏ°í "wishfit"ÀÇ ¾È³»°¡ ÀÖ´Â °æ¿ì¿¡´Â ±×¿¡ µû¶ó¾ß ÇÕ´Ï´Ù.&nbsp;</p>
+<p>2. ì œ1í•­ì— ì˜í•œ ì„œë¹„ìŠ¤ ì¤‘ë‹¨ì˜ ê²½ìš°ì—ëŠ” "wishfit"ëŠ” ì œ8ì¡° ì œ2í•­ì—ì„œ ì •í•œ ë°©ë²•ìœ¼ë¡œ íšŒì›ì—ê²Œ í†µì§€í•©ë‹ˆë‹¤. ë‹¤ë§Œ, "wishfit"ì—ì„œ í†µì œí•  ìˆ˜ ì—†ëŠ” ì‚¬ìœ ë¡œ ì¸í•œ ì„œë¹„ìŠ¤ì˜ ì¤‘ë‹¨(ì‹œìŠ¤í…œ ê´€ë¦¬ìžì˜ ê³ ì˜, ê³¼ì‹¤ì´ ì—†ëŠ” ë””ìŠ¤í¬ ìž¥ì• , ì‹œìŠ¤í…œ ë‹¤ìš´ ë“±)ìœ¼ë¡œ ì¸í•˜ì—¬ ì‚¬ì „ í†µì§€ê°€ ë¶ˆê°€ëŠ¥í•œ ê²½ìš°ì—ëŠ” ê·¸ëŸ¬í•˜ì§€ ì•„ë‹ˆí•©ë‹ˆë‹¤.&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<p><b>Á¦12Á¶ È¸¿øÀÇ ÀÇ¹«</b></p>
+<p><b>ì œ7ì¡° íšŒì› íƒˆí‡´ ë° ìžê²© ìƒì‹¤ ë“±</b></p>
 
-<p>È¸¿øÀº ´ÙÀ½ °¢ È£ÀÇ ÇàÀ§¸¦ ÇÏ¿©¼­´Â ¾ÈµË´Ï´Ù.&nbsp;</p>
+<p>1. íšŒì›ì€ "wishfit"ì— ì–¸ì œë“ ì§€ ìžì‹ ì˜ íšŒì› ë“±ë¡ì„ ë§ì†Œí•´ ì¤„ ê²ƒ(íšŒì› íƒˆí‡´)ì„ ìš”ì²­í•  ìˆ˜ ìžˆìœ¼ë©° "wishfit"ëŠ” ê°œì¸ì •ë³´ì·¨ê¸‰ë°©ì¹¨ì— ë”°ë¼ í•´ë‹¹ íšŒì›ì˜ íšŒì› ë“±ë¡ ë§ì†Œë¥¼ ìœ„í•œ ì ˆì°¨ë¥¼ ë°ŸìŠµë‹ˆë‹¤.&nbsp;</p>
 
-<p>1. "wishfit"¿¡¼­ Á¦°øÇÏ´Â ¼­ºñ½º¿¡ Á¤ÇÑ ¾à°ü ±âÅ¸ ¼­ºñ½º ÀÌ¿ë¿¡ °üÇÑ ±ÔÁ¤À» À§¹ÝÇÏ´Â ÇàÀ§</p>
+<p>2. íšŒì›ì´ ë‹¤ìŒ ê° í˜¸ì˜ ì‚¬ìœ ì— í•´ë‹¹í•˜ëŠ” ê²½ìš°, "wishfit"ëŠ” íšŒì›ì˜ íšŒì›ìžê²©ì„ ì ì ˆí•œ ë°©ë²•ìœ¼ë¡œ ì œí•œ ë° ì •ì§€ ë˜ëŠ” ìƒì‹¤ì‹œí‚¬ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.&nbsp;</p>
 
-<p>&nbsp;2. "wishfit" °øÁö»çÇ× ¶Ç´Â °¢ °Ô½ÃÆÇ °øÁö»çÇ×¿¡ À§¹ÝÇÏ´Â ÇàÀ§</p>
+<p>â‘  ê³µì§€ì‚¬í•­ ë˜ëŠ” ê° ê²Œì‹œíŒ ê³µì§€ì‚¬í•­ì— ìœ„ë°˜í•˜ëŠ” í™œë™ì„ í•˜ëŠ” ê²½ìš°</p>
 
-<p>3. "wishfit" ±âÅ¸ Á¦3ÀÚÀÇ ÀÎ°Ý±Ç ¶Ç´Â ÁöÀûÀç»ê±ÇÀ» Ä§ÇØÇÏ°Å³ª ¾÷¹«¸¦ ¹æÇØÇÏ´Â ÇàÀ§</p>
+<p>â‘¡ ê°€ìž… ì‹ ì²­ ì‹œì— í—ˆìœ„ ë‚´ìš©ì„ ë“±ë¡í•œ ê²½ìš°&nbsp;</p>
 
-<p>&nbsp;4. ´Ù¸¥ È¸¿øÀÇ ID¸¦ µµ¿ëÇÏ´Â ÇàÀ§&nbsp;</p>
+<p>â‘¢ ë‹¤ë¥¸ ì‚¬ëžŒì˜ "ì„œë¹„ìŠ¤" ì´ìš©ì„ ë°©í•´í•˜ê±°ë‚˜ ê·¸ ì •ë³´ë¥¼ ë„ìš©í•˜ëŠ” ë“± "ì„œë¹„ìŠ¤"ìƒ ìœ„í˜‘ì— í•´ë‹¹í•˜ëŠ” í–‰ë™ì˜ ê²½ìš°</p>
 
-<p>5. Á¤Å©¸ÞÀÏ(junk mail), ½ºÆÔ¸ÞÀÏ(spam mail), Çà¿îÀÇ ÆíÁö(chain letters), ÇÇ¶ó¹Ìµå Á¶Á÷¿¡ °¡ÀÔÇÒ °ÍÀ» ±ÇÀ¯ÇÏ´Â ¸ÞÀÏ, ¿Ü¼³ ¶Ç´Â Æø·ÂÀûÀÎ ¸Þ½ÃÁö ¡¤È­»ó¡¤À½¼º µîÀÌ ´ã±ä ¸ÞÀÏÀ» º¸³»°Å³ª ±âÅ¸ °ø¼­¾ç¼Ó¿¡ ¹ÝÇÏ´Â Á¤º¸¸¦ °ø°³ ¶Ç´Â°Ô½ÃÇÏ´Â ÇàÀ§.</p>
+<p>&nbsp;â‘£ ë²•ë ¹ê³¼ ë³¸ ì•½ê´€ì´ ê¸ˆì§€í•˜ê±°ë‚˜ ê³µì„œì–‘ì†ì— ë°˜í•˜ëŠ” í–‰ìœ„ë¥¼ í•˜ëŠ” ê²½ìš°&nbsp;</p>
 
-<p>&nbsp;6. °ü·Ã ¹ý·É¿¡ ÀÇÇÏ¿© ±× Àü¼Û ¶Ç´Â °Ô½Ã°¡ ±ÝÁöµÇ´Â Á¤º¸(ÄÄÇ»ÅÍ ÇÁ·Î±×·¥ µî)ÀÇ Àü¼Û ¶Ç´Â °Ô½ÃÇÏ´Â ÇàÀ§</p>
+<p>3. "wishfit"ëŠ” íšŒì›ì˜ íšŒì›ìžê²©ì„ ìƒì‹¤ì‹œí‚¤ê¸°ë¡œ ê²°ì •í•œ ê²½ìš°ì—ëŠ” íšŒì›ë“±ë¡ì„ ë§ì†Œí•©ë‹ˆë‹¤.</p>
 
-<p>7. "wishfit"ÀÇ Á÷¿øÀÌ³ª "wishfit" ¼­ºñ½ºÀÇ °ü¸®ÀÚ¸¦ °¡ÀåÇÏ°Å³ª »çÄªÇÏ¿© ¶Ç´Â Å¸ÀÎÀÇ ¸íÀÇ¸¦ ¸ð¿ëÇÏ¿© ±ÛÀ» °Ô½ÃÇÏ°Å³ª ¸ÞÀÏÀ» ¹ß¼ÛÇÏ´Â ÇàÀ§</p>
+<p>4. íšŒì› íƒˆí‡´ê°€ ì´ë£¨ì–´ì§„ ê²½ìš° ê²Œì‹œíŒì— ë“±ë¡ëœ ê²Œì‹œê¸€ ë° ëŒ“ê¸€ì€ ì‚­ì œë˜ì§€ ì•Šìœ¼ë©°, ìž‘ì„±í•œ ê²Œì‹œë¬¼ ë“±ì˜ ì‚­ì œë¥¼ ì›í•˜ì‹œëŠ” ê²½ìš°ì—ëŠ” ë°˜ë“œì‹œ ì§ì ‘ ì‚­ì œí•˜ì‹  í›„, íƒˆí‡´í•´ ì£¼ì‹œê¸° ë°”ëžë‹ˆë‹¤.</p>
 
-<p>8. ÄÄÇ»ÅÍ ¼ÒÇÁÆ®¿þ¾î, ÇÏµå¿þ¾î, Àü±âÅë½Å ÀåºñÀÇ Á¤»óÀûÀÎ °¡µ¿À» ¹æÇØ, ÆÄ±«ÇÒ ¸ñÀûÀ¸·Î °í¾ÈµÈ ¼ÒÇÁÆ®¿þ¾î ¹ÙÀÌ·¯½º, ±âÅ¸ ´Ù¸¥ ÄÄÇ»ÅÍ ÄÚµå, ÆÄÀÏ, ÇÁ·Î±×·¥À» Æ÷ÇÔÇÏ°í ÀÖ´Â ÀÚ·á¸¦ °Ô½ÃÇÏ°Å³ª ÀüÀÚ¿ìÆíÀ¸·Î ¹ß¼ÛÇÏ´Â ÇàÀ§</p>
+<p>5. ìž‘ì„±í•œ ê²Œì‹œê¸€ ë° ëŒ“ê¸€ì— ë‚¨ì•„ìžˆëŠ” ê°œì¸ì •ë³´ ì¹¨í•´ ì‚¬ìœ  ë‚´ìš©ì€, íƒˆí‡´ ì´í›„ë¼ë„ ìž‘ì„±ìž ë³¸ì¸ìž„ì„ í™•ì¸í•  ìˆ˜ ìžˆëŠ” ì¦ëª…ìžë£Œ, ê´€ë ¨ ì‚¬ìœ , ì²¨ë¶€ ìžë£Œë¥¼ ê°œì¸ì •ë³´ì·¨ê¸‰ë°©ì¹¨ ìƒ ê°œì¸ì •ë³´ë³´í˜¸ ë‹´ë‹¹ë¶€ì„œì— ìš”ì²­í•˜ë©´ ì‹¬ì˜ í›„ ê°œë³„ì ìœ¼ë¡œ ì‚­ì œë  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</p>
 
-<p>&nbsp;9. ½ºÅäÅ·(stalking) µî ´Ù¸¥ È¸¿øÀ» ±«·ÓÈ÷´Â ÇàÀ§</p>
-
-<p>10. ´Ù¸¥ È¸¿ø¿¡ ´ëÇÑ °³ÀÎÁ¤º¸¸¦ ±× µ¿ÀÇ ¾øÀÌ ¼öÁý,ÀúÀå,°ø°³ÇÏ´Â ÇàÀ§</p>
-
-<p>11. ºÒÆ¯Á¤ ´Ù¼öÀÇ ÀÚ¸¦ ´ë»óÀ¸·Î ÇÏ¿© ±¤°í ¶Ç´Â ¼±ÀüÀ» °Ô½ÃÇÏ°Å³ª ½ºÆÔ¸ÞÀÏÀ» Àü¼ÛÇÏ´Â µîÀÇ ¹æ¹ýÀ¸·Î "wishfit"ÀÇ ¼­ºñ½º¸¦ ÀÌ¿ëÇÏ¿© ¿µ¸®¸ñÀûÀÇ È°µ¿À» ÇÏ´Â ÇàÀ§</p>
-
-<p>12. ¼­¹ö³ª È¸¼±¿¡ ¹«¸®¸¦ ÁÙ ¼ö ÀÖ´Â ÇàÀ§</p>
-
-<p>À§ÀÇ °¢ È£¿¡ ÇØ´çÇÏ´Â ÇàÀ§¸¦ ÇÑ È¸¿øÀÌ ÀÖÀ» °æ¿ì "wishfit"´Â È¸¿øÀÇ È¸¿øÀÚ°ÝÀ» ÀûÀýÇÑ ¹æ¹ýÀ¸·Î Á¦ÇÑ ¹× Á¤Áö, »ó½Ç½ÃÅ³ ¼ö ÀÖÀ¸¸ç,È¸¿øÀº ±× ±ÍÃ¥»çÀ¯·Î ÀÎÇÏ¿© "wishfit"³ª ´Ù¸¥ È¸¿øÀÌ ÀÔÀº ¼ÕÇØ¸¦ ¹è»óÇÒ Ã¥ÀÓÀÌ ÀÖ½À´Ï´Ù.</p>
+<p>6. íšŒì›ì´ ë³¸ ì•½ê´€ì— ì˜í•´ì„œ íšŒì› ê°€ìž… í›„ ì„œë¹„ìŠ¤ë¥¼ ì´ìš©í•˜ëŠ” ë„ì¤‘, ì—°ì†í•˜ì—¬ 1ë…„ ë™ì•ˆ ì„œë¹„ìŠ¤ë¥¼ ì´ìš©í•˜ê¸° ìœ„í•œ ë¡œê·¸ì¸ ê¸°ë¡ì´ ì—†ëŠ” ê²½ìš°, íœ´ë©´ê³„ì •ìœ¼ë¡œ ì·¨ê¸‰ ë  ìˆ˜ ìžˆìœ¼ë©°, "wishfit"ëŠ” íšŒì›ì˜ íšŒì›ìžê²©ì„ ìƒì‹¤ì‹œí‚¬ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</p>
 
 <p>&nbsp;</p>
 
-<p><b>Á¦13Á¶ °Ô½Ã¹° °ü·Ã »çÇ×</b></p>
+<p><b>ì œ8ì¡° íšŒì›ì— ëŒ€í•œ í†µì§€</b></p>
 
-<p>1. "wishfit"´Â °Ô½Ã¹°(°Ô½Ã±Û/´ñ±Û) ¹× ³»¿ë¹°¿¡ °üÇÑ ¼¼ºÎ ÀÌ¿ëÁöÄ§(°øÁö»çÇ×)À» º°µµ·Î Á¤ÇÏ¿© ¿î¿µÇÒ ¼ö ÀÖÀ¸¸ç È¸¿øÀº ±× ÁöÄ§¿¡ µû¶ó ³»¿ëÀ» µî·ÏÇÏ¿©¾ß ÇÕ´Ï´Ù.</p>
+<p>1. "wishfit"ëŠ” íŠ¹ì • íšŒì›ì—ê²Œ ëŒ€í•œ í†µì§€ë¥¼ í•˜ëŠ” ê²½ìš° "wishfit"ì˜ íšŒì›ì •ë³´ì— ê¸°ìž¬ëœ E-mail ë° ê³µì§€ì‚¬í•­ ê²Œì‹œíŒ ë˜ëŠ” ê´€ë ¨ ê²Œì‹œíŒ ë° ìª½ì§€ë¡œ í†µì§€ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</p>
 
-<p>2. "wishfit"´Â °ø°³°Ô½Ã¹°ÀÇ ³»¿ëÀÌ ´ÙÀ½ °¢ È£¿¡ ÇØ´çÇÏ´Â °æ¿ì È¸¿ø¿¡°Ô »çÀü ÅëÁö ¾øÀÌ ÇØ´ç °ø°³°Ô½Ã¹°À» ÀÓ½Ã Â÷´Ü Á¶Ä¡ ¶Ç´Â »èÁ¦³ª ÀÌµ¿ÇÒ ¼ö ÀÖ°í, ÇØ´ç È¸¿øÀÇ È¸¿ø ÀÚ°ÝÀ» Á¦ÇÑ, Á¤Áö ¶Ç´Â »ó½Ç½ÃÅ³ ¼ö ÀÖ½À´Ï´Ù.</p>
-
-<p>&nbsp;¨ç "wishfit"¿¡¼­ Á¦°øÇÏ´Â ¼­ºñ½º¿¡ Á¤ÇÑ ¾à°ü ±âÅ¸ ¼­ºñ½º ÀÌ¿ë¿¡ °üÇÑ ±ÔÁ¤À» À§¹ÝÇÏ´Â ÇàÀ§&nbsp;</p>
-
-<p>¨è "wishfit" °øÁö»çÇ× ¶Ç´Â °¢ °Ô½ÃÆÇ °øÁö»çÇ×¿¡ À§¹ÝÇÏ´Â ³»¿ë</p>
-
-<p>¨é ´Ù¸¥ È¸¿ø ¶Ç´Â Á¦3ÀÚ¸¦ ºñ¹æÇÏ°Å³ª Áß»ó ¸ð·«À¸·Î ¸í¿¹¸¦ ¼Õ»ó½ÃÅ°´Â ³»¿ë</p>
-
-<p>¨ê Á¦3ÀÚÀÇ ÀúÀÛ±Ç µî ±Ç¸®¸¦ Ä§ÇØÇÏ´Â ³»¿ë</p>
-
-<p>¨ë ¹üÁËÇàÀ§¿Í °ü·ÃÀÌ ÀÖ´Ù°í ÆÇ´ÜµÇ´Â ³»¿ë</p>
-
-<p>¨ì ±âÅ¸ °ü°è ¹ý·É¿¡ À§¹èµÈ´Ù°í ÆÇ´ÜµÇ´Â ³»¿ë</p>
-
-<p>3. "wishfit"´Â È¸¿øÀÇ °Ô½Ã¹° µî¿¡ ´ëÇÏ¿© ´Ù¸¥ È¸¿ø È¤Àº Á¦3ÀÚÀÇ ¹ý·ü»ó ±Ç¸® Ä§ÇØ¸¦ ±Ù°Å·Î °Ô½Ã Áß´Ü ¿äÃ»À» ¹ÞÀº °æ¿ì °Ô½Ã¹°À» °Ô½Ã Áß´ÜÇÒ ¼ö ÀÖÀ¸¸ç, °Ô½Ã Áß´Ü ¿äÃ»ÀÚ¿Í °Ô½Ã¹° µî·Ï È¸¿ø °£ÀÇ ÇÕÀÇ ¶Ç´Â ¹ýÀû Á¶Ä¡ÀÇ °á°ú µîÀÌ "wishfit"¿¡ Á¢¼öµÇ¸é ±×¿¡ µû¸¨´Ï´Ù.</p>
+<p>2. "wishfit"ëŠ” ë¶ˆíŠ¹ì •ë‹¤ìˆ˜ íšŒì›ì— ëŒ€í•œ í†µì§€ë¥¼ í•˜ëŠ” ê²½ìš° "wishfit"ì˜ ê³µì§€ì‚¬í•­ ê²Œì‹œíŒ ë° ê´€ë ¨ ê²Œì‹œíŒì— ê²Œì‹œí•¨ìœ¼ë¡œì¨ ê°œë³„ í†µì§€ì— ê°ˆìŒí•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<p><b>Á¦14Á¶ ÀúÀÛ±ÇÀÇ ±Í¼Ó ¹× ÀÌ¿ëÁ¦ÇÑ</b></p>
+<p><b>ì œ9ì¡° íšŒì›ì˜ ê°œì¸ì •ë³´ë³´í˜¸</b></p>
 
-<p>1. "wishfit"°¡ ÀÛ¼ºÇÑ ÀúÀÛ¹°¿¡ ´ëÇÑ ÀúÀÛ±Ç ±âÅ¸ ÁöÀûÀç»ê±ÇÀº "wishfit"¿¡ ±Í¼ÓÇÕ´Ï´Ù.</p>
+<p>1. "wishfit"ëŠ” ê´€ë ¨ë²•ë ¹ì´ ì •í•˜ëŠ” ë°”ì— ë”°ë¼ì„œ íšŒì› ë“±ë¡ì •ë³´ë¥¼ í¬í•¨í•œ íšŒì›ì˜ ê°œì¸ì •ë³´ë¥¼ ë³´í˜¸í•˜ê¸° ìœ„í•˜ì—¬ ë…¸ë ¥í•©ë‹ˆë‹¤.</p>
 
-<p>2. È¸¿øÀº "wishfit"¸¦ ÀÌ¿ëÇÔÀ¸·Î½á ¾òÀº Á¤º¸¸¦ "wishfit"ÀÇ »çÀü½Â³« ¾øÀÌ º¹Á¦, Àü¼Û, ÃâÆÇ, ¹èÆ÷, ¹æ¼Û ±âÅ¸ ¹æ¹ý¿¡ ÀÇÇÏ¿© ¿µ¸®¸ñÀûÀ¸·Î ÀÌ¿ëÇÏ°Å³ª Á¦3ÀÚ¿¡°Ô ÀÌ¿ëÇÏ°Ô ÇÏ¿©¼­´Â ¾ÈµË´Ï´Ù.&nbsp;</p>
-
-<p>3. È¸¿øÀÌ ¼­ºñ½º ³»¿¡ °Ô½ÃÇÑ °Ô½Ã¹°ÀÇ ÀúÀÛ±ÇÀº °Ô½ÃÇÑ È¸¿ø¿¡°Ô ±Í¼ÓµË´Ï´Ù. ´Ü, "wishfit"´Â ¼­ºñ½ºÀÇ ¿î¿µ, Àü½Ã, Àü¼Û, ¹èÆ÷, È«º¸ÀÇ ¸ñÀûÀ¸·Î È¸¿øÀÇ º°µµÀÇ Çã¶ô ¾øÀÌ ¹«»óÀ¸·Î ÀúÀÛ±Ç¹ý¿¡ ±ÔÁ¤ÇÏ´Â °øÁ¤ÇÑ °üÇà¿¡ ÇÕÄ¡µÇ°Ô ÇÕ¸®ÀûÀÎ ¹üÀ§ ³»¿¡¼­ ´ÙÀ½°ú °°ÀÌ È¸¿øÀÌ µî·ÏÇÑ °Ô½Ã¹°À» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.&nbsp;</p>
-
-<p>¨ç ¼­ºñ½º ³»¿¡¼­ È¸¿ø °Ô½Ã¹°ÀÇ º¹Á¦, ¼öÁ¤, °³Á¶, Àü½Ã, Àü¼Û, ¹èÆ÷ ¹× ÀúÀÛ¹°¼ºÀ» ÇØÄ¡Áö ¾Ê´Â ¹üÀ§ ³»¿¡¼­ÀÇ ÆíÁý ÀúÀÛ¹° ÀÛ¼º&nbsp;</p>
-
-<p>¨è °Ô½Ã¹° °Ë»ö ¼­ºñ½º µî Çâ»óµÈ ¼­ºñ½º Á¦°øÀ» À§ÇÏ¿© °ü·Ã Á¦ÈÞ»ç¿¡°Ô ÇÊ¿äÇÑ ÀÚ·á(°Ô½Ã¹° Á¦¸ñ ¹× ³»¿ë, °Ô½ÃÀÏ, Á¶È¸¼ö µî)¸¦ º¹Á¦, Àü¼ÛÇÏ´Â °Í. ´Ü, ÀÌ °æ¿ì "wishfit"´Â º°µµÀÇ µ¿ÀÇ ¾øÀÌ È¸¿øÀÇ °³ÀÎÁ¤º¸¸¦ Á¦°øÇÏÁö ¾Ê½À´Ï´Ù.&nbsp;</p>
-
-<p>¨é ¹Ìµð¾î, Åë½Å»ç µî ¼­ºñ½º Á¦ÈÞ»ç¿¡°Ô È¸¿øÀÇ °Ô½Ã¹° ³»¿ëÀ» Á¦°ø, Àü½Ã È¤Àº È«º¸ÇÏ°Ô ÇÏ´Â °Í. ´Ü, ÀÌ °æ¿ì "wishfit"´Â º°µµÀÇ µ¿ÀÇ ¾øÀÌ È¸¿øÀÇ °³ÀÎÁ¤º¸¸¦ Á¦°øÇÏÁö ¾Ê½À´Ï´Ù.&nbsp;</p>
-
-<p>4. "wishfit"´Â ÀüÇ× ÀÌ¿ÜÀÇ ¹æ¹ýÀ¸·Î È¸¿øÀÇ °Ô½Ã¹°À» ÀÌ¿ëÇÏ°íÀÚ ÇÏ´Â °æ¿ì, ÀÌ¸ÞÀÏ ¶Ç´Â ±âÅ¸ ¹æ½ÄÀ¸·Î È¸¿øÀÇ »çÀü µ¿ÀÇ¸¦ ¾ò¾î¾ß ÇÕ´Ï´Ù.</p>
-
-<p>5. ÀÛ¼ºÇÑ °Ô½Ã¹°·Î ÀÎÇØ ¹ß»ýµÇ´Â ¹®Á¦¿¡ ´ëÇØ¼­´Â ÇØ´ç °Ô½Ã¹°À» °Ô½ÃÇÑ °Ô½ÃÀÚ¿¡°Ô Ã¥ÀÓÀÌ ÀÖÀ¸¸ç, Å¸ÀÎÀÇ ±Ç¸®¸¦ Ä§ÇØÇÑ °Ô½Ã¹°Àº Ä§ÇØ ´ç»çÀÚ ¶Ç´Â ±ÇÇÑ ´ë¸®ÀÎÀÇ ¿äÃ»¿¡ ÀÇÇØ »èÁ¦µÉ ¼ö ÀÖ½À´Ï´Ù.</p>
-
-<p>6. ÀÛ¼ºÇÑ °Ô½Ã¹°·Î ÀÎÇØ Å¸ÀÎ ¹× ÀúÀÛ¹°ÀÇ ÀúÀÛ±ÇÀ» Ä§ÇØÇÏ´Â °æ¿ì ÀÌ¿¡ ´ëÇÑ ¹Î.Çü»ç»óÀÇ Ã¥ÀÓÀº ±Û °Ô½ÃÀÚ¿¡°Ô ÀÖ½À´Ï´Ù. ¸¸ÀÏ ÀÌ¸¦ ÀÌÀ¯·Î "wishfit"°¡ Å¸ÀÎ¿¡°Ô ¼ÕÇØ¹è»óÃ»±¸ µî ÀÌÀÇ Á¦±â¸¦ ¹ÞÀº °æ¿ì ÇØ´ç °Ô½ÃÀÚ´Â ±×·Î ÀÎÇØ ¹ß»ýµÇ´Â ¸ðµç ¼ÕÇØ¸¦ ºÎ´ãÇØ¾ß ÇÕ´Ï´Ù.</p>
+<p>2. íšŒì›ì˜ ê°œì¸ì •ë³´ë³´í˜¸ì— ê´€í•´ì„œëŠ” ê´€ë ¨ë²•ë ¹ ë° "wishfit"ì—ì„œ ì •í•˜ëŠ” "ê°œì¸ì •ë³´ì·¨ê¸‰ë°©ì¹¨"ì— ì •í•œ ë°”ì— ì˜í•©ë‹ˆë‹¤.&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<p><b>Á¦15Á¶ ±¤°í °ÔÀç ¹× Á¤º¸ÀÇ Á¦°ø</b></p>
+<p><b>ì œ10ì¡° "wishfit"ì˜ ì˜ë¬´</b></p>
 
-<p>1. "wishfit"´Â ¼­ºñ½º ÀÌ¿ë¿¡ ÇÊ¿ä°¡ ÀÖ´Ù°í ÀÎÁ¤µÇ´Â °¢Á¾ Á¤º¸ ¶Ç´Â ±¤°í¸¦ ¼­ºñ½º È­¸é¿¡ °ÔÀçÇÒ ¼ö ÀÖ½À´Ï´Ù. È¸¿øÀº È¸¿øÀÌ µî·ÏÇÑ °Ô½Ã¹°ÀÇ ³»¿ëÀ» È°¿ëÇÑ ±¤°í°ÔÀç ¹× ±âÅ¸ ¼­ºñ½º»ó¿¡ ³ëÃâµÇ´Â ±¤°í°ÔÀç¿¡ ´ëÇØ µ¿ÀÇÇÕ´Ï´Ù.&nbsp;</p>
+<p>1. "wishfit"ëŠ” ë²•ë ¹ê³¼ ë³¸ ì•½ê´€ì´ ê¸ˆì§€í•˜ê±°ë‚˜ ê³µì„œì–‘ì†ì— ë°˜í•˜ëŠ” í–‰ìœ„ë¥¼ í•˜ì§€ ì•Šìœ¼ë©° ë³¸ ì•½ê´€ì´ ì •í•˜ëŠ” ë°”ì— ë”°ë¼ ì§€ì†ì ì´ê³ , ì•ˆì •ì ìœ¼ë¡œ ì„œë¹„ìŠ¤ë¥¼ ì œê³µí•˜ê¸° ìœ„í•´ì„œ ë…¸ë ¥í•©ë‹ˆë‹¤.&nbsp;</p>
 
-<p>2. "wishfit"´Â ¼­ºñ½º»ó¿¡ °ÔÀçµÇ¾î ÀÖ°Å³ª ¼­ºñ½º¸¦ ÅëÇÑ ±¤°íÁÖÀÇ ÆÇÃËÈ°µ¿¿¡ È¸¿øÀÌ Âü¿©ÇÏ°Å³ª ±³½Å ¶Ç´Â °Å·¡¸¦ ÇÔÀ¸·Î½á ¹ß»ýÇÏ´Â ¼Õ½Ç°ú ¼ÕÇØ¿¡ ´ëÇØ Ã¥ÀÓÀ» ÁöÁö ¾Ê½À´Ï´Ù</p>
-
-<p>&nbsp;</p>
-
-<p><b>Á¦16Á¶ ÀçÆÇ°üÇÒ</b></p>
-
-<p>"wishfit"¿ÍÈ¸¿ø°£¿¡ ¹ß»ýÇÑ ¼­ºñ½º ÀÌ¿ë¿¡ °üÇÑ ºÐÀï¿¡ ´ëÇÏ¿©´Â ´ëÇÑ¹Î±¹ ¹ýÀ» Àû¿ëÇÏ¸ç, º» ºÐÀïÀ¸·Î ÀÎÇÑ ¼Ò´Â ¹Î»ç¼Ò¼Û¹ý»óÀÇ °üÇÒÀ» °¡Áö´Â ´ëÇÑ¹Î±¹ÀÇ ¹ý¿ø¿¡ Á¦±âÇÕ´Ï´Ù.</p>
+<p>2. "wishfit"ëŠ” íšŒì›ì´ ì›í•˜ì§€ ì•ŠëŠ” ì˜ë¦¬ëª©ì ì˜ ê´‘ê³ ì„± ì „ìžìš°íŽ¸ì„ ë°œì†¡í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<p><b>ºÎÄ¢</b></p>
+<p><b>ì œ11ì¡° íšŒì›ì˜ ID ë° ë¹„ë°€ë²ˆí˜¸ì— ëŒ€í•œ ì˜ë¬´</b></p>
 
-<p>º» ¾à°üÀº 2021³â 4¿ù 3ÀÏºÎÅÍ ½ÃÇàÇÕ´Ï´Ù.</p>          </div>
+<p>1. "wishfit"ëŠ” ê´€ê³„ë²•ë ¹, "ê°œì¸ì •ë³´ì·¨ê¸‰ë°©ì¹¨"ì— ì˜í•´ì„œ ê·¸ ì±…ìž„ì„ ì§€ëŠ” ê²½ìš°ë¥¼ ì œì™¸í•˜ê³ , ìžì‹ ì˜ IDì™€ ë¹„ë°€ë²ˆí˜¸ì— ê´€í•œ ê´€ë¦¬ì±…ìž„ì€ ê° íšŒì›ì—ê²Œ ìžˆìŠµë‹ˆë‹¤.&nbsp;</p>
+
+<p>2. íšŒì›ì€ ìžì‹ ì˜ ID ë° ë¹„ë°€ë²ˆí˜¸ë¥¼ ì œ3ìžì—ê²Œ ì´ìš©í•˜ê²Œ í•´ì„œëŠ” ì•ˆë©ë‹ˆë‹¤.&nbsp;</p>
+
+<p>3. íšŒì›ì€ ìžì‹ ì˜ ID ë° ë¹„ë°€ë²ˆí˜¸ë¥¼ ë„ë‚œë‹¹í•˜ê±°ë‚˜ ì œ3ìžê°€ ì‚¬ìš©í•˜ê³  ìžˆìŒì„ ì¸ì§€í•œ ê²½ìš°ì—ëŠ” ë°”ë¡œ "wishfit"ì— í†µë³´í•˜ê³  "wishfit"ì˜ ì•ˆë‚´ê°€ ìžˆëŠ” ê²½ìš°ì—ëŠ” ê·¸ì— ë”°ë¼ì•¼ í•©ë‹ˆë‹¤.&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><b>ì œ12ì¡° íšŒì›ì˜ ì˜ë¬´</b></p>
+
+<p>íšŒì›ì€ ë‹¤ìŒ ê° í˜¸ì˜ í–‰ìœ„ë¥¼ í•˜ì—¬ì„œëŠ” ì•ˆë©ë‹ˆë‹¤.&nbsp;</p>
+
+<p>1. "wishfit"ì—ì„œ ì œê³µí•˜ëŠ” ì„œë¹„ìŠ¤ì— ì •í•œ ì•½ê´€ ê¸°íƒ€ ì„œë¹„ìŠ¤ ì´ìš©ì— ê´€í•œ ê·œì •ì„ ìœ„ë°˜í•˜ëŠ” í–‰ìœ„</p>
+
+<p>&nbsp;2. "wishfit" ê³µì§€ì‚¬í•­ ë˜ëŠ” ê° ê²Œì‹œíŒ ê³µì§€ì‚¬í•­ì— ìœ„ë°˜í•˜ëŠ” í–‰ìœ„</p>
+
+<p>3. "wishfit" ê¸°íƒ€ ì œ3ìžì˜ ì¸ê²©ê¶Œ ë˜ëŠ” ì§€ì ìž¬ì‚°ê¶Œì„ ì¹¨í•´í•˜ê±°ë‚˜ ì—…ë¬´ë¥¼ ë°©í•´í•˜ëŠ” í–‰ìœ„</p>
+
+<p>&nbsp;4. ë‹¤ë¥¸ íšŒì›ì˜ IDë¥¼ ë„ìš©í•˜ëŠ” í–‰ìœ„&nbsp;</p>
+
+<p>5. ì •í¬ë©”ì¼(junk mail), ìŠ¤íŒ¸ë©”ì¼(spam mail), í–‰ìš´ì˜ íŽ¸ì§€(chain letters), í”¼ë¼ë¯¸ë“œ ì¡°ì§ì— ê°€ìž…í•  ê²ƒì„ ê¶Œìœ í•˜ëŠ” ë©”ì¼, ì™¸ì„¤ ë˜ëŠ” í­ë ¥ì ì¸ ë©”ì‹œì§€ Â·í™”ìƒÂ·ìŒì„± ë“±ì´ ë‹´ê¸´ ë©”ì¼ì„ ë³´ë‚´ê±°ë‚˜ ê¸°íƒ€ ê³µì„œì–‘ì†ì— ë°˜í•˜ëŠ” ì •ë³´ë¥¼ ê³µê°œ ë˜ëŠ”ê²Œì‹œí•˜ëŠ” í–‰ìœ„.</p>
+
+<p>&nbsp;6. ê´€ë ¨ ë²•ë ¹ì— ì˜í•˜ì—¬ ê·¸ ì „ì†¡ ë˜ëŠ” ê²Œì‹œê°€ ê¸ˆì§€ë˜ëŠ” ì •ë³´(ì»´í“¨í„° í”„ë¡œê·¸ëž¨ ë“±)ì˜ ì „ì†¡ ë˜ëŠ” ê²Œì‹œí•˜ëŠ” í–‰ìœ„</p>
+
+<p>7. "wishfit"ì˜ ì§ì›ì´ë‚˜ "wishfit" ì„œë¹„ìŠ¤ì˜ ê´€ë¦¬ìžë¥¼ ê°€ìž¥í•˜ê±°ë‚˜ ì‚¬ì¹­í•˜ì—¬ ë˜ëŠ” íƒ€ì¸ì˜ ëª…ì˜ë¥¼ ëª¨ìš©í•˜ì—¬ ê¸€ì„ ê²Œì‹œí•˜ê±°ë‚˜ ë©”ì¼ì„ ë°œì†¡í•˜ëŠ” í–‰ìœ„</p>
+
+<p>8. ì»´í“¨í„° ì†Œí”„íŠ¸ì›¨ì–´, í•˜ë“œì›¨ì–´, ì „ê¸°í†µì‹  ìž¥ë¹„ì˜ ì •ìƒì ì¸ ê°€ë™ì„ ë°©í•´, íŒŒê´´í•  ëª©ì ìœ¼ë¡œ ê³ ì•ˆëœ ì†Œí”„íŠ¸ì›¨ì–´ ë°”ì´ëŸ¬ìŠ¤, ê¸°íƒ€ ë‹¤ë¥¸ ì»´í“¨í„° ì½”ë“œ, íŒŒì¼, í”„ë¡œê·¸ëž¨ì„ í¬í•¨í•˜ê³  ìžˆëŠ” ìžë£Œë¥¼ ê²Œì‹œí•˜ê±°ë‚˜ ì „ìžìš°íŽ¸ìœ¼ë¡œ ë°œì†¡í•˜ëŠ” í–‰ìœ„</p>
+
+<p>&nbsp;9. ìŠ¤í† í‚¹(stalking) ë“± ë‹¤ë¥¸ íšŒì›ì„ ê´´ë¡­ížˆëŠ” í–‰ìœ„</p>
+
+<p>10. ë‹¤ë¥¸ íšŒì›ì— ëŒ€í•œ ê°œì¸ì •ë³´ë¥¼ ê·¸ ë™ì˜ ì—†ì´ ìˆ˜ì§‘,ì €ìž¥,ê³µê°œí•˜ëŠ” í–‰ìœ„</p>
+
+<p>11. ë¶ˆíŠ¹ì • ë‹¤ìˆ˜ì˜ ìžë¥¼ ëŒ€ìƒìœ¼ë¡œ í•˜ì—¬ ê´‘ê³  ë˜ëŠ” ì„ ì „ì„ ê²Œì‹œí•˜ê±°ë‚˜ ìŠ¤íŒ¸ë©”ì¼ì„ ì „ì†¡í•˜ëŠ” ë“±ì˜ ë°©ë²•ìœ¼ë¡œ "wishfit"ì˜ ì„œë¹„ìŠ¤ë¥¼ ì´ìš©í•˜ì—¬ ì˜ë¦¬ëª©ì ì˜ í™œë™ì„ í•˜ëŠ” í–‰ìœ„</p>
+
+<p>12. ì„œë²„ë‚˜ íšŒì„ ì— ë¬´ë¦¬ë¥¼ ì¤„ ìˆ˜ ìžˆëŠ” í–‰ìœ„</p>
+
+<p>ìœ„ì˜ ê° í˜¸ì— í•´ë‹¹í•˜ëŠ” í–‰ìœ„ë¥¼ í•œ íšŒì›ì´ ìžˆì„ ê²½ìš° "wishfit"ëŠ” íšŒì›ì˜ íšŒì›ìžê²©ì„ ì ì ˆí•œ ë°©ë²•ìœ¼ë¡œ ì œí•œ ë° ì •ì§€, ìƒì‹¤ì‹œí‚¬ ìˆ˜ ìžˆìœ¼ë©°,íšŒì›ì€ ê·¸ ê·€ì±…ì‚¬ìœ ë¡œ ì¸í•˜ì—¬ "wishfit"ë‚˜ ë‹¤ë¥¸ íšŒì›ì´ ìž…ì€ ì†í•´ë¥¼ ë°°ìƒí•  ì±…ìž„ì´ ìžˆìŠµë‹ˆë‹¤.</p>
+
+<p>&nbsp;</p>
+
+<p><b>ì œ13ì¡° ê²Œì‹œë¬¼ ê´€ë ¨ ì‚¬í•­</b></p>
+
+<p>1. "wishfit"ëŠ” ê²Œì‹œë¬¼(ê²Œì‹œê¸€/ëŒ“ê¸€) ë° ë‚´ìš©ë¬¼ì— ê´€í•œ ì„¸ë¶€ ì´ìš©ì§€ì¹¨(ê³µì§€ì‚¬í•­)ì„ ë³„ë„ë¡œ ì •í•˜ì—¬ ìš´ì˜í•  ìˆ˜ ìžˆìœ¼ë©° íšŒì›ì€ ê·¸ ì§€ì¹¨ì— ë”°ë¼ ë‚´ìš©ì„ ë“±ë¡í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.</p>
+
+<p>2. "wishfit"ëŠ” ê³µê°œê²Œì‹œë¬¼ì˜ ë‚´ìš©ì´ ë‹¤ìŒ ê° í˜¸ì— í•´ë‹¹í•˜ëŠ” ê²½ìš° íšŒì›ì—ê²Œ ì‚¬ì „ í†µì§€ ì—†ì´ í•´ë‹¹ ê³µê°œê²Œì‹œë¬¼ì„ ìž„ì‹œ ì°¨ë‹¨ ì¡°ì¹˜ ë˜ëŠ” ì‚­ì œë‚˜ ì´ë™í•  ìˆ˜ ìžˆê³ , í•´ë‹¹ íšŒì›ì˜ íšŒì› ìžê²©ì„ ì œí•œ, ì •ì§€ ë˜ëŠ” ìƒì‹¤ì‹œí‚¬ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</p>
+
+<p>&nbsp;â‘  "wishfit"ì—ì„œ ì œê³µí•˜ëŠ” ì„œë¹„ìŠ¤ì— ì •í•œ ì•½ê´€ ê¸°íƒ€ ì„œë¹„ìŠ¤ ì´ìš©ì— ê´€í•œ ê·œì •ì„ ìœ„ë°˜í•˜ëŠ” í–‰ìœ„&nbsp;</p>
+
+<p>â‘¡ "wishfit" ê³µì§€ì‚¬í•­ ë˜ëŠ” ê° ê²Œì‹œíŒ ê³µì§€ì‚¬í•­ì— ìœ„ë°˜í•˜ëŠ” ë‚´ìš©</p>
+
+<p>â‘¢ ë‹¤ë¥¸ íšŒì› ë˜ëŠ” ì œ3ìžë¥¼ ë¹„ë°©í•˜ê±°ë‚˜ ì¤‘ìƒ ëª¨ëžµìœ¼ë¡œ ëª…ì˜ˆë¥¼ ì†ìƒì‹œí‚¤ëŠ” ë‚´ìš©</p>
+
+<p>â‘£ ì œ3ìžì˜ ì €ìž‘ê¶Œ ë“± ê¶Œë¦¬ë¥¼ ì¹¨í•´í•˜ëŠ” ë‚´ìš©</p>
+
+<p>â‘¤ ë²”ì£„í–‰ìœ„ì™€ ê´€ë ¨ì´ ìžˆë‹¤ê³  íŒë‹¨ë˜ëŠ” ë‚´ìš©</p>
+
+<p>â‘¥ ê¸°íƒ€ ê´€ê³„ ë²•ë ¹ì— ìœ„ë°°ëœë‹¤ê³  íŒë‹¨ë˜ëŠ” ë‚´ìš©</p>
+
+<p>3. "wishfit"ëŠ” íšŒì›ì˜ ê²Œì‹œë¬¼ ë“±ì— ëŒ€í•˜ì—¬ ë‹¤ë¥¸ íšŒì› í˜¹ì€ ì œ3ìžì˜ ë²•ë¥ ìƒ ê¶Œë¦¬ ì¹¨í•´ë¥¼ ê·¼ê±°ë¡œ ê²Œì‹œ ì¤‘ë‹¨ ìš”ì²­ì„ ë°›ì€ ê²½ìš° ê²Œì‹œë¬¼ì„ ê²Œì‹œ ì¤‘ë‹¨í•  ìˆ˜ ìžˆìœ¼ë©°, ê²Œì‹œ ì¤‘ë‹¨ ìš”ì²­ìžì™€ ê²Œì‹œë¬¼ ë“±ë¡ íšŒì› ê°„ì˜ í•©ì˜ ë˜ëŠ” ë²•ì  ì¡°ì¹˜ì˜ ê²°ê³¼ ë“±ì´ "wishfit"ì— ì ‘ìˆ˜ë˜ë©´ ê·¸ì— ë”°ë¦…ë‹ˆë‹¤.</p>
+
+<p>&nbsp;</p>
+
+<p><b>ì œ14ì¡° ì €ìž‘ê¶Œì˜ ê·€ì† ë° ì´ìš©ì œí•œ</b></p>
+
+<p>1. "wishfit"ê°€ ìž‘ì„±í•œ ì €ìž‘ë¬¼ì— ëŒ€í•œ ì €ìž‘ê¶Œ ê¸°íƒ€ ì§€ì ìž¬ì‚°ê¶Œì€ "wishfit"ì— ê·€ì†í•©ë‹ˆë‹¤.</p>
+
+<p>2. íšŒì›ì€ "wishfit"ë¥¼ ì´ìš©í•¨ìœ¼ë¡œì¨ ì–»ì€ ì •ë³´ë¥¼ "wishfit"ì˜ ì‚¬ì „ìŠ¹ë‚™ ì—†ì´ ë³µì œ, ì „ì†¡, ì¶œíŒ, ë°°í¬, ë°©ì†¡ ê¸°íƒ€ ë°©ë²•ì— ì˜í•˜ì—¬ ì˜ë¦¬ëª©ì ìœ¼ë¡œ ì´ìš©í•˜ê±°ë‚˜ ì œ3ìžì—ê²Œ ì´ìš©í•˜ê²Œ í•˜ì—¬ì„œëŠ” ì•ˆë©ë‹ˆë‹¤.&nbsp;</p>
+
+<p>3. íšŒì›ì´ ì„œë¹„ìŠ¤ ë‚´ì— ê²Œì‹œí•œ ê²Œì‹œë¬¼ì˜ ì €ìž‘ê¶Œì€ ê²Œì‹œí•œ íšŒì›ì—ê²Œ ê·€ì†ë©ë‹ˆë‹¤. ë‹¨, "wishfit"ëŠ” ì„œë¹„ìŠ¤ì˜ ìš´ì˜, ì „ì‹œ, ì „ì†¡, ë°°í¬, í™ë³´ì˜ ëª©ì ìœ¼ë¡œ íšŒì›ì˜ ë³„ë„ì˜ í—ˆë½ ì—†ì´ ë¬´ìƒìœ¼ë¡œ ì €ìž‘ê¶Œë²•ì— ê·œì •í•˜ëŠ” ê³µì •í•œ ê´€í–‰ì— í•©ì¹˜ë˜ê²Œ í•©ë¦¬ì ì¸ ë²”ìœ„ ë‚´ì—ì„œ ë‹¤ìŒê³¼ ê°™ì´ íšŒì›ì´ ë“±ë¡í•œ ê²Œì‹œë¬¼ì„ ì‚¬ìš©í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.&nbsp;</p>
+
+<p>â‘  ì„œë¹„ìŠ¤ ë‚´ì—ì„œ íšŒì› ê²Œì‹œë¬¼ì˜ ë³µì œ, ìˆ˜ì •, ê°œì¡°, ì „ì‹œ, ì „ì†¡, ë°°í¬ ë° ì €ìž‘ë¬¼ì„±ì„ í•´ì¹˜ì§€ ì•ŠëŠ” ë²”ìœ„ ë‚´ì—ì„œì˜ íŽ¸ì§‘ ì €ìž‘ë¬¼ ìž‘ì„±&nbsp;</p>
+
+<p>â‘¡ ê²Œì‹œë¬¼ ê²€ìƒ‰ ì„œë¹„ìŠ¤ ë“± í–¥ìƒëœ ì„œë¹„ìŠ¤ ì œê³µì„ ìœ„í•˜ì—¬ ê´€ë ¨ ì œíœ´ì‚¬ì—ê²Œ í•„ìš”í•œ ìžë£Œ(ê²Œì‹œë¬¼ ì œëª© ë° ë‚´ìš©, ê²Œì‹œì¼, ì¡°íšŒìˆ˜ ë“±)ë¥¼ ë³µì œ, ì „ì†¡í•˜ëŠ” ê²ƒ. ë‹¨, ì´ ê²½ìš° "wishfit"ëŠ” ë³„ë„ì˜ ë™ì˜ ì—†ì´ íšŒì›ì˜ ê°œì¸ì •ë³´ë¥¼ ì œê³µí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.&nbsp;</p>
+
+<p>â‘¢ ë¯¸ë””ì–´, í†µì‹ ì‚¬ ë“± ì„œë¹„ìŠ¤ ì œíœ´ì‚¬ì—ê²Œ íšŒì›ì˜ ê²Œì‹œë¬¼ ë‚´ìš©ì„ ì œê³µ, ì „ì‹œ í˜¹ì€ í™ë³´í•˜ê²Œ í•˜ëŠ” ê²ƒ. ë‹¨, ì´ ê²½ìš° "wishfit"ëŠ” ë³„ë„ì˜ ë™ì˜ ì—†ì´ íšŒì›ì˜ ê°œì¸ì •ë³´ë¥¼ ì œê³µí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.&nbsp;</p>
+
+<p>4. "wishfit"ëŠ” ì „í•­ ì´ì™¸ì˜ ë°©ë²•ìœ¼ë¡œ íšŒì›ì˜ ê²Œì‹œë¬¼ì„ ì´ìš©í•˜ê³ ìž í•˜ëŠ” ê²½ìš°, ì´ë©”ì¼ ë˜ëŠ” ê¸°íƒ€ ë°©ì‹ìœ¼ë¡œ íšŒì›ì˜ ì‚¬ì „ ë™ì˜ë¥¼ ì–»ì–´ì•¼ í•©ë‹ˆë‹¤.</p>
+
+<p>5. ìž‘ì„±í•œ ê²Œì‹œë¬¼ë¡œ ì¸í•´ ë°œìƒë˜ëŠ” ë¬¸ì œì— ëŒ€í•´ì„œëŠ” í•´ë‹¹ ê²Œì‹œë¬¼ì„ ê²Œì‹œí•œ ê²Œì‹œìžì—ê²Œ ì±…ìž„ì´ ìžˆìœ¼ë©°, íƒ€ì¸ì˜ ê¶Œë¦¬ë¥¼ ì¹¨í•´í•œ ê²Œì‹œë¬¼ì€ ì¹¨í•´ ë‹¹ì‚¬ìž ë˜ëŠ” ê¶Œí•œ ëŒ€ë¦¬ì¸ì˜ ìš”ì²­ì— ì˜í•´ ì‚­ì œë  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</p>
+
+<p>6. ìž‘ì„±í•œ ê²Œì‹œë¬¼ë¡œ ì¸í•´ íƒ€ì¸ ë° ì €ìž‘ë¬¼ì˜ ì €ìž‘ê¶Œì„ ì¹¨í•´í•˜ëŠ” ê²½ìš° ì´ì— ëŒ€í•œ ë¯¼.í˜•ì‚¬ìƒì˜ ì±…ìž„ì€ ê¸€ ê²Œì‹œìžì—ê²Œ ìžˆìŠµë‹ˆë‹¤. ë§Œì¼ ì´ë¥¼ ì´ìœ ë¡œ "wishfit"ê°€ íƒ€ì¸ì—ê²Œ ì†í•´ë°°ìƒì²­êµ¬ ë“± ì´ì˜ ì œê¸°ë¥¼ ë°›ì€ ê²½ìš° í•´ë‹¹ ê²Œì‹œìžëŠ” ê·¸ë¡œ ì¸í•´ ë°œìƒë˜ëŠ” ëª¨ë“  ì†í•´ë¥¼ ë¶€ë‹´í•´ì•¼ í•©ë‹ˆë‹¤.</p>
+
+<p>&nbsp;</p>
+
+<p><b>ì œ15ì¡° ê´‘ê³  ê²Œìž¬ ë° ì •ë³´ì˜ ì œê³µ</b></p>
+
+<p>1. "wishfit"ëŠ” ì„œë¹„ìŠ¤ ì´ìš©ì— í•„ìš”ê°€ ìžˆë‹¤ê³  ì¸ì •ë˜ëŠ” ê°ì¢… ì •ë³´ ë˜ëŠ” ê´‘ê³ ë¥¼ ì„œë¹„ìŠ¤ í™”ë©´ì— ê²Œìž¬í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤. íšŒì›ì€ íšŒì›ì´ ë“±ë¡í•œ ê²Œì‹œë¬¼ì˜ ë‚´ìš©ì„ í™œìš©í•œ ê´‘ê³ ê²Œìž¬ ë° ê¸°íƒ€ ì„œë¹„ìŠ¤ìƒì— ë…¸ì¶œë˜ëŠ” ê´‘ê³ ê²Œìž¬ì— ëŒ€í•´ ë™ì˜í•©ë‹ˆë‹¤.&nbsp;</p>
+
+<p>2. "wishfit"ëŠ” ì„œë¹„ìŠ¤ìƒì— ê²Œìž¬ë˜ì–´ ìžˆê±°ë‚˜ ì„œë¹„ìŠ¤ë¥¼ í†µí•œ ê´‘ê³ ì£¼ì˜ íŒì´‰í™œë™ì— íšŒì›ì´ ì°¸ì—¬í•˜ê±°ë‚˜ êµì‹  ë˜ëŠ” ê±°ëž˜ë¥¼ í•¨ìœ¼ë¡œì¨ ë°œìƒí•˜ëŠ” ì†ì‹¤ê³¼ ì†í•´ì— ëŒ€í•´ ì±…ìž„ì„ ì§€ì§€ ì•ŠìŠµë‹ˆë‹¤</p>
+
+<p>&nbsp;</p>
+
+<p><b>ì œ16ì¡° ìž¬íŒê´€í• </b></p>
+
+<p>"wishfit"ì™€íšŒì›ê°„ì— ë°œìƒí•œ ì„œë¹„ìŠ¤ ì´ìš©ì— ê´€í•œ ë¶„ìŸì— ëŒ€í•˜ì—¬ëŠ” ëŒ€í•œë¯¼êµ­ ë²•ì„ ì ìš©í•˜ë©°, ë³¸ ë¶„ìŸìœ¼ë¡œ ì¸í•œ ì†ŒëŠ” ë¯¼ì‚¬ì†Œì†¡ë²•ìƒì˜ ê´€í• ì„ ê°€ì§€ëŠ” ëŒ€í•œë¯¼êµ­ì˜ ë²•ì›ì— ì œê¸°í•©ë‹ˆë‹¤.</p>
+
+<p>&nbsp;</p>
+
+<p><b>ë¶€ì¹™</b></p>
+
+<p>ë³¸ ì•½ê´€ì€ 2021ë…„ 4ì›” 3ì¼ë¶€í„° ì‹œí–‰í•©ë‹ˆë‹¤.</p>          </div>
           <div class="confirm">
-            <input type="checkbox" name="accept_agreement[1]" value="Y" id="accept_agreement_1" class="app-input-checkbox">
-            <label for="accept_agreement_1">À§ÀÇ ³»¿ëÀ» ¸ðµÎ ÀÐ¾úÀ¸¸ç µ¿ÀÇÇÕ´Ï´Ù.</label>
+            <input type="checkbox" value="Y" id="accept_agreement_1" class="app-input-checkbox">
+            <label for="accept_agreement_1">ìœ„ì˜ ë‚´ìš©ì„ ëª¨ë‘ ì½ì—ˆìœ¼ë©° ë™ì˜í•©ë‹ˆë‹¤.</label>
           </div>
         </div><div class="app-agreement">
           
           <div class="app-agreement-title">
-            <em style="color:red">*</em>            <span>°³ÀÎÁ¤º¸ ¼öÁý ¹× ÀÌ¿ë µ¿ÀÇ (ÇÊ¼ö)</span>
+            <em style="color:red">*</em>            <span>ê°œì¸ì •ë³´ ìˆ˜ì§‘ ë° ì´ìš© ë™ì˜ (í•„ìˆ˜)</span>
                       </div>
           <div class="app-agreement-body">
-            <p><b>1. °³ÀÎÁ¤º¸ Ã³¸®¹æÄ§</b></p>
+            <p><b>1. ê°œì¸ì •ë³´ ì²˜ë¦¬ë°©ì¹¨</b></p>
 
-<p>"wishfit"´Â ÀÌ¿ëÀÚÀÇ µ¿ÀÇ¸¦ ¹Þ¾Æ °³ÀÎÁ¤º¸¸¦ ¼öÁý, ÀÌ¿ë ¹× Á¦°øÇÏ°í ÀÖÀ¸¸ç, ¡®ÀÌ¿ëÀÚÀÇ ±Ç¸® (°³ÀÎÁ¤º¸ ÀÚ±â°áÁ¤±Ç)¸¦ Àû±ØÀûÀ¸·Î º¸Àå¡¯ ÇÕ´Ï´Ù.&nbsp;¶ÇÇÑ ÀÌ¿ëÀÚ¿¡°Ô ´Ù¾çÇÑ ¼­ºñ½º¸¦ Á¦°øÇÔ¿¡ ÀÖ¾î ¾Æ·¡ ±âÁØÀ» ÁØ¼öÇÕ´Ï´Ù."wishfit"´Â Á¤º¸Åë½Å¼­ºñ½ºÁ¦°øÀÚ°¡ ÁØ¼öÇÏ¿©¾ß ÇÏ´Â ´ëÇÑ¹Î±¹ÀÇ °ü°è ¹ý·É ¹× °³ÀÎÁ¤º¸º¸È£ ±ÔÁ¤, °¡ÀÌµå¶óÀÎÀ» ÁØ¼öÇÏ°í ÀÖ½À´Ï´Ù. ¡°°³ÀÎÁ¤º¸Ã³¸®¹æÄ§¡±ÀÌ¶õ ÀÌ¿ëÀÚÀÇ ¼ÒÁßÇÑ °³ÀÎÁ¤º¸¸¦ º¸È£ÇÔÀ¸·Î½á ÀÌ¿ëÀÚ°¡ ¾È½ÉÇÏ°í ¼­ºñ½º¸¦ ÀÌ¿ëÇÒ ¼ö ÀÖµµ·Ï "wishfit"°¡ ÁØ¼öÇØ¾ß ÇÒ ÁöÄ§À» ÀÇ¹ÌÇÕ´Ï´Ù.&nbsp;</p>
-
-<p>&nbsp;</p>
-
-<p><b>2. °³ÀÎÁ¤º¸ ¼öÁý</b></p>
-
-<p>¸ðµç ÀÌ¿ëÀÚ´Â "wishfit"°¡ Á¦°øÇÏ´Â ¼­ºñ½º¸¦ ÀÌ¿ëÇÒ ¼ö ÀÖ°í, È¸¿ø°¡ÀÔ°ú ±¸µ¶ ½ÅÃ»À» ÅëÇØ ´õ¿í ´Ù¾çÇÑ ¼­ºñ½º¸¦ Á¦°ø¹ÞÀ» ¼ö ÀÖ½À´Ï´Ù. "wishfit"´Â ´ÙÀ½ÀÇ ¿øÄ¢ ÇÏ¿¡&nbsp; ÀÌ¿ëÀÚÀÇ °³ÀÎÁ¤º¸¸¦ ¼öÁýÇÏ°í ÀÖÀ¸¸ç, ÀÌ¿ëÀÚÀÇ °³ÀÎÁ¤º¸¸¦ ¼öÁýÇÏ´Â °æ¿ì¿¡´Â ¹Ýµå½Ã »çÀü¿¡ ÀÌ¿ëÀÚ¿¡°Ô ÇØ´ç »ç½ÇÀ» ¾Ë¸®°í µ¿ÀÇ¸¦ ±¸ÇÏµµ·Ï ÇÏ°Ú½À´Ï´Ù.&nbsp; ¼öÁý¹æ¹ý¿¡´Â ¼­ºñ½º ÀÌ¿ë, ¸ÞÀÏ ±¸µ¶ ½ÅÃ», ÀÌº¥Æ® ÀÀ¸ð, ÀüÈ­ µîÀÌ ÀÖÀ¸¸ç, ¾Æ·¡ÀÇ ¿øÄ¢À» ÁØ¼öÇÏ°í ÀÖ½À´Ï´Ù.&nbsp;&nbsp; &nbsp;</p>
-
-<p>1.&nbsp; ¼­ºñ½º Á¦°ø¿¡ ÇÊ¿äÇÑ ÃÖ¼ÒÇÑÀÇ °³ÀÎÁ¤º¸¸¦ ¼öÁýÇÕ´Ï´Ù.&nbsp; &nbsp; &nbsp;</p>
-
-<p>- °³ÀÎÁ¤º¸ ¼öÁý Ç×¸ñ : ¾ÆÀÌµð, ºñ¹Ð¹øÈ£, ÀÌ¸ÞÀÏ, ´Ð³×ÀÓ, ÀÌ¸§</p>
-
-<p>2.¼­ºñ½º ÀÌ¿ë°úÁ¤¿¡¼­ ¾Æ·¡¿Í °°Àº Á¤º¸µéÀÌ ÀÚµ¿À¸·Î »ý¼ºµÇ¾î ¼öÁýµÉ ¼ö ÀÖ½À´Ï´Ù.&nbsp;</p>
-
-<p>-&nbsp; IP ÁÖ¼Ò, ÄíÅ°, ¹æ¹® ÀÏ½Ã, ¼­ºñ½º ÀÌ¿ë ±â·Ï, ºÒ·® ÀÌ¿ë ±â·Ï</p>
-
-<p>3. "wishfit"´Â ¹Î°¨ Á¤º¸¸¦ ¼öÁýÇÏÁö ¾Ê½À´Ï´Ù.&nbsp; &nbsp; &nbsp;</p>
-
-<p>¹Î°¨Á¤º¸¶õ´Â ÀÌ¿ëÀÚÀÇ ¼ÒÁßÇÑ ÀÎ±ÇÀ» Ä§ÇØÇÒ ¿ì·Á°¡ ÀÖ´Â Á¤º¸ÀÔ´Ï´Ù.(ÀÎÁ¾, »ç»ó ¹× ½ÅÁ¶, Á¤Ä¡Àû ¼ºÇâÀÌ³ª ¹üÁË±â·Ï, ÀÇ·áÁ¤º¸ µî)&nbsp; &nbsp; &nbsp;</p>
-
-<p>´Ü, ¹ý·É¿¡¼­ ¹Î°¨ Á¤º¸ÀÇ Ã³¸®¸¦ ¿ä±¸ÇÏ°Å³ª Çã¿ëÇÏ´Â °æ¿ì¿¡´Â ¹Ýµå½Ã »çÀü¿¡ ÀÌ¿ëÀÚ¿¡°Ô ÇØ´ç »ç½ÇÀ» ¾Ë¸®°í µ¿ÀÇ¸¦ ±¸ÇÏµµ·Ï ÇÏ°Ú½À´Ï´Ù.&nbsp;</p>
+<p>"wishfit"ëŠ” ì´ìš©ìžì˜ ë™ì˜ë¥¼ ë°›ì•„ ê°œì¸ì •ë³´ë¥¼ ìˆ˜ì§‘, ì´ìš© ë° ì œê³µí•˜ê³  ìžˆìœ¼ë©°, â€˜ì´ìš©ìžì˜ ê¶Œë¦¬ (ê°œì¸ì •ë³´ ìžê¸°ê²°ì •ê¶Œ)ë¥¼ ì ê·¹ì ìœ¼ë¡œ ë³´ìž¥â€™ í•©ë‹ˆë‹¤.&nbsp;ë˜í•œ ì´ìš©ìžì—ê²Œ ë‹¤ì–‘í•œ ì„œë¹„ìŠ¤ë¥¼ ì œê³µí•¨ì— ìžˆì–´ ì•„ëž˜ ê¸°ì¤€ì„ ì¤€ìˆ˜í•©ë‹ˆë‹¤."wishfit"ëŠ” ì •ë³´í†µì‹ ì„œë¹„ìŠ¤ì œê³µìžê°€ ì¤€ìˆ˜í•˜ì—¬ì•¼ í•˜ëŠ” ëŒ€í•œë¯¼êµ­ì˜ ê´€ê³„ ë²•ë ¹ ë° ê°œì¸ì •ë³´ë³´í˜¸ ê·œì •, ê°€ì´ë“œë¼ì¸ì„ ì¤€ìˆ˜í•˜ê³  ìžˆìŠµë‹ˆë‹¤. â€œê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨â€ì´ëž€ ì´ìš©ìžì˜ ì†Œì¤‘í•œ ê°œì¸ì •ë³´ë¥¼ ë³´í˜¸í•¨ìœ¼ë¡œì¨ ì´ìš©ìžê°€ ì•ˆì‹¬í•˜ê³  ì„œë¹„ìŠ¤ë¥¼ ì´ìš©í•  ìˆ˜ ìžˆë„ë¡ "wishfit"ê°€ ì¤€ìˆ˜í•´ì•¼ í•  ì§€ì¹¨ì„ ì˜ë¯¸í•©ë‹ˆë‹¤.&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<p><b>3. °³ÀÎÁ¤º¸ ÀÌ¿ë</b></p>
+<p><b>2. ê°œì¸ì •ë³´ ìˆ˜ì§‘</b></p>
 
-<p>ÀÌ¿ëÀÚÀÇ °³ÀÎÁ¤º¸¸¦ ´ÙÀ½°ú °°Àº ¸ñÀûÀ¸·Î¸¸ ÀÌ¿ëÇÏ¸ç, ¸ñÀûÀÌ º¯°æ µÉ °æ¿ì¿¡´Â »çÀü¿¡ ÀÌ¿ëÀÚ¿¡°Ô µ¿ÀÇ¸¦ ±¸ÇÏµµ·Ï ÇÏ°Ú½À´Ï´Ù.&nbsp;&nbsp; &nbsp;</p>
+<p>ëª¨ë“  ì´ìš©ìžëŠ” "wishfit"ê°€ ì œê³µí•˜ëŠ” ì„œë¹„ìŠ¤ë¥¼ ì´ìš©í•  ìˆ˜ ìžˆê³ , íšŒì›ê°€ìž…ê³¼ êµ¬ë… ì‹ ì²­ì„ í†µí•´ ë”ìš± ë‹¤ì–‘í•œ ì„œë¹„ìŠ¤ë¥¼ ì œê³µë°›ì„ ìˆ˜ ìžˆìŠµë‹ˆë‹¤. "wishfit"ëŠ” ë‹¤ìŒì˜ ì›ì¹™ í•˜ì—&nbsp; ì´ìš©ìžì˜ ê°œì¸ì •ë³´ë¥¼ ìˆ˜ì§‘í•˜ê³  ìžˆìœ¼ë©°, ì´ìš©ìžì˜ ê°œì¸ì •ë³´ë¥¼ ìˆ˜ì§‘í•˜ëŠ” ê²½ìš°ì—ëŠ” ë°˜ë“œì‹œ ì‚¬ì „ì— ì´ìš©ìžì—ê²Œ í•´ë‹¹ ì‚¬ì‹¤ì„ ì•Œë¦¬ê³  ë™ì˜ë¥¼ êµ¬í•˜ë„ë¡ í•˜ê² ìŠµë‹ˆë‹¤.&nbsp; ìˆ˜ì§‘ë°©ë²•ì—ëŠ” ì„œë¹„ìŠ¤ ì´ìš©, ë©”ì¼ êµ¬ë… ì‹ ì²­, ì´ë²¤íŠ¸ ì‘ëª¨, ì „í™” ë“±ì´ ìžˆìœ¼ë©°, ì•„ëž˜ì˜ ì›ì¹™ì„ ì¤€ìˆ˜í•˜ê³  ìžˆìŠµë‹ˆë‹¤.&nbsp;&nbsp; &nbsp;</p>
 
-<p>- ÀÌ¿ëÀÚ ½Äº°, °¡ÀÔÀÇ»ç ¹× ¿¬·É È®ÀÎ, ºÒ·®È¸¿ø ºÎÁ¤ÀÌ¿ë ¹æÁö</p>
+<p>1.&nbsp; ì„œë¹„ìŠ¤ ì œê³µì— í•„ìš”í•œ ìµœì†Œí•œì˜ ê°œì¸ì •ë³´ë¥¼ ìˆ˜ì§‘í•©ë‹ˆë‹¤.&nbsp; &nbsp; &nbsp;</p>
 
-<p>&nbsp;- ´Ù¾çÇÑ ¼­ºñ½º Á¦°ø, ¹®ÀÇ»çÇ× ¶Ç´Â ºÒ¸¸ Ã³¸®, °øÁö»çÇ× Àü´Þ&nbsp; &nbsp;</p>
+<p>- ê°œì¸ì •ë³´ ìˆ˜ì§‘ í•­ëª© : ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸, ì´ë©”ì¼, ë‹‰ë„¤ìž„, ì´ë¦„</p>
 
-<p>- ÀÌ¿ëÀÚ¿Í ¾à¼ÓÇÑ ¼­ºñ½º Á¦°ø, À¯·á ¼­ºñ½º ±¸¸Å ¹× ÀÌ¿ë ½Ã ¿ä±Ý Á¤»ê&nbsp; &nbsp;</p>
+<p>2.ì„œë¹„ìŠ¤ ì´ìš©ê³¼ì •ì—ì„œ ì•„ëž˜ì™€ ê°™ì€ ì •ë³´ë“¤ì´ ìžë™ìœ¼ë¡œ ìƒì„±ë˜ì–´ ìˆ˜ì§‘ë  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.&nbsp;</p>
 
-<p>- ½Å±Ô ¼­ºñ½º °³¹ß, ÀÌº¥Æ® Çà»ç ½Ã Á¤º¸ Àü´Þ, ¸¶ÄÉÆÃ ¹× ±¤°í µî¿¡ È°¿ë&nbsp; &nbsp;</p>
+<p>-&nbsp; IP ì£¼ì†Œ, ì¿ í‚¤, ë°©ë¬¸ ì¼ì‹œ, ì„œë¹„ìŠ¤ ì´ìš© ê¸°ë¡, ë¶ˆëŸ‰ ì´ìš© ê¸°ë¡</p>
 
-<p>- ¼­ºñ½º ÀÌ¿ë ±â·Ï°ú Á¢¼Ó ºóµµ ºÐ¼®, ¼­ºñ½º ÀÌ¿ë¿¡ ´ëÇÑ Åë°è, ¸ÂÃãÇü ¼­ºñ½º Á¦°ø, ¼­ºñ½º °³¼±¿¡ È°¿ë</p>
+<p>3. "wishfit"ëŠ” ë¯¼ê° ì •ë³´ë¥¼ ìˆ˜ì§‘í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.&nbsp; &nbsp; &nbsp;</p>
 
-<p>&nbsp;"wishfit"´Â ÀÌ¿ëÀÚÀÇ °³ÀÎÁ¤º¸¸¦ ¼öÁý ¹× ÀÌ¿ë ¸ñÀû, ÀÌ¿ë ±â°£¿¡¸¸ Á¦ÇÑÀûÀ¸·Î ÀÌ¿ëÇÏ°í ÀÖÀ¸¸ç, Å»Åð¸¦ ¿äÃ»ÇÏ°Å³ª µ¿ÀÇ¸¦ Ã¶È¸ÇÏ´Â °æ¿ì ÁöÃ¼ ¾øÀÌ ÆÄ±âÇÕ´Ï´Ù.&nbsp;</p>
+<p>ë¯¼ê°ì •ë³´ëž€ëŠ” ì´ìš©ìžì˜ ì†Œì¤‘í•œ ì¸ê¶Œì„ ì¹¨í•´í•  ìš°ë ¤ê°€ ìžˆëŠ” ì •ë³´ìž…ë‹ˆë‹¤.(ì¸ì¢…, ì‚¬ìƒ ë° ì‹ ì¡°, ì •ì¹˜ì  ì„±í–¥ì´ë‚˜ ë²”ì£„ê¸°ë¡, ì˜ë£Œì •ë³´ ë“±)&nbsp; &nbsp; &nbsp;</p>
 
-<p><b>4. °³ÀÎÁ¤º¸ÀÇ Ãë±ÞÀ§Å¹</b></p>
-
-<p>&nbsp;"wishfit"´Â ¼­ºñ½º À¯Áö¿Í Çâ»óÀ» À§ÇØ ¾Æ·¡¿Í °°ÀÌ °³ÀÎÁ¤º¸¸¦ À§Å¹ÇÏ°í ÀÖ½À´Ï´Ù. ¶ÇÇÑ °ü°è ¹ý·É¿¡ µû¶ó °³ÀÎÁ¤º¸°¡ ¾ÈÀüÇÏ°Ô °ü¸®µÉ ¼ö ÀÖµµ·Ï ÇÊ¿äÇÑ »çÇ×À» ±ÔÁ¤ÇÏ°í ÀÖ½À´Ï´Ù. À§Å¹ ¾÷¹«ÀÇ ³»¿ëÀÌ³ª ¼öÅ¹ÀÚ°¡ º¯°æµÉ °æ¿ì¿¡´Â ÁöÃ¼¾øÀÌ º» °³ÀÎÁ¤º¸ Ã³¸®¹æÄ§À» ÅëÇØ °ø°³ÇÏµµ·Ï ÇÏ°Ú½À´Ï´Ù.</p>
-
-<p>- ¼öÅ¹¾÷Ã¼ : Amazon Web Services Inc, (ÁÖ)½½·Î¿öÅ©(½ºÆ¼ºñ)</p>
-
-<p>&nbsp;-À§Å¹ ¾÷¹« ³»¿ë : °³ÀÎÁ¤º¸°¡ ÀúÀåµÈ ±¹³» Å¬¶ó¿ìµå ¼­¹ö ¿î¿µ ¹× °ü¸® (Amazon Web Services Inc)</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;±¤°í µî ÀÌ¸ÞÀÏ ¸¶ÄÉÆÃ ÄÁÅÙÃ÷ ¹ß¼Û ((ÁÖ)½½·Î¿öÅ©)</p>
-
-<p>°³ÀÎÁ¤º¸ÀÇ º¸À¯ ¹× ÀÌ¿ë±â°£ :&nbsp; È¸¿øÅ»Åð½Ã È¤Àº À§Å¹°è¾à Á¾·á½Ã±îÁö</p>
+<p>ë‹¨, ë²•ë ¹ì—ì„œ ë¯¼ê° ì •ë³´ì˜ ì²˜ë¦¬ë¥¼ ìš”êµ¬í•˜ê±°ë‚˜ í—ˆìš©í•˜ëŠ” ê²½ìš°ì—ëŠ” ë°˜ë“œì‹œ ì‚¬ì „ì— ì´ìš©ìžì—ê²Œ í•´ë‹¹ ì‚¬ì‹¤ì„ ì•Œë¦¬ê³  ë™ì˜ë¥¼ êµ¬í•˜ë„ë¡ í•˜ê² ìŠµë‹ˆë‹¤.&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<p><b>5. °³ÀÎÁ¤º¸ ÆÄ±â</b></p>
+<p><b>3. ê°œì¸ì •ë³´ ì´ìš©</b></p>
 
-<p>ÀÌ¿ëÀÚÀÇ °³ÀÎÁ¤º¸¿¡ ´ëÇØ °³ÀÎÁ¤º¸ÀÇ ¼öÁý¡¤ÀÌ¿ë ¸ñÀûÀÌ ´Þ¼ºµÈ ÈÄ¿¡´Â ÇØ´ç Á¤º¸¸¦ ÁöÃ¼ ¾øÀÌ ÆÄ±âÇÕ´Ï´Ù. ´Ù¸¸, °ü°è¹ý·É¿¡ ÀÇÇØ º¸°üÇØ¾ß ÇÏ´Â Á¤º¸´Â ¹ý·ÉÀÌ Á¤ÇÑ ±â°£ µ¿¾È º¸°üÇÑ ÈÄ ÆÄ±âÇÏ¸ç, ÀÌ¿ë¾à°ü 15Á¶ 2Ç×¿¡ ÀÇÇØ ID°¡ Á¤Áö µÈ È¸¿øÀÇ Àç°¡ÀÔÀ» ¸·±â À§ÇØ º»ÀÎÈ®ÀÎ°ªÀ» º¸°üÇÕ´Ï´Ù.</p>
+<p>ì´ìš©ìžì˜ ê°œì¸ì •ë³´ë¥¼ ë‹¤ìŒê³¼ ê°™ì€ ëª©ì ìœ¼ë¡œë§Œ ì´ìš©í•˜ë©°, ëª©ì ì´ ë³€ê²½ ë  ê²½ìš°ì—ëŠ” ì‚¬ì „ì— ì´ìš©ìžì—ê²Œ ë™ì˜ë¥¼ êµ¬í•˜ë„ë¡ í•˜ê² ìŠµë‹ˆë‹¤.&nbsp;&nbsp; &nbsp;</p>
+
+<p>- ì´ìš©ìž ì‹ë³„, ê°€ìž…ì˜ì‚¬ ë° ì—°ë ¹ í™•ì¸, ë¶ˆëŸ‰íšŒì› ë¶€ì •ì´ìš© ë°©ì§€</p>
+
+<p>&nbsp;- ë‹¤ì–‘í•œ ì„œë¹„ìŠ¤ ì œê³µ, ë¬¸ì˜ì‚¬í•­ ë˜ëŠ” ë¶ˆë§Œ ì²˜ë¦¬, ê³µì§€ì‚¬í•­ ì „ë‹¬&nbsp; &nbsp;</p>
+
+<p>- ì´ìš©ìžì™€ ì•½ì†í•œ ì„œë¹„ìŠ¤ ì œê³µ, ìœ ë£Œ ì„œë¹„ìŠ¤ êµ¬ë§¤ ë° ì´ìš© ì‹œ ìš”ê¸ˆ ì •ì‚°&nbsp; &nbsp;</p>
+
+<p>- ì‹ ê·œ ì„œë¹„ìŠ¤ ê°œë°œ, ì´ë²¤íŠ¸ í–‰ì‚¬ ì‹œ ì •ë³´ ì „ë‹¬, ë§ˆì¼€íŒ… ë° ê´‘ê³  ë“±ì— í™œìš©&nbsp; &nbsp;</p>
+
+<p>- ì„œë¹„ìŠ¤ ì´ìš© ê¸°ë¡ê³¼ ì ‘ì† ë¹ˆë„ ë¶„ì„, ì„œë¹„ìŠ¤ ì´ìš©ì— ëŒ€í•œ í†µê³„, ë§žì¶¤í˜• ì„œë¹„ìŠ¤ ì œê³µ, ì„œë¹„ìŠ¤ ê°œì„ ì— í™œìš©</p>
+
+<p>&nbsp;"wishfit"ëŠ” ì´ìš©ìžì˜ ê°œì¸ì •ë³´ë¥¼ ìˆ˜ì§‘ ë° ì´ìš© ëª©ì , ì´ìš© ê¸°ê°„ì—ë§Œ ì œí•œì ìœ¼ë¡œ ì´ìš©í•˜ê³  ìžˆìœ¼ë©°, íƒˆí‡´ë¥¼ ìš”ì²­í•˜ê±°ë‚˜ ë™ì˜ë¥¼ ì² íšŒí•˜ëŠ” ê²½ìš° ì§€ì²´ ì—†ì´ íŒŒê¸°í•©ë‹ˆë‹¤.&nbsp;</p>
+
+<p><b>4. ê°œì¸ì •ë³´ì˜ ì·¨ê¸‰ìœ„íƒ</b></p>
+
+<p>&nbsp;"wishfit"ëŠ” ì„œë¹„ìŠ¤ ìœ ì§€ì™€ í–¥ìƒì„ ìœ„í•´ ì•„ëž˜ì™€ ê°™ì´ ê°œì¸ì •ë³´ë¥¼ ìœ„íƒí•˜ê³  ìžˆìŠµë‹ˆë‹¤. ë˜í•œ ê´€ê³„ ë²•ë ¹ì— ë”°ë¼ ê°œì¸ì •ë³´ê°€ ì•ˆì „í•˜ê²Œ ê´€ë¦¬ë  ìˆ˜ ìžˆë„ë¡ í•„ìš”í•œ ì‚¬í•­ì„ ê·œì •í•˜ê³  ìžˆìŠµë‹ˆë‹¤. ìœ„íƒ ì—…ë¬´ì˜ ë‚´ìš©ì´ë‚˜ ìˆ˜íƒìžê°€ ë³€ê²½ë  ê²½ìš°ì—ëŠ” ì§€ì²´ì—†ì´ ë³¸ ê°œì¸ì •ë³´ ì²˜ë¦¬ë°©ì¹¨ì„ í†µí•´ ê³µê°œí•˜ë„ë¡ í•˜ê² ìŠµë‹ˆë‹¤.</p>
+
+<p>- ìˆ˜íƒì—…ì²´ : Amazon Web Services Inc, (ì£¼)ìŠ¬ë¡œì›Œí¬(ìŠ¤í‹°ë¹„)</p>
+
+<p>&nbsp;-ìœ„íƒ ì—…ë¬´ ë‚´ìš© : ê°œì¸ì •ë³´ê°€ ì €ìž¥ëœ êµ­ë‚´ í´ë¼ìš°ë“œ ì„œë²„ ìš´ì˜ ë° ê´€ë¦¬ (Amazon Web Services Inc)</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ê´‘ê³  ë“± ì´ë©”ì¼ ë§ˆì¼€íŒ… ì»¨í…ì¸  ë°œì†¡ ((ì£¼)ìŠ¬ë¡œì›Œí¬)</p>
+
+<p>ê°œì¸ì •ë³´ì˜ ë³´ìœ  ë° ì´ìš©ê¸°ê°„ :&nbsp; íšŒì›íƒˆí‡´ì‹œ í˜¹ì€ ìœ„íƒê³„ì•½ ì¢…ë£Œì‹œê¹Œì§€</p>
 
 <p>&nbsp;</p>
 
-<p><b>6. ±âÅ¸»çÇ×</b></p>
+<p><b>5. ê°œì¸ì •ë³´ íŒŒê¸°</b></p>
 
-<p>&nbsp;- ¾ðÁ¦µçÁö ÀÚ½ÅÀÇ °³ÀÎÁ¤º¸¸¦ Á¶È¸ÇÏ°í ¼öÁ¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.&nbsp;</p>
-
-<p>- ¾ðÁ¦µçÁö °³ÀÎÁ¤º¸ Á¦°ø¿¡ °üÇÑ µ¿ÀÇÃ¶È¸/È¸¿ø°¡ÀÔÇØÁö¸¦ ¿äÃ»ÇÒ ¼ö ÀÖ½À´Ï´Ù.&nbsp;</p>
-
-<p>&nbsp;- Á¤È®ÇÑ °³ÀÎÁ¤º¸ÀÇ ÀÌ¿ë ¹× Á¦°øÀ» À§ÇØ ¼öÁ¤ÀÌ ¿Ï·áµÉ ¶§±îÁö ÀÌ¿ëÀÚÀÇ °³ÀÎÁ¤º¸´Â ÀÌ¿ëµÇ°Å³ª Á¦°øµÇÁö ¾Ê½À´Ï´Ù.&nbsp;</p>
-
-<p>- ÀÌ¹Ì Á¦3ÀÚ¿¡°Ô Á¦°øµÈ °æ¿ì¿¡´Â ÁöÃ¼ ¾øÀÌ Á¦°ø¹ÞÀº ÀÚ¿¡°Ô »ç½ÇÀ» ¾Ë·Á ¼öÁ¤ÀÌ ÀÌ·ç¾îÁú ¼ö ÀÖµµ·Ï ÇÏ°Ú½À´Ï´Ù.&nbsp; &nbsp;</p>
-
-<p>- ÄíÅ°Cooie¸¦ ¼³Ä¡, ¿î¿µÇÏ°í ÀÖ°í ÀÌ¿ëÀÚ´Â ÀÌ¸¦ °ÅºÎÇÒ ¼ö ÀÖ½À´Ï´Ù.&nbsp; &nbsp;</p>
-
-<p>- ÄíÅ°´Â ÀÌ¿ëÀÚ¿¡°Ô º¸´Ù ºü¸£°í Æí¸®ÇÑ À¥»çÀÌÆ® »ç¿ëÀ» Áö¿øÇÏ°í ¸ÂÃãÇü ¼­ºñ½º¸¦ Á¦°øÇÏ±â À§ÇØ »ç¿ëµË´Ï´Ù.</p>
-
-<p>&nbsp;°³ÀÎÁ¤º¸º¸È£ Ã¥ÀÓÀÚÃ¥ÀÓÀÚ :&nbsp; wishfit¿î¿µÆÀ(team"wishfit"@<a href="http://gmail.com/" rev="en_rl_none">gmail.com</a>)&nbsp;¶ÇÇÑ °³ÀÎÁ¤º¸°¡ Ä§ÇØµÇ¾î ÀÌ¿¡ ´ëÇÑ ½Å°í³ª »ó´ãÀÌ ÇÊ¿äÇÏ½Å °æ¿ì¿¡´Â ¾Æ·¡ ±â°ü¿¡ ¹®ÀÇÇÏ¼Å¼­ µµ¿òÀ» ¹ÞÀ¸½Ç ¼ö ÀÖ½À´Ï´Ù.&nbsp;&nbsp;</p>
-
-<p>- °³ÀÎÁ¤º¸Ä§ÇØ½Å°í¼¾ÅÍ (<a href="http://privacy.kisa.or.kr/" rev="en_rl_none">http://privacy.kisa.or.kr</a>&nbsp;/ ±¹¹ø¾øÀÌ 118)</p>
-
-<p>&nbsp;- ´ë°ËÂûÃ» »çÀÌ¹ö¼ö»ç°ú (<a href="http://www.spo.go.kr/" rev="en_rl_none">http://www.spo.go.kr</a>&nbsp;/ ±¹¹ø¾øÀÌ 1301)</p>
-
-<p>&nbsp;- °æÂûÃ» »çÀÌ¹ö¾ÈÀü±¹ (<a href="http://cyberbureau.police.go.kr/" rev="en_rl_none">http://cyberbureau.police.go.kr</a>&nbsp;/ ±¹¹ø¾øÀÌ 182)</p>
+<p>ì´ìš©ìžì˜ ê°œì¸ì •ë³´ì— ëŒ€í•´ ê°œì¸ì •ë³´ì˜ ìˆ˜ì§‘Â·ì´ìš© ëª©ì ì´ ë‹¬ì„±ëœ í›„ì—ëŠ” í•´ë‹¹ ì •ë³´ë¥¼ ì§€ì²´ ì—†ì´ íŒŒê¸°í•©ë‹ˆë‹¤. ë‹¤ë§Œ, ê´€ê³„ë²•ë ¹ì— ì˜í•´ ë³´ê´€í•´ì•¼ í•˜ëŠ” ì •ë³´ëŠ” ë²•ë ¹ì´ ì •í•œ ê¸°ê°„ ë™ì•ˆ ë³´ê´€í•œ í›„ íŒŒê¸°í•˜ë©°, ì´ìš©ì•½ê´€ 15ì¡° 2í•­ì— ì˜í•´ IDê°€ ì •ì§€ ëœ íšŒì›ì˜ ìž¬ê°€ìž…ì„ ë§‰ê¸° ìœ„í•´ ë³¸ì¸í™•ì¸ê°’ì„ ë³´ê´€í•©ë‹ˆë‹¤.</p>
 
 <p>&nbsp;</p>
 
-<p><b>7. ºÎÄ¢</b></p>
+<p><b>6. ê¸°íƒ€ì‚¬í•­</b></p>
 
-<p>-&nbsp; °³ÀÎÁ¤º¸Ã³¸®¹æÄ§ ½ÃÇàÀÏÀÚ : 2021³â 4¿ù 3ÀÏ</p>
+<p>&nbsp;- ì–¸ì œë“ ì§€ ìžì‹ ì˜ ê°œì¸ì •ë³´ë¥¼ ì¡°íšŒí•˜ê³  ìˆ˜ì •í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.&nbsp;</p>
+
+<p>- ì–¸ì œë“ ì§€ ê°œì¸ì •ë³´ ì œê³µì— ê´€í•œ ë™ì˜ì² íšŒ/íšŒì›ê°€ìž…í•´ì§€ë¥¼ ìš”ì²­í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.&nbsp;</p>
+
+<p>&nbsp;- ì •í™•í•œ ê°œì¸ì •ë³´ì˜ ì´ìš© ë° ì œê³µì„ ìœ„í•´ ìˆ˜ì •ì´ ì™„ë£Œë  ë•Œê¹Œì§€ ì´ìš©ìžì˜ ê°œì¸ì •ë³´ëŠ” ì´ìš©ë˜ê±°ë‚˜ ì œê³µë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.&nbsp;</p>
+
+<p>- ì´ë¯¸ ì œ3ìžì—ê²Œ ì œê³µëœ ê²½ìš°ì—ëŠ” ì§€ì²´ ì—†ì´ ì œê³µë°›ì€ ìžì—ê²Œ ì‚¬ì‹¤ì„ ì•Œë ¤ ìˆ˜ì •ì´ ì´ë£¨ì–´ì§ˆ ìˆ˜ ìžˆë„ë¡ í•˜ê² ìŠµë‹ˆë‹¤.&nbsp; &nbsp;</p>
+
+<p>- ì¿ í‚¤Cooieë¥¼ ì„¤ì¹˜, ìš´ì˜í•˜ê³  ìžˆê³  ì´ìš©ìžëŠ” ì´ë¥¼ ê±°ë¶€í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.&nbsp; &nbsp;</p>
+
+<p>- ì¿ í‚¤ëŠ” ì´ìš©ìžì—ê²Œ ë³´ë‹¤ ë¹ ë¥´ê³  íŽ¸ë¦¬í•œ ì›¹ì‚¬ì´íŠ¸ ì‚¬ìš©ì„ ì§€ì›í•˜ê³  ë§žì¶¤í˜• ì„œë¹„ìŠ¤ë¥¼ ì œê³µí•˜ê¸° ìœ„í•´ ì‚¬ìš©ë©ë‹ˆë‹¤.</p>
+
+<p>&nbsp;ê°œì¸ì •ë³´ë³´í˜¸ ì±…ìž„ìžì±…ìž„ìž :&nbsp; wishfitìš´ì˜íŒ€(team"wishfit"@<a href="http://gmail.com/" rev="en_rl_none">gmail.com</a>)&nbsp;ë˜í•œ ê°œì¸ì •ë³´ê°€ ì¹¨í•´ë˜ì–´ ì´ì— ëŒ€í•œ ì‹ ê³ ë‚˜ ìƒë‹´ì´ í•„ìš”í•˜ì‹  ê²½ìš°ì—ëŠ” ì•„ëž˜ ê¸°ê´€ì— ë¬¸ì˜í•˜ì…”ì„œ ë„ì›€ì„ ë°›ìœ¼ì‹¤ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.&nbsp;&nbsp;</p>
+
+<p>- ê°œì¸ì •ë³´ì¹¨í•´ì‹ ê³ ì„¼í„° (<a href="http://privacy.kisa.or.kr/" rev="en_rl_none">http://privacy.kisa.or.kr</a>&nbsp;/ êµ­ë²ˆì—†ì´ 118)</p>
+
+<p>&nbsp;- ëŒ€ê²€ì°°ì²­ ì‚¬ì´ë²„ìˆ˜ì‚¬ê³¼ (<a href="http://www.spo.go.kr/" rev="en_rl_none">http://www.spo.go.kr</a>&nbsp;/ êµ­ë²ˆì—†ì´ 1301)</p>
+
+<p>&nbsp;- ê²½ì°°ì²­ ì‚¬ì´ë²„ì•ˆì „êµ­ (<a href="http://cyberbureau.police.go.kr/" rev="en_rl_none">http://cyberbureau.police.go.kr</a>&nbsp;/ êµ­ë²ˆì—†ì´ 182)</p>
+
+<p>&nbsp;</p>
+
+<p><b>7. ë¶€ì¹™</b></p>
+
+<p>-&nbsp; ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨ ì‹œí–‰ì¼ìž : 2021ë…„ 4ì›” 3ì¼</p>
 </div>
 
 
           <div class="confirm">
-            <input type="checkbox" name="accept_agreement[2]" value="Y" id="accept_agreement_2" class="app-input-checkbox">
-            <label for="accept_agreement_2">À§ÀÇ ³»¿ëÀ» ¸ðµÎ ÀÐ¾úÀ¸¸ç µ¿ÀÇÇÕ´Ï´Ù.</label>
+            <input type="checkbox" value="Y" id="accept_agreement_2" class="app-input-checkbox">
+            <label for="accept_agreement_2">ìœ„ì˜ ë‚´ìš©ì„ ëª¨ë‘ ì½ì—ˆìœ¼ë©° ë™ì˜í•©ë‹ˆë‹¤.</label>
           </div>
         </div>  
+         
+      
         <ul class="app-member-form">
           <li>
             <label for="user_id">
               <em>*</em>
-              <span>¾ÆÀÌµð</span>
+              <span>ì•„ì´ë””</span>
             </label>
-            <input type="text" name="mem_id" id="user_id" value="" required="">
+            <input type="text" name="memId" id="user_id" value="" required="">
             
             <div class="app-error">
-              Æ¯¼ö¹®ÀÚ¸¦ Á¦¿ÜÇÑ ¿µ¾î ¼Ò¹®ÀÚ, ¼ýÀÚ Æ÷ÇÔÇÑ 6ÀÚ¸®~20ÀÚ¸®
+              íŠ¹ìˆ˜ë¬¸ìžë¥¼ ì œì™¸í•œ ì˜ì–´ ì†Œë¬¸ìž, ìˆ«ìž í¬í•¨í•œ 6ìžë¦¬~20ìžë¦¬
              </div>
              </li>
   
           <li>
             <label for="password">
               <em>*</em>
-              <span>ºñ¹Ð¹øÈ£</span>
+              <span>ë¹„ë°€ë²ˆí˜¸</span>
             </label>
-            <input class="hi input input-default" type="password" name="mem_pw" id="password" value="" required="">
-            <p class="app-error">¿µ¾î ´ë/¼Ò¹®ÀÚ, ¼ýÀÚ, Æ¯¼ö¹®ÀÚ¸¦ Æ÷ÇÔÇÑ 8ÀÚ¸® ~ 30ÀÚ¸®</p>
+            <input class="hi input input-default" type="password" name="memPw" id="password" value="" required="" onblur="pwCheck()">
+            <p class="app-error">ì˜ì–´ ëŒ€/ì†Œë¬¸ìž, ìˆ«ìž, íŠ¹ìˆ˜ë¬¸ìžë¥¼ í¬í•¨í•œ 8ìžë¦¬ ~ 30ìžë¦¬</p>
           </li>
           
           <li>
             <label for="password2">
               <em>*</em>
-              <span>ºñ¹Ð¹øÈ£ È®ÀÎ</span>
+              <span>ë¹„ë°€ë²ˆí˜¸ í™•ì¸</span>
             </label>
-            <input type="password" name="mem_pw2" id="password2" value="" required="">
+            <input type="password" id="password2" name="memPw2" value="" required="" onblur="pw2Check()">
           </li>
           
           <li>
             <label for="password_Q">
               <em>*</em>
-              <span>ºñ¹Ð¹øÈ£ Ã£±â Áú¹®</span>
+              <span>ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì§ˆë¬¸</span>
             </label>
-            <select name="mem_pwQ" id="pw_question">
-	                                <option value="01">¾Æ¹öÁöÀÇ ¼ºÇÔÀº?</option>
-	                                <option value="02">¾î¸Ó´ÏÀÇ ¼ºÇÔÀº?</option>
-	                                <option value="03">ÀÚ½ÅÀÇ »ýÀÏÀº?</option>
-	                                <option value="04">Ãâ½Å ÃÊµîÇÐ±³´Â?</option>
-	                                <option value="05">°¨¸í±í°Ô ÀÐÀº Ã¥ ÀÌ¸§Àº?</option>
+            <select name="memPwQ" id="pw_question">
+	                                <option value="01">ì•„ë²„ì§€ì˜ ì„±í•¨ì€?</option>
+	                                <option value="02">ì–´ë¨¸ë‹ˆì˜ ì„±í•¨ì€?</option>
+	                                <option value="03">ìžì‹ ì˜ ìƒì¼ì€?</option>
+	                                <option value="04">ì¶œì‹  ì´ˆë“±í•™êµëŠ”?</option>
+	                                <option value="05">ê°ëª…ê¹Šê²Œ ì½ì€ ì±… ì´ë¦„ì€?</option>
 	                            </select>
           </li>
           
           <li>
           	<label for="password_A">
           		<em>*</em>
-          		<span>ºñ¹Ð¹øÈ£ Ã£±â ´äº¯</span>
+          		<span>ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ë‹µë³€</span>
           	</label>
-          		<input type="text" name="mem_pwA" id="pw_answer">
-          		<p class="app-error">¼±ÅÃÇÑ Áú¹®¿¡ ´ëÇÑ ´äº¯À» ³²°ÜÁÖ½Ê½Ã¿À.</p>
+          		<input type="text" name="memPwA" id="pw_answer">
+          		<p class="app-error">ì„ íƒí•œ ì§ˆë¬¸ì— ëŒ€í•œ ë‹µë³€ì„ ë‚¨ê²¨ì£¼ì‹­ì‹œì˜¤.</p>
           </li>
           
           <li>
             <label for="user_name">
             				<em>*</em>
-                            <span>¼ºÇÔ</span>
+                            <span>ì„±í•¨</span>
             </label>
-                          <input type="text" name="mem_name" id="user_name" value="" required=""> 
+                          <input type="text" name="memName" id="user_name" value="" required=""> 
                           </li><li>
           
           <li>
             <label for="user_nick">
             				<em>*</em>
-                            <span>´Ð³×ÀÓ</span>
+                            <span>ë‹‰ë„¤ìž„</span>
             </label>
-                          <input type="text" name="mem_nick" id="user_nick" value="" required=""> 
+                          <input type="text" name="memNick" id="user_nick" value="" required=""> 
                           </li><li>
                           
             <label for="user_birth">
             				<em>*</em>
-                            <span>»ý³â¿ùÀÏ</span>
+                            <span>ìƒë…„ì›”ì¼</span>
             </label>
-                          <input type="date" name="mem_birth" id="user_birth" value="" required="">
+                          <input type="date" name="memBirth" id="user_birth" value="" required="">
                           </li><li>
                           
             
             <label for="user_gender">
             				<em>*</em>
-                            <span>¼ºº°</span>
+                            <span>ì„±ë³„</span>
             </label>
-                          <input type="radio" name="mem_gender" id="user_gender" value="female"> ¿©ÀÚ
-                          <input type="radio" name="mem_gender" id="user_gender" value="male"> ³²ÀÚ
+            			  <input type="radio" name="memGender" id="user_gender" value="male"> ë‚¨ìž
+                          <input type="radio" name="memGender" id="user_gender" value="female"> ì—¬ìž
                           </li><li>
                           
             <label for="user_phone">
-                            <span>ÀüÈ­¹øÈ£</span>
+                            <span>ì „í™”ë²ˆí˜¸</span>
             </label>
-                          <input type="text" name="mem_phone" id="user_phone"  value=""> 
+                          <input type="text" name="memPhone" id="user_phone"  value=""> 
                           <p class="app-error">
-                          ÀüÈ­¹øÈ£´Â - À» Á¦¿ÜÇÑ 11ÀÚ¸® ¼ýÀÚ¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.</p>
+                          ì „í™”ë²ˆí˜¸ëŠ” - ì„ í¬í•¨í•œ 13ìžë¦¬ ìˆ«ìžë¥¼ ìž…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.</p>
                           </li><li>
                           
             <label for="profile_image">
-                            <span>ÇÁ·ÎÇÊ »çÁø</span>
+                            <span>í”„ë¡œí•„ ì‚¬ì§„</span>
             </label>
-                          <input type="hidden" name="attach" value="false">
-                          <input type="file" name="profile_image" id="profile_image" value="" accept="image/*" data-max-filesize="102400" 
-                          																										data-max-filesize-error="ÆÄÀÏÀÌ ³Ê¹« Å®´Ï´Ù. ¿ë·® Á¦ÇÑÀº %sÀÔ´Ï´Ù.">
-                          <p class="help-block">ÆÄÀÏ ¿ë·® Á¦ÇÑ: 100.0KB, °¡·Î Á¦ÇÑ ±æÀÌ: 50px, ¼¼·Î Á¦ÇÑ ±æÀÌ: 50px</p>
+                          <input type="file" name="attach" accept="image/*">
+                          <p class="help-block">íŒŒì¼ ìš©ëŸ‰ ì œí•œ: 100.0KB, ê°€ë¡œ ì œí•œ ê¸¸ì´: 50px, ì„¸ë¡œ ì œí•œ ê¸¸ì´: 50px</p>
 						      
                   </ul>
-                  
+                 
         <div class="tw-flex tw-justify-end tw-pt-3">
-          <button class="app-button primary" type="submit">µî·Ï</button>
+          <button class="app-button primary" type="submit">ë“±ë¡</button>
         </div>
       </form>
     </div>  
@@ -480,9 +539,9 @@
 </div>
 </section>
         
-        <!--  ¿ìÃø »çÀÌµå -->
+        <!--  ìš°ì¸¡ ì‚¬ì´ë“œ -->
         <jsp:include page="/template/rightSide.jsp"></jsp:include>
         
         
-        <!-- ÇªÅÍ -->      
+        <!-- í‘¸í„° -->      
         <jsp:include page="/template/footer.jsp"></jsp:include>	

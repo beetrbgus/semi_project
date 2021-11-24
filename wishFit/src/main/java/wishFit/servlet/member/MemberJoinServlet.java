@@ -17,7 +17,7 @@ import wishFit.beans.member.MemberDto;
 import wishFit.beans.member.MemberProfileDao;
 import wishFit.beans.member.MemberProfileDto;
 
-@WebServlet(urlPatterns="/member/join.wishfit")
+@WebServlet(urlPatterns="/page/member/join.kh")
 public class MemberJoinServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,6 +36,7 @@ public class MemberJoinServlet extends HttpServlet{
 			memberDto.setMemPw(mRequest.getParameter("memPw"));
 			memberDto.setMemPwQ(mRequest.getParameter("memPwQ"));
 			memberDto.setMemPwA(mRequest.getParameter("memPwA"));
+			memberDto.setMemName(mRequest.getParameter("memName"));
 			memberDto.setMemNick(mRequest.getParameter("memNick"));
 			memberDto.setMemBirth(mRequest.getParameter("memBirth"));
 			memberDto.setMemPhone(mRequest.getParameter("memPhone"));
@@ -46,10 +47,12 @@ public class MemberJoinServlet extends HttpServlet{
 			
 			if(mRequest.getFile("attach")!=null) {
 				MemberProfileDto memberProfileDto = new MemberProfileDto();
+				
 				memberProfileDto.setMpId(memberDto.getMemId());
 				memberProfileDto.setMpSave(mRequest.getFilesystemName("attach"));
 				memberProfileDto.setMpUpload(mRequest.getOriginalFileName("attach"));
 				memberProfileDto.setMpType(mRequest.getContentType("attach"));
+				
 				File target = mRequest.getFile("attach");
 				memberProfileDto.setMpSize(target == null ? 0L : target.length());
 				
@@ -59,7 +62,8 @@ public class MemberJoinServlet extends HttpServlet{
 			
 			resp.sendRedirect("index.jsp");
 		}	catch(Exception e) {
-			
+			e.printStackTrace();
+			resp.sendError(500);
 		}
 	}
 }
