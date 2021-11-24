@@ -1,4 +1,4 @@
-		var today = new Date(); // 오늘 날짜
+        var today = new Date(); // 오늘 날짜
         var date = new Date();
     
         //이전 달 누르면 넘어가기
@@ -14,6 +14,10 @@
                 today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
                 build();
             });
+        });
+        
+        $(function(){
+        	build();
         });
         function build()
         {
