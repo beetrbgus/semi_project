@@ -7,6 +7,13 @@ public class MemberDto {
 								memGender,memPwQ,memPwA,memName,memPhone;
 	private int memReport;
 	private Date memJoin;
+	@Override
+	public String toString() {
+		return "MemberDto [memId=" + memId + ", memPw=" + memPw + ", memNick=" + memNick + ", memGrade=" + memGrade
+				+ ", memBirth=" + memBirth + ", memGender=" + memGender + ", memPwQ=" + memPwQ + ", memPwA=" + memPwA
+				+ ", memName=" + memName + ", memPhone=" + memPhone + ", memReport=" + memReport + ", memJoin="
+				+ memJoin + "]";
+	}
 	public String getMemId() {
 		return memId;
 	}

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import wishFit.beans.JdbcUtils;
+import wishFit.util.JdbcUtils;
 
 public class ReplyDao {
 	//댓글 조회(게시글 번호 참조)
@@ -71,13 +71,30 @@ public class ReplyDao {
 		con.close();
 	}
 	
-	
-	
-	
-	
-
-	
-	
-	
-
+	// 마이페이지 - 작성 댓글 목록
+	public List<ReplyDto> replyMine(String column, String keyword)throws Exception{
+		Connection con = JdbcUtils.connect();
+		
+		String sql = "select * from reply where #1 = ? order by reply_date desc";
+		sql = sql.replace("#1", column);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ReplyDto> list = new ArrayList<>();
+		while(rs.next()) {
+			ReplyDto replyDto = new ReplyDto();
+			
+			replyDto.setReplyNo(rs.getInt("reply_no"));
+			replyDto.setBoardNo(rs.getInt("board_no"));
+			replyDto.setReplyId(rs.getString("reply_id"));
+			replyDto.setReplyPost(rs.getString("reply_post"));
+			replyDto.setReplyDate(rs.getString("reply_Date"));
+			
+			list.add(replyDto);
+		}
+		con.close();
+		
+		return list;
+	}
 }
