@@ -151,7 +151,7 @@ public class Noti_Pagenation {
 	public void setBlockSize(int blockSize) {
 		this.blockSize = blockSize;
 	}
-	public List<BoardDto> getList() {
+	public List<NotificationDto> getList() {
 		return list;
 	}
 }
