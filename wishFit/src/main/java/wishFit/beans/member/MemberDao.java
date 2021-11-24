@@ -14,7 +14,7 @@ public class MemberDao {
 	// 회원가입
 	
 	public void join(MemberDto memberDto) throws Exception{
-		Connection con = JdbcUtils.connect();
+		conn = JdbcUtils.connect();
 		
 		String sql = "insert into member( "
 				+ "mem_id, mem_pw, "
@@ -25,7 +25,7 @@ public class MemberDao {
 				+ ")"
 				+ "values(?,?,?,?,to_date(?,'YYYY-MM-DD'),?,?,?,?)";
 		
-		ps = con.prepareStatement(sql);
+		ps = conn.prepareStatement(sql);
 		
 		ps.setString(1, memberDto.getMemId());
 		ps.setString(2, memberDto.getMemPw());
@@ -39,7 +39,7 @@ public class MemberDao {
 		ps.execute();
 		
 		System.out.print("들어옴");
-		con.close();
+		conn.close();
 	}
 	//로그인 
 	public MemberDto login(String memId , String memPw) throws Exception {
@@ -95,23 +95,23 @@ public class MemberDao {
 
 	// 회원 탈퇴
 	public boolean quit(String memId, String memPw) throws Exception {
-		Connection con = JdbcUtils.connect();
+		conn = JdbcUtils.connect();
 		
 		String sql="delect member where mem_id=? and mem_pw=?";
-		ps = con.prepareStatement(sql);
+		ps = conn.prepareStatement(sql);
 		ps.setString(1, memId);
 		ps.setString(2, memPw);
 		
 		int result = ps.executeUpdate();
 		
-		con.close();
+		conn.close();
 		
 		return result > 0;
 	}
 
 	//정보 수정
 	public boolean edit(MemberDto memberDto) throws Exception {
-		Connection con = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect();
 		System.out.println(memberDto);
 		String sql="update member "
 				+ "set "
@@ -120,7 +120,7 @@ public class MemberDao {
 					+ "mem_phone=? "
 				+ "where mem_id=?";  //아이디 기준
 		
-		ps = con.prepareStatement(sql);
+		ps = conn.prepareStatement(sql);
 		
 		ps.setString(1, memberDto.getMemPw());
 		ps.setString(2, memberDto.getMemNick());
@@ -129,7 +129,7 @@ public class MemberDao {
 		
 		int result = ps.executeUpdate();
 
-		con.close();
+		conn.close();
 		
 		return result > 0;
 	}
@@ -156,11 +156,11 @@ public class MemberDao {
 	
 	// 비밀번호 찾기(아이디, 질문, 답변)
 	public String findPw(MemberDto memberDto) throws Exception {
-		Connection con = JdbcUtils.connect();
+		conn = JdbcUtils.connect();
 		
 		String sql = "select mem_pw from member "
 				+ "where mem_id=? and mem_pw_q=? and mem_pw_a=?";
-		ps = con.prepareStatement(sql);
+		ps = conn.prepareStatement(sql);
 		ps.setString(1, memberDto.getMemId());
 		ps.setString(2, memberDto.getMemPwQ());
 		ps.setString(3, memberDto.getMemPwA());
@@ -172,7 +172,7 @@ public class MemberDao {
 		} else {
 			memPw = null;
 		}
-		con.close();
+		conn.close();
 		return memPw;
 	}
 }
