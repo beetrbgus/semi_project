@@ -8,10 +8,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-String uid = (String) session.getAttribute("uid");
-// 처리
-MemberDao memberDao = new MemberDao();
-MemberDto memberDto = memberDao.get(uid);
+	String uid = (String) session.getAttribute("uid");
+	// 처리
+	MemberDao memberDao = new MemberDao();
+	MemberDto memberDto = memberDao.get(uid);
 %>
 <%
 	ReplyDao replyDao = new ReplyDao();

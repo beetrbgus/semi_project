@@ -60,7 +60,7 @@ public class MemberJoinServlet extends HttpServlet{
 				memberProfileDao.insert(memberProfileDto);
 			}
 			
-			resp.sendRedirect("/index.jsp");
+			resp.sendRedirect("index.jsp");
 		}	catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

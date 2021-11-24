@@ -10,13 +10,14 @@ import wishFit.util.JdbcUtils;
 
 // 마이페이지 - 작성 글 목록 보기
 public class FitgroupDao {
-	public List<FitgroupDto> fitgroupMine(String fgId) throws Exception{
+	public List<FitgroupDto> fitgroupMine(String column, String keyword) throws Exception{
 		Connection con = JdbcUtils.connect();
 		
-		String sql = "select * from fitgroup where fg_id = ? order by fg_no desc";
+		String sql = "select * from fitgroup where #1 = ? order by fg_no desc";
 		
+		sql = sql.replace("#1", column);
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, fgId);
+		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
 		
 		List<FitgroupDto> list = new ArrayList<>();

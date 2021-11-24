@@ -22,7 +22,7 @@
     		$("input[name=memId]").on("input",function(){
     			var input = $("input[name=memId]").val();
     			$.ajaxf({
-    				url = "";
+    				url = "ajax_id_check.kh";
     				type : "post";
     				data:{
     					memId : inputId
@@ -66,7 +66,7 @@
     		});
     
     	// 비밀번호 확인
-    	function pw2check(){
+    	function pw2Check(){
     		var pwInput = document.querySelector("input[name=memPw]");
         	var pw2Input = document.querySelector("input[name=memPw2]");
         	var notice = pw2Input.nextElementSibling;

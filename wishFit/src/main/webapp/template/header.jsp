@@ -493,6 +493,7 @@ String uid = (String) session.getAttribute("uid");
 			
 		
 	</script>
+	<!-- 멤버 프로필 사진이 헤더에 보이게  -->
 				<%
 					MemberDao memberDao = new MemberDao();
 					MemberDto memberDto = memberDao.get(uid);
@@ -541,7 +542,7 @@ String uid = (String) session.getAttribute("uid");
 								</a></li>
 								
 								<li class="tw-border-b tw-border-gray-300 tw-my-2"></li>
-								<li><a href="logout.kh"
+								<li><a href="<%=root%>/page/member/logout.kh""
 									class="eq more"> <ion-icon name="lock-open-outline"
 											role="img" class="md hydrated" aria-label="lock open outline"></ion-icon>
 										<span>로그아웃</span>
@@ -553,7 +554,6 @@ String uid = (String) session.getAttribute("uid");
 			</div>
 		</header>
 		<div class="app-header-space"></div>
-		<!--#Meta:layouts/slow/components/header/header-menu/header-menu.scss?$__Context->themeConfig->variables-->
 
 
 		<div class="app-header-menu">
