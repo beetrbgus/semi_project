@@ -2,6 +2,14 @@
 	pageEncoding="UTF-8"%>
 
 <!-- 왼쪽 사이드 바 -->
+<script>
+$(document).ready(function(){
+	$(".app-sidebar-left.app-custom-scroll > nav > ul > li").click(function(){
+		$("li.active open").find("li").removeClass("active open");
+		/* $(this).removeClass("active open"); */
+	});
+});
+</script>
 <div class="app-layout">
 	<!--#Meta:layouts/slow/components/sidebar-left/sidebar-left.scss?$__Context->themeConfig->variables-->
 	<aside id="app-sidebar-left" class="app-layout__sidebar-left">
@@ -19,27 +27,24 @@
 					</li>
 					<li class="">
 						<div class="app-sidebar-left__nav__item">
-							<a href="community.html"> <span>내 기록</span>
-							</a>
-							<ion-icon name="chevron-down-outline" class="app-sidebar-left__nav__more md hydrated" role="img" aria-label="chevron down outline">
-								<div class="icon-inner">
-									<svg xmlns="http://www.w3.org/2000/svg" class="ionicon s-ion-icon" viewBox="0 0 512 512"><title>Chevron Down</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path></svg>
-								</div>
-							</ion-icon>
-						</div>
-
-						<ul class="app-sidebar-left__nav__child">
-							<li><a href="best.html">추천글게시판</a></li>
-							<li><a href="certifyboard.html">운동인증</a></li>
-							<li><a href="coordiboard.html">운동코디</a></li>
-							<li><a href="freeboard.html">자유게시판</a></li>
-							<li><a href="humorboard.html">유머게시판</a></li>
-							<li><a href="qna.html">질문게시판</a></li>
-						</ul>
+	       					<a href="#">
+	             		    	<span>내 기록</span>
+	        				</a>
+					        <ion-icon name="chevron-down-outline" 
+					        	class="app-sidebar-left__nav__more md hydrated" 
+					        	role="img" aria-label="chevron down outline">
+					        	<div class="icon-inner">
+					        		<svg xmlns="http://www.w3.org/2000/svg" class="ionicon s-ion-icon" viewBox="0 0 512 512">
+					        			<title>Chevron Down</title>
+					        			<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"></path>
+					        		</svg>
+				        		</div>
+					        </ion-icon>
+        				</div>
 					</li>
 					<li class="">
 						<div class="app-sidebar-left__nav__item">
-							<a href="infomation.html"> <span>커뮤니티</span>
+							<a href="#"> <span>커뮤니티</span>
 							</a>
 							<ion-icon name="chevron-down-outline"
 								class="app-sidebar-left__nav__more"> </ion-icon>
@@ -55,7 +60,7 @@
 					</li>
 					<li class="">
 						<div class="app-sidebar-left__nav__item">
-							<a href="small.html"> <span>소모임</span>
+							<a href="#"> <span>소모임</span>
 							</a>
 							<ion-icon name="chevron-down-outline"
 								class="app-sidebar-left__nav__more"> </ion-icon>
@@ -74,7 +79,7 @@
 					</li>
 					<li class="">
 						<div class="app-sidebar-left__nav__item">
-							<a href="elite.html"> <span>마켓</span>
+							<a href="#"> <span>마켓</span>
 							</a>
 							<ion-icon name="chevron-down-outline"
 								class="app-sidebar-left__nav__more"> </ion-icon>
@@ -90,7 +95,7 @@
 					</li>
 					<li class="">
 						<div class="app-sidebar-left__nav__item">
-							<a href="managment.html"> <span>운영사항</span>
+							<a href="#"> <span>운영사항</span>
 							</a>
 							<ion-icon name="chevron-down-outline"
 								class="app-sidebar-left__nav__more"> </ion-icon>

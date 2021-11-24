@@ -1,15 +1,21 @@
 
+<%@page import="wishFit.beans.message.MessageDao"%>
+<%@page import="wishFit.beans.member.MemberProfileDto"%>
+<%@page import="wishFit.beans.member.MemberProfileDao"%>
+<%@page import="wishFit.beans.member.MemberDto"%>
+<%@page import="wishFit.beans.member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- 	<%@page import="wishFit.beans.message.MessageDao"%> --%>
 <!DOCTYPE html>
 <html class="hydrated">
-<%
-String root = request.getContextPath();
-%>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<% 
+String root = request.getContextPath();
+String uid = (String)request.getSession().getAttribute("uid");
+%>
 <style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/667a9524d72c3d7bdb2c48b2d4c5271c0988e0b2.rhymix.less.minefb7.css?20210415220507" />
