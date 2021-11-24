@@ -315,7 +315,7 @@ $(document).ready(function(){
 							</div>
 							<div class="app-dialog-body">
 								<!-- 로그인 입력 폼 -->
-								<form class="tw-mb-5" action="https://sweatee.co.kr/"
+								<form class="tw-mb-5" 
 									method="post" autocomplete="off">
 									<input type="hidden" name="error_return_url" value="/" /> <input
 										type="hidden" name="mid" value="index" /> <input

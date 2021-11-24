@@ -41,9 +41,7 @@ public class MemberDao {
 		con.close();
 	}
 
-	// 로그인
-	public MemberDto get(String mem_id) throws Exception{
-		Connection con = JdbcUtils.connect();
+
 	//로그인 
 	public MemberDto login(String memId , String memPw) throws Exception {
 		conn = JdbcUtils.connect();
@@ -60,24 +58,6 @@ public class MemberDao {
 		return memberDto; 
 	}
 	
-	// 회원 상세
-	public MemberDto get(String memId) throws Exception{
-		Connection con = JdbcUtils.connect();
-	//로그인 
-	public MemberDto login(String memId , String memPw) throws Exception {
-		conn = JdbcUtils.connect();
-		String sql = "select mem_id ,  mem_grade from member where mem_id=? and mem_pw =?";
-		ps = conn.prepareStatement(sql);
-		ps.setString(1, memId);
-		ps.setString(2, memPw);
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		MemberDto memberDto = new MemberDto();
-		memberDto.setMemId(rs.getString("mem_id"));
-		memberDto.setMemGrade(rs.getString("mem_grade"));
-		conn.close();
-		return memberDto; 
-	}
 	
 	// 회원 상세
 	public MemberDto get(String memId) throws Exception{

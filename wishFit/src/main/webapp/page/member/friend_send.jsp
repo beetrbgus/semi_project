@@ -8,7 +8,7 @@
 <%
 	// 처리
 	FriendDao friendDao = new FriendDao();
-	List<FriendDto> list = friendDao.send();
+// 	List<FriendDto> list = friendDao.send();
 %>
 
 <h2>친구 요청 보낸 페이지</h2>
@@ -22,14 +22,14 @@
 		</tr>
 	</thead>
 	<tbody>
-	<%for(FriendDto friendDto : list){%>
-	<tr>
-		<td><%=friendDto.getFriendNo() %></td>
-		<td><%=friendDto.getFriendNick() %></td>
-		<td>
-		<a href="quit_delete.kh?friendNo=<%=friendDto.getFriendNo()%>">친구 신청 취소</a>
-		</td>
-	</tr>
-	<%} %>
+<%-- 	<%for(FriendDto friendDto : list){%> --%>
+<!-- 	<tr> -->
+<%-- 		<td><%=friendDto.getFriendNo() %></td> --%>
+<%-- 		<td><%=friendDto.getFriendNick() %></td> --%>
+<!-- 		<td> -->
+<%-- 		<a href="quit_delete.kh?friendNo=<%=friendDto.getFriendNo()%>">친구 신청 취소</a> --%>
+<!-- 		</td> -->
+<!-- 	</tr> -->
+<%-- 	<%} %> --%>
 	</tbody>
 </table>
