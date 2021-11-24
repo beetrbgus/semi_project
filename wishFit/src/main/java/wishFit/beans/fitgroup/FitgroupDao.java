@@ -186,8 +186,7 @@ public class FitgroupDao {
 	// 글수정
 	public boolean update(FitgroupDto fitgroupDto) throws Exception {
 		Connection con = JdbcUtils.connect();
-		String sql = "update fitgroup set excate_name=?, fg_title=?, fg_intro=?, fg_starttime=?, "
-				+ "fg_endtime=?, fg_location=? fg_latitude=?,fg_longitude=?  where fg_no=?";
+		String sql = "update fitgroup set excate_name=?, fg_title=?, fg_intro=?,fg_starttime=to_date(?,'yyyy-mm-dd hh24:mi'),fg_endtime=to_date(?,'yyyy-mm-dd hh24:mi'),fg_location=?,fg_latitude=?,fg_longitude=? where fg_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, fitgroupDto.getExcateName());
 		ps.setString(2, fitgroupDto.getFgTitle());
@@ -195,11 +194,9 @@ public class FitgroupDao {
 		ps.setString(4, fitgroupDto.getFgStarttime());
 		ps.setString(5, fitgroupDto.getFgEndtime());
 		ps.setString(6, fitgroupDto.getFgLocation());
-		ps.setString(7, fitgroupDto.getFgId());
-		ps.setString(8, fitgroupDto.getFgLatitude());
-		ps.setString(9, fitgroupDto.getFgLongtitude());
-
-
+		ps.setString(7, fitgroupDto.getFgLatitude());
+		ps.setString(8, fitgroupDto.getFgLongtitude());
+		ps.setInt(9, fitgroupDto.getFgNo());
 
 		int result = ps.executeUpdate();
 		con.close();
@@ -229,4 +226,35 @@ public class FitgroupDao {
 		con.close();
 		return seq;
 	}
+	public List<TotalVO> count() throws Exception{
+		Connection con = JdbcUtils.connect();
+		String sql = "select excate_name fgname, count(fg_no) total from fitgroup group by excate_name";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		List<TotalVO> list = new ArrayList<>();
+		while(rs.next()) {
+			TotalVO totalVO = new TotalVO();
+			totalVO.setFgName(rs.getString("fgname"));
+			totalVO.setTotal(rs.getInt("total"));
+		list.add(totalVO);
+		}
+		con.close();
+		return list;
+	}
+	public TotalVO countTotal() throws Exception{
+		Connection con = JdbcUtils.connect();
+		String sql = "select count(*)total from fitgroup";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		TotalVO totalVO ;
+		if(rs.next()) {
+			 totalVO = new TotalVO();	
+			totalVO.setTotal(rs.getInt("total"));
+		}else {
+			totalVO=null;
+		}
+		con.close();
+		return totalVO;
+	}
+	
 }
