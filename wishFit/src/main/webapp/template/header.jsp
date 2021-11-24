@@ -1,4 +1,8 @@
 <%@page import="wishFit.beans.message.MessageDao"%>
+<%@page import="wishFit.beans.member.MemberProfileDto"%>
+<%@page import="wishFit.beans.member.MemberProfileDao"%>
+<%@page import="wishFit.beans.member.MemberDto"%>
+<%@page import="wishFit.beans.member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -131,30 +135,55 @@ String uid = (String)request.getSession().getAttribute("uid");
 }
 </style>
 <script>
-
-
 function modal_on(){
 	$("#app-login").addClass('active');
 }
 function modal_off(){
 	$("#app-login").removeClass('active');
 }
-
+/* 알림 , 메세지 창 , 프로필 클릭시 자식 화면 화면에 보이기. */
 $(document).ready(function(){
 	/* 헤더의 검색창 누를 때. 검색창 영역 보이게.*/
-	$('.app-search-toggle').on('click', function() { 
-		$('#app-search').toggleClass('app-search--active');
-	});
+	$(".app-pc-only.app-dropdown a").click(function(e){ 
+		$(this).parent().toggleClass("active");
+	});	
+	/* 알림 , 메세지 창 , 프로필 클릭시 자식 화면 화면에 보이기. */
+	$(".app-pc-only.app-dropdown a").click(function(e){ 
+		$(this).parent().toggleClass("active");
+	});	
+	
+	/* 로그인 했으면 로그인 회원가입 창 없애기. */
+	/* 페이지 리로딩 하니까 밑에 세션에서 값을 가져옴. 세션에 값이 있으면
+	
+	*/
+	
+	$(function(){
+		let login  = $("#uid").val();
+	
+		if(login == "" ||login ==null || login =="null" ){
+			$(".notLogin").show();
+			$(".onlyLogin").hide();
+		}else{
+			$(".onlyLogin").show();
+			$(".notLogin").hide();
+		}
+	})
+	$(function(){
+		let login  = $("#uid").val();
+	
+		if(login =="" ||login ==null || login =="null" ){
+			$(".notLogin").show();
+			$(".onlyLogin").hide();
+		}else{
+			$(".onlyLogin").show();
+			$(".notLogin").hide();
+		}
+	})
 	/* 닫기 버튼 누를 때나 , 영역 밖 누를 때 hidden 됨.*/
 	$('.app-search__background, .app-search__close').on('click', function() {
 		$('#app-search').removeClass('app-search--active');
 	});
 	
-	/* 알림 , 메세지 창 , 프로필 클릭시 자식 화면 화면에 보이기. */
-	$(".app-pc-only.app-dropdown a").click(function(e){ 
-		/* e.preventDefault(); */
-		$(this).parent().toggleClass("active");
-	});	
 	/* 알림 ,메세지의 갯수가 없으면 빨간 숫자 없어짐. */
 	$(".app-header-item-badge").each(function(){
 		let newCount = $(this).text(); 
@@ -165,7 +194,6 @@ $(document).ready(function(){
 	});
 	
 });
-
 </script>
 <!-- COMMON JS VARIABLES -->
 </head>
@@ -441,6 +469,7 @@ $(document).ready(function(){
 					        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
 				      	</svg>
 				      	<%-- 알림 있을 때 갯수 뽑아줌. --%>
+				      	<%-- <span class="app-header-item-badge"><%= newMessage %></span> --%>
 				      	<span id="msgCount"class="app-header-item-badge"><%= notRead %></span>
         
 					</a>
