@@ -181,51 +181,47 @@ $(document).ready(function(){
 				</a>
 				<!--헤더의 항목 부분-->
 				<ul class="app-header-nav">
-					<li class="active"><a href="index.html"> <span>Now</span>
+					<li class="active"><a href="index.jsp"> <span>Now</span>
 					</a></li>
-					<li><a href="community.html"> <span>내 기록</span> <ion-icon
+					<li><a href="my_record.jsp"> <span>내 기록</span> <ion-icon
 								class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
 					</a>
 						<ul class="app-header-nav-child">
-							<li><a href="best.html">추천글게시판</a></li>
-							<li><a href="certifyboard.html">운동인증</a></li>
-							<li><a href="coordiboard.html">운동코디</a></li>
-							<li><a href="freeboard.html">자유게시판</a></li>
-							<li><a href="humorboard.html">유머게시판</a></li>
-							<li><a href="qna.html">질문게시판</a></li>
+							<li><a href="my_record.jsp">전체</a></li>
+							<li><a href="my_record.jsp?boardMiddleName=일자별">일자별</a></li>
+							<li><a href="my_record.jsp?boardMiddleName=소모임">소모임</a></li>
+							<li><a href="my_record.jsp?boardMiddleName=식단">식단</a></li>
 						</ul></li>
-					<li><a href="infomation.html"> <span>커뮤니티</span> <ion-icon
+					<li><a href="commu.jsp"> <span>커뮤니티</span> <ion-icon
 								class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
 					</a>
 						<ul class="app-header-nav-child">
-							<li><a href="news.html">새로운소식</a></li>
-							<li><a href="experience.html">용품/대회후기</a></li>
-							<li><a href="competition.html">대회소식(생활운동)</a></li>
-							<li><a href="useful.html">유용한사이트</a></li>
-							<li><a href="tip.html">나만의팁</a></li>
+							<li><a href="#">전체</a></li>
+							<li><a href="#">유머</a></li>
+							<li><a href="#">질문</a></li>
+							<li><a href="#">운동인증</a></li>
+							<li><a href="#">코디</a></li>
+							<li><a href="#">추천글</a></li>
 						</ul></li>
-					<li><a href="small.html"> <span>소모임</span> <ion-icon
+					<li><a href="#"> <span>소모임</span> <ion-icon
 								class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
 					</a>
 						<ul class="app-header-nav-child">
-							<li><a href="swim.html">수영</a></li>
-							<li><a href="bike.html">자전거</a></li>
-							<li><a href="run.html">달리기</a></li>
-							<li><a href="hiking.html">등산</a></li>
-							<li><a href="fitness.html">홈트짐트</a></li>
-							<li><a href="Pilates.html">필라테스/요가</a></li>
-							<li><a href="golf.html">골프</a></li>
-							<li><a href="skate.html">스케이트(빙상)</a></li>
+							<li><a href="#">수영</a></li>
+							<li><a href="#">자전거</a></li>
+							<li><a href="#">달리기</a></li>
+							<li><a href="#">등산</a></li>
+							<li><a href="#">홈트짐트</a></li>
+							<li><a href="#">필라테스/요가</a></li>
+							<li><a href="#">골프</a></li>
+							<li><a href="#">스케이트(빙상)</a></li>
 						</ul></li>
-					<li><a href="elite.html"> <span>마켓</span> <ion-icon
+					<li><a href="market.jsp"> <span>마켓</span> <ion-icon
 								class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
 					</a>
 						<ul class="app-header-nav-child">
-							<li><a href="elitecom.html">대회소식(엘리트)</a></li>
-							<li><a href="elitefree.html">자유게시판(엘리트)</a></li>
-							<li><a href="counseling.html">진로고민상담</a></li>
-							<li><a href="parents.html">학부모게시판</a></li>
-							<li><a href="career.html">구인구직</a></li>
+							<li><a href="#">판매</a></li>
+							<li><a href="#">구매</a></li>
 						</ul></li>					
 					<li><a href="managment.html"> <span>운영사항</span> <ion-icon
 								class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
