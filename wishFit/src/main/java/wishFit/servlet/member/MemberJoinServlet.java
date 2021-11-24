@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+//import com.oreilly.servlet.MultipartRequest;
+//import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import wishFit.beans.member.MemberDao;
 import wishFit.beans.member.MemberDto;
@@ -26,36 +26,36 @@ public class MemberJoinServlet extends HttpServlet{
 			String savePath = "D:/upload/member";
 			int maxSize = 10*1024*1024;
 			String encoding ="UTF-8";
-			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
-			MultipartRequest mRequest =
-					new MultipartRequest(req, savePath, maxSize, encoding, policy);
-			
-			req.setCharacterEncoding("UTF-8");
-			MemberDto memberDto = new MemberDto();
-			memberDto.setMemId(mRequest.getParameter("memId"));
-			memberDto.setMemPw(mRequest.getParameter("memPw"));
-			memberDto.setMemPwQ(mRequest.getParameter("memPwQ"));
-			memberDto.setMemPwA(mRequest.getParameter("memPwA"));
-			memberDto.setMemNick(mRequest.getParameter("memNick"));
-			memberDto.setMemBirth(mRequest.getParameter("memBirth"));
-			memberDto.setMemPhone(mRequest.getParameter("memPhone"));
-			memberDto.setMemGender(mRequest.getParameter("memGender"));
-			
-			MemberDao memberDao = new MemberDao();
-			memberDao.join(memberDto);
-			
-			if(mRequest.getFile("attach")!=null) {
-				MemberProfileDto memberProfileDto = new MemberProfileDto();
-				memberProfileDto.setMpId(memberDto.getMemId());
-				memberProfileDto.setMpSave(mRequest.getFilesystemName("attach"));
-				memberProfileDto.setMpUpload(mRequest.getOriginalFileName("attach"));
-				memberProfileDto.setMpType(mRequest.getContentType("attach"));
-				File target = mRequest.getFile("attach");
-				memberProfileDto.setMpSize(target == null ? 0L : target.length());
-				
-				MemberProfileDao memberProfileDao = new MemberProfileDao();
-				memberProfileDao.insert(memberProfileDto);
-			}
+//			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
+//			MultipartRequest mRequest =
+//					new MultipartRequest(req, savePath, maxSize, encoding, policy);
+//			
+//			req.setCharacterEncoding("UTF-8");
+//			MemberDto memberDto = new MemberDto();
+//			memberDto.setMemId(mRequest.getParameter("memId"));
+//			memberDto.setMemPw(mRequest.getParameter("memPw"));
+//			memberDto.setMemPwQ(mRequest.getParameter("memPwQ"));
+//			memberDto.setMemPwA(mRequest.getParameter("memPwA"));
+//			memberDto.setMemNick(mRequest.getParameter("memNick"));
+//			memberDto.setMemBirth(mRequest.getParameter("memBirth"));
+//			memberDto.setMemPhone(mRequest.getParameter("memPhone"));
+//			memberDto.setMemGender(mRequest.getParameter("memGender"));
+//			
+//			MemberDao memberDao = new MemberDao();
+//			memberDao.join(memberDto);
+//			
+//			if(mRequest.getFile("attach")!=null) {
+//				MemberProfileDto memberProfileDto = new MemberProfileDto();
+//				memberProfileDto.setMpId(memberDto.getMemId());
+//				memberProfileDto.setMpSave(mRequest.getFilesystemName("attach"));
+//				memberProfileDto.setMpUpload(mRequest.getOriginalFileName("attach"));
+//				memberProfileDto.setMpType(mRequest.getContentType("attach"));
+//				File target = mRequest.getFile("attach");
+//				memberProfileDto.setMpSize(target == null ? 0L : target.length());
+//				
+//				MemberProfileDao memberProfileDao = new MemberProfileDao();
+//				memberProfileDao.insert(memberProfileDto);
+//			}
 			
 			resp.sendRedirect("index.jsp");
 		}	catch(Exception e) {
