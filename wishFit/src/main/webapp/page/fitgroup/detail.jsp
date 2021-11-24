@@ -11,6 +11,7 @@
 <%
 String root = request.getContextPath();
 %>
+
 <link rel="stylesheet" type="text/css" href="../css/commons.css">
 <link rel="stylesheet"href="<%=root%>/resources/files/cache/assets/compiled/92b01c3552e164431c570224468c40fb97bd6173.default.scssdedd.css" />
 <link rel="stylesheet"href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.base.scssdedd.css?20210328011802" />
@@ -58,6 +59,14 @@ String root = request.getContextPath();
 			var map = new kakao.maps.Map(container, options);
 		});
 	</script>
+	<style>
+	.fgTime{
+	 font-family : TmonMonsori, "GodoB", "굴림";
+	font-weight: bolder;
+	font-weigth:600;
+	color :red;
+	}
+	</style>
 <%
 FitgroupDao fitgroupDao = new FitgroupDao();
 int fgNo = Integer.parseInt(request.getParameter("fgNo"));
@@ -131,13 +140,12 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 											<el-tooltip content="2021-04-06 11:19:24">
 											<div class="app-article-meta-item">2021.04.06</div>
 											</el-tooltip>
-											<div class="app-article-meta-divider">・</div>
-											<div class="app-article-meta-item">조회 수 19</div>
-											<div class="app-article-meta-divider">・</div>
-											<div class="app-article-meta-item">추천 수 0</div>
+											<div class="app-article-meta-divider">・ 운동시간 :</div>
+											<div class="app-article-meta-item fgTime"> <%=fitgroupDto.getFgStarttime().substring(0,16)%></div>
+											<div class="app-article-meta-divider">~</div>
+											<div class="app-article-meta-item fgTime"><%=fitgroupDto.getFgEndtime().substring(0,16) %></div>
 											<div class="app-article-meta-divider app-pc-only">・</div>
-											<a href="#comment" class="app-pc-only app-article-meta-item">댓글
-												3</a>
+											
 										</div>
 									</div>
 								</div>
@@ -209,12 +217,13 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 							<%if(isJoin){%>
 								<button class="app-article-vote__up"
 									onclick="location.href='cancel.kh?fgNo=<%=fitgroupDto.getFgNo()%>&memId=<%=uid%>'">
-									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 										fill="currentColor">
         <path
-											d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+											d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
       </svg>
-									<span class="app-article-vote__count">0</spsn>
+									
+									<span class="app-article-vote__count">참가 취소</spsn>
 								</button>
 									<%}else{ %>
 								<button class="app-article-vote__down" data-type="down"
@@ -222,10 +231,10 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 										fill="currentColor">
         <path
-											d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
+											d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
       </svg>
 
-									<span class="app-article-vote__count">0</span>
+									<span class="app-article-vote__count">참가</span>
 								</button>
 								<%} %>
 							</div>

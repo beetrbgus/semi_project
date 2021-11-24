@@ -1,7 +1,6 @@
-package wishFit.servelt.mysmallgroup;
+package wishFit.servlet.mysmallgroup;
 
 import java.io.IOException;
-import java.security.spec.ECFieldF2m;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,30 +9,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import wishFit.beans.mysmallgroup.MySmallGroupDao;
+import wishFit.beans.mysmallgroup.MySmallGroupDto;
 
-@WebServlet(urlPatterns = "/page/fitgroup/cancel.kh")
-public class MySmallGroupCancel extends HttpServlet {
+@WebServlet(urlPatterns = "/page/fitgroup/join.kh")
+public class MySmallGroupJoin extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-
 			int fgNo = Integer.parseInt(req.getParameter("fgNo"));
-			// String memId = (String) req.getSession().getAttribute("uid");
-			String memId = req.getParameter("memId");
+			
+			//String memId = (String) req.getSession().getAttribute("uid");
+			String memId = "ksm01";
+			MySmallGroupDto mySmallGroupDto = new MySmallGroupDto();
+			mySmallGroupDto.setFgNo(fgNo);
+			mySmallGroupDto.setMemId(memId);
 
 			MySmallGroupDao mySmallGroupDao = new MySmallGroupDao();
-			boolean success = mySmallGroupDao.delete(fgNo, memId);
-			if (success) {
-				resp.sendRedirect("detail.jsp?fgNo=" + fgNo);
-
-			} else {
-				resp.sendError(500);
-
-			}
+			mySmallGroupDao.insert(mySmallGroupDto);
+			resp.sendRedirect("detail.jsp?fgNo="+fgNo);
+			System.out.println("3");
 		} catch (Exception e) {
 			e.printStackTrace();
-			resp.sendError(500);
 		}
-
 	}
 }

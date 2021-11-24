@@ -1,3 +1,5 @@
+<%@page import="wishFit.beans.member.MemberProfileDto"%>
+<%@page import="wishFit.beans.member.MemberProfileDao"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.fitgroup.FitImageVO"%>
 <%@page import="wishFit.beans.fitgroup.FitgroupDao"%>
@@ -134,7 +136,7 @@ String fgLocation = request.getParameter("fgLocation");
 //isSearch = 검색을 실행하는 것
 boolean isSearch = fgLocation != null && !fgLocation.equals("");
 String title;
-
+String uid = "ksm01";
 
 
 FitImageVO fitImageVo = new FitImageVO();
@@ -144,6 +146,8 @@ if(isSearch){
 }else{
 	list=fitgroupDao.listAll();
 }
+MemberProfileDao memberProfileDao = new MemberProfileDao();
+MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 //자기 자신 글 인지 확인하기
 //boolean isOwner = uid.equals(fitImageVo.getFgId());
 %>
@@ -199,8 +203,8 @@ if(isSearch){
 		placeholder="검색" value="" class="app-aside-search-input" />
 
 			</div>
- 					
- 					<button><a href="write.jsp">이게2맞ㄴ</a></button>
+ 				
+ 					<button type="button"onclick = "location.href = 'write.jsp'">글작성</button>
  					<%
 						for (FitImageVO fitImageVO : list) {
 						%>
@@ -226,7 +230,8 @@ if(isSearch){
 									<!-- 제목 -->
 									<div class="tw-flex-1">
 										<div class="app-list-title tw-flex-wrap">
-											<span class="tw-mr-1"><%=fitImageVO.getFgTitle()%></span>
+											<span class="tw-mr-1"><%=fitImageVO.getFgTitle()%>			
+											</span>
 										</div>
 
 										<div class="app-list-meta">
@@ -237,7 +242,7 @@ if(isSearch){
 													<div class="app-avatar"
 														style="width: 1.25rem; height: 1.25rem;">
 														
-														<img src="#" alt="profile" >
+														<img src="profile.kh?mpNo=<%=memberProfileDto.getMpNo() %>">
 													</div>
 
 													<div class="member_459 tw-inline-flex tw-items-center">
@@ -272,3 +277,4 @@ if(isSearch){
 </main>
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>
+

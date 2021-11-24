@@ -45,7 +45,7 @@ public class MemberDao {
 	//로그인 
 	public MemberDto login(String memId , String memPw) throws Exception {
 		conn = JdbcUtils.connect();
-		String sql = "select mem_id ,  mem_grade from member where mem_id=? and mem_pw =?";
+		String sql = "select mem_id,mem_grade from member where mem_id=? and mem_pw =?";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, memId);
 		ps.setString(2, memPw);
