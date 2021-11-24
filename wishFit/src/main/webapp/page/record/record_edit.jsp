@@ -1,5 +1,5 @@
-<%@page import="wishFit.beans.board.RecordBoardDto"%>
-<%@page import="wishFit.beans.board.RecordBoardDao"%>
+<%@page import="wishFit.beans.board.BoardDto"%>
+<%@page import="wishFit.beans.board.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%--입력 --%>
@@ -8,8 +8,8 @@ int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 %>
 <%--처리 --%>
 <%
-RecordBoardDao boardDao = new RecordBoardDao();
-	RecordBoardDto boardDto = boardDao.detail(boardNo);
+BoardDao boardDao = new BoardDao();
+BoardDto boardDto = boardDao.detail(boardNo);
 %>
 
 
