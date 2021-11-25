@@ -20,7 +20,7 @@ public class RecordBoardDao {
 	
 	
 	//월별 조회 = 하루치 목록 조회 * 날짜수
-	public Map<String, List<BoardDto>> monthlyList(int year, int month) throws Exception {
+	public Map<String, List<BoardDto>> monthlyList(int year, int month,String boardWriter) throws Exception {
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.MONTH, month+1);
 		int max = c.getActualMaximum(Calendar.DATE);
@@ -41,20 +41,22 @@ public class RecordBoardDao {
 			}
 			
 			
-			List<BoardDto> list = dailyList(time);
+			List<BoardDto> list = dailyList(time,boardWriter);
 			map.put(time, list);
 		}
 		return map;
 	}
 	
 	//하루치 목록 조회 메소드
-	public List<BoardDto> dailyList(String time) throws Exception {
+	public List<BoardDto> dailyList(String time,String boardWriter) throws Exception {
 		Connection con = wishFit.util.JdbcUtils.connect();
 		String sql = "select * from board "
 				+ "where board_large_name='기록' and board_date = to_date(?, 'yyyy-mm-dd')  "
+				+ "and board_writer=? "
 				+ "order by board_middle_name asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, time);
+		ps.setString(2, boardWriter);
 		
 		
 		ResultSet rs = ps.executeQuery();
@@ -79,7 +81,7 @@ public class RecordBoardDao {
 		return list;
 	}
 	//월별 조회2(중분류=> board_middle_name 파라미터존재시) = 하루치 목록 조회 * 날짜수
-		public Map<String, List<BoardDto>> monthlyListMiddle(int year, int month,String middleName) throws Exception {
+		public Map<String, List<BoardDto>> monthlyListMiddle(int year, int month,String middleName,String boardWriter) throws Exception {
 			Calendar c = Calendar.getInstance();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			c.add(Calendar.MONTH, month+1);
@@ -101,22 +103,24 @@ public class RecordBoardDao {
 					
 					}
 					
-				List<BoardDto> list = dailyList(time,middleName);
+				List<BoardDto> list = dailyList(time,middleName,boardWriter);
 				map.put(time, list);
 			}
 			return map;
 		}
 	//하루치 목록 조회 메소드 (middleName 존재시)
-		public List<BoardDto> dailyList(String time,String middleName) throws Exception {
+		public List<BoardDto> dailyList(String time,String middleName,String boardWriter) throws Exception {
 			Connection con = wishFit.util.JdbcUtils.connect();
 			String sql = "select * from board "
 					+ "where board_large_name='기록' "
 					+ "and board_date = to_date(?, 'yyyy-mm-dd') "
 					+ "and board_middle_name=? "
+					+ "and board_writer = ? "
 					+ "order by board_middle_name asc";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, time);
 			ps.setString(2, middleName);
+			ps.setString(3, boardWriter);
 		
 			
 			ResultSet rs = ps.executeQuery();

@@ -1,6 +1,8 @@
         var today = new Date(); // 오늘 날짜
         var date = new Date();
-    
+    	$(function(){
+        	build();
+        });
         //이전 달 누르면 넘어가기
         $(function(){
             $("#before").click(function(){
@@ -16,9 +18,7 @@
             });
         });
         
-        $(function(){
-        	build();
-        });
+        
         function build()
         {
             var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날

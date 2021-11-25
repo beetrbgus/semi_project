@@ -48,8 +48,7 @@
             	}
 	%>       		
   	<%     	//회원아이디 세션으로 가져오기
-            	//String boardWriter = (String)session.getAttribute("ses");
-            	String boardWriter = "testmember1";
+            	String boardWriter = (String)session.getAttribute("uid");
             	
             	//파라미터로 boardMiddleName 을 가져올 경우
            		String middleName = request.getParameter("boardMiddleName");
@@ -67,9 +66,9 @@
             	Map<String,List<BoardDto>> mapList;
             	boolean isMidName = middleName != null && !middleName.isEmpty();
             	if(isMidName){
-            		mapList = recordDao.monthlyListMiddle(nowYear,nowMonth,middleName);
+            		mapList = recordDao.monthlyListMiddle(nowYear,nowMonth,middleName,boardWriter);
 		          }else{
-		       		mapList = recordDao.monthlyList(nowYear, nowMonth);
+		       		mapList = recordDao.monthlyList(nowYear, nowMonth,boardWriter);
 		          }
     %>
     
@@ -91,7 +90,6 @@
 
 <main class="app-content app-clearfix">
 <!-- 기록은 자기 글만 볼 수 있으니 session 으로 boardWriter를 hidden으로 보내기 -->
-<input type="hidden" name="boardWriter" value="<%=boardWriter%>">
 <script>
 	
 </script>
@@ -147,7 +145,7 @@
 							</td>
 						<%} %>
 							<td style="border : 1px solid black"><%=list.get(k).getBoardMiddleName()%></td>
-							<td style="border : 1px solid black; text-align:left; padding :0.5rem 0">
+							<td style="border : 1px solid black; text-align:left; padding :0rem 0.5rem ">
 							<a href="record_detail.jsp?boardNo=<%=list.get(k).getBoardNo()%>"><%=list.get(k).getBoardTitle()%></a>
 							</td>
 						</tr>

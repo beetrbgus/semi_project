@@ -1,11 +1,13 @@
 package wishFit.beans.image;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardImageVO;
 import wishFit.util.GetSeq;
 import wishFit.util.JdbcUtils;
@@ -96,5 +98,33 @@ public class ImageDao {
 		}
 		conn.close();
 		return list;
+	}
+	//파일 삭제 다오(글 삭제 할 때 폴더안에 있는 사진 삭제)
+	public boolean deleteImage(int boardNo) throws Exception {
+		//파일의 경로
+		//파일의 업로드 이름 찾기
+		BoardDao boardDao = new BoardDao();
+		BoardImageVO boardImageVO = boardDao.detail(boardNo);
+		
+		String imagePath = "D:/upload/board/"+boardImageVO.getBoardUpload();
+		
+		File deleteImage = new File(imagePath);
+		
+		if(deleteImage.exists()) {
+			
+			//파일을 삭제합니다.
+			deleteImage.delete();
+		}
+		return true;
+	}
+	public boolean delete(int imageNo) throws Exception{
+		conn=JdbcUtils.connect();
+		String sql = "delete image where image_no = ?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, imageNo);
+		int result = ps.executeUpdate();
+		
+		conn.close();
+		return result>0;
 	}
 }

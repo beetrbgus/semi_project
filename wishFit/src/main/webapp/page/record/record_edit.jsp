@@ -24,7 +24,7 @@
 
 
 <h2>게시글 수정</h2>
-<form action = "record_edit.kh" method="post">
+<form action = "record_edit.kh" method="post" enctype="multipart/form-data">
 <input type="hidden" name="boardNo" value="<%=boardNo%>">
 	<div class="container-700 container-center">
 		<div class="row">
@@ -49,7 +49,13 @@
 		</div>
 		<div class="row">
 			<label>첨부파일</label>
-			<input type="file" name="attach"   value="<%=boardImageVO.getImageNo()%>">
+			<input type="file" name="attach">
+			<%if(boardImageVO.getImageNo()!=0){ %>
+				<span><%=boardImageVO.getBoardUpload() %></span>
+				<a href="imageDelete.kh?imageNo=<%=boardImageVO.getImageNo()%>"><button class="btn">삭제</button></a>
+			<%} else{%>
+				<span>이미지 파일 없음</span>
+			<%} %>
 		</div>
 		<div class="row">
 			<input type="submit" value="수정 완료">
