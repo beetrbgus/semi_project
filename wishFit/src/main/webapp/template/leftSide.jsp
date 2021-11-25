@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <script src = "http://code.jquery.com/jquery-3.6.0.js"></script>
-<script src = "../css/widget.js"></script>
 <link rel = "stylesheet" type="text/css" href="../css/widget.css">
+<script src = "../css/widget.js"></script>
  
     
     
@@ -17,7 +17,7 @@
             <ul class="app-card app-sidebar-left__nav">
                <li class="active open">
                   <div class="app-sidebar-left__nav__item">
-                     <a href="index.html"> <span>Now</span>
+                     <a href="<%=request.getContextPath() %>/index.jsp"> <span>Now</span>
                      </a>
                   </div>
 
@@ -107,7 +107,7 @@
                </li>
             </ul>
          </nav>
-         <div class="tw-mb-5 app-card app-sidebar-left__nav" style="margin:0px 0px 0px ">
+         <div class="app-card app-sidebar-left__nav" style="margin:0px 0px 0px ">
             <div class="">
 				    <div>
 				        <table id="calendar" style="width:100%;height:30%">
@@ -135,4 +135,5 @@
             <br>
          </div>
       </div>
+      
    </aside>
