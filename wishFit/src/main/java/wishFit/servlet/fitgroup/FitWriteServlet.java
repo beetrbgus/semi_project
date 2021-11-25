@@ -16,6 +16,7 @@ import wishFit.beans.firgroupimage.FitgroupImageDao;
 import wishFit.beans.firgroupimage.FitgroupImageDto;
 import wishFit.beans.fitgroup.FitgroupDao;
 import wishFit.beans.fitgroup.FitgroupDto;
+import wishFit.util.GetSeq;
 
 @WebServlet(urlPatterns = "/page/fitgroup/write.kh")
 public class FitWriteServlet extends HttpServlet {
@@ -38,20 +39,18 @@ public class FitWriteServlet extends HttpServlet {
 			// fitgroupDto.setFgId((String)req.getSession().getAttribute("uid"));
 			fitgroupDto.setFgId(mRequest.getParameter("fgId"));
 			fitgroupDto.setExcateName(mRequest.getParameter("excateName"));
-			System.out.println(mRequest.getParameter("excateName"));
 			fitgroupDto.setFgTitle(mRequest.getParameter("fgTitle"));
-			System.out.println(mRequest.getParameter("fgTitle"));
 			fitgroupDto.setFgIntro(mRequest.getParameter("fgIntro"));
 			fitgroupDto.setFgStarttime(mRequest.getParameter("fgStarttime"));
 			fitgroupDto.setFgEndtime(mRequest.getParameter("fgEndtime"));
 			fitgroupDto.setFgLocation(mRequest.getParameter("fgLocation"));
-			fitgroupDto.setFgLatitude(mRequest.getParameter("fglatitude"));
-			fitgroupDto.setFgLongtitude(mRequest.getParameter("fglongitude"));
+			fitgroupDto.setFgLatitude(mRequest.getParameter("fgLatitude"));
+			fitgroupDto.setFgLongtitude(mRequest.getParameter("fgLongitude"));
 			
 			FitgroupDao fitgroupDao = new FitgroupDao();
 
 			//상세보기로 이동하기 위한 스퀸스 구하기
-			int fgNo = fitgroupDao.getSeq(); // 시퀸스를 이용해서 번호로를 알아낸다
+			int fgNo = GetSeq.getSequence("fitgroup_seq"); // 시퀸스를 이용해서 번호로를 알아낸다
 			
 			fitgroupDto.setFgNo(fgNo);
 			fitgroupDao.write(fitgroupDto);

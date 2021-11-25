@@ -6,7 +6,8 @@
 <%@page import="wishFit.beans.fitgroup.FitgroupDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8	"
 	pageEncoding="UTF-8"%>
-	
+<jsp:include page="/template/header.jsp"></jsp:include>
+<jsp:include page="/template/leftSide.jsp"></jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript"
@@ -16,8 +17,8 @@
 		//지도 생성 준비 코드
 		var container = document.querySelector("#map");
 		var options = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667),
-			level : 3
+			center : new kakao.maps.LatLng(37.5339851357212, 126.897094049199),
+			level : 8
 		};
 
 		//지도 생성 코드
@@ -139,7 +140,6 @@ height:35px;
 }
 </style>
 <%
-//String uid =request.getSession().getAttribute("uid");
 FitgroupDao fitgroupDao = new FitgroupDao();
 
 String fgLocation = request.getParameter("fgLocation");
@@ -147,7 +147,7 @@ String fgLocation = request.getParameter("fgLocation");
 //isSearch = 검색을 실행하는 것
 boolean isSearch = fgLocation != null && !fgLocation.equals("");
 String title;
-String uid = "ksm01";
+
 
 
 FitImageVO fitImageVo = new FitImageVO();
@@ -159,19 +159,15 @@ if(isSearch){
 }
 MemberProfileDao memberProfileDao = new MemberProfileDao();
 
-//자기 자신 글 인지 확인하기
-//boolean isOwner = uid.equals(fitImageVo.getFgId());
+//페이지네이션
+Pagination pagination = new Pagination(request);
+pagination.calculate(); 
 
-	//Pagination 모듈을 이용하여 계산을 처리하도록 위임
-	Pagination pagination = new Pagination(request);
-	//pagination.setPageSize(15);
-	//pagination.setBlockSize(5);   
-	pagination.calculate(); 
+//로그인 상태인지 확인
 %>
 
 %>
-<jsp:include page="/template/header.jsp"></jsp:include>
-<jsp:include page="/template/leftSide.jsp"></jsp:include>
+
 
 <form>
 <main class="app-content app-clearfix">
@@ -221,9 +217,9 @@ MemberProfileDao memberProfileDao = new MemberProfileDao();
 			<input id="search-input" type="text" name="fgLocation" placeholder="지역주소를 검색해주세요!" >
 			<input  class="app-button app-primary" type="submit" value="검색">
 				</form>
-			</div>
- 				
- 					<button type="button"onclick = "location.href = 'write.jsp'">글작성</button>
+		</div>	<a href="write.jsp" class="app-button app-button-rounded primary">
+				   <span>쓰기</span></a>		
+ 	
  					<%
 						for (FitImageVO fitImageVO : list) {
 						%>

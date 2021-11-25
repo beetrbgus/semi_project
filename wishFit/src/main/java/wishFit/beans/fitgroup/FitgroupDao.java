@@ -215,17 +215,6 @@ public class FitgroupDao {
 		return result > 0;
 	}
 
-	public int getSeq() throws Exception {
-		Connection con = JdbcUtils.connect();
-		String sql = "select fitgroup_seq.nextval from dual";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-
-		rs.next();
-		int seq = rs.getInt(1);
-		con.close();
-		return seq;
-	}
 	//페이지네이션 전체조회
 	public List<FitImageVO> listByRownum(int begin, int end) throws Exception {
 		Connection con = JdbcUtils.connect();

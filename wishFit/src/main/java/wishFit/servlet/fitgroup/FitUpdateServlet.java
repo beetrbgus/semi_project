@@ -31,7 +31,7 @@ public class FitUpdateServlet extends HttpServlet {
 			FitgroupDto fitgroupDto = new FitgroupDto();
 			//req.getSession().setAttribute("ses", memId);
 			//fitgroupDt.setFgId((String)req.getSession().getAttribute("ses"));
-			fitgroupDto.setFgId(req.getParameter("fgId"));
+			
 			fitgroupDto.setFgNo(Integer.parseInt(req.getParameter("fgNo")));
 			fitgroupDto.setExcateName(req.getParameter("excateName"));
 			fitgroupDto.setFgTitle(req.getParameter("fgTitle"));
