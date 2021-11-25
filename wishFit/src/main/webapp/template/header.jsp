@@ -1,5 +1,4 @@
-
-<%@page import="wishFit.beans.message.MessageDao"%>
+<%-- <%@page import="wishFit.beans.message.MessageDao"%> --%>
 <%@page import="wishFit.beans.member.MemberProfileDto"%>
 <%@page import="wishFit.beans.member.MemberProfileDao"%>
 <%@page import="wishFit.beans.member.MemberDto"%>
@@ -8,14 +7,12 @@
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="hydrated">
-
+<%
+String root = request.getContextPath();
+%>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<% 
-String root = request.getContextPath();
-String uid = (String)request.getSession().getAttribute("uid");
-%>
 <style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
 <link rel="stylesheet"
    href="<%=root%>/resources/files/cache/assets/compiled/667a9524d72c3d7bdb2c48b2d4c5271c0988e0b2.rhymix.less.minefb7.css?20210415220507" />
@@ -113,18 +110,19 @@ String uid = (String)request.getSession().getAttribute("uid");
    href="<%=root%>/resources/addons/photoswipe/PhotoSwipe/default-skin/default-skina68c.css?20210415215946" />
 <link rel="stylesheet"
    href="<%=root%>/resources/files/cache/assets/compiled/02d0979eb468efbabe5aa16b3b137eb28a1b647b.style.scss7f16.css?20210330204710" />
-<!-- JS -->
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+
 
 <!-- OTHER HEADERS -->
 <style>
 :root { -
    -aside-width: 17.625rem;
 }
+
 .leftBtn {
    width: 20px;
    height: 20px;
 }
+
 .app-layout .app-layout-aside {
    flex: 0 0 auto;
    width: 17.625rem;
@@ -133,6 +131,9 @@ String uid = (String)request.getSession().getAttribute("uid");
    margin-left: 2rem;
 }
 </style>
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <script>
 function modal_on(){
    $("#app-login").addClass('active');
@@ -143,17 +144,42 @@ function modal_off(){
 /* 알림 , 메세지 창 , 프로필 클릭시 자식 화면 화면에 보이기. */
 $(document).ready(function(){
    $(".app-pc-only.app-dropdown a").click(function(e){ 
-      e.preventDefault();
       $(this).parent().toggleClass("active");
    });   
+   
+   /* 로그인 했으면 로그인 회원가입 창 없애기. */
+   /* 페이지 리로딩 하니까 밑에 세션에서 값을 가져옴. 세션에 값이 있으면
+   
+   */
+   
+   $(function(){
+      let login  = $("#uid").val();
+   
+      if(login =="" ||login ==null || login =="null" ){
+         $(".notLogin").show();
+         $(".onlyLogin").hide();
+      }else{
+         $(".onlyLogin").show();
+         $(".notLogin").hide();
+      }
+   })
+   
 });
+
 </script>
+
 <!-- COMMON JS VARIABLES -->
 </head>
 <!-- BODY START -->
 
 <body>
 
+<%
+String uid = (String) session.getAttribute("uid"); 
+%>
+
+
+   <input type="hidden" id="uid" value ="<%=uid%>">
    <!-- 앱 중간에 뜨는 화면. 경고창. 알림 모두삭제 클릭시 에 뜸. -->
    <!--  비활성화 = app-confirm
          활성화 = app-confirm app-confirm--danger active -->
@@ -185,51 +211,38 @@ $(document).ready(function(){
             </a>
             <!--헤더의 항목 부분-->
             <ul class="app-header-nav">
-               <li class="active"><a href="index.html"> <span>Now</span>
+               <li class="active"><a href="<%=root %>/index.jsp"> <span>Now</span>
                </a></li>
-               <li><a href="community.html"> <span>내 기록</span> <ion-icon
+               <li><a href="<%=request.getContextPath() %>/page/record/my_record.jsp"> <span>내 기록</span> <ion-icon
                         class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
                </a>
                   <ul class="app-header-nav-child">
-                     <li><a href="best.html">추천글게시판</a></li>
-                     <li><a href="certifyboard.html">운동인증</a></li>
-                     <li><a href="coordiboard.html">운동코디</a></li>
-                     <li><a href="freeboard.html">자유게시판</a></li>
-                     <li><a href="humorboard.html">유머게시판</a></li>
-                     <li><a href="qna.html">질문게시판</a></li>
+                     <li><a href="my_record.jsp">전체</a></li>
+                     <li><a href="my_record.jsp?boardMiddleName=일자별">일자별</a></li>
+                     <li><a href="my_record.jsp?boardMiddleName=소모임">소모임</a></li>
+                     <li><a href="my_record.jsp?boardMiddleName=식단">식단</a></li>
                   </ul></li>
-               <li><a href="infomation.html"> <span>커뮤니티</span> <ion-icon
+               <li><a href="commu.jsp"> <span>커뮤니티</span> <ion-icon
                         class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
                </a>
                   <ul class="app-header-nav-child">
-                     <li><a href="news.html">새로운소식</a></li>
-                     <li><a href="experience.html">용품/대회후기</a></li>
-                     <li><a href="competition.html">대회소식(생활운동)</a></li>
-                     <li><a href="useful.html">유용한사이트</a></li>
-                     <li><a href="tip.html">나만의팁</a></li>
+                     <li><a href="#">전체</a></li>
+                     <li><a href="#">유머</a></li>
+                     <li><a href="#">질문</a></li>
+                     <li><a href="#">운동인증</a></li>
+                     <li><a href="#">코디</a></li>
+                     <li><a href="#">추천글</a></li>
                   </ul></li>
-               <li><a href="small.html"> <span>소모임</span> <ion-icon
+               <li><a href="<%=root%>/page/fitgroup/list.jsp"> <span>소모임</span> <ion-icon
+                        class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
+               </a>
+                  </li>
+               <li><a href="market.jsp"> <span>마켓</span> <ion-icon
                         class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
                </a>
                   <ul class="app-header-nav-child">
-                     <li><a href="swim.html">수영</a></li>
-                     <li><a href="bike.html">자전거</a></li>
-                     <li><a href="run.html">달리기</a></li>
-                     <li><a href="hiking.html">등산</a></li>
-                     <li><a href="fitness.html">홈트짐트</a></li>
-                     <li><a href="Pilates.html">필라테스/요가</a></li>
-                     <li><a href="golf.html">골프</a></li>
-                     <li><a href="skate.html">스케이트(빙상)</a></li>
-                  </ul></li>
-               <li><a href="elite.html"> <span>마켓</span> <ion-icon
-                        class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
-               </a>
-                  <ul class="app-header-nav-child">
-                     <li><a href="elitecom.html">대회소식(엘리트)</a></li>
-                     <li><a href="elitefree.html">자유게시판(엘리트)</a></li>
-                     <li><a href="counseling.html">진로고민상담</a></li>
-                     <li><a href="parents.html">학부모게시판</a></li>
-                     <li><a href="career.html">구인구직</a></li>
+                     <li><a href="#">판매</a></li>
+                     <li><a href="#">구매</a></li>
                   </ul></li>               
                <li><a href="managment.html"> <span>운영사항</span> <ion-icon
                         class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
@@ -247,7 +260,7 @@ $(document).ready(function(){
             <!-- 헤더 오른쪽 부분. 검색 , 로그인 ,회원가입 아이콘 -->
 
             <!-- 검색 아이콘 -->
-            <a class="app-header-item app-icon-button app-icon-button-gray app-search-toggle">
+         <a class="app-header-item app-icon-button app-icon-button-gray app-search-toggle">
                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round"
@@ -301,17 +314,46 @@ $(document).ready(function(){
                );
             </script>
             
-            <!-- 로그인 버튼 -->
-            <a href="#" class="app-pc-only app-header-login-link"
+            <!-- 로그인 버튼 --> <!--  로그인 안했을 때 보이는 항목  -->
+            <a href="#" class="app-pc-only app-header-login-link notLogin"
                onclick="modal_on()"> <i class="el-icon-lock"></i>
                <span>로그인</span>
             </a>
             <!-- 회원가입 버튼 -->
             <a
-               class="app-pc-only app-button app-primary app-button-rounded app-button-small"
-               href="join.jsp">회원가입
+               class="app-pc-only app-button app-primary app-button-rounded app-button-small notLogin"
+               href="/wishFit/page/member/join.jsp">회원가입
             </a>
+            <!--  로그인 비동기  -->
+            <script>
+            $(function() {
 
+               $("#btnlogin").click(function(e) {
+
+                  $.ajax({
+                     type: "post",
+                     url: "http://localhost:8080/wishFit/login.kh",
+                     data: { "memId": $("#memId").val(), "memPw": $("#memPw").val() },
+                     
+                     success: function(result) {
+                        $("#uid").val(result);
+                        
+                        if(result.trim()!=""){
+                           location.href = "/wishFit/index.jsp";
+                           alert("로그인성공");
+                        } else{
+                           $("#msg").html("<p style='color:red'>아이디나 패스워드가 틀렸습니다</p>");
+                           alert("로그인 실패")
+                           }
+                     },
+                     
+                     error: function() {
+                        alert("error");
+                     }
+                  });
+               });
+            });
+            </script>
             <!-- 로그인 모달 창 -->
             <div id="app-login" class="app-dialog">
                <div class="app-dialog-container">
@@ -321,31 +363,23 @@ $(document).ready(function(){
                      </div>
                      <div class="app-dialog-body">
                         <!-- 로그인 입력 폼 -->
-                        <form class="tw-mb-5" 
+                        <form class="tw-mb-5" action="https://sweatee.co.kr/"
                            method="post" autocomplete="off">
-                           <input type="hidden" name="error_return_url" value="/" /> <input
-                              type="hidden" name="mid" value="index" /> <input
-                              type="hidden" name="ruleset" value="@login" /> <input
-                              type="hidden" name="success_return_url" value="" /> <input
-                              type="hidden" name="act" value="procMemberLogin" /> <input
-                              type="hidden" name="xe_validator_id" value="layouts/slow" />
-
+                        
                            <fieldset>
-                              <div class="tw-mb-3">
-                                 <div class="app-labeled-input" label="이메일 주소">
-                                    <div class="app-labeled-input__title">이메일 주소</div>
-                                    <input class="app-input app-input-expand" type="text"
-                                       name="user_id" placeholder="user@email.com" required
-                                       tabindex="1" />
-                                 </div>
-                              </div>
+                                <div class="tw-mb-3">
+                                                <div class="app-labeled-input" label="아이디">
+                                                    <div class="app-labeled-input__title">아이디</div>
+                                                    <input class="app-input app-input-expand" type="text" name="memId"
+                                                          id="memId" required tabindex="1" />
+                                                </div>
+                                            </div>
 
                               <div class="app-labeled-input tw-mb-3" label="비밀번호">
-                                 <div class="app-labeled-input__title">비밀번호</div>
-                                 <input class="app-input app-input-expand" type="password"
-                                    name="password" placeholder="•••••••••" required
-                                    tabindex="2" />
-                              </div>
+                                                <div class="app-labeled-input__title">비밀번호</div>
+                                                <input class="app-input app-input-expand" type="password"
+                                                   id="memPw" name="memPw" placeholder="•••••••••" required tabindex="2" />
+                                            </div>
 
                               <div class="tw-flex tw-items-center tw-mb-4">
                                  <div class="eq flex text-left">
@@ -360,20 +394,21 @@ $(document).ready(function(){
                                  <div class="tw-flex-1"></div>
 
                                  <a class="tw-text-gray-700 app-link app-link-gray"
-                                    href="indexb7be.html?mid=index&amp;act=dispMemberFindAccount"
+                                    href="<%=root%>/page/member/find.jsp"
                                     tabindex="5">ID/PW 찾기</a>
                               </div>
                               <!-- 제출 버튼 -->
-                              <button type="submit"
-                                 class="app-button app-button-expand app-button-rounded primary"
-                                 tabindex="4">로그인</button>
+                                <button id="btnlogin" type="button" 
+                                                class="app-button app-button-expand app-button-rounded primary"
+                                                tabindex="4">로그인</button>
+                                       
                            </fieldset>
                         </form>
                         <!-- 로그인 창 하단 부분.  -->
                         <div class="tw-text-sm tw-text-center tw-text-gray-700">
-                           <span class="eq text-muted">아직 회원이 아니신가요?</span> <a
-                              href="join.jsp"
-                              class="tw-text-primary tw-text-bold" tabindex="6">회원가입 하기</a>
+                           <span class="eq text-muted">아직 회원이 아니신가요?</span>
+                                 <a href="<%=root%>/page/member/join.jsp"
+                                            class="tw-text-primary tw-text-bold" tabindex="6">회원가입 하기</a>
                         </div>
                      </div>
                   </div>
@@ -391,7 +426,8 @@ $(document).ready(function(){
                     </svg>
             </a>
             <!-- 알림 아이콘 -->
-            <div class="app-pc-only app-dropdown">
+             <!--  로그인 했을 때 보이는 항목  -->
+            <div class="app-pc-only app-dropdown onlyLogin">
                <a class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                      fill="currentColor">
@@ -413,12 +449,12 @@ $(document).ready(function(){
                </div>
             </div>
             
-<%--          
+            <%-- <% 
                MessageDao messageDao = new MessageDao();
-                int newMessage = messageDao.getNotReadCount("test2");
-<%--              %> --%>
+               int newMessage = messageDao.getNotReadCount("test2");
+             %> --%>
              <!-- 쪽지 -->
-            <div class="app-pc-only app-dropdown">
+            <div class="app-pc-only app-dropdown onlyLogin">
                <a class="app-header-item app-dropdown-toggle app-icon-button app-icon-button-gray">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                      fill="currentColor">
@@ -428,57 +464,74 @@ $(document).ready(function(){
                            d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                      </svg>
                      <%-- 알림 있을 때 갯수 뽑아줌. --%>
-<%--                      <span class="app-header-item-badge"><%= newMessage %></span> --%>
+                     <%-- <span class="app-header-item-badge"><%= newMessage %></span> --%>
         
                </a>
                <!-- 쪽지 목록 창. -->
                <div class="app-dropdown-menu app-right" style="width: 270px">
-<%--                   <jsp:include page="/page/headerNav/message.jsp"></jsp:include> --%>
+                  <%-- <jsp:include page="/page/headerNav/message.jsp"></jsp:include> --%>
                </div>
             </div>
+   <script > 
+      $(document).ready(function(){
+         
+         console.log($("#uid").val());
+      });
+         
+      
+   </script>
+   <!-- 멤버 프로필 사진이 헤더에 보이게  -->
+            <%
+               MemberDao memberDao = new MemberDao();
+               MemberDto memberDto = memberDao.get(uid);
+               
+               MemberProfileDao memberProfileDao = new MemberProfileDao();
+               MemberProfileDto memberProfileDto ;
+               String nickName; 
+               if(uid ==""||uid == null){
+                  memberProfileDto = null;
+                  nickName="";
+               }else{
+                   memberProfileDto = memberProfileDao.get(uid);   
+                   nickName =  memberDto.getMemNick();
+               }
+            %>
+            
             <!-- 프로필 사진 누르면 나오는 드롭박스  -->
-            <div class="app-pc-only app-dropdown">
+            <div class="app-pc-only app-dropdown onlyLogin">
                <a class="app-header-profile app-dropdown-toggle app-avatar"
                   title="닉네임"> 
-                  <ion-icon name="person-sharp" role="img"
-                     class="md hydrated" aria-label="person sharp"></ion-icon>
+                  
+                  <%if(memberProfileDto == null){ %>
+                        <img src="<%=root%>/resources/image/profile-user.png">
+                       
+                     <%} else{ %>
+                        <img src="profile.kh?mpNo=<%=memberProfileDto.getMpNo() %>">
+                        <%=memberProfileDto.getMpNo() %>
+                     <%} %>
+                     
                </a>
                <div class="app-dropdown-menu app-right" style="width: 250px">
                   <div>
                      <div class="tw-py-4 tw-px-6 tw-border-b tw-border-gray-300">
-                        <div class="tw-font-bold tw-text-sm tw-mb-1">닉네임</div>
+                        <div class="tw-font-bold tw-text-sm tw-mb-1">
+                         <%=nickName %></div>
                      </div>
                      <ul class="app-dropdown-menu-list tw-py-2 app-custom-scroll">
 
-                        <li><a href="/index.php?mid=index&amp;act=dispMemberInfo">
-                              <ion-icon name="person-outline" role="img" class="md hydrated"
-                                 aria-label="person outline"></ion-icon> <span>마이페이지</span>
+                        <li><a href="<%=root%>/page/member/mypage.jsp">
+                               <span>마이페이지</span>
                         </a></li>
-                        <li><a
-                           href="/index.php?mid=index&amp;act=dispMemberScrappedDocument">
-                              <ion-icon name="bookmark-outline" role="img"
-                                 class="md hydrated" aria-label="bookmark outline"></ion-icon>
-                              <span>스크랩</span>
+                        <li>
+                        <a href="<%=root%>/page/member/note_post.jsp">
+                              <span>작성 게시글</span>
                         </a></li>
-                        <li><a
-                           href="/index.php?mid=index&amp;act=dispMemberOwnDocument">
-                              <ion-icon name="document-text-outline" role="img"
-                                 class="md hydrated" aria-label="document text outline"></ion-icon>
-                              <span>작성글</span>
-                        </a></li>
-                        <li><a
-                           href="/index.php?mid=index&amp;act=dispMemberOwnComment"> <ion-icon
-                                 name="chatbox-ellipses-outline" role="img"
-                                 class="md hydrated" aria-label="chatbox ellipses outline"></ion-icon>
+                        <li><a href="<%=root%>/page/member/note_commend.jsp"> 
                               <span>작성댓글</span>
                         </a></li>
-                        <li><a onclick="onClickDarkThemeToggle()"> <ion-icon
-                                 name="contrast-outline" role="img" class="md hydrated"
-                                 aria-label="contrast outline"></ion-icon> <span>다크모드
-                                 전환</span>
-                        </a></li>
+                        
                         <li class="tw-border-b tw-border-gray-300 tw-my-2"></li>
-                        <li><a href="/index.php?mid=index&amp;act=dispMemberLogout"
+                        <li><a href="<%=root%>/page/member/logout.kh""
                            class="eq more"> <ion-icon name="lock-open-outline"
                                  role="img" class="md hydrated" aria-label="lock open outline"></ion-icon>
                               <span>로그아웃</span>
@@ -490,7 +543,6 @@ $(document).ready(function(){
          </div>
       </header>
       <div class="app-header-space"></div>
-      <!--#Meta:layouts/slow/components/header/header-menu/header-menu.scss?$__Context->themeConfig->variables-->
 
 
       <div class="app-header-menu">
@@ -540,13 +592,13 @@ $(document).ready(function(){
 
                <a class="app-login" onclick="onClickHeaderMenuLogin()">로그인이
                   필요합니다.</a> <a class="app-signup"
-                  href="join.jsp">회원가입</a>
+                  href="<%=root %>/page/member/join.jsp">회원가입</a>
             </div>
             <nav>
                <ul class="app-card app-sidebar-left__nav">
                   <li>
                      <div class="app-sidebar-left__nav__item">
-                        <a href="/index"> <span>Now</span>
+                        <a href="../../index.jsp"> <span>Now</span>
                         </a>
 
                      </div>
@@ -591,7 +643,7 @@ $(document).ready(function(){
                   </li>
                   <li>
                      <div class="app-sidebar-left__nav__item">
-                        <a href="/small"> <span>소모임</span>
+                        <a href="<%=root%>/fitgroup/list.jsp"> <span>소모임</span>
                         </a>
 
                         <ion-icon name="chevron-down-outline"

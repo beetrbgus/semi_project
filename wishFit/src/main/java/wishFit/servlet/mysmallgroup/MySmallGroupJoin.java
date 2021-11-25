@@ -18,8 +18,7 @@ public class MySmallGroupJoin extends HttpServlet {
 		try {
 			int fgNo = Integer.parseInt(req.getParameter("fgNo"));
 			
-			//String memId = (String) req.getSession().getAttribute("uid");
-			String memId = "ksm01";
+			String memId = (String) req.getSession().getAttribute("uid");
 			MySmallGroupDto mySmallGroupDto = new MySmallGroupDto();
 			mySmallGroupDto.setFgNo(fgNo);
 			mySmallGroupDto.setMemId(memId);

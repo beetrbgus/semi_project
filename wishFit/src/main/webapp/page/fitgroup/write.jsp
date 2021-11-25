@@ -129,6 +129,10 @@
 		}
 	});
 </script>
+<%
+String uid = (String)request.getSession().getAttribute("uid");
+%>
+
 
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -150,7 +154,7 @@
 			<tbody>
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="fgId" value="ksm01"></td>
+					<td><input type="text" name="fgId" value="<%=uid%>"></td>
 				</tr>
 				<tr>
 				<tr>

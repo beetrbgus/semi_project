@@ -81,8 +81,8 @@ public class MemberDao {
 			memberDto.setMemGrade(rs.getString("mem_grade"));
 			memberDto.setMemBirth(rs.getString("mem_birth"));
 			memberDto.setMemGender(rs.getString("mem_gender"));
-			memberDto.setMemPwQ(rs.getString("mem_pwQ"));
-			memberDto.setMemPwA(rs.getString("mem_pwA"));
+			memberDto.setMemPwQ(rs.getString("mem_pw_q"));
+			memberDto.setMemPwA(rs.getString("mem_pw_a"));
 			memberDto.setMemName(rs.getString("mem_name"));
 			memberDto.setMemPhone(rs.getString("mem_phone"));
 			memberDto.setMemReport(rs.getInt("mem_report"));

@@ -1,3 +1,4 @@
+<%@page import="wishFit.beans.fitgroup.Pagination"%>
 <%@page import="wishFit.beans.member.MemberProfileDto"%>
 <%@page import="wishFit.beans.member.MemberProfileDao"%>
 <%@page import="java.util.List"%>
@@ -126,6 +127,16 @@ String root = request.getContextPath();
 :root { -
 	-aside-width: 17.625rem;
 }
+#search-input{
+width:88%;
+height:30px;
+border :3px solid black;
+border-radius :5px;
+}
+#search-submit{
+width:30px;
+height:35px;
+}
 </style>
 <%
 //String uid =request.getSession().getAttribute("uid");
@@ -147,9 +158,17 @@ if(isSearch){
 	list=fitgroupDao.listAll();
 }
 MemberProfileDao memberProfileDao = new MemberProfileDao();
-MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
+
 //자기 자신 글 인지 확인하기
 //boolean isOwner = uid.equals(fitImageVo.getFgId());
+
+	//Pagination 모듈을 이용하여 계산을 처리하도록 위임
+	Pagination pagination = new Pagination(request);
+	//pagination.setPageSize(15);
+	//pagination.setBlockSize(5);   
+	pagination.calculate(); 
+%>
+
 %>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
@@ -198,10 +217,10 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 				
 			<div class="app-aside-search">
 			
-	
-			<input type="text" name="fgLocation"
-		placeholder="검색" value="" class="app-aside-search-input" />
-
+			<form><%--id="search-submit" --%>
+			<input id="search-input" type="text" name="fgLocation" placeholder="지역주소를 검색해주세요!" >
+			<input  class="app-button app-primary" type="submit" value="검색">
+				</form>
 			</div>
  				
  					<button type="button"onclick = "location.href = 'write.jsp'">글작성</button>
@@ -236,15 +255,23 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 
 										<div class="app-list-meta">
 											<span style="color:"></span><span>
-
+												
+												<%
+												MemberProfileDto memberProfileDto = memberProfileDao.get(fitImageVO.getFgId());
+												%>
 												<div class="app-list-member" style="color:#;">
 													
 													<div class="app-avatar"
 														style="width: 1.25rem; height: 1.25rem;">
-														
+														<%if(memberProfileDto != null){ %>
 														<img src="profile.kh?mpNo=<%=memberProfileDto.getMpNo() %>">
+												<%}else{ %>
+												<img src="<%=root%>/resources/common/img/no_image.gif">
+												<%} %>
+													
+												
 													</div>
-
+	
 													<div class="member_459 tw-inline-flex tw-items-center">
 													<%=fitImageVO.getFgId()%></div>
 												</div>
@@ -263,18 +290,58 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 						</ul>
 					</div>
 					 <%} %>
-					  </form>
-					  
-					  
-					  
-					  
-					  
-					  
-				</div>
-				<jsp:include page="/template/footer.jsp"></jsp:include>
-			</div>
 		</div>
+	<div class="row pagination">
+
+	<!-- 이전 버튼 -->
+		<%if(pagination.isPreviousAvailable()){ %>
+			<%if(pagination.isSearch()){ %>
+				<!-- 검색용 링크 -->
+				<a href="list.jsp?fgLocation=<%=pagination.getfgLocationString()%>&p=<%=pagination.getPreviousBlock()%>">&lt;</a>
+			<%} else { %>
+				<!-- 목록용 링크 -->
+				<a href="list.jsp?p=<%=pagination.getPreviousBlock()%>">&lt;</a>
+			<%} %>
+		<%} else { %>
+			 <a>&lt;</a>
+		<%} %> 
+		<!-- 페이지 네비게이터 -->
+
+		<%for(int i = pagination.getStartBlock(); i <= pagination.getRealLastBlock(); i++){ %>
+			<%if(pagination.isSearch()){ %>
+			<!-- 검색용 링크 -->
+			<a href="list.jsp?fgLocation=<%=pagination.getfgLocationString()%>&p=<%=i%>"><%=i%></a>
+			<%}else{ %>
+			<!-- 목록용 링크 -->
+			<a href="list.jsp?p=<%=i%>"><%=i%></a>
+			<%} %>
+			
+		<%} %>
+
+	<!-- 다음 -->
+		<%if(pagination.isNextAvailable()){ %>
+			<%if(pagination.isSearch()){ %>
+				<!-- 검색용 링크 -->
+				<a href="list.jsp?fgLocation=<%=pagination.getfgLocationString()%>&p=<%=pagination.getNextBlock()%>">&gt;</a>
+			<%} else { %>
+				<!-- 목록용 링크 -->
+				<a href="list.jsp?p=<%=pagination.getNextBlock()%>">&gt;</a>
+			<%} %> 
+		<%} else {%>
+			<a>&gt;</a>
+		<%} %>
+
+	</div>
+	
+	</div>
+	<!-- 푸터 -->
+	</form>
+	<jsp:include page="/template/footer.jsp"></jsp:include>
 </main>
+
+
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>
+
+
 

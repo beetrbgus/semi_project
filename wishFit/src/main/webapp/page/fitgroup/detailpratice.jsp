@@ -1,7 +1,12 @@
+<%@page import="wishFit.beans.mysmallgroup.MySmallGroupDto"%>
+<%@page import="java.util.List"%>
+<%@page import="wishFit.beans.mysmallgroup.MySmallGroupDao"%>
+<%@page import="wishFit.beans.firgroupimage.FitgroupImageDto"%>
+<%@page import="wishFit.beans.firgroupimage.FitgroupImageDao"%>
+<%@page import="wishFit.beans.fitgroup.FitgroupDto"%>
+<%@page import="wishFit.beans.fitgroup.FitgroupDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="/template/header.jsp"></jsp:include>
-<jsp:include page="/template/leftSide.jsp"></jsp:include>
 <%
 String root = request.getContextPath();
 %>
@@ -77,15 +82,11 @@ String root = request.getContextPath();
 	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.header.scssdedd.css?20210328011802" />
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.status-icon.scssdedd.css?20210328011802" />
-<style>
-:root { -
-	-aside-width: 17.625rem;
-}
-</style>
 
-
+<jsp:include page="/template/header.jsp"></jsp:include>
+<jsp:include page="/template/leftSide.jsp"></jsp:include>
 <main class="app-content app-clearfix">
-	<!--#Meta:layouts/slow/components/main-banner/main-banner.scss?$__Context->themeConfig->variables-->
+<!-- 	<div id="map" style="width: 100%; height: 300px; border-radius: 20px;"></div> -->
 
 
 	<div class="app-clearfix">
@@ -135,7 +136,7 @@ String root = request.getContextPath();
 											<div class="app-article-meta-divider">・</div>
 											<div class="app-article-meta-item">조회 수 19</div>
 											<div class="app-article-meta-divider">・</div>
-											
+
 											<a href="#comment" class="app-pc-only app-article-meta-item">댓글
 												3</a>
 										</div>
@@ -237,164 +238,9 @@ String root = request.getContextPath();
 						</div>
 					</div>
 				</div>
-
-				<div class="app-author-post app-board-section app-author-post--">
-
-
-				</div>
-
-				<div class="ed text-center margin-vertical-small"></div>
-				<div class="app-card app-board-comment app-board-section">
-					<div class="app-board-comment-target" id="comment"></div>
-					<div
-						class="app-comment-header app-board-container tw-flex tw-items-center">
-						<div class="tw-font-bold tw-text-base tw-mr-2">댓글</div>
-						<div class="tw-text-sm">
-							<span class="tw-text-gray-700">총 </span> <span
-								class="tw-text-primary tw-font-bold">3</span><span
-								class="tw-text-gray-700">개</span>
-						</div>
-					</div>
-
-					<ul id="app-board-comment-list" class="app-board-comment-list">
-						<li id="comment_1141" class="app-comment-item app-clearfix ">
-							<div class="app-comment-profile-image-wrap tw-flex-initial">
-								<div
-									class="app-comment-profile-image app-owner-profile app-avatar">
-									<img
-										src="../modules/board/skins/slow/assets/images/ic_profile_default.png"
-										alt="추어탕" />
-								</div>
-							</div>
-
-							<div class="tw-flex-1 tw-pl-4">
-								<div class="tw-flex tw-items-center tw-flex-wrap">
-									<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-
-										<a href="#popup_menu_area"
-											class="tw-flex tw-items-center member_1137"
-											onclick="return false" style="color: #;">추어탕</a>
-										<!--  -->
-									</div>
-									<el-tooltip content="2021-10-18 22:43:55">
-									<div class="tw-ml-2 tw-mr-4 tw-text-gray-700">2021.10.18</div>
-									</el-tooltip>
-
-									<div class="tw-flex-1"></div>
-
-								</div>
-
-								<div class="app-comment-content tw-py-3">
-									<div>
-										<!--BeforeComment(1141,1137)-->
-										<div class="comment_1141_1137 rhymix_content xe_content">
-											<p>좋네요</p>
-										</div>
-										<!--AfterComment(1141,1137)-->
-									</div>
-								</div>
-								<div class="app-comment-actions tw-flex tw-items-center">
-									<!--#Meta:modules/board/skins/slow/components/comment/comment-vote/comment-vote.scss?$__Context->themeConfig->variables-->
-									<div class="app-comment-vote" data-target-srl="1141">
-										<button class="app-comment-vote__up" data-type="up"
-											data-count="0" onclick="appCommentVote(this)">
-											<ion-icon name="thumbs-up-sharp"></ion-icon>
-											<span class="app-comment-vote__count"> </span>
-										</button>
-
-										<button class="app-comment-vote__down" data-type="down"
-											data-count="0" onclick="appCommentVote(this)">
-											<ion-icon name="thumbs-down-sharp"></ion-icon>
-											<span class="app-comment-vote__count"> </span>
-										</button>
-									</div>
-									<a class="comment-item-tool app-link tw-mr-2"
-										onclick="reComment('512',
-      '1141',
-      '../index7cfd.html?search_target=tag&amp;search_keyword=%EC%95%84%EC%86%8C%EC%8A%A4&amp;mid=bike&amp;document_srl=512&amp;act=dispBoardReplyComment&amp;comment_srl=1141');
-      return false;">댓글</a>
-									<div class="app-dropdown">
-										<a
-											class="app-dropdown-toggle app-icon-button app-icon-button-gray">
-											<ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-										</a>
-										<div class="app-dropdown-menu">
-											<ul>
-												<li></li>
-
-												<li></li>
-
-												<li><a href="#"
-													onclick="doCallModuleAction('comment','procCommentDeclare','1141');return false">
-														신고 </a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-
-
-					</ul>
-
-					<div class="tw-text-center tw-py-8 tw-px-4">
-						<ion-icon name="finger-print-outline"
-							class="tw-text-gray-600 tw-text-2xl tw-mb-4"></ion-icon>
-						<div class="tw-text-black tw-font-bold tw-text-sm tw-mb-2">댓글
-							쓰기</div>
-						<div class="tw-text-sm tw-text-gray-700">권한이 없습니다.</div>
-					</div>
-					<div id="recomment-write"
-						class="app-comment-write app-recomment-form" style="display: none">
-						<form action="https://sweatee.co.kr/" method="post"
-							onsubmit="return procFilter(this,insert_comment)">
-							<input type="hidden" name="error_return_url"
-								value="/bike/512?search_target=tag&amp;search_keyword=%EC%95%84%EC%86%8C%EC%8A%A4" /><input
-								type="hidden" name="act" value="" /> <input type="hidden"
-								name="mid" value="bike" /> <input type="hidden"
-								name="document_srl" value="512" /> <input type="hidden"
-								name="parent_srl" value="" />
-
-							<div class="tw-flex tw-items-center tw-mb-3">
-								<input type="text" name="nick_name" placeholder="글쓴이"
-									class="app-input tw-mr-2" style="width: 100px" /> <input
-									type="password" name="password" placeholder="비밀번호"
-									class="app-input tw-mr-2" style="width: 100px" />
-							</div>
-							<textarea id="temp-recomment" class="app-textarea"
-								style="resize: none"></textarea>
-							<textarea style="display: none;" id="editor-recomment"
-								name="content"></textarea>
-
-							<div class="tw-flex tw-items-start tw-pt-3">
-								<div class="tw-flex tw-items-center tw-flex-wrap tw-mb-3">
-
-
-
-									<a id="use-editor" class="app-link tw-mr-3" href="#">에디터</a>
-								</div>
-								<div class="tw-flex-1"></div>
-								<button type="button"
-									class="app-button app-button-rounded app-button-xs tw-mr-2"
-									onclick="jQuery('#recomment-write').toggle().parent().find('#reComment').focus();return false">취소</button>
-								<button type="submit" onclick="setTextareaReplaceReComment()"
-									class="app-button app-button-rounded app-button-xs primary">등록</button>
-							</div>
-						</form>
-					</div>
-				</div>
-				<div class="tw-text-center tw-my-3"></div>
 			</div>
-
 			<div class="app-board-section"></div>
-			<div class="app-board-section tw-text-center">
 
-				<ul class="app-pagination">
-					<li class="app-active"><a
-						href="../bike5489.html?search_target=tag&amp;search_keyword=%EC%95%84%EC%86%8C%EC%8A%A4&amp;page=1&amp;division=-515&amp;last_division=0">1</a>
-					</li>
-				</ul>
-			</div>
 			<jsp:include page="/template/footer.jsp"></jsp:include>
 		</div>
 	</div>

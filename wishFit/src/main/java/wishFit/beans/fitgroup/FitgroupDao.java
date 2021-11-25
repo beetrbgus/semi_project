@@ -226,35 +226,108 @@ public class FitgroupDao {
 		con.close();
 		return seq;
 	}
-	public List<TotalVO> count() throws Exception{
+	//페이지네이션 전체조회
+	public List<FitImageVO> listByRownum(int begin, int end) throws Exception {
 		Connection con = JdbcUtils.connect();
-		String sql = "select excate_name fgname, count(fg_no) total from fitgroup group by excate_name";
+		String sql ="select * from(select rownum rn, TMP.* from(select * from fitgroup left outer join fitgroupimage on fitgroup.fg_no = fitgroupimage.fg_no where fg_starttime>sysdate order by fg_starttime asc)TMP)where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, begin);
+		ps.setInt(2, end);
 		ResultSet rs = ps.executeQuery();
-		List<TotalVO> list = new ArrayList<>();
-		while(rs.next()) {
-			TotalVO totalVO = new TotalVO();
-			totalVO.setFgName(rs.getString("fgname"));
-			totalVO.setTotal(rs.getInt("total"));
-		list.add(totalVO);
+		List<FitImageVO> list = new ArrayList<>();
+		while (rs.next()) {
+			FitImageVO fitImageVO = new FitImageVO();
+			fitImageVO.setFgNo(rs.getInt("fg_no"));
+			fitImageVO.setFgId(rs.getString("fg_id"));
+			fitImageVO.setExcateName(rs.getString("excate_name"));
+			fitImageVO.setFgTitle(rs.getString("fg_title"));
+			fitImageVO.setFgIntro(rs.getString("fg_intro"));
+			fitImageVO.setFgStarttime(rs.getString("fg_starttime"));
+			fitImageVO.setFgEndtime(rs.getString("fg_endtime"));
+			fitImageVO.setFgLocation(rs.getString("fg_location"));
+			fitImageVO.setFgLatitude(rs.getString("fg_latitude"));
+			fitImageVO.setFgLongitude(rs.getString("fg_longitude"));
+			fitImageVO.setFgMkDate(rs.getString("fg_mkdate"));
+			fitImageVO.setFgImageNo(rs.getInt("fg_image_no"));
+			fitImageVO.setFgImageUpload(rs.getString("fg_image_upload"));
+			fitImageVO.setFgImageSave(rs.getString("fg_image_save"));
+			fitImageVO.setFgImageSize(rs.getLong("fg_image_size"));
+			fitImageVO.setFgImageType(rs.getString("fg_image_type"));
+
+			list.add(fitImageVO);
+
 		}
 		con.close();
 		return list;
-	}
-	public TotalVO countTotal() throws Exception{
-		Connection con = JdbcUtils.connect();
-		String sql = "select count(*)total from fitgroup";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		TotalVO totalVO ;
-		if(rs.next()) {
-			 totalVO = new TotalVO();	
-			totalVO.setTotal(rs.getInt("total"));
-		}else {
-			totalVO=null;
+}
+	//페이지 네이션 검색
+		public List<FitImageVO> searchByRownum(String fgLocation,int begin, int end) throws Exception {
+			Connection con = JdbcUtils.connect();
+			String sql ="select rownum rn, TMP.* from(select * from fitgroup left outer join fitgroupimage on fitgroup.fg_no = fitgroupimage.fg_no where instr(fg_location,?) >0 and fg_starttime>sysdate order by fg_starttime asc)TMP)where rn between ? and ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, fgLocation);
+			ps.setInt(2, begin);
+			ps.setInt(3, end);
+			ResultSet rs = ps.executeQuery();
+			List<FitImageVO> list = new ArrayList<>();
+			while (rs.next()) {
+				FitImageVO fitImageVO = new FitImageVO();
+				fitImageVO.setFgNo(rs.getInt("fg_no"));
+				fitImageVO.setFgId(rs.getString("fg_id"));
+				fitImageVO.setExcateName(rs.getString("excate_name"));
+				fitImageVO.setFgTitle(rs.getString("fg_title"));
+				fitImageVO.setFgIntro(rs.getString("fg_intro"));
+				fitImageVO.setFgStarttime(rs.getString("fg_starttime"));
+				fitImageVO.setFgEndtime(rs.getString("fg_endtime"));
+				fitImageVO.setFgLocation(rs.getString("fg_location"));
+				fitImageVO.setFgLatitude(rs.getString("fg_latitude"));
+				fitImageVO.setFgLongitude(rs.getString("fg_longitude"));
+				fitImageVO.setFgMkDate(rs.getString("fg_mkdate"));
+				fitImageVO.setFgImageNo(rs.getInt("fg_image_no"));
+				fitImageVO.setFgImageUpload(rs.getString("fg_image_upload"));
+				fitImageVO.setFgImageSave(rs.getString("fg_image_save"));
+				fitImageVO.setFgImageSize(rs.getLong("fg_image_size"));
+				fitImageVO.setFgImageType(rs.getString("fg_image_type"));
+
+				list.add(fitImageVO);
+
+			}
+			con.close();
+			return list;
 		}
-		con.close();
-		return totalVO;
-	}
+		//페이징에서 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능(목록 / 검색)
+		public int count() throws Exception {
+			Connection con = JdbcUtils.connect();
+			
+			String sql = "select count(*) from fitgroup where fg_starttime>sysdate";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			
+			int count = rs.getInt("count(*)");
+			//int count = rs.getInt(1);
+			
+			con.close();
+			
+			return count;
+		}
+		public int count(String fgLocation) throws Exception {
+			Connection con = JdbcUtils.connect();
+			
+			String sql = "select count(*) from fitgroup where instr(fg_location, ?) and fg_starttime>sysdate > 0";
 	
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, fgLocation);
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			
+			int count = rs.getInt("count(*)");
+			//int count = rs.getInt(1);
+			
+			con.close();
+			
+			return count;
+		}
 }

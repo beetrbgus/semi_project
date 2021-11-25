@@ -11,7 +11,7 @@ public class MemberProfileDao {
 	public void insert(MemberProfileDto memberProfileDto) throws Exception {
 		conn = JdbcUtils.connect();
 		
-		String sql = "insert into member_profile values(mp_seq.nextval, ?, ?, ?, ?, ?)";
+		String sql = "insert into member_profile values(memberprofile_seq.nextval, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, memberProfileDto.getMpId());
 		ps.setString(2, memberProfileDto.getMpUpload());

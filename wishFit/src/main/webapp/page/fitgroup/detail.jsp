@@ -1,3 +1,5 @@
+<%@page import="wishFit.beans.member.MemberProfileDto"%>
+<%@page import="wishFit.beans.member.MemberProfileDao"%>
 <%@page import="wishFit.beans.mysmallgroup.MySmallGroupDto"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.mysmallgroup.MySmallGroupDao"%>
@@ -7,11 +9,12 @@
 <%@page import="wishFit.beans.fitgroup.FitgroupDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<!-- 헤더 -->
+<jsp:include page="/template/header.jsp"></jsp:include>
+<jsp:include page="/template/leftSide.jsp"></jsp:include>
 <%
 String root = request.getContextPath();
 %>
-
 <link rel="stylesheet" type="text/css" href="../css/commons.css">
 <link rel="stylesheet"href="<%=root%>/resources/files/cache/assets/compiled/92b01c3552e164431c570224468c40fb97bd6173.default.scssdedd.css" />
 <link rel="stylesheet"href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.base.scssdedd.css?20210328011802" />
@@ -47,31 +50,43 @@ String root = request.getContextPath();
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=229c9e937f7dfe922976a86a9a2b723b&libraries=services"></script>
 <script>
-		$(function(){
-			//지도 생성 준비 코드
-			var container = document.querySelector("#map");
-			var options = {
-				center: new kakao.maps.LatLng(33.450701, 126.570667),
-				level: 3
-			};
+	$(function() {
+		//지도 생성 준비 코드
+		var container = document.querySelector("#map");
+		var options = {
+			center : new kakao.maps.LatLng($("input[name=latitude]").val(), $(
+					"input[name=longitude]").val()),
+			level : 3
+		};
 
-			//지도 생성 코드
-			var map = new kakao.maps.Map(container, options);
+		//지도 생성 코드
+		var map = new kakao.maps.Map(container, options);
+
+		// 마커가 표시될 위치입니다 
+		var markerPosition = new kakao.maps.LatLng($("input[name=latitude]")
+				.val(), $("input[name=longitude]").val());
+
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+			position : markerPosition
 		});
-	</script>
-	<style>
-	.fgTime{
-	 font-family : TmonMonsori, "GodoB", "굴림";
-	font-weight: bolder;
-	font-weigth:600;
-	color :red;
-	}
-	</style>
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+	});
+</script>
+<style>
+#msgMem{
+color:blue;
+font-size="30px";
+
+}
+</style>
 <%
+String uid = (String)request.getSession().getAttribute("uid");
 FitgroupDao fitgroupDao = new FitgroupDao();
 int fgNo = Integer.parseInt(request.getParameter("fgNo"));
 FitgroupDto fitgroupDto = fitgroupDao.detail(fgNo);
-String uid = "ksm01";
 boolean isJoin = false;
 
 //이미지 파일 가져오기
@@ -81,6 +96,8 @@ FitgroupImageDto fitgroupImageDto = fitgroupImageDao.find(fgNo);
 <%
 MySmallGroupDao mySmallGroupDao = new MySmallGroupDao();
 List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
+boolean isOwner = fitgroupDto.getFgId().equals(uid);
+boolean isMember = uid !=null;
 // MySmallGroupDto mySmallGroupDto = new MySmallGroupDto();
 // mySmallGroupDto = mySmallGroupDao.detail(fgNo, uid);
 %>
@@ -88,11 +105,12 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 :root { -
 	-aside-width: 17.625rem;
 }
+.fgTime{
+color:red;
+}
 </style>
 
-<!-- 헤더 -->
-<jsp:include page="/template/header.jsp"></jsp:include>
-<jsp:include page="/template/leftSide.jsp"></jsp:include>
+
 
 <main class="app-content app-clearfix">
 	<!--#Meta:layouts/slow/components/main-banner/main-banner.scss?$__Context->themeConfig->variables-->
@@ -124,7 +142,7 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 					<div class="app-board-article-head">
 						<div class="app-board-container">
 							<!-- <img src="https://sweatee.co.kr/files/thumbnails/512/80x80.ratio.jpg?20210417102343" alt=""> -->
-							<h1 class="tw-font-bold tw-text-3xl md:tw-text-xl"><%=fitgroupDto.getFgTitle()	 %></h1>
+							<h1 class="tw-font-bold tw-text-3xl md:tw-text-xl"><%=fitgroupDto.getFgTitle() %></h1>
 							<div class="tw-flex tw-items-end">
 								<div class="app-board-article-profile tw-flex tw-items-center">
 									<div class="app-profile-image app-avatar">
@@ -132,20 +150,20 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 											src="../files/member_extra_info/profile_image/431/431bd61.png?20210405140807"
 											alt="Profile" />
 									</div>
-
+										
 									<div class="tw-flex-1 app-profile-body">
+									<input type="hidden" name="latitude" value="<%=fitgroupDto.getFgLatitude()%>">
+									<input type="hidden" name="longitude"value="<%=fitgroupDto.getFgLongtitude()%>">
 										<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_431 author"
 											href="#" onclick="return false"><%=fitgroupDto.getFgId() %></a>
 										<div class="app-article-meta">
-											<el-tooltip content="2021-04-06 11:19:24">
-											<div class="app-article-meta-item">2021.04.06</div>
+											<div class="app-article-meta-item">작성 일 : <%=fitgroupDto.getFgMkdate().substring(0,10) %></div>
 											</el-tooltip>
 											<div class="app-article-meta-divider">・ 운동시간 :</div>
-											<div class="app-article-meta-item fgTime"> <%=fitgroupDto.getFgStarttime().substring(0,16)%></div>
+											<div class="app-article-meta-item fgTime"><%=fitgroupDto.getFgStarttime().substring(0,16) %></div>
 											<div class="app-article-meta-divider">~</div>
 											<div class="app-article-meta-item fgTime"><%=fitgroupDto.getFgEndtime().substring(0,16) %></div>
-											<div class="app-article-meta-divider app-pc-only">・</div>
-											
+																						
 										</div>
 									</div>
 								</div>
@@ -165,7 +183,8 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 							<!--BeforeDocument(512,431)-->
 							<div class="document_512_431 rhymix_content xe_content">
 								<p>
-									<%if(fitgroupImageDto != null) { //이미지가 없으면 안보여준다.%>	
+								
+									<%if(fitgroupImageDto != null) {%>	
 					<img src="download.kh?fgImageNo=<%=fitgroupImageDto.getFgImageNo()%>">
 					<%} %>
 								</p>
@@ -175,29 +194,20 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 								<p><%=fitgroupDto.getFgIntro() %></p>
 								
 							</div>
-							<!--AfterDocument(512,431)-->
-							<div class="tw-text-center tw-pt-6">
-							
-
-							</div>
-							<div class="tw-flex tw-pt-8">
-								<div class="tw-pr-6">
-									<ul class="app-article-tags">
-									</ul>
-								</div>
-								<div class="tw-flex-1"></div>
-								<div style="flex: 0 0 auto;">
-									
-								</div>
-							</div>
+   
 						</div>
-	<div>
-					<h2>참가자 명단</h2>
+					<div>
+					
+					<h4>참가자 명단</h4>
 					<%
 					for (MySmallGroupDto mySmallGroupDto : list) {
 					%>
-					<tr>
-						<td><%=mySmallGroupDto.getMemId()%></td>
+					 <ul class="app-article-tags">
+   						 <li>
+            				<a href="#" class="tag" rel="tag"><%=mySmallGroupDto.getMemId()%></a>
+      					</li>
+									</ul>
+						
 						<%
 						isJoin = (mySmallGroupDto.getMemId().equals(uid)) ? true : false;
 						%>
@@ -210,25 +220,25 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 					%>
 
 				</div>
-					
+					<%if(isMember){ %>
 						<div class="app-article-footer">
 						
 							<div class="app-article-vote" data-target-srl="512">
 							<%if(isJoin){%>
-								<button class="app-article-vote__up"
+								<button class="app-article-vote__down"
 									onclick="location.href='cancel.kh?fgNo=<%=fitgroupDto.getFgNo()%>&memId=<%=uid%>'">
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 										fill="currentColor">
         <path
 											d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
       </svg>
-									
-									<span class="app-article-vote__count">참가 취소</spsn>
+									<span class="app-article-vote__count">참가취소</spsn>
 								</button>
 									<%}else{ %>
-								<button class="app-article-vote__down" data-type="down"
+								<button class="app-article-vote__up" data-type="down"
 									onclick="location.href='join.kh?fgNo=<%=fitgroupDto.getFgNo()%>'">
-									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+								
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 										fill="currentColor">
         <path
 											d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
@@ -239,20 +249,27 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 								<%} %>
 							</div>
 						</div>
+						<%} %>
 	
 					</div>
 
 
-					<!-- 툴바 -->
 					<div class="app-article-toolbar">
 						<div class="app-board-container">
-							<a class="app-link" href="../bike.html"> <svg
+							<a class="app-link" href="list.jsp"> <svg
 									xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
 									fill="currentColor">
               <path fill-rule="evenodd"
 										d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
 										clip-rule="evenodd" />
-            </svg> <span><a href="list.jsp">목록으로</a></span>
+            </svg> <span>목록으로</span>
+            <div class="tw-ml-2 tw-mr-2 tw-text-sm">
+            <a href="/index.php?mid=news&amp;document_srl=1295&amp;act=dispBoardWrite" class="app-link tw-mr-2">
+              수정            </a>
+            
+            <a class="app-link tw-mr-2 tw-text-sm" onclick="onClickDocumentDelete()">
+              삭제            </a>
+          </div>
 							</a>
 
 							<div class="tw-flex-1"></div>
@@ -270,38 +287,16 @@ List<MySmallGroupDto> list = mySmallGroupDao.search(fgNo);
 						</div>
 					</div>
 				</div>
-
-				<div class="app-author-post app-board-section app-author-post--">
-					
-					
-				</div>
-
-				<div class="ed text-center margin-vertical-small">
-				
-				</div>
-
-				<div class="tw-text-center tw-my-3">
-			
-
-				</div>
 			</div>
-		
-			<div class="app-board-section">
-				
-			</div>
-			<div class="app-board-section tw-text-center">
+			<div class="app-board-section"></div>
 
-				<ul class="app-pagination">
-					<li class="app-active"><a
-						href="../bike5489.html?search_target=tag&amp;search_keyword=%EC%95%84%EC%86%8C%EC%8A%A4&amp;page=1&amp;division=-515&amp;last_division=0">1</a>
-					</li>
-				</ul>
-			</div>
 			<jsp:include page="/template/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </main>
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>
+
+
 
 
