@@ -514,11 +514,6 @@ $(document).ready(function(){
 											class="md hydrated" aria-label="chatbox ellipses outline"></ion-icon>
 										<span>작성댓글</span>
 								</a></li>
-								<li><a onclick="onClickDarkThemeToggle()"> <ion-icon
-											name="contrast-outline" role="img" class="md hydrated"
-											aria-label="contrast outline"></ion-icon> <span>다크모드
-											전환</span>
-								</a></li>
 								<li class="tw-border-b tw-border-gray-300 tw-my-2"></li>
 								<li><a href="/index.php?mid=index&amp;act=dispMemberLogout"
 									class="eq more"> <ion-icon name="lock-open-outline"
