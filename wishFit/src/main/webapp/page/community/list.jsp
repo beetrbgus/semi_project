@@ -1,11 +1,12 @@
-<%@page import="wishFit.beans.PaginationThumnail"%>
+<%@page import="wishFit.beans.PaginationThumbnail"%>
 <%@page import="wishFit.beans.board.BoardImageVO"%>
 <%@page import="wishFit.beans.board.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<!-- 페이지네이션 -->
 <%
-PaginationThumnail pagination = new PaginationThumnail(request);
+PaginationThumbnail pagination = new PaginationThumbnail(request);
 pagination.calculate();
 %>
 
@@ -17,10 +18,7 @@ pagination.calculate();
 
 	
 </script>
-<form class="commu-form" action="list.jsp" method="get">
-	<input type="hidden" name="boardLargeName">
-	<input type="hidden" name="p">
-</form>
+
 
 <div class="container-1000 container-center">
 	<div class="row center">
@@ -29,6 +27,7 @@ pagination.calculate();
 		</h1>
 	</div>
 	<br>
+	<!-- 게시글 정렬 -->
 	<div style="display: inline;">
 		<a href="list.jsp?boardLargeName=커뮤니티&boardMiddleName=질문" class="btn">질문</a>
 	</div>

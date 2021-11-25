@@ -1,5 +1,7 @@
 package wishFit.beans.image;
 
+// 이미지 Dto
+
 public class ImageDto {
 	private int imageNo;
 	   private int boardNo;

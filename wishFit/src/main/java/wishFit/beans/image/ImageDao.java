@@ -13,6 +13,9 @@ import wishFit.util.JdbcUtils;
 public class ImageDao {
 	private Connection conn;
 	
+	// 보드Dao에 들어가야할 애들이 왜 여기로
+	
+	
 	public int imageSeq() throws Exception{
 	      conn = JdbcUtils.connect();
 	      String sql = "select image_seq.nextval from dual";
