@@ -1,6 +1,6 @@
 package wishFit.beans.image;
 
-// 이미지 Dto
+
 
 public class ImageDto {
 	private int imageNo;
@@ -9,6 +9,7 @@ public class ImageDto {
 	   private String boardSave;
 	   private Long boardSize;
 	   private String boardType;
+	   
 	   public int getImageNo() {
 	      return imageNo;
 	   }

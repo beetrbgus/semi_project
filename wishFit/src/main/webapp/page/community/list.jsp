@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!-- 페이지네이션 -->
+<!-- 해당 jsp실행시 대분류 파라미터가 없어서 전체글 조회됨 -->
 <%
 PaginationThumbnail pagination = new PaginationThumbnail(request);
 pagination.calculate();

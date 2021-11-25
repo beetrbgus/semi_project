@@ -13,7 +13,7 @@ import wishFit.util.JdbcUtils;
 public class ImageDao {
 	private Connection conn;
 	
-	// 보드Dao에 들어가야할 애들이 왜 여기로
+	// boardDao에 들어가야될거같은데..
 	
 	
 	public int imageSeq() throws Exception{
