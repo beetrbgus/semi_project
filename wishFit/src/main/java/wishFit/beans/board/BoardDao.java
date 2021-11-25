@@ -55,7 +55,7 @@ public class BoardDao {
 	   
 	   //게시글 등록 처리 / 커뮤 + 마켓용
 	   public void write(BoardDto boardDto) throws Exception{
-	      
+		   
 	      conn = JdbcUtils.connect();
 	      String sql = "insert into board values(?,?,?,?,?,?,sysdate,0,0,0,0)";
 	      //?순서 1)board_no(위에서 가져온 시퀀스를 서블릿에서 부여 후 boardDto 로 넣어서 가져옴(board_seq.nextva 사용x)
@@ -70,8 +70,10 @@ public class BoardDao {
 	      ps.setString(5, boardDto.getBoardTitle());
 	      ps.setString(6, boardDto.getBoardPost());
 	      
-	      ps.execute();
+	     
 	      
+	      ps.execute();
+	      System.out.println("writeDao out");
 	      conn.close();
 	   }
 	   
@@ -144,7 +146,6 @@ public class BoardDao {
 	      }
 	      conn.close();
 	      
-	      System.out.println("나옴");
 
 	      return boardImageVO;
 	      

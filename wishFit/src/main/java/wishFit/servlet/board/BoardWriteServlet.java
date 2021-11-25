@@ -20,6 +20,8 @@ import wishFit.beans.image.ImageDto;
 
 @WebServlet(urlPatterns = "/page/community/comu_write.kh")
 public class BoardWriteServlet extends HttpServlet{
+	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -35,7 +37,7 @@ public class BoardWriteServlet extends HttpServlet{
 	         DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 	         
 	         //MultipartRequest mRequest = new MultipartRequest(req,저장경로,최대크기,인코딩); 
-	         MultipartRequest mRequest = new MultipartRequest(req,savePath,maxSize,encoding); 
+	         MultipartRequest mRequest = new MultipartRequest(req,savePath,maxSize,encoding, policy); 
 			
 	         System.out.println("writerServlet In");
 			//기록글 작성 서블릿 
@@ -48,8 +50,8 @@ public class BoardWriteServlet extends HttpServlet{
 			boardDto.setBoardLargeName(mRequest.getParameter("boardLargeName"));
 			//아이디 : 세션에서
 			//boardDto.setBoardWriter((String)req.getSession().getAttribute("ses"));
-			//boardDto.setBoardWriter(mRequest.getParameter("testuser"));
-			boardDto.setBoardWriter("testuser");
+			boardDto.setBoardWriter(mRequest.getParameter("boardWriter"));
+			//boardDto.setBoardWriter("testuser");
 			
 			//처리
 			BoardDao boardDao = new BoardDao();
@@ -60,16 +62,20 @@ public class BoardWriteServlet extends HttpServlet{
 			boardDao.write(boardDto);
 			
 			if(mRequest.getFile("attach")!=null) {//파일 attach란 이름으로 업로드가 이루어졌다면
-				System.out.println("imageServlet In");
 				ImageDto imageDto = new ImageDto();
+				ImageDao imageDao = new ImageDao();
+				int imageNo = imageDao.imageSeq();
+				imageDto.setImageNo(imageNo);
 				imageDto.setBoardNo(boardNo);//게시글 번호
 				imageDto.setBoardSave(mRequest.getFilesystemName("attach"));//실제 저장된 이름
 				imageDto.setBoardUpload(mRequest.getOriginalFileName("attach"));//사용자가 올린 이름
 				imageDto.setBoardType(mRequest.getContentType("attach"));//파일 유형
 				
 				File target = mRequest.getFile("attach");//파일을 꺼내기
-				imageDto.setBoardSize(target == null ? 0L : target.length());//파일크기
-				ImageDao imageDao = new ImageDao();
+				imageDto.setBoardSize(target == null ? 0L : target.length());//파일크기				
+				
+				
+				
 				imageDao.insert(imageDto);
 				
 			}

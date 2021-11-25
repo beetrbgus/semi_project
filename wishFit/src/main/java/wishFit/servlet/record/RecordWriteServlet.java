@@ -29,7 +29,7 @@ public class RecordWriteServlet extends HttpServlet{
 			
 			//처리
 			BoardDao boardDao = new BoardDao();
-			int boardNo=boardDao.getSeq();
+			int boardNo=boardDao.boardSeq();
 			boardDto.setBoardNo(boardNo);
 			
 			boardDao.write(boardDto);

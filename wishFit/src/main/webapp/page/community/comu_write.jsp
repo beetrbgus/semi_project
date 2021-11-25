@@ -9,9 +9,9 @@
 
 
 <main>
-<div class="container-800 container-center" > 
 	
     <form action="comu_write.kh"  method="post"  enctype="multipart/form-data">
+<div class="container-800 container-center" > 
     	<div class="row">
     		<input type="text" name="boardWriter" value="testuser">
     	</div>
@@ -33,8 +33,8 @@
     	<div class="row">
     		<input type="submit" value="등록" class="btn">
     	</div>
-    </form>
 </div>
+    </form>
     
     
     
