@@ -8,7 +8,8 @@ public class GetSeq {
 	//시퀀스 구하는 sql 
 	public static int getSequence(String seqName) throws Exception{
 		Connection conn = JdbcUtils.connect();
-		String sql = "select"+seqName+" from dual"; 
+		String sql = "select #1.nextval from dual";
+		sql = sql.replace("#1", seqName);
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
