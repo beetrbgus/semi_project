@@ -8,7 +8,9 @@ int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 %>
 <%--처리 --%>
 <%
-	BoardDao boardDao = new BoardDao();
+BoardDao boardDao = new BoardDao();
+BoardDto boardDto = boardDao.detail(boardNo);
+
 %>
 
 

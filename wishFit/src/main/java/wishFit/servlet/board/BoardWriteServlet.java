@@ -40,6 +40,7 @@ public class BoardWriteServlet extends HttpServlet{
 	         MultipartRequest mRequest = new MultipartRequest(req,savePath,maxSize,encoding, policy); 
 			
 	         System.out.println("writerServlet In");
+
 			//기록글 작성 서블릿 
 			//입력 : 제목/내용/작성일/대분류/중분류/게시글번호(시퀀스)/작성자아이디(세션이용)
 			BoardDto boardDto = new BoardDto();
@@ -55,7 +56,7 @@ public class BoardWriteServlet extends HttpServlet{
 			
 			//처리
 			BoardDao boardDao = new BoardDao();
-			int boardNo=boardDao.boardSeq();
+			int boardNo=boardDao.getSeq();
 			boardDto.setBoardNo(boardNo);
 			
 			
