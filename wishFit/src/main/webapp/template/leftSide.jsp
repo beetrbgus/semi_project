@@ -3,7 +3,16 @@
 <script src = "http://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel = "stylesheet" type="text/css" href="../css/widget.css">
 <script src = "../css/widget.js"></script>
- 
+<script src = "../css/record.js"></script>
+<link rel = "stylesheet" type="text/css" href="../css/commons.cs"> 
+<%
+	String root = request.getContextPath();
+%> 
+
+<form class="record-form" action="my_record.jsp" method="get">
+	<input type="hidden" name="year">
+	<input type="hidden" name="month">
+</form>
     
     
 <!-- 왼쪽 사이드 바 -->
@@ -17,14 +26,14 @@
             <ul class="app-card app-sidebar-left__nav">
                <li class="active open">
                   <div class="app-sidebar-left__nav__item">
-                     <a href="<%=request.getContextPath() %>/index.jsp"> <span>Now</span>
+                     <a href="<%=root %>/index.jsp"> <span>Now</span>
                      </a>
                   </div>
 
                </li>
-               <li class="">
+               <li class="open">
                   <div class="app-sidebar-left__nav__item">
-                     <a href="my_record.jsp"> <span>내 기록</span>
+                     <a href="<%=root %>/page/record/my_record.jsp"> <span>내 기록</span>
                      </a>
                      <ion-icon name="chevron-down-outline" class="app-sidebar-left__nav__more md hydrated" role="img" aria-label="chevron down outline">
                         <div class="icon-inner">
@@ -34,9 +43,14 @@
                   </div>
 
                   <ul class="app-sidebar-left__nav__child">
-                     <li><a href="my_record.jsp?boardMiddleName=일자별">일자별</a></li>
-                     <li><a href="my_record.jsp?boardMiddleName=소모임">소모임</a></li>
-                     <li><a href="my_record.jsp?boardMiddleName=식단">식단</a></li>
+<%--                      <li><a href="<%=root %>/page/record/my_record.jsp?boardMiddleName=일자별">일자별</a></li> --%>
+<!--                       <li><button>일자별</button></li> -->
+<%--                      <li><a href="<%=root %>/page/record/my_record.jsp?boardMiddleName=소모임">소모임</a></li> --%>
+<%--                      <li><a href="<%=root %>/page/recordmy_record.jsp?boardMiddleName=식단">식단</a></li> --%>
+	                  	<li><button class="reset-record"><span>전체</span></button></li>
+						<li><button class="daily-record"><span>일자별</span></button></li>
+						<li><button class="fitgroup-record"><span>소모임</span></button></li>
+						<li><button class="diet-record"><span>식단</span></button></li>
                   </ul>
                </li>
                <li class="">

@@ -9,7 +9,7 @@
     pageEncoding="UTF-8"%>
     
 <script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src = "../css/record.js"></script>
+<!-- <script src = "../css/record.js"></script> -->
 <link rel = "stylesheet" type="text/css" href="../css/commons.cs"> 
     <!-- 달력 날짜 구하기 -->
     
@@ -106,10 +106,10 @@
 		<a href="my_record.jsp" class="btn">
 		<label>처음으로</label>
 		</a>
-		<button class="btn reset-record"><span>전체</span></button>
-		<button class="btn daily-record"><span>일자별</span></button>
-		<button class="btn fitgroup-record"><span>소모임</span></button>
-		<button class="btn diet-record"><span>식단</span></button>
+<!-- 		<button class="btn reset-record"><span>전체</span></button> -->
+<!-- 		<button class="btn daily-record"><span>일자별</span></button> -->
+<!-- 		<button class="btn fitgroup-record"><span>소모임</span></button> -->
+<!-- 		<button class="btn diet-record"><span>식단</span></button> -->
 	</div>
 	<div class="row">
  	<table  class="table" style="width:100%">

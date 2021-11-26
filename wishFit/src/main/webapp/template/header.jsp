@@ -211,9 +211,9 @@ String uid = (String) session.getAttribute("uid");
 				</a>
 				<!--헤더의 항목 부분-->
 				<ul class="app-header-nav">
-					<li class="active"><a href="index.jsp"> <span>Now</span>
+					<li class="active"><a href="<%=root %>/index.jsp"> <span>Now</span>
 					</a></li>
-					<li><a href="my_record.jsp"> <span>내 기록</span> <ion-icon
+					<li><a href="<%=request.getContextPath() %>/page/record/my_record.jsp"> <span>내 기록</span> <ion-icon
 								class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
 					</a>
 						<ul class="app-header-nav-child">
@@ -331,7 +331,7 @@ String uid = (String) session.getAttribute("uid");
 				<!-- 회원가입 버튼 -->
 				<a
 					class="app-pc-only app-button app-primary app-button-rounded app-button-small notLogin"
-					href="join.jsp">회원가입
+					href="/wishFit/page/member/join.jsp">회원가입
 				</a>
 				<!--  로그인 비동기  -->
 				<script>
@@ -348,7 +348,7 @@ String uid = (String) session.getAttribute("uid");
 								$("#uid").val(result);
 								
 								if(result.trim()!=""){
-									location.href = "/wishFit/";
+									location.href = "/wishFit/index.jsp";
 									alert("로그인성공");
 								} else{
 									$("#msg").html("<p style='color:red'>아이디나 패스워드가 틀렸습니다</p>");
@@ -599,13 +599,13 @@ String uid = (String) session.getAttribute("uid");
 
 					<a class="app-login" onclick="onClickHeaderMenuLogin()">로그인이
 						필요합니다.</a> <a class="app-signup"
-						href="join.jsp">회원가입</a>
+						href="<%=root %>/page/member/join.jsp">회원가입</a>
 				</div>
 				<nav>
 					<ul class="app-card app-sidebar-left__nav">
 						<li>
 							<div class="app-sidebar-left__nav__item">
-								<a href="/index"> <span>Now</span>
+								<a href="../../index.jsp"> <span>Now</span>
 								</a>
 
 							</div>
