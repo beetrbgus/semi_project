@@ -211,7 +211,7 @@ String uid = (String) session.getAttribute("uid");
             </a>
             <!--헤더의 항목 부분-->
             <ul class="app-header-nav">
-               <li class="active"><a href="<%=root %>/index.jsp"> <span>Now</span>
+               <li class="active"><a href="index.jsp"> <span>Now</span>
                </a></li>
                <li><a href="<%=request.getContextPath() %>/page/record/my_record.jsp"> <span>내 기록</span> <ion-icon
                         class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
@@ -233,10 +233,19 @@ String uid = (String) session.getAttribute("uid");
                      <li><a href="#">코디</a></li>
                      <li><a href="#">추천글</a></li>
                   </ul></li>
-               <li><a href="<%=root%>/page/fitgroup/list.jsp"> <span>소모임</span> <ion-icon
+               <li><a href="#"> <span>소모임</span> <ion-icon
                         class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
                </a>
-                  </li>
+                  <ul class="app-header-nav-child">
+                     <li><a href="#">수영</a></li>
+                     <li><a href="#">자전거</a></li>
+                     <li><a href="#">달리기</a></li>
+                     <li><a href="#">등산</a></li>
+                     <li><a href="#">홈트짐트</a></li>
+                     <li><a href="#">필라테스/요가</a></li>
+                     <li><a href="#">골프</a></li>
+                     <li><a href="#">스케이트(빙상)</a></li>
+                  </ul></li>
                <li><a href="market.jsp"> <span>마켓</span> <ion-icon
                         class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
                </a>
@@ -339,7 +348,7 @@ String uid = (String) session.getAttribute("uid");
                         $("#uid").val(result);
                         
                         if(result.trim()!=""){
-                           location.href = "/wishFit/index.jsp";
+                           location.href = "/wishFit/";
                            alert("로그인성공");
                         } else{
                            $("#msg").html("<p style='color:red'>아이디나 패스워드가 틀렸습니다</p>");
@@ -504,10 +513,8 @@ String uid = (String) session.getAttribute("uid");
                   
                   <%if(memberProfileDto == null){ %>
                         <img src="<%=root%>/resources/image/profile-user.png">
-                       
                      <%} else{ %>
-                        <img src="profile.kh?mpNo=<%=memberProfileDto.getMpNo() %>">
-                        <%=memberProfileDto.getMpNo() %>
+                        <img src="<%=root %>/profile.kh?mpNo=<%=memberProfileDto.getMpNo() %>">
                      <%} %>
                      
                </a>
@@ -598,7 +605,7 @@ String uid = (String) session.getAttribute("uid");
                <ul class="app-card app-sidebar-left__nav">
                   <li>
                      <div class="app-sidebar-left__nav__item">
-                        <a href="../../index.jsp"> <span>Now</span>
+                        <a href="/index"> <span>Now</span>
                         </a>
 
                      </div>
@@ -643,7 +650,7 @@ String uid = (String) session.getAttribute("uid");
                   </li>
                   <li>
                      <div class="app-sidebar-left__nav__item">
-                        <a href="<%=root%>/fitgroup/list.jsp"> <span>소모임</span>
+                        <a href="/small"> <span>소모임</span>
                         </a>
 
                         <ion-icon name="chevron-down-outline"
