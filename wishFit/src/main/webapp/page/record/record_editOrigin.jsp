@@ -24,7 +24,7 @@
 
 
 <h2>게시글 수정</h2>
-<form action = "record_edit.kh" method="post" enctype="multipart/form-data">
+<form action = "#" method="post" enctype="multipart/form-data">
 <input type="hidden" name="boardNo" value="<%=boardNo%>">
 	<div class="container-700 container-center">
 		<div class="row">

@@ -1,4 +1,4 @@
-package wishFit.servlet.record;
+package wishFit.servlet.board;
 
 import java.io.File;
 import java.io.IOException;

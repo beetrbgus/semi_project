@@ -138,7 +138,7 @@ String recordDate = boardImageVO.getBoardDate().substring(0,10);
                               class="fileupload-processing form-data" name="Filedata"
                               data-auto-upload="true" data-editor-sequence="1" multiple="">
                               <%if(boardImageVO.getImageNo()!=0){ %>
-								<span><%=boardImageVO.getBoardUpload() %></span>
+								<span>현재 파일 : <%=boardImageVO.getBoardUpload() %></span>
 			<%} else{%>
 				<span>이미지 파일 없음</span>
 			<%} %>

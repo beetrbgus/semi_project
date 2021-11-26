@@ -58,7 +58,7 @@ String boardWriter=(String)session.getAttribute("uid");
          </div>
          <div class="app-card">
             <div class="app-board-section app-board-section-padding">
-               <form action="record_write.kh" method="post" enctype="multipart/form-data"
+               <form action="#" method="post" enctype="multipart/form-data"
                   onsubmit="return procFilter(this, window.insert)"
                   class="ed write-form inner-container">
                   <input type="hidden" name="mid" value="coordiboard"> <input
