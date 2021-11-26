@@ -21,7 +21,7 @@
 	BoardDao boardDao = new BoardDao();
 	List<BoardDto> boardMine = boardDao.boardMine("board_writer",uid);
 	FitgroupDao fitgroupDao = new FitgroupDao();
-	List<FitgroupDto> fitgroupMine = fitgroupDao.fitgroupMine("fg_id",uid);
+// 	List<FitgroupDto> fitgroupMine = fitgroupDao.fitgroupMine("fg_id",uid);
 	// 프로필 이미지 조회
 	MemberProfileDao memberProfileDao = new MemberProfileDao();
 	MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
@@ -107,25 +107,25 @@ String root = request.getContextPath();
           </div>
         </li>      
         <%} %>
-        <%for(FitgroupDto fitgroupDto : fitgroupMine){ %>
-        <li>
-          <a href="#" target="_blank">
-            <span><%=fitgroupDto.getFgTitle() %></span>
-          </a>
+<%--         <%for(FitgroupDto fitgroupDto : fitgroupMine){ %> --%>
+<!--         <li> -->
+<!--           <a href="#" target="_blank"> -->
+<%--             <span><%=fitgroupDto.getFgTitle() %></span> --%>
+<!--           </a> -->
           
-          <div class="app-member-list-meta">
-            <div><%=fitgroupDto.getFgStarttime() %></div>
+<!--           <div class="app-member-list-meta"> -->
+<%--             <div><%=fitgroupDto.getFgStarttime() %></div> --%>
   
-            <div>
-              <span>카테고리</span>
-              <span class="tw-font-bold tw-text-black">
-              <%=fitgroupDto.getExcateName() %>
-              </span>
-            </div>
+<!--             <div> -->
+<!--               <span>카테고리</span> -->
+<!--               <span class="tw-font-bold tw-text-black"> -->
+<%--               <%=fitgroupDto.getExcateName() %> --%>
+<!--               </span> -->
+<!--             </div> -->
   
-          </div>
-        </li>      
-        <%} %>
+<!--           </div> -->
+<!--         </li>       -->
+<%--         <%} %> --%>
         </ul>
   
       <ul class="app-pagination">

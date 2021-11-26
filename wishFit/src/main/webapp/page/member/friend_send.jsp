@@ -7,7 +7,7 @@
     pageEncoding="UTF-8"%>
 <%
 	// 처리
-// 	FriendDao friendDao = new FriendDao();
+	FriendDao friendDao = new FriendDao();
 // 	List<FriendDto> list = friendDao.send();
 %>
 
@@ -23,13 +23,13 @@
 	</thead>
 	<tbody>
 <%-- 	<%for(FriendDto friendDto : list){%> --%>
-	<tr>
+<!-- 	<tr> -->
 <%-- 		<td><%=friendDto.getFriendNo() %></td> --%>
 <%-- 		<td><%=friendDto.getFriendNick() %></td> --%>
-		<td>
+<!-- 		<td> -->
 <%-- 		<a href="quit_delete.kh?friendNo=<%=friendDto.getFriendNo()%>">친구 신청 취소</a> --%>
-		</td>
-	</tr>
+<!-- 		</td> -->
+<!-- 	</tr> -->
 <%-- 	<%} %> --%>
 	</tbody>
 </table>

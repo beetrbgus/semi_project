@@ -1,272 +1,343 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
-<%
-String root = request.getContextPath(); 
-%>
-<!-- 헤더 -->
+<%@page import="wishFit.beans.fitgroup.Pagination"%>
+<%@page import="wishFit.beans.member.MemberProfileDto"%>
+<%@page import="wishFit.beans.member.MemberProfileDao"%>
+<%@page import="java.util.List"%>
+<%@page import="wishFit.beans.fitgroup.FitImageVO"%>
+<%@page import="wishFit.beans.fitgroup.FitgroupDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8	"
+	pageEncoding="UTF-8"%>
 <jsp:include page="/template/header.jsp"></jsp:include>
+<jsp:include page="/template/leftSide.jsp"></jsp:include>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=229c9e937f7dfe922976a86a9a2b723b&libraries=services"></script>
+<script>
+	$(function() {
+		//지도 생성 준비 코드
+		var container = document.querySelector("#map");
+		var options = {
+			center : new kakao.maps.LatLng(37.5339851357212, 126.897094049199),
+			level : 8
+		};
+
+		//지도 생성 코드
+		var map = new kakao.maps.Map(container, options);
+
+		// 마커의 위치 , 내용을 가지고 있는 객체 배열입니다
+		var positions = [
+
+		];
+		var markers = [];
+		
+		for (var i = 0; i < $(".fgTitle").length; i++) {
+			let title = $(".fgTitle").eq(i).val();
+			let latti = Number($(".fgLatitude").eq(i).val());
+			let longdi = Number($(".fgLongitude").eq(i).val());
+			console.log($(".fgTitle").eq(i).val());
+			console.log($(".fgLatitude").eq(i).val());
+			console.log($(".fgLongitude").eq(i).val());
+		
+			positions.push({
+				content : title ,
+				latlng : new kakao.maps.LatLng(latti,longdi)
+			});			
+		}
+		
+		for (var i = 0; i < positions.length; i++) {
+			addMarker(positions[i]);
+			
+		}
+
+		//마커 생성 함수 + 클릭 이벤트 추가 함수 
+		function addMarker(position){
+			var marker = new kakao.maps.Marker({
+				map : map, // 마커를 표시할 지도
+				position : position.latlng
+			
+			});
+			
+			// 마커에 표시할 인포윈도우를 생성합니다 
+			var infowindow = new kakao.maps.InfoWindow({
+					content : position.content
+				// 인포윈도우에 표시할 내용
+				});
+			
+			kakao.maps.event.addListener(marker, 'click', function() {
+	
+				var lat = marker.getPosition().getLat();
+				var lng = marker.getPosition().getLng();
+				setCenter(lat,lng);
+
+			});
+			// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+			// 이벤트 리스너로는 클로저를 만들어 등록합니다 
+			// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+			kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(
+					map, marker, infowindow));
+			kakao.maps.event.addListener(marker, 'mouseout',
+					makeOutListener(infowindow));
+			
+		}
+		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+		function makeOverListener(map, marker, infowindow) {
+			return function() {
+				infowindow.open(map, marker);
+			};
+		}
+
+		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		function makeOutListener(infowindow) {
+			return function() {
+				infowindow.close();
+			}; 
+		}
+		
+	 	function setCenter(lat,lng) {            
+			
+		    var moveLatLon = new kakao.maps.LatLng(lat,lng);
+		    map.setLevel(3);
+		    // 지도 중심을 이동 시킵니다
+		    map.setCenter(moveLatLon);
+		}
+		
+		
+	});
+</script>
 
 
-<!-- 좌측 사이드 -->
-<jsp:include page="../../template/leftSide.jsp"></jsp:include>
+<%
+String root = request.getContextPath();
+%>
+<link rel="stylesheet" type="text/css" href="../css/commons.css">
+<link rel="stylesheet"
+	href="<%=root%>/resources/files/cache/assets/compiled/92b01c3552e164431c570224468c40fb97bd6173.default.scssdedd.css" />
+<link rel="stylesheet"
+	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.base.scssdedd.css?20210328011802" />
+<link rel="stylesheet"
+	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.extra-form.scssdedd.css?20210328011802" />
+<link rel="stylesheet"
+	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.header.scssdedd.css?20210328011802" />
+<link rel="stylesheet"
+	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.status-icon.scssdedd.css?20210328011802" />
+<link rel="stylesheet"
+	href="<%=root%>/resources/files/cache/assets/compiled/782e3367956a91b8978627b8dfd50ebfe1c577b9.card.scssdedd.css?20210328011802" />
+<link rel="stylesheet"
+	href="<%=root%>/resources/files/cache/assets/compiled/782e3367956a91b8978627b8dfd50ebfe1c577b9.base.scssdedd.css?20210328011802" />
+<style>
+:root { -
+	-aside-width: 17.625rem;
+}
+#search-input{
+width:88%;
+height:30px;
+border :3px solid black;
+border-radius :5px;
+}
+#search-submit{
+width:30px;
+height:35px;
+}
+</style>
+<%
+FitgroupDao fitgroupDao = new FitgroupDao();
 
-<!-- 화면 중간. 본문 -->
+String fgLocation = request.getParameter("fgLocation");
+
+//isSearch = 검색을 실행하는 것
+boolean isSearch = fgLocation != null && !fgLocation.equals("");
+String title;
+
+
+
+FitImageVO fitImageVo = new FitImageVO();
+List<FitImageVO> list ;
+if(isSearch){
+	list = fitgroupDao.detailAll(fgLocation);
+}else{
+	list=fitgroupDao.listAll();
+}
+MemberProfileDao memberProfileDao = new MemberProfileDao();
+
+//페이지네이션
+Pagination pagination = new Pagination(request);
+pagination.calculate(); 
+
+//로그인 상태인지 확인
+%>
+
+%>
+
+
+<form>
 <main class="app-content app-clearfix">
-	<!--#Meta:layouts/slow/components/main-banner/main-banner.scss?$__Context->themeConfig->variables-->
-	<!-- 배너 부분. 인덱스 부분만 필요. -->
-	<div class="app-main-banner swiper-container">
-		<div class="swiper-wrapper">
-			<a class="swiper-slide" href="notice/170.html" target="_blank"> <img
-				class="app-main-banner-bg"
-				src="files/attach/images/113/4f0e42b21e6955439e25b0d32ac915c4.jpg"
-				alt="오픈했어요!"
-			>
-
-				<div class="app-main-banner-body">
-					<div class="app-main-banner__container">
-						<div class="app-main-banner__content">
-							<div class="app-subtitle">베타여도 괜찮아</div>
-							<div class="app-title">오픈했어요!</div>
-							<div class="app-slide-button">더보기</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="swiper-slide"
-				href="https://page.stibee.com/subscriptions/112053" target="_blank"> 
-				<img class="app-main-banner-bg"
-				src="files/attach/images/113/0eb8f0c2a6d009c5cbaa168b85823c91.jpg"
-				alt="생활운동 트렌드">
-
-				<div class="app-main-banner-body">
-					<div class="app-main-banner__container">
-						<div class="app-main-banner__content">
-							<div class="app-subtitle">뉴스레터로 놓치지 마세요.</div>
-							<div class="app-title">생활운동 트렌드</div>
-							<div class="app-slide-button">구독하기</div>
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		<div class="app-main-banner__footer">
-			<div class="app-main-banner__container">
-				<div class="app-main-banner__pagination"></div>
-
-				<div class="app-main-banner__indicator"></div>
-				<div class="app-divider"></div>
-				<div class="app-main-banner__arrow">
-					<button class="app-main-banner-prev" title="이전">
-						<ion-icon name="chevron-back-sharp"></ion-icon>
-					</button>
-					<button class="app-main-banner-next" title="다음">
-						<ion-icon name="chevron-forward-sharp"></ion-icon>
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 배너 제외한 영역 -->
 	<div class="app-clearfix">
-		<!--  영역 1 -->
-		<div class="xe-widget-wrapper xe-widget"
-			style="float: left; width: 49%; border-width: 0px; border-style: solid; border-color: rgb(0, 0, 0); margin: 0px 0px 15px; background-image: none; background-repeat: repeat; background-position: 0% 0%;"
-		>
-
-			<div class="app-widgetstyle-wrap" style="height: 100%">
-				<div class="app-widgetstyle-card app-card">
-					<div class="app-widgetstyle-header">
-						<div class="tw-text-base tw-font-bold">오늘의 운동</div>
-
-						<div class="tw-flex-1"></div>
-
-						<a class="app-button primary app-button-xs"
-							href="certifyboard.html"
-						>더보기</a>
+		<div id="app-confirm" class="app-confirm">
+			<div class="app-confirm__container">
+				<div class="app-confirm__box">
+					<div class="app-confirm__body">
+						<ion-icon class="app-confirm__icon md hydrated"
+							name="information-circle-outline" role="img"
+							aria-label="information circle outline"></ion-icon>
+						<div class="app-confirm__title"></div>
+						<div class="app-confirm__description"></div>
 					</div>
 
-					<div class="app-clearfix">
-						<div style="*zoom: 1; padding: 0px 0px 0px 0px !important;">
-							<!--#Meta:widgets/content/skins/slow/assets/css/widget.scss?$__Context->themeConfig->variables-->
-							<div class="app-widget-content-main">
-								<!--#Meta:widgets/content/skins/slow/templates/gallery/gallery.scss?$__Context->themeConfig->variables-->
-								<ul class="app-widget-content app-gallery"
-									style="grid-template-columns: repeat(3, 1fr);"
-								>
-									<li><a href="certifyboard/1061.html#0">
-											<div class="app-thumbnail">
-												<img
-													src="files/thumbnails/061/001/100x75.cropfa77.jpg?20210424151650"
-													srcset="https://sweatee.co.kr/files/thumbnails/061/001/200x150.crop.jpg?20210424151640 2x"
-													alt="주말 아침 라이딩 완료" width="100" height="75" style=""
-												>
-												<!--  -->
-											</div>
-											<div class="app-gallery-body">
-												<div class="app-meta"></div>
-											</div>
-									</a></li>
+				</div>
 
-								</ul>
-							</div>
+			</div>
+
+		</div>
+
+		<div id="app-board" class="app-board-skin ">
+			<div id="board-list">
+				<!-- 현재 대분류가 무엇인지 나타내는 영역 -->
+				<div class="app-board-header">
+					<div class="app-board-title">
+						<div class="tw-flex tw-items-center">
+							<a
+								class="tw-inline-block tw-font-medium tw-text-2xl tw-font-bold tw-mr-1"
+								href="/community">소모임 </a>
+							<div class="tw-flex-1"></div>
+		
 						</div>
+						<!-- 현재 게시판 이름  대분류 + 중분류  -->
+						<p
+							class="tw-text-sm tw-text-gray-700 tw-bt-1 app-board-description">
+						
+							소모임 통합게시판입니다</p>
 					</div>
 				</div>
-			</div>
-		</div>
-		<!--  영역 2 -->
-		<div class="xe-widget-wrapper xe-widget"
-			style="float: right; width: 49%; border-width: 0px; border-style: solid; border-color: rgb(0, 0, 0); margin: 0px 0px 15px; background-image: none; background-repeat: repeat; background-position: 0% 0%;"
-		>
-			<div class="app-widgetstyle-wrap" style="height: 100%">
-				<div class="app-widgetstyle-card app-card">
-					<div class="app-widgetstyle-header">
-						<div class="tw-text-base tw-font-bold">오늘의 운코</div>
+				<!-- 지도 api -->
+				<div id="map" style="width: 800px; height: 300px; border-radius: 20px;"></div>
+				
+			<div class="app-aside-search">
+			
+			<form><%--id="search-submit" --%>
+			<input id="search-input" type="text" name="fgLocation" placeholder="지역주소를 검색해주세요!" >
+			<input  class="app-button app-primary" type="submit" value="검색">
+				</form>
+		</div>	<a href="write.jsp" class="app-button app-button-rounded primary">
+				   <span>쓰기</span></a>		
+ 	
+ 					<%
+						for (FitImageVO fitImageVO : list) {
+						%>
+						<div class="app-board-section">
+					<div class="app-card">
+						<ul class="app-board-template-list">
+							<!-- 마커 등록을 위한 hidden -->
+							<td><input type="hidden" class="fgTitle" value="<%=fitImageVO.getFgTitle()%>"></td>
+							<td><input type="hidden" class="fgLatitude" value="<%=fitImageVO.getFgLatitude()%>"></td>
+							<td><input type="hidden" class="fgLongitude" value="<%=fitImageVO.getFgLongitude()%>"></td>
+							
+							<li><a class="tw-flex-1" href="detail.jsp?fgNo=<%=fitImageVO.getFgNo()%>">
+							
+									<div class="app-thumbnail">
+									<%if(fitImageVO.getFgImageNo() == 0) {%><!-- 사진이 없으면 기본이미지 --> >
+										<img src="<%=root%>/resources/common/img/no_image.gif">
+										<%}else{ %>
+										<img src="download.kh?fgImageNo=<%=fitImageVO.getFgImageNo()%>">
+										<%} %>
+									</div>
+									
+									
+									<!-- 제목 -->
+									<div class="tw-flex-1">
+										<div class="app-list-title tw-flex-wrap">
+											<span class="tw-mr-1"><%=fitImageVO.getFgTitle()%>			
+											</span>
+										</div>
 
-						<div class="tw-flex-1"></div>
-
-						<a class="app-button primary app-button-xs"
-							href="coordiboard.html"
-						>더보기</a>
-					</div>
-
-					<div class="app-clearfix">
-						<div style="*zoom: 1; padding: 0px 0px 0px 0px !important;">
-							<!--#Meta:widgets/content/skins/slow/assets/css/widget.scss?$__Context->themeConfig->variables-->
-							<div class="app-widget-content-main">
-								<!--#Meta:widgets/content/skins/slow/templates/gallery/gallery.scss?$__Context->themeConfig->variables-->
-								<ul class="app-widget-content app-gallery"
-									style="grid-template-columns: repeat(3, 1fr);"
-								>
-									<li><a href="coordiboard/1023.html#0">
-											<div class="app-thumbnail">
-												<img
-													src="files/thumbnails/023/001/100x75.cropa184.jpg?20210422210405"
-													srcset="https://sweatee.co.kr/files/thumbnails/023/001/200x150.crop.jpg?20210422210357 2x"
-													alt="수영완료 !" width="100" height="75" style=""
-												>
-												<!--  -->
-											</div>
-											<div class="app-gallery-body">
-												<div class="app-meta"></div>
-											</div>
-									</a></li>
-
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 영역 공백 -->
-		<div class="rhymix_content xe_content xe-widget-wrapper "
-			style="float: left; width: 100%; border-width: 0px; border-style: solid; border-color: rgb(0, 0, 0); margin: 0px 3px 15px; background-image: none; background-repeat: repeat; background-position: 0% 0%; min-height: 0px !important; height: auto !important;"
-		>
-			<div style="padding: 0px 0px 0px 0px !important;">
-				<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
-				<!-- SWEATEE 메인 -->
-				<ins class="adsbygoogle" style="display: block"
-					data-ad-client="ca-pub-1560594066518337" data-ad-slot="2622954799"
-					data-ad-format="auto" data-full-width-responsive="true"
-				></ins>
-				<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>
-		</div>
-
-		<!-- 영역 3 -->
-		<div class="xe-widget-wrapper xe-widget"
-			style="float: left; width: 49%; border-width: 0px; border-style: solid; border-color: rgb(0, 0, 0); margin: 0px 0px 15px; background-image: none; background-repeat: repeat; background-position: 0% 0%;"
-		>
-			<div class="app-widgetstyle-wrap" style="height: 100%">
-				<div class="app-widgetstyle-card app-card">
-					<div class="app-widgetstyle-header">
-						<div class="tw-text-base tw-font-bold">새로운 소식</div>
-
-						<div class="tw-flex-1"></div>
-
-						<a class="app-button primary app-button-xs" href="infomation.html">더보기</a>
-					</div>
-
-					<div class="app-clearfix">
-						<div style="*zoom: 1; padding: 0px 0px 0px 0px !important;">
-							<!--#Meta:widgets/content/skins/slow/assets/css/widget.scss?$__Context->themeConfig->variables-->
-							<div class="app-widget-content-main">
-								<!--#Meta:widgets/content/skins/slow/templates/normal/normal.scss?$__Context->themeConfig->variables-->
-								<ul class="app-widget-content app-widget-content-normal">
-									<li><a href="news/1106.html">
-											<div class="tw-flex tw-items-center tw-flex-wrap">
-												<div class="tw-mr-3">
-
-													<span
-														class="tw-text-sm tw-font-bold tw-text-gray-700 tw-mr-1"
-														style="color: !important;"
-													>자전거</span>
-
-													<span class="tw-text-sm">가민 가정의 달 맞이 특별 프로모션 세일</span>
+										<div class="app-list-meta">
+											<span style="color:"></span><span>
+												
+												<%
+												MemberProfileDto memberProfileDto = memberProfileDao.get(fitImageVO.getFgId());
+												%>
+												<div class="app-list-member" style="color:#;">
+													
+													<div class="app-avatar"
+														style="width: 1.25rem; height: 1.25rem;">
+														<%if(memberProfileDto != null){ %>
+														<img src="profile.kh?mpNo=<%=memberProfileDto.getMpNo() %>">
+												<%}else{ %>
+												<img src="<%=root%>/resources/common/img/no_image.gif">
+												<%} %>
+													
+												
+													</div>
+	
+													<div class="member_459 tw-inline-flex tw-items-center">
+													<%=fitImageVO.getFgId()%></div>
 												</div>
-											</div>
-											<div>
-												<span class="tw-text-xs tw-text-gray-700 tw-mr-2">스웻티뉴스</span>
-												<span class="tw-text-xs tw-text-gray-700">2021-05-04</span>
-											</div>
-									</a></li>
+											</span>
+											 <span><span class="tw-mr-1">시작시간 : </span>
+											  <span><%=fitImageVO.getFgStarttime().substring(0,16)%></span>
+											</span>
+											
+											 <span><span class="tw-mr-1">위치 : </span>
+											  <span><%=fitImageVO.getFgLocation()%></span>
+											</span>
 
-								</ul>
-							</div>
-						</div>
+										</div>
+									</div>
+							</a></li>
+						</ul>
 					</div>
-				</div>
-			</div>
+					 <%} %>
 		</div>
-		<!-- 영역 4 -->
-		<div class="xe-widget-wrapper xe-widget"
-			style="float: right; width: 49%; border-width: 0px; border-style: solid; border-color: rgb(0, 0, 0); margin: 0px 0px 15px; background-image: none; background-repeat: repeat; background-position: 0% 0%;"
-		>
-			<div class="app-widgetstyle-wrap" style="height: 100%">
-				<div class="app-widgetstyle-card app-card">
-					<div class="app-widgetstyle-header">
-						<div class="tw-text-base tw-font-bold">스웻티마켓</div>
+	<div class="row pagination">
 
-						<div class="tw-flex-1"></div>
+	<!-- 이전 버튼 -->
+		<%if(pagination.isPreviousAvailable()){ %>
+			<%if(pagination.isSearch()){ %>
+				<!-- 검색용 링크 -->
+				<a href="list.jsp?fgLocation=<%=pagination.getfgLocationString()%>&p=<%=pagination.getPreviousBlock()%>">&lt;</a>
+			<%} else { %>
+				<!-- 목록용 링크 -->
+				<a href="list.jsp?p=<%=pagination.getPreviousBlock()%>">&lt;</a>
+			<%} %>
+		<%} else { %>
+			 <a>&lt;</a>
+		<%} %> 
+		<!-- 페이지 네비게이터 -->
 
-						<a class="app-button primary app-button-xs" href="market.html">더보기</a>
-					</div>
+		<%for(int i = pagination.getStartBlock(); i <= pagination.getRealLastBlock(); i++){ %>
+			<%if(pagination.isSearch()){ %>
+			<!-- 검색용 링크 -->
+			<a href="list.jsp?fgLocation=<%=pagination.getfgLocationString()%>&p=<%=i%>"><%=i%></a>
+			<%}else{ %>
+			<!-- 목록용 링크 -->
+			<a href="list.jsp?p=<%=i%>"><%=i%></a>
+			<%} %>
+			
+		<%} %>
 
-					<div class="app-clearfix">
-						<div style="*zoom: 1; padding: 0px 0px 0px 0px !important;">
-							<!--#Meta:widgets/content/skins/slow/assets/css/widget.scss?$__Context->themeConfig->variables-->
-							<div class="app-widget-content-main">
-								<!--#Meta:widgets/content/skins/slow/templates/normal/normal.scss?$__Context->themeConfig->variables-->
-								<ul class="app-widget-content app-widget-content-normal">
-									<li><a href="sell/1139.html">
-											<div class="tw-flex tw-items-center tw-flex-wrap">
-												<div class="tw-mr-3">
+	<!-- 다음 -->
+		<%if(pagination.isNextAvailable()){ %>
+			<%if(pagination.isSearch()){ %>
+				<!-- 검색용 링크 -->
+				<a href="list.jsp?fgLocation=<%=pagination.getfgLocationString()%>&p=<%=pagination.getNextBlock()%>">&gt;</a>
+			<%} else { %>
+				<!-- 목록용 링크 -->
+				<a href="list.jsp?p=<%=pagination.getNextBlock()%>">&gt;</a>
+			<%} %> 
+		<%} else {%>
+			<a>&gt;</a>
+		<%} %>
 
-													<span class="tw-text-sm">123</span>
-												</div>
-											</div>
-											<div>
-												<span class="tw-text-xs tw-text-gray-700 tw-mr-2">포카리스웻티</span>
-												<span class="tw-text-xs tw-text-gray-700">2021-10-18</span>
-											</div>
-									</a></li>
-
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
+	
+	</div>
+	<!-- 푸터 -->
+	</form>
+	<jsp:include page="/template/footer.jsp"></jsp:include>
 </main>
 
-<!--  우측 사이드 -->
-<jsp:include page="../../template/rightSide.jsp"></jsp:include>
 
-<!-- 푸터 -->
-<jsp:include page="../../template/footer.jsp"></jsp:include>
+<jsp:include page="/template/rightSide.jsp"></jsp:include>
+<jsp:include page="/template/bottomNav.jsp"></jsp:include>
+
+
+

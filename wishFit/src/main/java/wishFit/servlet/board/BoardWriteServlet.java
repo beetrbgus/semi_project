@@ -22,8 +22,6 @@ public class BoardWriteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			//jsp 에서 form 안에 multipart/form-data형태로 보내야함
-			//그걸 해석하는 객체
 			
 			//저장되는 경로
 			String savePath = "D:/upload/board";

@@ -1,4 +1,25 @@
+commit;
+-- 쪽지 테이블
 
+
+select msgcon.no no ,msg.receiver receiver,msg.sender sender ,msg.sendtime sendtime ,msg.readtime readtime ,msgcon.title title, msgcon.text text  from message msg  inner join messageContext msgcon 
+on msg.no=msgcon.no;
+
+
+select * from (select message.no d from message msg  inner join messageContext msgcon 
+on msg.no=msgcon.no) where receiver='test1';
+
+
+
+
+drop table messageContext;
+
+drop table message;
+
+alter table messageContext modify(msgCon_title varchar2(90));
+select * from messageContext;
+
+-- 회원 테이블
 create table member(
     mem_id varchar2(20) primary key,
     mem_pw varchar2(30) not null,
@@ -13,7 +34,13 @@ create table member(
     mem_pw_q varchar2(40) not null,
     mem_pw_a varchar2(30) not null
 );
-
+select * from member;
+insert into member values('test1' , 'testpw1','테스트1' , '테스트1', '일반회원',sysdate,'010-1111-0001','남성',0,sysdate,'질문','질문');
+insert into member values('test2' , 'testpw2','테스트2' , '테스트2' , '일반회원',sysdate,'010-1111-0002','여성',0,sysdate,'질문','질문');
+insert into member values('test3' , 'testpw3','테스트3' , '테스트3' , '일반회원',sysdate,'010-1111-0003','여성',0,sysdate,'질문','질문');
+insert into member values('test4' , 'testpw4','테스트4' , '테스트4', '일반회원',sysdate,'010-1111-0004','남성',0,sysdate,'질문','질문');
+insert into member values('test5' , 'testpw5','테스트5' , '테스트5' , '일반회원',sysdate,'010-1111-0005','여성',0,sysdate,'질문','질문');
+insert into member values('test6' , 'testpw6','테스트6' , '테스트6' , '일반회원',sysdate,'010-1111-0006','여성',0,sysdate,'질문','질문');
 create table exercisecategory(
 excate_name varchar2(20) primary key
 );

@@ -57,35 +57,34 @@ String root = request.getContextPath();
 								class="tw-inline-block tw-font-medium tw-text-2xl tw-font-bold tw-mr-1"
 								href="/community">커뮤니티 </a>
 							<div class="tw-flex-1"></div>
-
+		
 						</div>
 						<!-- 현재 게시판 이름  대분류 + 중분류  -->
 						<p
 							class="tw-text-sm tw-text-gray-700 tw-bt-1 app-board-description">
+						
 							커뮤니티 통합게시판입니다</p>
 					</div>
 				</div>
+				<!-- 지도 api -->
+				
+				
+				
+				
 				<!-- 현재 게시판 게시글  -->
 				<div class="app-board-section">
-
+ 					<!-- for문 돌릴 자리 -->
 					<div class="app-card">
 						<ul class="app-board-template-list">
-							<li class="notice"><a href="/community/460"
-								class="tw-flex tw-items-start tw-flex-wrap"> <span
-									class="tw-text-primary tw-font-bold tw-mr-3">공지</span>
-									<div class="tw-flex-1">
-										<span class="tw-mr-1">커뮤니티 게시판 이용 안내</span>
-
-										<ion-icon name="image-outline"
-											class="app-board-type-icon tw-mr-1 md hydrated" role="img"
-											aria-label="image outline"></ion-icon>
-									</div>
-							</a></li>
+							
 							<li><a class="tw-flex-1" href="/community/952">
 									<div class="app-thumbnail">
 										<img
 											src="https://sweatee.co.kr/files/thumbnails/952/100x100.crop.jpg?20210421215924">
 									</div>
+									
+									
+									
 									<div class="tw-flex-1">
 										<div class="app-list-title tw-flex-wrap">
 											<span class="tw-mr-1">클릿 입문 했습니다.</span>
@@ -99,17 +98,18 @@ String root = request.getContextPath();
 											<span style="color:"></span> <span>
 
 												<div class="app-list-member" style="color: #;">
+													
 													<div class="app-avatar"
 														style="width: 1.25rem; height: 1.25rem;">
-														<img
-															src="/files/member_extra_info/profile_image/459/459.png?20210405162634"
-															alt="profile" title="운동친구">
+														
+														<img src="#" alt="profile" >
 													</div>
 
-													<div class="member_459 tw-inline-flex tw-items-center">운동친구</div>
+													<div class="member_459 tw-inline-flex tw-items-center">아이디</div>
 												</div>
-											</span> <span title="2021-04-21 21:59:24">2021.04.21</span> <span>
-												<span class="tw-mr-1">조회</span> <span>15</span>
+											</span>
+											 <span title="2021-04-21 21:59:24">2021.04.21</span> 
+											 <span><span class="tw-mr-1">위치 : </span> <span>제주도</span>
 											</span>
 
 										</div>
@@ -123,4 +123,5 @@ String root = request.getContextPath();
 		</div>
 </main>
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
+>>>>>>> refs/remotes/origin/master
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>

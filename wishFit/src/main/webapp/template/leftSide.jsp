@@ -16,6 +16,14 @@
     
     
 <!-- 왼쪽 사이드 바 -->
+<script>
+$(document).ready(function(){
+	$(".app-sidebar-left.app-custom-scroll > nav > ul > li").click(function(){
+		$("li.active open").find("li").removeClass("active open");
+		/* $(this).removeClass("active open"); */
+	});
+});
+</script>
 <div class="app-layout">
    <!--#Meta:layouts/slow/components/sidebar-left/sidebar-left.scss?$__Context->themeConfig->variables-->
    <aside id="app-sidebar-left" class="app-layout__sidebar-left">
@@ -53,14 +61,13 @@
 						<li><button class="diet-record"><span>식단</span></button></li>
                   </ul>
                </li>
-               <li class="">
+               <li class="active">
                   <div class="app-sidebar-left__nav__item">
                      <a href="infomation.html"> <span>커뮤니티</span>
                      </a>
                      <ion-icon name="chevron-down-outline"
                         class="app-sidebar-left__nav__more"> </ion-icon>
                   </div>
-
                   <ul class="app-sidebar-left__nav__child">
                      <li><a href="news.html">새로운소식</a></li>
                      <li><a href="experience.html">용품/대회후기</a></li>
@@ -77,40 +84,40 @@
                         class="app-sidebar-left__nav__more"> </ion-icon>
                   </div>
 
-                  <ul class="app-sidebar-left__nav__child">
-                     <li><a href="swim.html">수영</a></li>
-                     <li><a href="bike.html">자전거</a></li>
-                     <li><a href="run.html">달리기</a></li>
-                     <li><a href="hiking.html">등산</a></li>
-                     <li><a href="fitness.html">홈트짐트</a></li>
-                     <li><a href="Pilates.html">필라테스/요가</a></li>
-                     <li><a href="golf.html">골프</a></li>
-                     <li><a href="skate.html">스케이트(빙상)</a></li>
-                  </ul>
-               </li>
-               <li class="">
-                  <div class="app-sidebar-left__nav__item">
-                     <a href="elite.html"> <span>마켓</span>
-                     </a>
-                     <ion-icon name="chevron-down-outline"
-                        class="app-sidebar-left__nav__more"> </ion-icon>
-                  </div>
+						<ul class="app-sidebar-left__nav__child">
+							<li><a href="swim.html">수영</a></li>
+							<li><a href="bike.html">자전거</a></li>
+							<li><a href="run.html">달리기</a></li>
+							<li><a href="hiking.html">등산</a></li>
+							<li><a href="fitness.html">홈트짐트</a></li>
+							<li><a href="Pilates.html">필라테스/요가</a></li>
+							<li><a href="golf.html">골프</a></li>
+							<li><a href="skate.html">스케이트(빙상)</a></li>
+						</ul>
+					</li>
+					<li class="">
+						<div class="app-sidebar-left__nav__item">
+							<a href="#"> <span>마켓</span>
+							</a>
+							<ion-icon name="chevron-down-outline"
+								class="app-sidebar-left__nav__more"> </ion-icon>
+						</div>
 
-                  <ul class="app-sidebar-left__nav__child">
-                     <li><a href="elitecom.html">대회소식(엘리트)</a></li>
-                     <li><a href="elitefree.html">자유게시판(엘리트)</a></li>
-                     <li><a href="counseling.html">진로고민상담</a></li>
-                     <li><a href="parents.html">학부모게시판</a></li>
-                     <li><a href="career.html">구인구직</a></li>
-                  </ul>
-               </li>
-               <li class="">
-                  <div class="app-sidebar-left__nav__item">
-                     <a href="managment.html"> <span>운영사항</span>
-                     </a>
-                     <ion-icon name="chevron-down-outline"
-                        class="app-sidebar-left__nav__more"> </ion-icon>
-                  </div>
+						<ul class="app-sidebar-left__nav__child">
+							<li><a href="elitecom.html">대회소식(엘리트)</a></li>
+							<li><a href="elitefree.html">자유게시판(엘리트)</a></li>
+							<li><a href="counseling.html">진로고민상담</a></li>
+							<li><a href="parents.html">학부모게시판</a></li>
+							<li><a href="career.html">구인구직</a></li>
+						</ul>
+					</li>
+					<li class="">
+						<div class="app-sidebar-left__nav__item">
+							<a href="#"> <span>운영사항</span>
+							</a>
+							<ion-icon name="chevron-down-outline"
+								class="app-sidebar-left__nav__more"> </ion-icon>
+						</div>
 
                   <ul class="app-sidebar-left__nav__child">
                      <li><a href="notice.html">안내사항</a></li>

@@ -2,16 +2,13 @@ package wishFit.servlet.member;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
 import wishFit.beans.member.MemberDao;
 import wishFit.beans.member.MemberDto;
 import wishFit.beans.member.MemberProfileDao;
@@ -23,7 +20,7 @@ public class MemberJoinServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 이미지 파일 설정
-			String savePath = "D:/upload/member";
+			String savePath = "D:/upload/wishfit";
 			int maxSize = 10*1024*1024;
 			String encoding ="UTF-8";
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();

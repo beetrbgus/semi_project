@@ -29,22 +29,23 @@ public class MemberDao {
 		
 		ps.setString(1, memberDto.getMemId());
 		ps.setString(2, memberDto.getMemPw());
-		ps.setString(3, memberDto.getMemName());
-		ps.setString(4, memberDto.getMemNick());
-		ps.setString(5, memberDto.getMemBirth());
-		ps.setString(6, memberDto.getMemPhone());
-		ps.setString(7, memberDto.getMemGender());
-		ps.setString(8,memberDto.getMemPwQ());
-		ps.setString(9,memberDto.getMemPwA());
-		ps.execute();
+		ps.setString(3, memberDto.getMemNick());
+		ps.setString(4, memberDto.getMemBirth());
+		ps.setString(5,memberDto.getMemGrade());
+		ps.setString(6,memberDto.getMemPwQ());
+		ps.setString(7,memberDto.getMemPwA());
+		ps.setString(8, memberDto.getMemName());
+		ps.setString(9, memberDto.getMemPhone());
 		
 		System.out.print("들어옴");
 		conn.close();
 	}
+
+
 	//로그인 
 	public MemberDto login(String memId , String memPw) throws Exception {
 		conn = JdbcUtils.connect();
-		String sql = "select mem_id ,  mem_grade from member where mem_id=? and mem_pw =?";
+		String sql = "select mem_id,mem_grade from member where mem_id=? and mem_pw =?";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, memId);
 		ps.setString(2, memPw);
@@ -56,6 +57,7 @@ public class MemberDao {
 		conn.close();
 		return memberDto; 
 	}
+	
 	
 	// 회원 상세
 	public MemberDto get(String memId) throws Exception{

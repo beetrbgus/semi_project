@@ -7,7 +7,7 @@
     pageEncoding="UTF-8"%>
 <%
 	// 처리
-// 	FriendDao friendDao = new FriendDao();
+	FriendDao friendDao = new FriendDao();
 // 	List<FriendDto> list = friendDao.receive();
 %>
 

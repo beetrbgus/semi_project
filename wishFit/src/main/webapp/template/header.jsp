@@ -710,6 +710,7 @@ String uid = (String) session.getAttribute("uid");
 			</div>
 		</div>
 
+
 <!--  
 햄버거를 눌렀을때 사이드바가 나와야한다
 app-header-menu에 active 클래스 추가. -->
