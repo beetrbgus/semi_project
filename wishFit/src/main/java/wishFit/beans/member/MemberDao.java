@@ -97,7 +97,7 @@ public class MemberDao {
 	public boolean quit(String memId, String memPw) throws Exception {
 		conn = JdbcUtils.connect();
 		
-		String sql="delect member where mem_id=? and mem_pw=?";
+		String sql="delete member where mem_id=? and mem_pw=?";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, memId);
 		ps.setString(2, memPw);
