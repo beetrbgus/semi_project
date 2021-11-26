@@ -29,7 +29,6 @@ public class RecordWriteServlet extends HttpServlet{
 			//작성자 getSession으로 받기
 //			boardDto.setBoardWriter((String)req.getSession().getAttribute("ses"));
 			boardDto.setBoardWriter(req.getParameter("boardWriter"));
-			System.out.println("boardWriter = "+boardDto.getBoardWriter());
 			
 			
 			int boardNo = boardDao.boardSeq();

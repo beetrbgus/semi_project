@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import wishFit.beans.board.BoardDao;
+import wishFit.beans.board.BoardImageVO;
 import wishFit.beans.image.ImageDao;
 
 @WebServlet(urlPatterns = "/page/record/record_delete.kh")
@@ -19,18 +20,18 @@ public class RecordDeleteServlet extends HttpServlet{
 			//입력 : boardNo
 			int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 			
+			BoardDao boardDao = new BoardDao();
 			
 			//만약 이미지 파일이 존재하면 이미지 파일 까지 삭제.
 			ImageDao imageDao = new ImageDao();
-			boolean successImage = imageDao.deleteImage(boardNo);
+			imageDao.deleteImage(boardNo);
 			
 			//처리
-			BoardDao boardDao = new BoardDao();
+			
+			
+			
+			//게시글 삭제
 			boolean success = boardDao.delete(boardNo);
-			
-			
-			
-			
 			
 			//출력
 			if(success) {

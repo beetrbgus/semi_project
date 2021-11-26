@@ -44,6 +44,9 @@ public class ImageDao {
 		ps.setString(6, imageDto.getBoardType());
 		
 		ps.execute();
+		System.out.println("이미지등록");
+		System.out.println("이미지 번호 : "+imageDto.getImageNo());
+		System.out.println("이미지 업로드이름:"+imageDto.getBoardUpload());
 		
 		conn.close();
 	}
@@ -100,24 +103,41 @@ public class ImageDao {
 		return list;
 	}
 	//파일 삭제 다오(글 삭제 할 때 폴더안에 있는 사진 삭제)
-	public boolean deleteImage(int boardNo) throws Exception {
-		//파일의 경로
-		//파일의 업로드 이름 찾기
-		BoardDao boardDao = new BoardDao();
-		BoardImageVO boardImageVO = boardDao.detail(boardNo);
+		public boolean deleteImage(int boardNo) throws Exception {
+			//파일의 경로
+			//파일의 업로드 이름 찾기
+			BoardDao boardDao = new BoardDao();
+			BoardImageVO boardImageVO = boardDao.detail(boardNo);
+			
+			String imagePath = "D:/upload/board/"+boardImageVO.getBoardUpload();
+			System.out.println("삭제할 이미지 경로 : "+imagePath);
+			File deleteImage = new File(imagePath);
+			
+			if(deleteImage.exists()) {//삭제할 파일이 존재할 때
+				
+				//파일을 삭제합니다.
+				deleteImage.delete();
+			}
+			return true;
+		}
+	//파일 수정 다오(글 수정 할 때 폴더안에 있는 사진 삭제)
+	public boolean deleteImage(int boardNo,String boardUpload) throws Exception {
 		
-		String imagePath = "D:/upload/board/"+boardImageVO.getBoardUpload();
-		
+		String imagePath = "D:/upload/board/"+boardUpload;
+		System.out.println("삭제할 이미지 경로 : "+imagePath);
 		File deleteImage = new File(imagePath);
 		
-		if(deleteImage.exists()) {
+		if(deleteImage.exists()) {//삭제할 파일이 존재할 때
 			
 			//파일을 삭제합니다.
 			deleteImage.delete();
 		}
 		return true;
 	}
+	//imageNo로 image테이블 삭제
 	public boolean delete(int imageNo) throws Exception{
+		System.out.println("이미지 디비 삭제");
+		System.out.println("삭제한 이미지 no = "+imageNo);
 		conn=JdbcUtils.connect();
 		String sql = "delete image where image_no = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);

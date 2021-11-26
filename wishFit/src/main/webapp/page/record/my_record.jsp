@@ -96,11 +96,9 @@
 <div class="container-center container-700">
 	<div class=" row"><h1 style="font-size:30px">[내 기록]</h1></div>
 	<div class="row">
-		<h1 class="left" style="font-size: 20px">
-		<label><h3><%=nowYear %>월 / <%=nowMonth %>월</h3></label>
+		<h3 class="left" style="font-size: 20px"><%=nowYear %>월 / <%=nowMonth %>월</h3>
 		<button class="btn before-month">이전달</button>
 		<button class="btn next-month">다음달</button>
-		</h1>
 	</div>
 	
 	<div class="row"><a href= "record_write.jsp" class="btn">기록 작성</a></div>

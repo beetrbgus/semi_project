@@ -1,5 +1,6 @@
 package wishFit.servlet.record;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,9 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
+import wishFit.beans.board.BoardImageVO;
+import wishFit.beans.image.ImageDao;
+import wishFit.beans.image.ImageDto;
 
 @WebServlet(urlPatterns = "/page/record/record_edit.kh")
 public class RecordEditServlet extends HttpServlet{
@@ -39,14 +43,44 @@ public class RecordEditServlet extends HttpServlet{
 			boardDto.setBoardDate(mRequest.getParameter("boardDate"));
 			boardDto.setBoardMiddleName(mRequest.getParameter("boardMiddleName"));
 			
-			//이미지 파일 수정이 이루어졌다면
+			int boardNo = boardDto.getBoardNo();
 			
 			
-			
-			
-			
-			//처리
 			BoardDao boardDao = new BoardDao();
+			//이미지 파일 수정이 이루어졌다면
+			if(mRequest.getFile("attach")!=null) {//파일 attach란 이름으로 업로드가 이루어졌다면
+				ImageDao imageDao = new ImageDao();//이미 있는 이미지를 삭제하기
+		       
+		        
+		        //이미지 디비 지우기
+		        BoardImageVO boardImageVO = boardDao.detail(boardNo);
+		        
+		        int imageNo  = boardImageVO.getImageNo();
+		        String imageUpload = boardImageVO.getBoardUpload();
+		        imageDao.deleteImage(boardNo,imageUpload);//이미지 파일 지우기
+		        imageDao.delete(imageNo);
+		        
+		      
+		         
+				ImageDto imageDto = new ImageDto();
+				imageDto.setBoardNo(boardNo);//게시글 번호
+				imageDto.setBoardSave(mRequest.getFilesystemName("attach"));//실제 저장된 이름
+				imageDto.setBoardUpload(mRequest.getOriginalFileName("attach"));//사용자가 올린 이름
+				imageDto.setBoardType(mRequest.getContentType("attach"));//파일 유형
+				
+				File target = mRequest.getFile("attach");//파일을 꺼내기
+				imageDto.setBoardSize(target == null ? 0L : target.length());//파일크기
+				//이미지 번호 시퀀스 미리 구해서 부여하기
+				//int imageNo = GetSeq.getSequence("image_seq");
+				int ChangeImageNo = imageDao.imageSeq();
+				imageDto.setImageNo(ChangeImageNo);
+				
+				//이미지 파일 등록
+				imageDao.insert(imageDto);
+				
+			}
+			//처리
+			
 			boolean success = boardDao.recordEdit(boardDto);
 			
 			//출력 : detail.jsp

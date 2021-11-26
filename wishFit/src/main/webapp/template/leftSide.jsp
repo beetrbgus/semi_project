@@ -110,7 +110,7 @@
          <div class="app-card app-sidebar-left__nav" style="margin:0px 0px 0px ">
             <div class="">
 				    <div>
-				        <table id="calendar" style="width:100%;height:30%">
+				        <table id="calendar" style="width:100%;height:70px;padding : 0px 0px ">
 				            <tr>
 				                <td class="beforeyear"><label id="before"></label></td>
 				                <td colspan="5" id="yearmonth"></td>

@@ -9,8 +9,10 @@
     pageEncoding="UTF-8"%>
     
 <script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src = "../css/record.js"></script>
 <link rel = "stylesheet" type="text/css" href="../css/commons.cs"> 
     <!-- 달력 날짜 구하기 -->
+    
      
     <%
     			LocalDate now = LocalDate.now();
@@ -46,8 +48,7 @@
             	}
 	%>       		
   	<%     	//회원아이디 세션으로 가져오기
-            	//String boardWriter = (String)session.getAttribute("ses");
-            	String boardWriter = "testmember1";
+            	String boardWriter = (String)session.getAttribute("uid");
             	
             	//파라미터로 boardMiddleName 을 가져올 경우
            		String middleName = request.getParameter("boardMiddleName");
@@ -65,43 +66,50 @@
             	Map<String,List<BoardDto>> mapList;
             	boolean isMidName = middleName != null && !middleName.isEmpty();
             	if(isMidName){
-            		mapList = recordDao.monthlyListMiddle(nowYear,nowMonth,middleName);
+            		mapList = recordDao.monthlyListMiddle(nowYear,nowMonth,middleName,boardWriter);
 		          }else{
-		       		mapList = recordDao.monthlyList(nowYear, nowMonth);
+		       		mapList = recordDao.monthlyList(nowYear, nowMonth,boardWriter);
 		          }
     %>
     
+<script>
+	var currentYear = <%=nowYear%>;
+	var currentMonth = <%=nowMonth%>;
+	var nowCategory="";
+	
+</script>
+<form class="record-form" action="my_record.jsp" method="get">
+	<input type="hidden" name="year">
+	<input type="hidden" name="month">
+</form>
+
+  <!-- ------------------------------------------------- -->
 <jsp:include page="/template/header.jsp"></jsp:include>
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
  
 
 <main class="app-content app-clearfix">
 <!-- 기록은 자기 글만 볼 수 있으니 session 으로 boardWriter를 hidden으로 보내기 -->
-<input type="hidden" name="boardWriter" value="<%=boardWriter%>">
+<script>
+	
+</script>
 <div class="container-center container-700">
 	<div class=" row"><h1 style="font-size:30px">[내 기록]</h1></div>
 	<div class="row">
-		<h1 class="left" style="font-size: 20px">
-		<a href= "my_record3.jsp?year=<%=nowYear %>&month=<%=(nowMonth-1) %>" class="btn">이전 달</a>
-		<a href= "my_record3.jsp?year=<%=nowYear %>&month=<%=nowMonth%>"><%=nowYear %>년<%=nowMonth %>월</a>
-		<a href= "my_record3.jsp?year=<%=nowYear %>&month=<%=(nowMonth+1) %>" class="btn">다음 달</a>
-		</h1>
+		<h3 class="left" style="font-size: 20px"><%=nowYear %>월 / <%=nowMonth %>월</h3>
+		<button class="btn before-month">이전달</button>
+		<button class="btn next-month">다음달</button>
 	</div>
 	
-	<div class="row"><a href= "record_write.jsp" class="btn">기록 작성</a></div>
+	<div class="row"><a href= "record_write2.jsp" class="btn">기록 작성</a></div>
 	<div class= "row">
-		<a href="my_record3.jsp" class="btn">
-		<label>전체</label>
+		<a href="my_record.jsp" class="btn">
+		<label>처음으로</label>
 		</a>
-		<a href="my_record3.jsp?boardMiddleName=일자별" class="btn">
-		<label>일자별</label>
-		</a>
-		<a href="my_record3.jsp?boardMiddleName=소모임" class="btn">
-		<label>소모임</label>
-		</a>
-		<a href="my_record3.jsp?boardMiddleName=식단" class="btn">
-		<label>식단</label>
-		</a>
+		<button class="btn reset-record"><span>전체</span></button>
+		<button class="btn daily-record"><span>일자별</span></button>
+		<button class="btn fitgroup-record"><span>소모임</span></button>
+		<button class="btn diet-record"><span>식단</span></button>
 	</div>
 	<div class="row">
  	<table  class="table" style="width:100%">
@@ -130,13 +138,13 @@
 						<%if(k==0){//첫번째 칸이라면 %>
 							<td style="border : 1px solid black" ><%=list.get(k).getBoardDate()%></td>
 						<%}else{//두번째 칸 이상이라면 %>
-							<td style="border : 1px solid black" >
+							<td style="border : 1px solid black;">
 							<img src = "<%=request.getContextPath() %>/resources/image/right-arrow.png" style="width:20px;height:20px;">
 							</td>
 						<%} %>
 							<td style="border : 1px solid black"><%=list.get(k).getBoardMiddleName()%></td>
-							<td style="border : 1px solid black">
-							<a href="record_detail.jsp?boardNo=<%=list.get(k).getBoardNo()%>" align="left"><%=list.get(k).getBoardTitle()%></a>
+							<td style="border : 1px solid black; text-align:left; padding :0rem 0.5rem ">
+							<a href="record_detail.jsp?boardNo=<%=list.get(k).getBoardNo()%>"><%=list.get(k).getBoardTitle()%></a>
 							</td>
 						</tr>
 					<%} %>
@@ -161,6 +169,7 @@
 
 </div>
 
+
 <jsp:include page="/template/footer.jsp"></jsp:include>
 </main>
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
@@ -169,3 +178,4 @@
 
 
 
+ 

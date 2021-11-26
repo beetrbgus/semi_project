@@ -2,7 +2,6 @@ package wishFit.servlet.board;
 
 import java.io.IOException;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import wishFit.beans.board.BoardDao;
+import wishFit.beans.image.ImageDao;
 
 @WebServlet(urlPatterns= {"/page/market/delete.kh","/page/community/delete.kh","/page/record/delete.kh"})
 public class BoardDeleteServlet extends HttpServlet{
@@ -19,7 +19,11 @@ public class BoardDeleteServlet extends HttpServlet{
       try {
          //입력
          int boardNo = Integer.parseInt(req.getParameter("boardNo"));
-         HttpSession session = req.getSession();
+//         HttpSession session = req.getSession();
+         
+         //글삭제 전에 이미지 삭제 먼저하기
+         ImageDao imageDao = new ImageDao();
+         boolean successImg = imageDao.deleteImage(boardNo);
          
          
          //처리
@@ -34,7 +38,6 @@ public class BoardDeleteServlet extends HttpServlet{
             
          }
          else {
-            System.out.println("남의 글을 삭제시도");
             resp.sendRedirect("list.jsp");
          }
          
