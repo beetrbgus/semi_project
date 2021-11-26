@@ -21,7 +21,7 @@ public class MySmallGroupDao {
 	// 취소
 	public boolean delete(int fgNo , String memId) throws Exception {
 		Connection con = JdbcUtils.connect();
-		String sql = "delete mysmallgroup where sg_no=? and m_id=?";
+		String sql = "delete mysmallgroup where fg_no=? and fg_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, fgNo);
 		ps.setString(2, memId);
@@ -33,16 +33,16 @@ public class MySmallGroupDao {
 	// 조회
 	public List<MySmallGroupDto> search(int fgNo) throws Exception {
 		Connection con = JdbcUtils.connect();
-		String sql = "select * from mysmallgroup where sg_no=?";
+		String sql = "select * from mysmallgroup where fg_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, fgNo);
 		ResultSet rs = ps.executeQuery();
 		List<MySmallGroupDto> list = new ArrayList<MySmallGroupDto>();
 		while (rs.next()) {
 			MySmallGroupDto mySmallGroupDto = new MySmallGroupDto();
-			mySmallGroupDto.setFgNo(rs.getInt("sg_no"));
+			mySmallGroupDto.setFgNo(rs.getInt("fg_no"));
 			mySmallGroupDto.setFgJoinNo(rs.getInt("fg_join_no"));
-			mySmallGroupDto.setMemId(rs.getString("m_id"));
+			mySmallGroupDto.setMemId(rs.getString("fg_id"));
 			list.add(mySmallGroupDto);
 		}
 		con.close();
@@ -53,7 +53,7 @@ public class MySmallGroupDao {
 	// 단일조회
 	public MySmallGroupDto detail(int fgNo, String memId) throws Exception {
 		Connection con = JdbcUtils.connect();
-		String sql = "select * from mysmallgroup where sg_no =? and m_id=?";
+		String sql = "select * from mysmallgroup where fg_no =? and fg_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, fgNo);
 		ps.setString(2, memId);
@@ -62,8 +62,8 @@ public class MySmallGroupDao {
 		if (rs.next()) {
 			mySmallGroupDto = new MySmallGroupDto();
 			mySmallGroupDto.setFgJoinNo(rs.getInt("fg_join_no"));
-			mySmallGroupDto.setFgNo(rs.getInt("sg_no"));
-			mySmallGroupDto.setMemId(rs.getString("m_id"));
+			mySmallGroupDto.setFgNo(rs.getInt("fg_no"));
+			mySmallGroupDto.setMemId(rs.getString("fg_id"));
 		} else {
 			mySmallGroupDto = null;
 		}

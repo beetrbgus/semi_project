@@ -187,7 +187,7 @@ height:35px;
                   <div class="tw-flex tw-items-center sm:tw-block tw-mb-6">
                      <div class="app-select sm:tw-mb-3 sm:tw-w-full tw-mr-3">
                     	<input type="hidden" name="fgId" value="<%=uid%>">
-                        <select name="excateName" >
+                        <select name="excateName"  required>
                         
                          <option selected>축구</option>
                         <option >런닝</option>
@@ -199,7 +199,7 @@ height:35px;
                      </div>
 
                  
-                 <input type="text" name="fgTitle" class="app-input tw-flex-1 sm:tw-w-full"  value="" autocomplete="off">
+                 <input type="text" name="fgTitle" class="app-input tw-flex-1 sm:tw-w-full" autocomplete="off" required>
                   </div>
                   <div class="app-board-editor-wrap tw-mb-3">
   
@@ -252,11 +252,19 @@ height:35px;
 				}
 				$(function(){
 					$("#fgBtn").click(function(e){
-		                e.preventDefault();
-							console.log($("input[name=fgNo]").val());
+						if($("input[name=fgTitle]").val()==""||
+						$("input[name=fgIntro]").val()==""||
+						$("input[name=end]").val()==""||
+						$("input[name=start]").val()==""||
+						$("input[name=fgLocation]").val()==""	)
+						{
+							e.preventDefault();
+   							alert("필수입력란이 비었습니다 확인해 주세요");
+   						} else{
+		                e.preventDefault();		
 		                makeTime();
-		               
 		                $("#fgwrite").submit();
+   						}
 		            });
 		        });
 				</script>
@@ -264,14 +272,14 @@ height:35px;
                      <th>시작시간</th>
 					<td><input id="startDate" type="date" > 
 					<input id="startTime" type="time" > 
-					<input id="start"type="hidden" name="fgStarttime" value=""></td>
+					<input id="start"type="hidden" name="fgStarttime" required></td>
 
 				
 				
 					<label>종료시간</label>
 					<td><input id="endDate" type="date" > 
 					<input id="endTime" type="time" > 
-					<input id="end" type="hidden" name="fgEndtime" value=""></td>
+					<input id="end" type="hidden" name="fgEndtime" required></td>
 						<span id="checkTime"> </span>
 				
                      
@@ -310,8 +318,9 @@ height:35px;
                            <%-- 취소버튼 --%>
                             <a href="list.jsp" class="app-button tw-mr-2 sm:tw-flex-1">취소</a>
                            <%-- 수정버튼 --%>
-                           <button id="fgBtn" type="submit" class="app-button primary sm:tw-flex-1">등록</button>
-
+                        
+<!--                            <button id="fgBtn" type="submit" class="app-button primary sm:tw-flex-1">등록</button> -->
+							<input type="submit" value="등록" id="fgBtn" class="app-button primary sm:tw-flex-1">
                         </div>
                      </div>
                   </div>

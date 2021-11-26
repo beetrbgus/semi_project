@@ -252,11 +252,19 @@ FitgroupDto fitgroupDto = fitgroupDao.detail(reqfgNo);
 				}
 				$(function(){
 					$("#fgBtn").click(function(e){
-		                e.preventDefault();
-							console.log($("input[name=fgNo]").val());
+						if($("input[name=fgTitle]").val()==""||
+						$("input[name=fgIntro]").val()==""||
+						$("input[name=end]").val()==""||
+						$("input[name=start]").val()==""||
+						$("input[name=fgLocation]").val()==""	)
+						{
+							e.preventDefault();
+   							alert("필수입력란이 비었습니다 확인해 주세요");
+   						} else{
+		                e.preventDefault();		
 		                makeTime();
-		               
 		                $("#fgwrite").submit();
+   						}
 		            });
 		        });
 				</script>
