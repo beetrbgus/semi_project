@@ -123,4 +123,5 @@ String root = request.getContextPath();
 		</div>
 </main>
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
+>>>>>>> refs/remotes/origin/master
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>

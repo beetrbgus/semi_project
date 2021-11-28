@@ -16,16 +16,17 @@ import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardDto;
 import wishFit.beans.image.ImageDao;
 import wishFit.beans.image.ImageDto;
+import wishFit.util.GetSeq;
 
-@WebServlet(urlPatterns = {"/page/community/write.kh","/page/market/write.kh"})
-public class BoardWriteServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/page/record/record_write.kh")
+public class RecordWriteServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
 			//저장되는 경로
 			String savePath = "D:/upload/board";
-			//사이즈(이게 10mb 였나?)
+			//사이즈(이게 10기가 였나?)
 			int maxSize = 10*1024*1024;
 			String encoding = "UTF-8";
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
@@ -33,24 +34,29 @@ public class BoardWriteServlet extends HttpServlet{
 			//MultipartRequest mRequest = new MultipartRequest(req,저장경로,최대크기,인코딩); 
 			MultipartRequest mRequest = new MultipartRequest(req,savePath,maxSize,encoding); 
 			
-			//입력 : 대분류(이건 )
+			//입력
 			BoardDto boardDto = new BoardDto();
-			boardDto.setBoardLargeName(mRequest.getParameter("boardLargeName"));
-			boardDto.setBoardMiddleName(mRequest.getParameter("boardMiddleName"));
 			boardDto.setBoardTitle(mRequest.getParameter("boardTitle"));
 			boardDto.setBoardPost(mRequest.getParameter("boardPost"));
+			boardDto.setBoardMiddleName(mRequest.getParameter("boardMiddleName"));
+			boardDto.setBoardDate(mRequest.getParameter("boardDate"));
+			boardDto.setBoardLargeName(mRequest.getParameter("boardLargeName"));
+
 			
-			//아이디는 세션으로 가져옴
-			boardDto.setBoardWriter((String)req.getSession().getAttribute("uid"));
-			
-			//boardNo 는 미리 만들어서 부여함
+			//처리
 			BoardDao boardDao = new BoardDao();
+			//작성자 getSession으로 받기
+			//boardDto.setBoardWriter((String)req.getSession().getAttribute("uid"));
+			boardDto.setBoardWriter(mRequest.getParameter("boardWriter"));
+			
+			
 			int boardNo = boardDao.boardSeq();
+//			int boardNo = GetSeq.getSequence("board_seq");
 			boardDto.setBoardNo(boardNo);
 			
-			//글작성 처리
-			boardDao.write(boardDto);
-
+			//글 등록
+			boardDao.recordWrite(boardDto);
+			
 			if(mRequest.getFile("attach")!=null) {//파일 attach란 이름으로 업로드가 이루어졌다면
 				ImageDto imageDto = new ImageDto();
 				imageDto.setBoardNo(boardNo);//게시글 번호
@@ -60,29 +66,19 @@ public class BoardWriteServlet extends HttpServlet{
 				
 				File target = mRequest.getFile("attach");//파일을 꺼내기
 				imageDto.setBoardSize(target == null ? 0L : target.length());//파일크기
-				
+				//이미지 번호 시퀀스 미리 구해서 부여하기
+				//int imageNo = GetSeq.getSequence("image_seq");
 				ImageDao imageDao = new ImageDao();
+				int imageNo = imageDao.imageSeq();
+				imageDto.setImageNo(imageNo);
+				
+				//이미지 파일 등록
 				imageDao.insert(imageDto);
 				
 			}
 			
-			
-			
-			//글작성 완료 후 행당 글 상세 페이지로 이동
-			//만약 getContextPath가 들어온 주소대로 market/commu를 구분해서 나타내 준다면
-			//if문 없이 그냥 바로 한개만 쓰면 될듯?
-			
-			if(req.getParameter("board_large_name").equals("마켓")) {//위의 largeName이 market이라면
-				//resp.sendRedirect(req.getContextPath()+"/market/list.jsp?boardNo="+boardDto.getBoardNo());
-				resp.sendRedirect(req.getContextPath()+"/list.jsp?boardNo="+boardDto.getBoardNo());
-				
-			}else {//마켓이 아닌 커뮤라면
-				//resp.sendRedirect(req.getContextPath()+"/commu/list.jsp?boardNo="+boardDto.getBoardNo());
-				resp.sendRedirect(req.getContextPath()+"/list.jsp?boardNo="+boardDto.getBoardNo());
-				
-			}
-			
-			
+			resp.sendRedirect(req.getContextPath()+"/page/record/record_detail.jsp?boardNo="+boardNo);
+//			resp.sendRedirect(req.getContextPath()+"/my_record.jsp?boardNo="+boardNo);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -95,7 +95,7 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 									<div><%=memberDto.getMemNick()%></div></li>
 									
 							<li><label for="user_brith">생년월일</label>
-							<div><%=memberDto.getMemBirth()%></div></li>
+							<div><%=memberDto.getMemBirth().substring(0,10)%></div></li>
 							
 							<li><label for="user_gender">성별
 							<span class="app-required">필수</span></label>

@@ -23,14 +23,14 @@
 	</thead>
 	<tbody>
 <%-- 	<%for(FriendDto friendDto : list){%> --%>
-<!-- 	<tr> -->
+	<tr>
 <%-- 		<td><%=friendDto.getFriendNo() %></td> --%>
 <%-- 		<td><%=friendDto.getFriendNick() %></td> --%>
-<!-- 		<td> -->
+		<td>
 <%-- 		<a href="accept.kh?friendNo=<%=friendDto.getFriendNo()%>">친구 수락</a> --%>
 <%-- 		<a href="accept_delete.kh?friendNo=<%=friendDto.getFriendNo()%>">친구 거부</a> --%>
-<!-- 		</td> -->
-<!-- 	</tr> -->
+		</td>
+	</tr>
 <%-- 	<%} %> --%>
 	</tbody>
 </table>

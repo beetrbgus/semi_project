@@ -61,10 +61,10 @@ public class MemberDao {
 	
 	// 회원 상세
 	public MemberDto get(String memId) throws Exception{
-		Connection con = JdbcUtils.connect();
+		conn = JdbcUtils.connect();
 		
 		String sql = "select * from member where mem_id=?";
-		ps = con.prepareStatement(sql);
+		ps = conn.prepareStatement(sql);
 		ps.setString(1, memId);
 		rs = ps.executeQuery();
 		
@@ -91,7 +91,7 @@ public class MemberDao {
 		else {
 			memberDto = null;
 		}
-		con.close();
+		conn.close();
 		return memberDto;
 	}
 
@@ -113,7 +113,7 @@ public class MemberDao {
 
 	//정보 수정
 	public boolean edit(MemberDto memberDto) throws Exception {
-		Connection conn = JdbcUtils.connect();
+		conn = JdbcUtils.connect();
 		System.out.println(memberDto);
 		String sql="update member "
 				+ "set "
@@ -138,10 +138,10 @@ public class MemberDao {
 	
 	// 아이디 찾기 (이름, 전화번호)
 	public String findId(MemberDto memberDto) throws Exception{
-		Connection con = JdbcUtils.connect();
+		conn = JdbcUtils.connect();
 		
 		String sql = "select mem_id from member where mem_name=? and mem_phone=?";
-		ps = con.prepareStatement(sql);
+		ps = conn.prepareStatement(sql);
 		ps.setString(1, memberDto.getMemName());
 		ps.setString(2, memberDto.getMemPhone());
 		rs = ps.executeQuery();
@@ -152,7 +152,7 @@ public class MemberDao {
 		} else {
 			memId = null;
 		}
-		con.close();
+		conn.close();
 		return memId;
 	}
 	

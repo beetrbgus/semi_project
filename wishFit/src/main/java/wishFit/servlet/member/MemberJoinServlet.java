@@ -57,7 +57,7 @@ public class MemberJoinServlet extends HttpServlet{
 				memberProfileDao.insert(memberProfileDto);
 			}
 			
-			resp.sendRedirect("http://localhost:8080/wishFit/index.jsp");
+			resp.sendRedirect(req.getContextPath()+"/index.jsp");
 		}	catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
