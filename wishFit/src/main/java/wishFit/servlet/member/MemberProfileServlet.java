@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.member.MemberProfileDao;
 import wishFit.beans.member.MemberProfileDto;
 
-
 @WebServlet(urlPatterns="/profile.kh")
 public class MemberProfileServlet extends HttpServlet{
 	@Override
