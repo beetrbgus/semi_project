@@ -6,8 +6,9 @@
 <script src = "<%=request.getContextPath() %>/page/js/record.js"></script>
 <%
 	String root = request.getContextPath();
+	String now = request.getParameter("now");
 %> 
-
+<input type="hidden" id = "now" value = <%=now %>>
 <form class="record-form" action="my_record.jsp" method="get">
 	<input type="hidden" name="year">
 	<input type="hidden" name="month">
@@ -17,10 +18,24 @@
 <!-- 왼쪽 사이드 바 -->
 <script>
 $(document).ready(function(){
+	let now = $("#now").val();
+	if(now =="record"){
+		$(".app-card.app-sidebar-left__nav").f.each
+		$("#record").addClass("active open");	
+			
+		});
+	}else if(now =="commu"){
+		$(".app-card.app-sidebar-left__nav").findeach(function(index,item){
+			$(this).find("li").addClass("active open");	
+			});
+		});	
+	}
+	
 	$(".app-sidebar-left.app-custom-scroll > nav > ul > li").click(function(){
-		$("li.active open").find("li").removeClass("active open");
+		//$("li.active open").find("li").removeClass("active open");
 		/* $(this).removeClass("active open"); */
 	});
+	
 });
 </script>
 <div class="app-layout">
@@ -38,9 +53,9 @@ $(document).ready(function(){
                   </div>
 
                </li>
-               <li class="open">
+               <li id="record">
                   <div class="app-sidebar-left__nav__item">
-                     <a href="<%=root %>/page/record/my_record.jsp"> <span>내 기록</span>
+                     <a href="<%=root %>/page/record/my_record.jsp?now=record"> <span>내 기록</span>
                      </a>
                      <ion-icon name="chevron-down-outline" class="app-sidebar-left__nav__more md hydrated" role="img" aria-label="chevron down outline">
                         <div class="icon-inner">
@@ -60,9 +75,9 @@ $(document).ready(function(){
 						<li><button class="diet-record"><span>식단</span></button></li>
                   </ul>
                </li>
-               <li class="open">
+               <li id="commu">
                   <div class="app-sidebar-left__nav__item">
-                     <a href="<%=request.getContextPath() %>/page/community/list.jsp"> <span>커뮤니티</span>
+                     <a href="<%=request.getContextPath() %>/page/community/list.jsp?now=commu"> <span>커뮤니티</span>
                      </a>
                      <ion-icon name="chevron-down-outline"
                         class="app-sidebar-left__nav__more"> </ion-icon>
@@ -76,7 +91,7 @@ $(document).ready(function(){
 					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=추천글">추천글</a></li>
                   </ul>
                </li>
-               <li class="">
+               <li>
                   <div class="app-sidebar-left__nav__item">
                      <a href="<%=request.getContextPath() %>/page/fitgroup/list.jsp"> <span>소모임</span>
                      </a>
