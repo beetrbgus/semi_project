@@ -24,7 +24,7 @@ public class MemberQuitServlet extends HttpServlet{
 			
 			if(success) {
 				req.getSession().removeAttribute("uid");
-				resp.sendRedirect("quit_success.jsp"); //탈퇴 메시지?
+				resp.sendRedirect("index.jsp"); //탈퇴 메시지?
 			}
 			else {
 				resp.sendRedirect("quit.jsp?error");

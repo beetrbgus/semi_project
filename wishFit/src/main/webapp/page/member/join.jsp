@@ -21,9 +21,9 @@
     	$(function(){
     		$("input[name=memId]").on("input",function(){
     			var input = $("input[name=memId]").val();
-    			$.ajaxf({
-    				url = "ajax_id_check.kh";
-    				type : "post";
+    			$.ajax({
+    				url = "http://localhost:8080/wishFIt/page/member/ajax_id_check.kh";
+    				type : "get";
     				data:{
     					memId : inputId
     				},
@@ -47,7 +47,7 @@
     				var input = $("input[name=memNick]").val();
     				$.ajax({
     					ur="";
-    					type:"post";
+    					type:"get";
     					data:{
     						memNick: inputNick
     					},
@@ -72,14 +72,30 @@
         	var notice = pw2Input.nextElementSibling;
         	
         	if(pwInput.values.Iength > 0 && pwInput.value == pw2Input.value){
-        		notice.textContent = "";
+        		app-error.textContent = "";
         		return true;
         	}
         	else{
-        		notice.textContent = "비밀번호가 일치하지 않습니다.";
+        		app-error.textContent = "비밀번호가 일치하지 않습니다.";
         		return false;
         	}
     	}
+    	
+    	// 아이디 regex
+    	function idCheck(){
+            var regex = /^[a-z][a-z0-9-_]{5,19}$/;
+            var input = document.querySelector("input[name=memId]");
+            var app-error = input.nextElementSibling;
+
+            if(regex.test(input.value)){
+            	app-error.textContent = "";
+                return true;
+            }
+            else{
+            	app-error.textContent = "특수문자를 제외한 영어 소문자, 숫자 포함한 6자리~20자리";
+                return false;
+            }
+        }
     </script>
     
     <section class="app-member">
@@ -435,10 +451,10 @@
               <em>*</em>
               <span>아이디</span>
             </label>
-            <input type="text" name="memId" id="user_id" value="" required="">
+            <input type="text" name="memId" id="user_id" value="" required="" onblur="idCheck();">
             
             <div class="app-error">
-              특수문자를 제외한 영어 소문자, 숫자 포함한 6자리~20자리
+				특수문자를 제외한 영어 소문자, 숫자 포함한 6자리~20자리
              </div>
              </li>
   
@@ -457,6 +473,7 @@
               <span>비밀번호 확인</span>
             </label>
             <input type="password" id="password2" name="memPw2" value="" required="" onblur="pw2Check()">
+            <p class="app-error"></p>
           </li>
           
           <li>

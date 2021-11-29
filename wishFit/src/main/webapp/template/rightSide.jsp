@@ -1,11 +1,17 @@
+<%@page import="wishFit.beans.member.MemberDto"%>
+<%@page import="wishFit.beans.member.MemberDao"%>
+<%@page import="wishFit.beans.board.BoardDto"%>
+<%@page import="wishFit.beans.board.BoardImageVO"%>
+<%@page import="wishFit.beans.board.BoardDao"%>
+<%@page import="java.util.List"%>
+<%@page import="wishFit.beans.reply.ReplyDto"%>
+<%@page import="wishFit.beans.reply.ReplyDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <!-- 오른쪽 사이드 바-->
 <aside class="app-layout-aside">
 	<div class="app-aside">
 		<div class="app-aside-content app-aside-container tw-pb-0">
-
 			<!-- 사이드바 검색창. -->
 			<div class="app-aside-search">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -23,7 +29,6 @@
 						placeholder="검색" value="" class="app-aside-search-input" />
 				</form>
 			</div>
-
 			<!-- 최근 글 영역 -->
 			<div class="tw-mb-5">
 				<div class="xe-widget-wrapper " style="">
@@ -33,27 +38,34 @@
 								<div class="tw-text-base tw-font-bold">최근글</div>
 								<div class="tw-flex-1"></div>
 							</div>
-
 							<div class="app-clearfix">
 								<div style="*zoom: 1; padding: 0px 0px 0px 0px !important;">
 									<div class="app-widget-content-main">
 										<ul class="app-widget-content app-widget-content-normal">
 											<!--  반복문으로 이 부분을 돌리면 됨. -->
-											<li><a href="sell/1139.html">
+											<%BoardDao boardDao = new BoardDao();
+												List<BoardDto> list = boardDao.mainList();%>
+												<%for(BoardDto boardDto : list){ %>
+											<li><a href="">
 													<div class="tw-flex tw-items-center tw-flex-wrap">
 														<div class="tw-mr-3">
 															<!--  제목. -->
-															<span class="tw-text-sm">123</span>
+															<span class="tw-text-sm"><%=boardDto.getBoardTitle() %></span>
 														</div>
 													</div>
 													<div>
 														<!-- 닉네임 -->
-														<span class="tw-text-xs tw-text-gray-700 tw-mr-2">포카리스웻티</span>
+														<%
+															MemberDao memberDao = new MemberDao();
+															String memId = boardDto.getBoardWriter();
+															MemberDto memberDto = memberDao.get(memId);
+														%>
+														<span class="tw-text-xs tw-text-gray-700 tw-mr-2"><%=memberDto.getMemNick() %></span>
 														<!--  댓글 단 날짜 혹은 시각. -->
-														<span class="tw-text-xs tw-text-gray-700">2021-10-18</span>
+														<span class="tw-text-xs tw-text-gray-700"><%=boardDto.getBoardDate() %></span>
 													</div>
 											</a></li>
-											
+											<%} %>
 										</ul>
 									</div>
 								</div>
@@ -69,29 +81,33 @@
 						<div class="app-widgetstyle-card app-card">
 							<div class="app-widgetstyle-header">
 								<div class="tw-text-base tw-font-bold">최근 댓글</div>
-
 								<div class="tw-flex-1"></div>
-
 							</div>
-
 							<div class="app-clearfix">
 								<div style="*zoom: 1; padding: 0px 0px 0px 0px !important;">
-									<div>
-										<ul class="app-widget-comment">
-											<!--  반복문 돌릴 영역  -->
-											<li><a href="#" title="1"> 
-												<el-tooltip content="ssuram" class="tw-mr-2">
-													<div class="app-avatar"
-														style="width: 1.25rem; height: 1.25rem">
-														<!-- 댓글의 프로필 이미지 -->
-														<img	src="widgets/slow_comment/skins/default/assets/images/ic_profile_default.png"
-															alt="ssuram">
+									<div><ul class="app-widget-content app-widget-content-normal">
+													<%  ReplyDao replyDao = new ReplyDao();
+													List<ReplyDto> list2 = replyDao.mainList();				
+											%>
+											<%for(ReplyDto replyDto : list2){%>
+											<!--  반복문으로 이 부분을 돌리면 됨. -->
+											<li><a href="sell/1139.html">
+													<div class="tw-flex tw-items-center tw-flex-wrap">
+														<div class="tw-mr-3">
+															<!--  제목. -->
+															<span class="tw-text-sm"><%=replyDto.getReplyPost() %></span>
+														</div>
 													</div>
-												</el-tooltip> 
-												<!-- 댓글의 내용 길면 ...으로 짜르기. -->
-												<div class="app-widget-comment-body">1</div>
+													<div>
+														<!-- 닉네임 -->
+														<span class="tw-text-xs tw-text-gray-700 tw-mr-2"><%=replyDto.getReplyId() %></span>
+														<!--  댓글 단 날짜 혹은 시각. -->
+														<span class="tw-text-xs tw-text-gray-700"><%=replyDto.getReplyDate().substring(0,10) %></span>
+													</div>
 											</a></li>
+											<%} %>
 										</ul>
+										
 									</div>
 								</div>
 							</div>
