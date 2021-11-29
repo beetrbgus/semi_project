@@ -10,10 +10,7 @@
 <%
 String root = request.getContextPath();
 String uid = (String) request.getSession().getAttribute("uid");
-Msg_Pagenation msg_Pagenation = new Msg_Pagenation(request);
-msg_Pagenation.setUid(uid);
-msg_Pagenation.calculate();
-List<MessageVo> msglist = msg_Pagenation.getList();
+
 %>
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/255b6902485612c74d806c3142450a55116bc82e.signup-form.scssb2cb.css"
@@ -45,6 +42,13 @@ List<MessageVo> msglist = msg_Pagenation.getList();
 	padding-bottom: 1rem;
 }
 </style>
+<script>
+function messageValid(){
+	$("#msgBtn").click(function(){
+		$("#messageform").submit();
+	});
+}
+</script>
 <main class="app-content app-clearfix">
 	<div class="app-article-toolbar">
 		<div class="app-board-container">
@@ -114,15 +118,17 @@ List<MessageVo> msglist = msg_Pagenation.getList();
 					</ul>
 				</div>
 			</div>
+			<form action="send.kh" method="post" id="messageform">
 			<div class="app-member-content">
 				<div class="app-member-card">
 					<div class="app-member-card-header">
-						<h1>쪽지 제목</h1>
+						<input type="text" name="msg_title" placeholder="제목을 입력하세요." required>
 					</div>
 
 					<div class="app-member-card-body">
 						<div class="app-board-article-profile tw-flex tw-items-center">
 							<div class="app-profile-image app-avatar">
+								<%-- 받는 사람 프로필 사진. --%>
 								<img
 									src="/modules/board/skins/slow/assets/images/ic_profile_default.png"
 									alt="Profile"
@@ -130,37 +136,34 @@ List<MessageVo> msglist = msg_Pagenation.getList();
 							</div>
 
 							<div class="tw-flex-1 app-profile-body">
-								<a
-									class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_1118 author"
+							<%-- 받는 사람 닉네임. --%>
+							<input type="hidden" name="msg_receiver" value="">
+								<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_1118 author"
 									href="#popup_menu_area" onclick="return false"
 									style="color: #;"
 								> 소얀</a>
-								<div class="app-article-meta">
-									<el-tooltip content="2021-11-18 17:38:35">
-									<div class="app-article-meta-item">보낸 날짜 : 2021.11.18</div>
-									</el-tooltip>
-								</div>
 							</div>
 						</div>
 						<div>
-							<!-- 닉네임 -->
+							
 
 						</div>
 						<div class="tw-flex tw-items-center"></div>
 					</div>
 					<%-- 실질적 메세지 내용 --%>
 					<div class="app-member-card-body tw-pt-0">
-						<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+						<textarea name="msg_text" rows="10" cols="80" style="border : 1px solid gray" required></textarea>
 					</div>
 					<%-- 메세지 답장 / 삭제 버튼 --%>
 					<div class="app-member-card-body tw-flex tw-items-center">
 						<input type="text" class="folder_name app-input tw-mr-2"
 							style="margin: 0; display: none" >
-						<button id="reply" class="app-button">답장</button>
-						<button id="delete" class="app-button">삭제</button>
+						<button type="button" id="msgBtn" class="app-button">전송</button>
+						
 					</div>
 				</div>
 			</div>
+			</form>
 		</section>
 	</div>
 	<jsp:include page="/template/footer.jsp"></jsp:include>

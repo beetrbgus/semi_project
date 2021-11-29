@@ -1,4 +1,5 @@
 <%--<%@page import="wishFit.beans.message.MessageDao"%>--%>
+<%@page import="wishFit.beans.message.MessageDao"%>
 <%@page import="wishFit.beans.member.MemberProfileDto"%>
 <%@page import="wishFit.beans.member.MemberProfileDao"%>
 <%@page import="wishFit.beans.member.MemberDto"%>
@@ -144,9 +145,7 @@ $(document).ready(function(){
 
 <body>
 
-<%
-String uid = (String) session.getAttribute("uid"); 
-%>
+
 
 
 <input type="hidden" id="uid" value ="<%=uid%>">
