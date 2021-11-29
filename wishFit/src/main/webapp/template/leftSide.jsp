@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <script src = "http://code.jquery.com/jquery-3.6.0.js"></script>
-<link rel = "stylesheet" type="text/css" href="../css/widget.css">
-<script src = "../css/widget.js"></script>
-<script src = "../css/record.js"></script>
-<link rel = "stylesheet" type="text/css" href="../css/commons.cs"> 
+<link rel = "stylesheet" type="text/css" href="<%=request.getContextPath() %>/page/css/widget.css">
+<script src = "<%=request.getContextPath() %>/page/js/widget.js"></script>
+<script src = "<%=request.getContextPath() %>/page/js/record.js"></script>
 <%
 	String root = request.getContextPath();
 %> 
@@ -69,7 +68,7 @@ $(document).ready(function(){
                         class="app-sidebar-left__nav__more"> </ion-icon>
                   </div>
                   <ul class="app-sidebar-left__nav__child">
-                    <li><a href="<%=request.getContextPath() %>/page/community/list.jsp">전체</a></li>
+                    <li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardLargeName=커뮤니티">전체</a></li>
 					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=유머">유머</a></li>
 					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=질문">질문</a></li>
 					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=운동인증">운동인증</a></li>

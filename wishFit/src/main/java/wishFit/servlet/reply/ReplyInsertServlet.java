@@ -13,7 +13,7 @@ import wishFit.beans.board.BoardDao;
 import wishFit.beans.reply.ReplyDao;
 import wishFit.beans.reply.ReplyDto;
 import wishFit.beans.reply.ReplyVo;
-@WebServlet(urlPatterns ={"/page/market/reply_insert.kh","/page/community/reply_insert.kh"})
+@WebServlet(urlPatterns ={"/page/market/replyinsert.kh","/page/community/replyinsert.kh"})
 public class ReplyInsertServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

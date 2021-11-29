@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import wishFit.beans.board.BoardDao;
+import wishFit.beans.board.BoardImageVO;
+
+
 
 
 public class PaginationThumbnail {

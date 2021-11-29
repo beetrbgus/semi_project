@@ -12,11 +12,9 @@
 	<!-- 배너 부분. 인덱스 부분만 필요. -->
 	<div class="app-main-banner swiper-container">
 		<div class="swiper-wrapper">
-			<a class="swiper-slide" href="notice/170.html" target="_blank"> <img
-				class="app-main-banner-bg"
-				src="files/attach/images/113/4f0e42b21e6955439e25b0d32ac915c4.jpg"
-				alt="오픈했어요!"
-			>
+			<a class="swiper-slide" href="<%=request.getContextPath()%>/index.jsp" target="_blank"> <img class="app-main-banner-bg" 
+			src="https://sweatee.co.kr/files/attach/images/113/4f0e42b21e6955439e25b0d32ac915c4.jpg" 
+			alt="오픈했어요!">
 
 				<div class="app-main-banner-body">
 					<div class="app-main-banner__container">

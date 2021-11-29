@@ -7,8 +7,6 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- <script src = "../css/record.js"></script> -->
-<link rel = "stylesheet" type="text/css" href="../css/commons.cs"> 
     <!-- 달력 날짜 구하기 -->
     
      
@@ -139,8 +137,8 @@ String root = request.getContextPath();
 								class="tw-inline-block tw-font-medium tw-text-2xl tw-font-bold tw-mr-1"
 								href="/my_record.jsp">내 기록 </a>
 							<div class="tw-flex-1"></div>
-					<a href="record_write.jsp" class="app-button app-button-rounded primary form-click" style="padding:0 auto">
-				   <span>+ 쓰기</span></a>
+					<a href="record_write.jsp" class="app-button app-button-rounded primary form-click">
+				   <span>+ 글쓰기</span></a>
 						</div>
 						<!-- 현재 게시판 이름  대분류 + 중분류  -->
 						<p
@@ -179,18 +177,18 @@ String root = request.getContextPath();
 							<li><a class="tw-flex-1" href="record_detail.jsp?boardNo=<%=list.get(k).getBoardNo()%>">
 									<div class="tw-flex-1">
 
-										<div class="app-list-meta">
+										<div class="app-list-meta ">
 											<span style="color:"></span> 
-											<span style="width:15%;">
-												<div class="app-list-member" style="color: #; width:15%">
+											<span >
+												<div class="app-list-member" style="color: #;">
 												<%if(k==0){//첫번째 칸이라면 %>
-													<div class="member_459 tw-inline-flex tw-items-center" style="width:15%"><%=list.get(k).getBoardDate()%></div>
+													<div class="member_459 tw-inline-flex tw-items-center"><%=list.get(k).getBoardDate()%></div>
 												<%}else{//두번째 칸 이상이라면 %>
-												<div class="member_459 tw-inline-flex tw-items-center" style="width:15%"></div>
+												<div class="member_459 tw-inline-flex tw-items-center" style="width:70px"></div>
 												<%} %>
 												</div>
 											</span>
-											 <span  style="width:15%;align:center"><%=list.get(k).getBoardMiddleName()%></span> 
+											 <span  style="align:center"><%=list.get(k).getBoardMiddleName()%></span> 
 											 <span><span class="tw-mr-1"><%=list.get(k).getBoardTitle()%></span></span>
 
 										</div>
@@ -209,12 +207,12 @@ String root = request.getContextPath();
 
 										<div class="app-list-meta">
 											<span style="color:"></span> 
-											<span style="width:20%;">
-												<div class="app-list-member" style="color: #; width:15%">
-													<div class="member_459 tw-inline-flex tw-items-center" style="width:30%"><%=time%></div>
+											<span>
+												<div class="app-list-member" style="color: #;">
+													<div class="member_459 tw-inline-flex tw-items-center"><%=time%></div>
 												</div>
 											</span>
-											 <span  style="width:15%;align:center"></span> 
+											 <span  style=";align:center"></span> 
 											 <span><span class="tw-mr-1"></span></span>
 
 										</div>

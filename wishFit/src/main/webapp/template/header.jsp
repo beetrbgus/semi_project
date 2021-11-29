@@ -205,9 +205,9 @@ String uid = (String) session.getAttribute("uid");
 		<!--맨위 헤더 부분-->
 		<header class="app-header ">
 			<div class="app-header-container">
-				<a class="app-header-logo" href="index.html"> 
-					<img src="files/attach/images/113/c66a562b582767d6f09fca013dfaeabc.png"
-					alt="WishFit">
+				<a class="app-header-logo" href="<%=root%>/index.jsp"> 
+					<img src="<%=root %>/resources/image/wishFit_logo.png"
+					alt="WishFit" style="width:100px; height:50px">
 				</a>
 				<!--헤더의 항목 부분-->
 				<ul class="app-header-nav">
@@ -222,11 +222,11 @@ String uid = (String) session.getAttribute("uid");
 							<li><a href="<%=request.getContextPath() %>/page/record/my_record.jsp?boardMiddleName=소모임">소모임</a></li>
 							<li><a href="<%=request.getContextPath() %>/page/record/my_record.jsp?boardMiddleName=식단">식단</a></li>
 						</ul></li>
-					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp"> <span>커뮤니티</span> <ion-icon
+					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardLargeName=커뮤니티"> <span>커뮤니티</span> <ion-icon
 								class="tw-ml-1 tw-color-gray-600" name="chevron-down-outline"></ion-icon>
 					</a>
 						<ul class="app-header-nav-child">
-							<li><a href="<%=request.getContextPath() %>/page/community/list.jsp">전체</a></li>
+							<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardLargeName=커뮤니티">전체</a></li>
 							<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=유머">유머</a></li>
 							<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=질문">질문</a></li>
 							<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=운동인증">운동인증</a></li>

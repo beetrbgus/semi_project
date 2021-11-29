@@ -74,7 +74,10 @@ ImageDto imageDto = new ImageDto();
 								class="tw-inline-block tw-font-medium tw-text-2xl tw-font-bold tw-mr-1"
 								href="/community">마켓 </a>
 							<div class="tw-flex-1"></div>
-
+								<a href="write.jsp" class="app-button app-button-rounded primary">
+							      <ion-icon name="add-outline" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
+							      <span>글작성</span>
+							    </a>
 						</div>
 						<!-- 현재 게시판 이름  대분류 + 중분류  -->
 						<p
@@ -82,10 +85,7 @@ ImageDto imageDto = new ImageDto();
 							마켓 판매게시판입니다</p>
 					</div>
 				</div>
-				<a href="write.jsp" class="app-button app-button-rounded primary">
-      <ion-icon name="add-outline" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
-      <span>글작성</span>
-    </a>
+				
 				<!-- 현재 게시판 게시글  -->
 				<div class="app-board-section">
 

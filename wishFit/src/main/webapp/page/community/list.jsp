@@ -10,6 +10,10 @@ PaginationThumbnail pagination = new PaginationThumbnail(request);
 pagination.calculate();
 %>
 
+<%
+	String uid = (String)session.getAttribute("uid");
+	boolean login = uid != null;
+%>
 
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -74,17 +78,20 @@ String root = request.getContextPath();
 					<div class="app-board-title">
 						<div class="tw-flex tw-items-center">
 							<a class="tw-inline-block tw-font-medium tw-text-2xl tw-font-bold tw-mr-1"
-								href="list.jsp?boardLargeName=커뮤니티">커뮤니티 </a>
+								href="comu_list.jsp?boardLargeName=커뮤니티">커뮤니티 </a>
+				
 							<div class="tw-flex-1"></div>
+							<%if(login) {%>
 								<a href="write.jsp" class="app-button app-button-rounded primary">
       								<ion-icon name="add-outline" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
-     								 <span>글쓰기</span>
+     								 <span>+글쓰기</span>
+     								 <%} %>
    								 </a>
 						</div>
 						<!-- 현재 게시판 이름  대분류 + 중분류  -->
 						<p
 							class="tw-text-sm tw-text-gray-700 tw-bt-1 app-board-description">
-							커뮤니티 통합게시판입니다</p>
+							자유게시판입니다</p>
 
 					</div>
 				<!-- 현재 게시판 게시글  -->
@@ -230,7 +237,7 @@ String root = request.getContextPath();
 				</div>
 				
 			<div class="row center">
-				<form action="list.jsp">
+				<form action="comu_list.jsp">
 				<%if(pagination.getBoardLargeName() != null) { %>
 				<input type="hidden" name="boardLargeName" value="<%=pagination.getBoardLargeName()%>">
 				<%} %>	

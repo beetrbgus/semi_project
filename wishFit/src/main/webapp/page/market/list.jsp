@@ -87,7 +87,7 @@ ImageDao imageDao = new ImageDao();
 							<div class="tw-flex-1"></div>
 							<a href="write.jsp" class="app-button app-button-rounded primary">
 						      <ion-icon name="add-outline" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
-						      <span>글작성</span>
+						      <span>+글작성</span>
 						    </a>
 
 						</div>
@@ -128,7 +128,7 @@ ImageDao imageDao = new ImageDao();
 															src="/files/member_extra_info/profile_image/459/459.png?20210405162634"
 															alt="profile" title="운동친구">-->
 													<!--  </div>-->
-
+													
 													<div class="member_459 tw-inline-flex tw-items-center"><%=boardDto.getBoardWriter()%></div>
 												</div>
 											</span> <span title="2021-04-21 21:59:24"><%=boardDto.getBoardDate().substring(0,10) %></span> <span>
