@@ -6,15 +6,22 @@ public class MessageVo {
 	private String msg_receiver;
 	private String msg_sender;
 	private String mem_nick ; 
-	private int profile_no;
 	
 	private String msg_sendTime;
 	private String msg_readTime;
+	private String mem_grade;
+	private int profile_no;
 	
 	private int msgCon_no;
 	private String msgCon_title;
 	private String msgCon_text;
-	
+
+	public String getMem_grade() {
+		return mem_grade;
+	}
+	public void setMem_grade(String mem_grade) {
+		this.mem_grade = mem_grade;
+	}
 	public int getMsg_no() {
 		return msg_no;
 	}

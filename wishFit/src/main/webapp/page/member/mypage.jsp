@@ -10,8 +10,8 @@
 <%
 String root = request.getContextPath();
 
-String uid = (String) session.getAttribute("uid");
-
+String uid = (String) request.getSession().getAttribute("uid");
+System.out.println(" mypage  uid  " + uid);
 // 처리
 MemberDao memberDao = new MemberDao();
 MemberDto memberDto = memberDao.get(uid);
@@ -64,7 +64,7 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 				    </li><li>
 				      <a href="<%=root%>/page/member/friend_list.jsp">친구 목록</a>
 				    </li><li>
-				      <a href="<%=root%>#">쪽지함 보기</a>
+				      <a href="<%=root%>/page/message/listmsg.jsp">쪽지함 보기</a>
 				    </li> <li>
 				      <a href="<%=root%>/page/member/logout.kh">로그아웃</a>
 				    </li> 
@@ -95,7 +95,7 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 									<div><%=memberDto.getMemNick()%></div></li>
 									
 							<li><label for="user_brith">생년월일</label>
-							<div><%=memberDto.getMemBirth().substring(0,10)%></div></li>
+							<div><%=memberDto.getMemBirth()%></div></li>
 							
 							<li><label for="user_gender">성별
 							<span class="app-required">필수</span></label>

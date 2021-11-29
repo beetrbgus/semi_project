@@ -3,7 +3,6 @@ package wishFit.beans.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import wishFit.util.JdbcUtils;
 
 public class MemberProfileDao {
@@ -11,7 +10,7 @@ public class MemberProfileDao {
 	public void insert(MemberProfileDto memberProfileDto) throws Exception {
 		conn = JdbcUtils.connect();
 		
-		String sql = "insert into member_profile values(memberprofile_seq.nextval, ?, ?, ?, ?, ?)";
+		String sql = "insert into member_profile values(mp_seq.nextval, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, memberProfileDto.getMpId());
 		ps.setString(2, memberProfileDto.getMpUpload());
@@ -73,3 +72,4 @@ public class MemberProfileDao {
 		return memberProfileDto;
 	}
 }
+ 

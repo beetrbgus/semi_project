@@ -7,6 +7,7 @@
 
 <!-- 좌측 사이드 -->
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
+
 <!-- 화면 중간. 본문 -->
 <main class="app-content app-clearfix">
 	<!-- 배너 부분. 인덱스 부분만 필요. -->
@@ -252,7 +253,6 @@
 									</a></li>
 
 								</ul>
-						
 							</div>
 						</div>
 					</div>

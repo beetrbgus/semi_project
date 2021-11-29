@@ -15,20 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.member.MemberProfileDao;
 import wishFit.beans.member.MemberProfileDto;
 
-
-@WebServlet(urlPatterns={"/page/fitgroup/profile.kh","/profile.kh"})
+@WebServlet(urlPatterns="/profile.kh")
 public class MemberProfileServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
 			int mpNo  = Integer.parseInt(req.getParameter("mpNo"));
-			
+
 			MemberProfileDao memberProfileDao = new MemberProfileDao();
 			MemberProfileDto memberProfileDto = memberProfileDao.get(mpNo);
-		
 
-			File dir = new File("D:\\upload\\wishfit");
+			File dir = new File("D:\\upload\\member");
 			File target = new File(dir, memberProfileDto.getMpSave());
 			InputStream in = new FileInputStream(target);
 			byte[] buffer = new byte[8192];

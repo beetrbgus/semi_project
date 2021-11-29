@@ -20,7 +20,7 @@ public class MemberJoinServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 이미지 파일 설정
-			String savePath = "D:/upload/wishfit";
+			String savePath = "D:/upload/member";
 			int maxSize = 10*1024*1024;
 			String encoding ="UTF-8";
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
@@ -57,7 +57,7 @@ public class MemberJoinServlet extends HttpServlet{
 				memberProfileDao.insert(memberProfileDto);
 			}
 			
-			resp.sendRedirect(req.getContextPath()+"/index.jsp");
+			resp.sendRedirect("index.jsp");
 		}	catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

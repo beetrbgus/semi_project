@@ -9,6 +9,9 @@ public class MessageDto {
 	private int msgCon_no;
 	private String msgCon_text;
 	
+	
+	
+	
 	public int getMsg_no() {
 		return msg_no;
 	}

@@ -1,12 +1,8 @@
 package wishFit.beans.image;
 
-public class ImageDto {
-	private int imageNo;
-	private int boardNo;
-	private String boardUpload;
-	private String boardSave;
-	private Long boardSize;
-	private String boardType;
+public class imageDto {
+	private int imageNo,boardNo,boardSize;
+	private String boardUpload,boardSave,boardType;
 	public int getImageNo() {
 		return imageNo;
 	}
@@ -18,6 +14,12 @@ public class ImageDto {
 	}
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
+	}
+	public int getBoardSize() {
+		return boardSize;
+	}
+	public void setBoardSize(int boardSize) {
+		this.boardSize = boardSize;
 	}
 	public String getBoardUpload() {
 		return boardUpload;
@@ -31,27 +33,15 @@ public class ImageDto {
 	public void setBoardSave(String boardSave) {
 		this.boardSave = boardSave;
 	}
-	public Long getBoardSize() {
-		return boardSize;
-	}
-	public void setBoardSize(Long boardSize) {
-		this.boardSize = boardSize;
-	}
 	public String getBoardType() {
 		return boardType;
 	}
 	public void setBoardType(String boardType) {
 		this.boardType = boardType;
 	}
-	public ImageDto() {
+	public imageDto() {
 		super();
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	

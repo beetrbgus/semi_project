@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class GetSeq {
+public class CommonSql {
 	//시퀀스 구하는 sql 
 	public static int getSequence(String seqName) throws Exception{
 		Connection conn = JdbcUtils.connect();

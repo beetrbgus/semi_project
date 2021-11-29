@@ -2,54 +2,63 @@ package wishFit.beans.notification;
 
 public class NotificationVo {
 	
-	private int no;
-	private String myId;
-	private String sender;
-	private String message;
-	private String notiTime;
-	private String noticategory;
-	private String read;
+	private int noti_no;
+	private String noti_ref;
+	private int noti_refval;
+	private String noti_sender;
+	private String noti_receiver;
+	private String noti_time;
+	private String noti_message;
+	private String noti_read;
 	
-	public int getNo() {
-		return no;
+	public int getNoti_no() {
+		return noti_no;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setNoti_no(int noti_no) {
+		this.noti_no = noti_no;
 	}
-	public String getMyId() {
-		return myId;
+	public String getNoti_ref() {
+		return noti_ref;
 	}
-	public void setMyId(String myId) {
-		this.myId = myId;
+	public void setNoti_ref(String noti_ref) {
+		this.noti_ref = noti_ref;
 	}
-	public String getSender() {
-		return sender;
+	public int getNoti_refval() {
+		return noti_refval;
 	}
-	public void setSender(String sender) {
-		this.sender = sender;
+	public void setNoti_refval(int noti_refval) {
+		this.noti_refval = noti_refval;
 	}
-	public String getMessage() {
-		return message;
+	public String getNoti_sender() {
+		return noti_sender;
 	}
-	public void setMessage(String message) {
-		this.message = message;
+	public void setNoti_sender(String noti_sender) {
+		this.noti_sender = noti_sender;
 	}
-	public String getNotiTime() {
-		return notiTime;
+	public String getNoti_receiver() {
+		return noti_receiver;
 	}
-	public void setNotiTime(String notiTime) {
-		this.notiTime = notiTime;
+	public void setNoti_receiver(String noti_receiver) {
+		this.noti_receiver = noti_receiver;
 	}
-	public String getNoticategory() {
-		return noticategory;
+	public String getNoti_time() {
+		return noti_time;
 	}
-	public void setNoticategory(String noticategory) {
-		this.noticategory = noticategory;
+	public void setNoti_time(String noti_time) {
+		this.noti_time = noti_time;
 	}
-	public String getRead() {
-		return read;
+	public String getNoti_message() {
+		return noti_message;
 	}
-	public void setRead(String read) {
-		this.read = read;
+	public void setNoti_message(String noti_message) {
+		this.noti_message = noti_message;
 	}
+	public String getNoti_read() {
+		return noti_read;
+	}
+	public void setNoti_read(String noti_read) {
+		this.noti_read = noti_read;
+	}
+	
+	
 }
