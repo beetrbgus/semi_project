@@ -19,14 +19,13 @@ boolean notNewMsg = msgList.isEmpty() || msgList.equals(null);
 <div class="app-dropdown-header tw-text-base tw-font-bold">쪽지</div>
 <% if(!notNewMsg) {%>
 <ul class="app-dropdown-menu-list">
-	<% for(MessageVo messageVo : msgList) {
-		%>
+	<% for(MessageVo messageVo : msgList) { %>
 	<li>
 		<% if(messageVo.getMsg_readTime().equals("안읽음")){ %>			
-		<a href="<%=root %>/page/message/readMsg.jsp?msg_no=<%=messageVo.getMsg_no()%>" 
-			class="tw-flex tw-items-center" style="background-color: #C7E0F0; margin: 1px;">
+		<a href="<%=root %>/page/message/read.kh?msg_no=<%=messageVo.getMsg_no()%>" 
+			class="tw-flex tw-items-center notread" style="background-color: #C7E0F0; margin: 1px;">
 		<%}else{ %>
-		<a href="<%=root %>/page/message/readMsg.jsp?msg_no=<%=messageVo.getMsg_no()%>" 
+		<a href="<%=root %>/page/message/detail.jsp?msg_no=<%=messageVo.getMsg_no()%>" 
 			class="tw-flex tw-items-center" style="margin: 1px;">
 		<%}%>
 			<!-- 댓글 보낸 사람 목록 프로필 사진 -->

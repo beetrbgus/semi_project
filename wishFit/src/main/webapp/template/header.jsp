@@ -1,4 +1,3 @@
-<%--<%@page import="wishFit.beans.message.MessageDao"%>--%>
 <%@page import="wishFit.beans.message.MessageDao"%>
 <%@page import="wishFit.beans.member.MemberProfileDto"%>
 <%@page import="wishFit.beans.member.MemberProfileDao"%>
@@ -312,8 +311,9 @@ $(document).ready(function(){
                            }
                      },
                      
-                     error: function() {
-                        alert("error");
+                     error: function(request , status , error ) {
+                    	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+
                      }
                   });
                });

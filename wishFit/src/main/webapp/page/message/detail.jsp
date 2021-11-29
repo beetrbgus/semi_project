@@ -1,3 +1,4 @@
+<%@page import="wishFit.beans.message.MessageDao"%>
 <%@page import="wishFit.beans.message.MessageVo"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.message.Msg_Pagenation"%>
@@ -10,10 +11,15 @@
 <%
 String root = request.getContextPath();
 String uid = (String) request.getSession().getAttribute("uid");
-Msg_Pagenation msg_Pagenation = new Msg_Pagenation(request);
-msg_Pagenation.setUid(uid);
-msg_Pagenation.calculate();
-List<MessageVo> msglist = msg_Pagenation.getList();
+int msgNo = Integer.parseInt(request.getParameter("msg_no"));
+MessageDao messageDao =new MessageDao();
+System.out.println("msgNo "  + msgNo);
+MessageVo messageVo = new MessageVo();
+if(msgNo !=0){
+	messageVo = messageDao.detailMessage(msgNo,uid);	
+}else{
+	messageVo = null;
+}
 %>
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/255b6902485612c74d806c3142450a55116bc82e.signup-form.scssb2cb.css"
@@ -64,56 +70,9 @@ List<MessageVo> msglist = msg_Pagenation.getList();
 	</div>
 	<div class="app-clearfix">
 		<section class="app-member">
-			<div class="app-member-side">
-				<div class="app-member-card app-member-profile">
-					<div class="app-member-card-body">
-						<div class="app-avatar tw-mb-2">
-							<!--  회원 프로필 사진 -->
-							<img src="/modules/member/skins/slow/img/ic_profile_default.png"
-								alt="profile_image"
-							>
-						</div>
-
-						<div>
-							<!-- 회원등급 -->
-							<span class="tw-text-primary tw-text-xs tw-mb-1">회원등급</span>
-							<!-- 닉네임 -->
-							<div class="tw-font-bold tw-mb-1">닉네임</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="app-member-card app-member-menu">
-					<ul>
-						<li><a href="/index.php?act=dispMemberInfo&amp;mid=community">회원정보
-								보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberScrappedDocument&amp;mid=community"
-						>스크랩 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberSavedDocument&amp;mid=community"
-						>저장함 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberOwnDocument&amp;mid=community"
-						>작성 글 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberOwnComment&amp;mid=community"
-						>작성 댓글 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberActiveLogins&amp;mid=community"
-						>자동 로그인 관리</a></li>
-						<li class="app-active"><a
-							href="/index.php?act=dispCommunicationMessages&amp;mid=community"
-						>쪽지함 보기</a></li>
-						<li><a
-							href="/index.php?act=dispCommunicationFriend&amp;mid=community"
-						>친구 보기</a></li>
-						<li><a
-							href="/index.php?act=dispSocialxeSnsManage&amp;mid=community"
-						>SNS 관리</a></li>
-					</ul>
-				</div>
-			</div>
+			<%-- 마이페이지 왼쪽것 --%>
+			<jsp:include page="/page/message/myPageLeftSide.jsp"></jsp:include>
+			
 			<div class="app-member-content">
 				<div class="app-member-card">
 					<div class="app-member-card-header">
@@ -123,21 +82,21 @@ List<MessageVo> msglist = msg_Pagenation.getList();
 					<div class="app-member-card-body">
 						<div class="app-board-article-profile tw-flex tw-items-center">
 							<div class="app-profile-image app-avatar">
-								<img
-									src="/modules/board/skins/slow/assets/images/ic_profile_default.png"
-									alt="Profile"
-								>
+								<% if(messageVo.getProfile_no() !=0) {%>
+								<img src="<%=root%>/page/message/download.kh?imageNo=<%=messageVo.getProfile_no()%>"
+									alt="Profile">
+								<% }else{ %>
+								<img src="<%=root%>/resources/image/profile-user.png"
+									alt="Profile">
+								<% } %>
 							</div>
-
 							<div class="tw-flex-1 app-profile-body">
-								<a
-									class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_1118 author"
+								<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_1118 author"
 									href="#popup_menu_area" onclick="return false"
-									style="color: #;"
-								> 소얀</a>
+									style="color: #;"> <%=messageVo.getMem_nick() %></a>
 								<div class="app-article-meta">
 									<el-tooltip content="2021-11-18 17:38:35">
-									<div class="app-article-meta-item">보낸 날짜 : 2021.11.18</div>
+									<div class="app-article-meta-item">보낸 날짜 : <%=messageVo.getMsg_sendTime()%></div>
 									</el-tooltip>
 								</div>
 							</div>
@@ -150,17 +109,31 @@ List<MessageVo> msglist = msg_Pagenation.getList();
 					</div>
 					<%-- 실질적 메세지 내용 --%>
 					<div class="app-member-card-body tw-pt-0">
-						<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+						<textarea  readonly style="resize:none;"cols="80"> <%=messageVo.getMsgCon_text()%></textarea>
 					</div>
 					<%-- 메세지 답장 / 삭제 버튼 --%>
+					
+					<input type="hidden" id="msg_no" name="msg_no" value="<%=messageVo.getMsg_no()%>">
 					<div class="app-member-card-body tw-flex tw-items-center">
 						<input type="text" class="folder_name app-input tw-mr-2"
 							style="margin: 0; display: none" >
-						<button id="reply" class="app-button">답장</button>
-						<button id="delete" class="app-button">삭제</button>
+						<button id="reply" class="app-button" onclick="replymessage()">답장</button>
+						<button id="delete" class="app-button" onclick="deleteMsg()">삭제</button>
 					</div>
+					<script>
+						function deleteMsg(){
+							let msgNo = $("#msg_no").val();
+							console.log("msgNo   "+msgNo);
+							location.href="./delete.kh?msgNo="+msgNo ; 
+						}
+						function replymessage(){
+							location.href= "./send.jsp?receiver=<%=messageVo.getMsg_sender()%>" ; 
+						}
+					</script>
+					
 				</div>
 			</div>
+			
 		</section>
 	</div>
 	<jsp:include page="/template/footer.jsp"></jsp:include>

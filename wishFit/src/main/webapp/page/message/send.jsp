@@ -1,3 +1,7 @@
+<%@page import="wishFit.beans.member.MemberProfileDto"%>
+<%@page import="wishFit.beans.member.MemberProfileDao"%>
+<%@page import="wishFit.beans.member.MemberDto"%>
+<%@page import="wishFit.beans.member.MemberDao"%>
 <%@page import="wishFit.beans.message.MessageVo"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.message.Msg_Pagenation"%>
@@ -9,8 +13,16 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <%
 String root = request.getContextPath();
-String uid = (String) request.getSession().getAttribute("uid");
 
+String uid = (String) request.getSession().getAttribute("uid");
+System.out.println(" mypage  uid  " + uid);
+// 처리
+MemberDao memberDao = new MemberDao();
+MemberDto memberDto = memberDao.get(uid);
+
+// 프로필 이미지 조회
+MemberProfileDao memberProfileDao = new MemberProfileDao();
+MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 %>
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/255b6902485612c74d806c3142450a55116bc82e.signup-form.scssb2cb.css"
@@ -68,57 +80,11 @@ function messageValid(){
 	</div>
 	<div class="app-clearfix">
 		<section class="app-member">
-			<div class="app-member-side">
-				<div class="app-member-card app-member-profile">
-					<div class="app-member-card-body">
-						<div class="app-avatar tw-mb-2">
-							<!--  회원 프로필 사진 -->
-							<img src="/modules/member/skins/slow/img/ic_profile_default.png"
-								alt="profile_image"
-							>
-						</div>
-
-						<div>
-							<!-- 회원등급 -->
-							<span class="tw-text-primary tw-text-xs tw-mb-1">회원등급</span>
-							<!-- 닉네임 -->
-							<div class="tw-font-bold tw-mb-1">닉네임</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="app-member-card app-member-menu">
-					<ul>
-						<li><a href="/index.php?act=dispMemberInfo&amp;mid=community">회원정보
-								보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberScrappedDocument&amp;mid=community"
-						>스크랩 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberSavedDocument&amp;mid=community"
-						>저장함 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberOwnDocument&amp;mid=community"
-						>작성 글 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberOwnComment&amp;mid=community"
-						>작성 댓글 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberActiveLogins&amp;mid=community"
-						>자동 로그인 관리</a></li>
-						<li class="app-active"><a
-							href="/index.php?act=dispCommunicationMessages&amp;mid=community"
-						>쪽지함 보기</a></li>
-						<li><a
-							href="/index.php?act=dispCommunicationFriend&amp;mid=community"
-						>친구 보기</a></li>
-						<li><a
-							href="/index.php?act=dispSocialxeSnsManage&amp;mid=community"
-						>SNS 관리</a></li>
-					</ul>
-				</div>
-			</div>
+			<%-- 마이페이지 왼쪽것 --%>
+			<jsp:include page="/page/message/myPageLeftSide.jsp"></jsp:include>
 			<form action="send.kh" method="post" id="messageform">
+			<input type="hidden" name ="receiver" value="<%=request.getParameter("receiver")%>">
+			<input type="hidden" name ="sender" value="<%=uid%>">
 			<div class="app-member-content">
 				<div class="app-member-card">
 					<div class="app-member-card-header">
@@ -127,26 +93,7 @@ function messageValid(){
 
 					<div class="app-member-card-body">
 						<div class="app-board-article-profile tw-flex tw-items-center">
-							<div class="app-profile-image app-avatar">
-								<%-- 받는 사람 프로필 사진. --%>
-								<img
-									src="/modules/board/skins/slow/assets/images/ic_profile_default.png"
-									alt="Profile"
-								>
-							</div>
-
-							<div class="tw-flex-1 app-profile-body">
-							<%-- 받는 사람 닉네임. --%>
-							<input type="hidden" name="msg_receiver" value="">
-								<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_1118 author"
-									href="#popup_menu_area" onclick="return false"
-									style="color: #;"
-								> 소얀</a>
-							</div>
-						</div>
-						<div>
 							
-
 						</div>
 						<div class="tw-flex tw-items-center"></div>
 					</div>
