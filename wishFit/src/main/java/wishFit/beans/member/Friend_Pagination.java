@@ -1,10 +1,10 @@
-package wishFit.beans.message;
+package wishFit.beans.member;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Msg_Pagenation {
+public class Friend_Pagination {
 	//필수 데이터
 	private String uid;
 	private int p;
@@ -15,7 +15,7 @@ public class Msg_Pagenation {
 	private String keyword;
 	
 	//생성자를 이용하여 필수 데이터를 설정하도록 구현
-	public Msg_Pagenation(HttpServletRequest req) {
+	public Friend_Pagination(HttpServletRequest req) {
 		try {
 			this.p = Integer.parseInt(req.getParameter("p"));
 			if(this.p <= 0) throw new Exception();
@@ -36,17 +36,13 @@ public class Msg_Pagenation {
 	private int blockSize = 10;
 	private int begin, end;
 	private int startBlock, finishBlock, lastBlock;
-	private List<MessageVo> list;
+	private List<FriendVo> list;
 	public void calculate() throws Exception {
 		
 		//count 계산
-		MessageDao msgDao = new MessageDao();
-		if(isSearch()) {
-			this.count = msgDao.count(uid , column, keyword);
-		}
-		else {
-			this.count = msgDao.count(uid);
-		}
+		FriendDao friendDao = new FriendDao();
+
+		this.count = friendDao.count(uid);
 		
 		//rownum 계산
 		this.end = this.p * this.pageSize;
@@ -58,22 +54,15 @@ public class Msg_Pagenation {
 		this.finishBlock = this.startBlock + (this.blockSize - 1);
 		
 		//list 계산
-		if(this.isSearch()) {
-			System.out.println("isSearch 들어옴");
-			System.out.println(" uid :   "+ uid + "   column =  " + column  );
-			System.out.println(" keyword :   "+ keyword + "   begin =  " + begin +"    end   " + end  );
-			if(column.equals("sender")|| column.equals("receiver")) {
-				System.out.println("sender  들어옴 ");
-				this.list = msgDao.receiveMessage(uid, column, keyword, begin, end);
-				
-			}else {
-				this.list = msgDao.notReadMsgList(uid, begin, end);				
-			}
-			
-		}else {
-			this.list = msgDao.allMsgList(uid, this.begin, this.end);
-		}
-
+		this.list = friendDao.friendmine(uid, this.begin, this.end);
+		System.out.println("count    : " + count);
+		System.out.println("end    : " + end);
+		System.out.println("begin    : " + begin);
+		System.out.println("lastBlock    : " +lastBlock);
+		System.out.println("startBlock    : " + startBlock);
+		System.out.println("finishBlock    : " + finishBlock);
+		System.out.println("isNextAvailable   : " + isNextAvailable() );
+		System.out.println("isNextAvailable   : " + isPreviousAvailable() );
 	}
 	
 	
@@ -127,10 +116,6 @@ public class Msg_Pagenation {
 	public boolean isNextAvailable() {
 		return this.finishBlock < this.lastBlock; 
 	}
-	//추가 : 검색모드인가요?
-	public boolean isSearch() {
-		return this.column != null && !this.column.equals("") && this.keyword != null && !this.keyword.equals("");
-	}
 	//추가 : 진짜 마지막 블록 번호 반환
 	public int getRealLastBlock() {
 		return Math.min(this.finishBlock, this.lastBlock);
@@ -142,17 +127,6 @@ public class Msg_Pagenation {
 	//추가 : 다음을 누르면 나오는 블록 번호
 	public int getNextBlock() {
 		return this.finishBlock + 1;
-	}
-	//추가 : 컬럼이 특정 값인지 검사
-	public boolean columnIs(String column) {
-		return this.column != null && this.column.equals(column);
-	}
-	//추가 : null을 제거한 keyword 반환 메소드
-	public String getKeywordString() {
-		if(this.keyword == null) 
-			return "";
-		else
-			return this.keyword;
 	}
 	
 	@Override
@@ -168,7 +142,7 @@ public class Msg_Pagenation {
 	public void setBlockSize(int blockSize) {
 		this.blockSize = blockSize;
 	}
-	public List<MessageVo> getList() {
+	public List<FriendVo> getList() {
 		return list;
 	}
 }

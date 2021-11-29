@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import wishFit.beans.message.MessageDao;
 import wishFit.beans.message.MessageVo;
+import wishFit.beans.notification.NotificationDao;
+import wishFit.beans.notification.NotificationDto;
+import wishFit.beans.notification.NotificationVo;
 import wishFit.util.CommonSql;
 
 @WebServlet(urlPatterns = "/page/message/send.kh")
@@ -25,14 +28,19 @@ public class MessageSendServlet extends HttpServlet {
 		try {
 			// 쪽지 테이블 시퀀스 번호 찾기. 시퀀스 이름 넣기
 			int msgSeq = CommonSql.getSequence("msg_seq");
-			
+			String uid= (String) req.getSession().getAttribute("uid");
 			messageVo.setMsg_no(msgSeq);
-			messageVo.setMsg_sender(req.getParameter("msg_sender"));
+			messageVo.setMsg_sender(req.getParameter(uid));
 			messageVo.setMsg_receiver(req.getParameter("msg_receiver"));
 			messageVo.setMsgCon_title(req.getParameter("msg_title"));
 			messageVo.setMsgCon_text(req.getParameter("msg_text"));
 
 			messageDao.send(messageVo);
+			NotificationVo notificationVo = new NotificationVo(); 
+			/*
+			 * NotificationDao notificationDao = new NotificationDao();
+			 * notificationVo.setNoti_ref("msgNo");
+			 */
 			resp.sendRedirect("list.jsp");
 
 		} catch (Exception e) {
