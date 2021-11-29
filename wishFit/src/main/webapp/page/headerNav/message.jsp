@@ -16,18 +16,23 @@
 <div class="app-dropdown-header tw-text-base tw-font-bold">쪽지</div>
 <%-- <% if(!notNewMsg) {%> --%>
 <ul class="app-dropdown-menu-list">
-	<% for(int i = 0 ; i < 7 ; i ++) {%>
+<%-- 	<% for(MessageVo messageVo : msgList) { %> --%>
 	<li>
-<%-- 		<% if(msgList.get(i).getMsg_readTime().equals("안읽음")){ %>			 --%>
-<%-- 		<a href="msgread.kh?msg_no=<%=msgList.get(i).getMsg_no()%>"  --%>
-<!-- 			class="tw-flex tw-items-center" style="background-color: #C7E0F0; margin: 1px;"> -->
+<%-- 		<% if(messageVo.getMsg_readTime().equals("안읽음")){ %>			 --%>
+<%-- 		<a href="<%=root %>/page/message/read.kh?msg_no=<%=messageVo.getMsg_no()%>"  --%>
+<!-- 			class="tw-flex tw-items-center notread" style="background-color: #C7E0F0; margin: 1px;"> -->
 <%-- 		<%}else{ %> --%>
-<%-- 		<a href="msgread.kh?msg_no=<%=msgList.get(i).getMsg_no()%>"  --%>
+<%-- 		<a href="<%=root %>/page/message/detail.jsp?msg_no=<%=messageVo.getMsg_no()%>"  --%>
 <!-- 			class="tw-flex tw-items-center" style="margin: 1px;"> -->
 <%-- 		<%}%> --%>
-<!-- 			<!-- 댓글 보낸 사람 목록 프로필 사진 --> -->
+			<!-- 댓글 보낸 사람 목록 프로필 사진 -->
+			
 <!-- 			<div class="app-avatar"> -->
-<!-- 				<img src="/wishFit/layouts/slow/assets/images/ic_profile_default.png" alt=""> -->
+<%-- 				<% if(messageVo.getProfile_no()==0){ %> --%>
+<!-- 				<img src="/wishFit/resources/image/profile-user.png" alt=""> -->
+<%-- 				<% }else{%> --%>
+<%-- 				<img src="/profile?mpNo=<%=messageVo.getProfile_no() %>" alt=""> --%>
+<%-- 				<% } %> --%>
 <!-- 			</div> -->
 		
 			<div class="tw-pl-2">
@@ -42,7 +47,7 @@
 			</div>
 		</a>
 	</li>
-	<%} %>
+<%-- 	<%} %> --%>
 </ul>
 <%-- <%} else{ %> --%>
 <div class="tw-text-center tw-mb-6 tw-px-4">

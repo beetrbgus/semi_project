@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <script src = "http://code.jquery.com/jquery-3.6.0.js"></script>
-<link rel = "stylesheet" type="text/css" href="<%=request.getContextPath() %>/page/css/widget.css">
-<script src = "<%=request.getContextPath() %>/page/js/widget.js"></script>
-<script src = "<%=request.getContextPath() %>/page/js/record.js"></script>
+<link rel = "stylesheet" type="text/css" href="../css/widget.css">
+<script src = "../css/widget.js"></script>
+<script src = "../css/record.js"></script>
+<link rel = "stylesheet" type="text/css" href="../css/commons.cs"> 
 <%
 	String root = request.getContextPath();
-	String now = request.getParameter("now");
 %> 
-<input type="hidden" id = "now" value = <%=now %>>
+
 <form class="record-form" action="my_record.jsp" method="get">
 	<input type="hidden" name="year">
 	<input type="hidden" name="month">

@@ -1,4 +1,5 @@
 <%-- <%@page import="wishFit.beans.message.MessageDao"%> --%>
+<%@page import="wishFit.beans.message.MessageDao"%>
 <%@page import="wishFit.beans.member.MemberProfileDto"%>
 <%@page import="wishFit.beans.member.MemberProfileDao"%>
 <%@page import="wishFit.beans.member.MemberDto"%>
