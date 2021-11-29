@@ -1,43 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<script src = "http://code.jquery.com/jquery-3.6.0.js"></script>
-<link rel = "stylesheet" type="text/css" href="../css/widget.css">
-<script src = "../css/widget.js"></script>
-<script src = "../css/record.js"></script>
-<link rel = "stylesheet" type="text/css" href="../css/commons.cs"> 
+
 <%
 	String root = request.getContextPath();
 %> 
+<script src = "http://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel = "stylesheet" type="text/css" href="<%=root %>/page/css/widget.css">
+<script src = "<%=root %>/page/js/widget.js"></script>
+<script src = "<%=root %>/page/js/record.js"></script>
+<link rel = "stylesheet" type="text/css" href="<%=root %>/page/css/commons.cs"> 
 
 <form class="record-form" action="my_record.jsp" method="get">
 	<input type="hidden" name="year">
 	<input type="hidden" name="month">
 </form>
+<script>
+	$(function(){
+		$(".app-sidebar-left__nav__child").hide();
+		
+		$(".app-sidebar-left__nav__item").click(function(){
+			$(this).next().slideToggle(300);
+			$(".app-sidebar-left__nav__item").not(this).next().slideUp(300);
+			return false;
+		});
+		$(".app-sidebar-left__nav__item").eq(0).trigger("click");		
+	});
+</script>
     
     
 <!-- 왼쪽 사이드 바 -->
-<script>
-$(document).ready(function(){
-	let now = $("#now").val();
-	if(now =="record"){
-		$(".app-card.app-sidebar-left__nav").f.each
-		$("#record").addClass("active open");	
-			
-		});
-	}else if(now =="commu"){
-		$(".app-card.app-sidebar-left__nav").findeach(function(index,item){
-			$(this).find("li").addClass("active open");	
-			});
-		});	
-	}
-	
-	$(".app-sidebar-left.app-custom-scroll > nav > ul > li").click(function(){
-		//$("li.active open").find("li").removeClass("active open");
-		/* $(this).removeClass("active open"); */
-	});
-	
-});
-</script>
+
 <div class="app-layout">
    <!--#Meta:layouts/slow/components/sidebar-left/sidebar-left.scss?$__Context->themeConfig->variables-->
    <aside id="app-sidebar-left" class="app-layout__sidebar-left">
@@ -53,7 +45,7 @@ $(document).ready(function(){
                   </div>
 
                </li>
-               <li id="record">
+               <li class="">
                   <div class="app-sidebar-left__nav__item">
                      <a href="<%=root %>/page/record/my_record.jsp?now=record"> <span>내 기록</span>
                      </a>
@@ -65,17 +57,14 @@ $(document).ready(function(){
                   </div>
 
                   <ul class="app-sidebar-left__nav__child">
-<%--                      <li><a href="<%=root %>/page/record/my_record.jsp?boardMiddleName=일자별">일자별</a></li> --%>
-<!--                       <li><button>일자별</button></li> -->
-<%--                      <li><a href="<%=root %>/page/record/my_record.jsp?boardMiddleName=소모임">소모임</a></li> --%>
-<%--                      <li><a href="<%=root %>/page/recordmy_record.jsp?boardMiddleName=식단">식단</a></li> --%>
-	                  	<li><button class="reset-record"><span>전체</span></button></li>
+                  	
+<!-- 	                  	<li><button class="reset-record"><span>전체</span></button></li> -->
 						<li><button class="daily-record"><span>일자별</span></button></li>
 						<li><button class="fitgroup-record"><span>소모임</span></button></li>
 						<li><button class="diet-record"><span>식단</span></button></li>
                   </ul>
                </li>
-               <li id="commu">
+               <li class="">
                   <div class="app-sidebar-left__nav__item">
                      <a href="<%=request.getContextPath() %>/page/community/list.jsp?now=commu"> <span>커뮤니티</span>
                      </a>
@@ -91,7 +80,7 @@ $(document).ready(function(){
 					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=추천글">추천글</a></li>
                   </ul>
                </li>
-               <li>
+               <li class="">
                   <div class="app-sidebar-left__nav__item">
                      <a href="<%=request.getContextPath() %>/page/fitgroup/list.jsp"> <span>소모임</span>
                      </a>
@@ -99,7 +88,7 @@ $(document).ready(function(){
                         class="app-sidebar-left__nav__more"> </ion-icon>
                   </div>
 					</li>
-					<li class="open">
+					<li class="">
 						<div class="app-sidebar-left__nav__item">
 							<a href="<%=request.getContextPath() %>/page/market/list.jsp"> <span>마켓</span>
 							</a>

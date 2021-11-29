@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.fitgroupimage.FitgroupImageDao;
 import wishFit.beans.fitgroupimage.FitgroupImageDto;
 
-@WebServlet(urlPatterns = "/page/fitgroup/download.kh")
+@WebServlet(urlPatterns = {"/page/fitgroup/download.kh","/fitgroup/download.kh"})
 public class FitFileDownloadServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

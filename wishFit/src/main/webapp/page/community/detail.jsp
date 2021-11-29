@@ -107,6 +107,7 @@ List<ReplyVo> replyList = replyDao.list(boardNo);
 	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.header.scssdedd.css?20210328011802" />
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.status-icon.scssdedd.css?20210328011802" />
+	<jsp:include page="/page/js/popup.jsp"></jsp:include>
 <style>
 :root { -
 	-aside-width: 17.625rem;
@@ -403,11 +404,19 @@ $(function(){
 </div>
 	
 	
-	
-		<jsp:include page="/template/footer.jsp"></jsp:include>
+<jsp:include page="/template/footer.jsp"></jsp:include>
 </main>
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>
+<div id="popup_menu_area" tabindex="0"
+	style="top: 400px; left: 550px; display: none;">
+	<ul>
+		<li class="dispCommunicationMessages"><a href="<%=root %>/page/message/send.jsp?msg_receiver=<%=boardImageVO.getBoardWriter()%>" target="_blank">쪽지
+				보내기</a></li>
+		<li class="dispCommunicationFriend"><a href="<%=root %>/page/member/insert.kh?friendId=<%=boardImageVO.getBoardWriter()%>" target="_blank">친구
+				등록</a></li>
+	</ul>
+</div>
 
 
 

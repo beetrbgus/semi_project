@@ -214,8 +214,7 @@ FitgroupDto fitgroupDto = fitgroupDao.detail(fgNo);
                            class="cke_1 cke cke_reset cke_chrome cke_editor_editor1 cke_ltr cke_browser_webkit"
                            dir="ltr" lang="ko" role="application"
                            aria-labelledby="cke_editor1_arialbl">
-                           <textarea name="fgIntro"  class="form-input fgMemo" rows="10" >  
-                            </textarea>
+                           <textarea name="fgIntro"  class="form-input fgMemo" rows="10"><%=fitgroupDto.getFgIntro()%></textarea>
                              <script>
         $(function(){
             $(".fgMemo").on("input", function(){

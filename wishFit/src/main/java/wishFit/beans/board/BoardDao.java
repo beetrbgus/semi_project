@@ -921,7 +921,90 @@ public class BoardDao {
 
     			return boardDto;
     		}
-    		
+    		//인덱스 구분 최신글(largeName 으로 구분)
+    		public List<BoardImageVO> listByLargeName(String boardLargeName) throws Exception{
+    			conn=JdbcUtils.connect();
+    			String sql = "select * from("
+    					+ "select rownum rn,TMP.* from("
+    					+ "select * from board B inner join image I on  B.board_no = I.board_no "
+    					+ "where B.board_large_name=? order by B.board_no desc)TMP) "
+    					+ "where rn between 1 and 9";
+//    			sql = sql.replace("#1", boardLargeName);
+    			PreparedStatement ps = conn.prepareStatement(sql);
+    			ps.setString(1, boardLargeName);
+    			
+    			ResultSet rs = ps.executeQuery();
+    			List<BoardImageVO> list=new ArrayList<>();;
+	    			while(rs.next()) {
+	    				BoardImageVO boardImageVO = new BoardImageVO();
+	    				
+	    				boardImageVO.setBoardNo(rs.getInt("board_no"));
+	    				boardImageVO.setImageNo(rs.getInt("image_no"));
+	    				boardImageVO.setBoardTitle(rs.getString("board_title"));
+	    				boardImageVO.setBoardWriter(rs.getString("board_title"));
+	    				boardImageVO.setBoardUpload(rs.getString("board_upload"));
+	    				
+	    				list.add(boardImageVO);
+	    			}
+    			conn.close();
+    			return list;
+    		}
+    		//인덱스 구분 최신글(largeName 으로 구분)기록용
+    		public List<BoardImageVO> listByLargeName(String boardLargeName,String boardWriter) throws Exception{
+    			conn=JdbcUtils.connect();
+    			String sql = "select * from("
+    					+ "select rownum rn,TMP.* from("
+    					+ "select * from board B inner join image I on  B.board_no = I.board_no "
+    					+ "where B.board_large_name=? and B.board_writer=? order by B.board_no desc)TMP) "
+    					+ "where rn between 1 and 9";
+//    			sql = sql.replace("#1", boardLargeName);
+    			PreparedStatement ps = conn.prepareStatement(sql);
+    			ps.setString(1, boardLargeName);
+    			ps.setString(2, boardWriter);
+    			
+    			ResultSet rs = ps.executeQuery();
+    			List<BoardImageVO> list=new ArrayList<>();;
+	    			while(rs.next()) {
+	    				BoardImageVO boardImageVO = new BoardImageVO();
+	    				
+	    				boardImageVO.setBoardNo(rs.getInt("board_no"));
+	    				boardImageVO.setImageNo(rs.getInt("image_no"));
+	    				boardImageVO.setBoardTitle(rs.getString("board_title"));
+	    				boardImageVO.setBoardWriter(rs.getString("board_title"));
+	    				boardImageVO.setBoardUpload(rs.getString("board_upload"));
+	    				
+	    				list.add(boardImageVO);
+	    			}
+    			conn.close();
+    			return list;
+    		}
+    		//인덱스 구분 최신글(largeName 으로 구분)
+    		public List<BoardDto> listByLargeName2(String boardLargeName) throws Exception{
+    			conn=JdbcUtils.connect();
+    			String sql = "select * from("
+    					+ "select rownum rn,TMP.* from("
+    					+ "select * from board where board_large_name=? order by board_no desc)TMP) "
+    					+ "where rn between 1 and 9";
+//    			sql = sql.replace("#1", boardLargeName);
+    			PreparedStatement ps = conn.prepareStatement(sql);
+    			ps.setString(1, boardLargeName);
+    			
+    			ResultSet rs = ps.executeQuery();
+    			List<BoardDto> list=new ArrayList<>();;
+	    			while(rs.next()) {
+	    				BoardDto boardDto = new BoardDto();
+	    				
+	    				boardDto.setBoardNo(rs.getInt("board_no"));
+	    				boardDto.setBoardTitle(rs.getString("board_title"));
+	    				boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
+	    				boardDto.setBoardWriter(rs.getString("board_title"));
+	    				boardDto.setBoardDate(rs.getString("board_date"));
+	    				
+	    				list.add(boardDto);
+	    			}
+    			conn.close();
+    			return list;
+    		}
     		
        
        

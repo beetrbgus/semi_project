@@ -219,6 +219,15 @@ String root = request.getContextPath();
       </div>
    </div>
 </main>
+<div id="popup_menu_area" tabindex="0"
+	style="top: 400px; left: 550px; display: none;">
+	<ul>
+		<li class="dispCommunicationMessages"><a href="#" target="_blank">쪽지
+				보내기</a></li>
+		<li class="dispCommunicationFriend"><a href="#" target="_blank">친구
+				등록</a></li>
+	</ul>
+</div>
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>
 

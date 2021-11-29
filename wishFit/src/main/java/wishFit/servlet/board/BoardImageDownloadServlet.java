@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.board.BoardImageVO;
 import wishFit.beans.image.ImageDao;
 
-@WebServlet(urlPatterns = {"/page/record/download.kh","/page/market/download.kh","/page/community/download.kh"})
+@WebServlet(urlPatterns = {"/page/record/download.kh","/page/market/download.kh","/page/community/download.kh","/board/download.kh"})
 public class BoardImageDownloadServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -105,16 +105,6 @@
 									value="<%=memberDto.getMemGender()%>"  disabled="disabled"
 									class="app-input app-input-expand">
 							</div></li>
-
-							<li>
-						        <label for="profile_image">프로필 사진</label>
-						        <div>
-						        <input type="hidden" name="attach" value="false">
-						        <input type="file" name="attach" id="profile_image" value="" accept="image/*"
-						         data-max-filesize="102400" data-max-filesize-error="파일이 너무 큽니다. 용량 제한은 %s입니다.">
-						         <p class="help-block">파일 용량 제한: 100.0KB, 가로 제한 길이: 50px, 세로 제한 길이: 50px</p>
-						         </div> 
-						     </li>
 					</ul>
 
 					<div class="tw-text-right tw-pt-6">

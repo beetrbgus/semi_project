@@ -347,9 +347,9 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(fitgroupDto.getFgId());
 <div id="popup_menu_area" tabindex="0"
 	style="top: 400px; left: 550px; display: none;">
 	<ul>
-		<li class="dispCommunicationMessages"><a href="#" target="_blank">쪽지
+		<li class="dispCommunicationMessages"><a href="<%=root %>/page/message/send.jsp?msg_receiver=<%=fitgroupDto.getFgId()%>" target="_blank">쪽지
 				보내기</a></li>
-		<li class="dispCommunicationFriend"><a href="#" target="_blank">친구
+		<li class="dispCommunicationFriend"><a href="<%=root %>/page/member/insert.kh?friendId=<%=fitgroupDto.getFgId()%>" target="_blank">친구
 				등록</a></li>
 	</ul>
 </div>

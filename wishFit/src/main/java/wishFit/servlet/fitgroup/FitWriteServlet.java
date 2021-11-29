@@ -2,6 +2,7 @@ package wishFit.servlet.fitgroup;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,12 +18,16 @@ import wishFit.beans.fitgroup.FitgroupDto;
 import wishFit.beans.fitgroupimage.FitgroupImageDao;
 import wishFit.beans.fitgroupimage.FitgroupImageDto;
 import wishFit.util.CommonSql;
+import wishFit.util.JdbcUtils;
 
 @WebServlet(urlPatterns = "/page/fitgroup/write.kh")
 public class FitWriteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			Connection conn = JdbcUtils.connect();
+			conn.setAutoCommit(false);
+			
 			//저장될 위치D:\wishfit
 			String savePath = "D:/upload/wishfit";
 			int maxSize = 10* 1024 * 1024; //10메가
@@ -51,12 +56,8 @@ public class FitWriteServlet extends HttpServlet {
 
 			//상세보기로 이동하기 위한 스퀸스 구하기
 			int fgNo = CommonSql.getSequence("fitgroup_seq"); // 시퀸스를 이용해서 번호로를 알아낸다
-			//int fgNo = fitgroupDao.getSequence();
 			fitgroupDto.setFgNo(fgNo);
 			fitgroupDao.write(fitgroupDto);
-			
-			//게시글 등록을 마친 뒤에 파일 정보를 db에 저장
-			
 			
 			//파일등록이 존재할 경우만
 			if(mRequest.getFile("fgImage")!= null) {
@@ -69,9 +70,13 @@ public class FitWriteServlet extends HttpServlet {
 				fitgroupImageDto.setFgImageSize(target.length()); //파일 크기
 				
 				FitgroupImageDao fitgroupImageDao = new FitgroupImageDao();
+				int fgImageNo = CommonSql.getSequence("fitgroupimage_seq"); 
+				fitgroupImageDto.setFgImageNo(fgImageNo);
+				
 				fitgroupImageDao.insert(fitgroupImageDto);
+				System.out.println("fitImageNo    :"+fitgroupImageDto.getFgImageNo());
 			}
-			
+			conn.commit();
 			resp.sendRedirect("detail.jsp?fgNo=" + fgNo);
 
 		} catch (Exception e) {

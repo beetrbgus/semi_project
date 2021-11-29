@@ -12,7 +12,7 @@ import wishFit.beans.board.BoardDao;
 import wishFit.beans.board.BoardImageVO;
 import wishFit.beans.image.ImageDao;
 
-@WebServlet(urlPatterns = "/page/record/record_delete.kh")
+//@WebServlet(urlPatterns = "/page/record/record_delete.kh")
 public class RecordDeleteServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
