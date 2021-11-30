@@ -13,9 +13,7 @@ int msgEnd = 7;
 List<MessageVo> msgList =  messageDao.notReadMsgList(uid,msgStart, msgEnd);
 System.out.println(msgList.size());
 boolean notNewMsg = msgList.isEmpty() || msgList.equals(null);
-
 %>
-
 <div class="app-dropdown-header tw-text-base tw-font-bold">쪽지</div>
 <% if(!notNewMsg) {%>
 <ul class="app-dropdown-menu-list">

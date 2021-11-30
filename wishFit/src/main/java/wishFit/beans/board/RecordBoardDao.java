@@ -18,7 +18,6 @@ public class RecordBoardDao {
 	private Connection conn;
 	private CommonSql getSeq;
 	
-	
 	//월별 조회 = 하루치 목록 조회 * 날짜수
 	public Map<String, List<BoardDto>> monthlyList(int year, int month,String boardWriter) throws Exception {
 		Calendar c = Calendar.getInstance();

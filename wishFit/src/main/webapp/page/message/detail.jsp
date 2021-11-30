@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 %>
- 
+ 
 <!-- 헤더 -->
 <jsp:include page="/template/header.jsp"></jsp:include>
 <%
@@ -42,7 +42,6 @@ if(msgNo !=0){
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 }
-
 .app-article-toolbar .app-board-container {
 	display: flex;
 	justify-content: flex-end;
@@ -72,13 +71,12 @@ if(msgNo !=0){
 		<section class="app-member">
 			<%-- 마이페이지 왼쪽것 --%>
 			<jsp:include page="/page/message/myPageLeftSide.jsp"></jsp:include>
-			
+
 			<div class="app-member-content">
 				<div class="app-member-card">
 					<div class="app-member-card-header">
 						<h1>쪽지 제목</h1>
 					</div>
-
 					<div class="app-member-card-body">
 						<div class="app-board-article-profile tw-flex tw-items-center">
 							<div class="app-profile-image app-avatar">
@@ -90,6 +88,7 @@ if(msgNo !=0){
 									alt="Profile">
 								<% } %>
 							</div>
+
 							<div class="tw-flex-1 app-profile-body">
 								<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_1118 author"
 									href="#popup_menu_area" onclick="return false"
@@ -103,7 +102,6 @@ if(msgNo !=0){
 						</div>
 						<div>
 							<!-- 닉네임 -->
-
 						</div>
 						<div class="tw-flex tw-items-center"></div>
 					</div>
@@ -112,7 +110,7 @@ if(msgNo !=0){
 						<textarea  readonly style="resize:none;"cols="80"> <%=messageVo.getMsgCon_text()%></textarea>
 					</div>
 					<%-- 메세지 답장 / 삭제 버튼 --%>
-					
+
 					<input type="hidden" id="msg_no" name="msg_no" value="<%=messageVo.getMsg_no()%>">
 					<div class="app-member-card-body tw-flex tw-items-center">
 						<input type="text" class="folder_name app-input tw-mr-2"
@@ -130,15 +128,15 @@ if(msgNo !=0){
 							location.href= "./send.jsp?receiver=<%=messageVo.getMsg_sender()%>" ; 
 						}
 					</script>
-					
+
 				</div>
 			</div>
-			
+
 		</section>
 	</div>
 	<jsp:include page="/template/footer.jsp"></jsp:include>
 </main>
- 
-<!-- 우측 사이드  -->
+ 
+<!-- 우측 사이드  -->
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>

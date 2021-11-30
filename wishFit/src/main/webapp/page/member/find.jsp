@@ -25,7 +25,7 @@ String root = request.getContextPath();
         <div class="app-member-card">
     <div class="app-member-card-header">
       <div>
-        <h1>아이디로 계정 찾기</h1>
+        <h1>아이디 찾기</h1>
         <p class="tw-text-gray-700">회원정보에 등록된 이름과 전화번호로 아이디/비밀번호를 알려드립니다. 아이디와 전화번호를 입력하고 "ID/PW 찾기" 버튼을 클릭해 주세요.<br></p>
       </div>
     </div>
@@ -48,7 +48,7 @@ String root = request.getContextPath();
     <div class="app-member-card">
     <div class="app-member-card-header">
       <div>
-        <h1>질문/답변으로 비밀번호 찾기</h1>
+        <h1>비밀번호 찾기</h1>
         <p class="tw-text-gray-700">회원 정보에 입력한 아이디와 질문/답변으로 비밀번호를 알 수 있습니다.</p>
       </div>
     </div>

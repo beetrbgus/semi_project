@@ -2,6 +2,7 @@
 <%@page import="wishFit.beans.member.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!-- 헤더 -->
 <jsp:include page="/template/header.jsp"></jsp:include>
 <%
@@ -34,7 +35,7 @@
 				</div>
 
 				<form id="fo_insert_member" action="edit.kh" method="post"
-					enctype="multipart/form-data" class="app-member-card-body">
+					class="app-member-card-body">
 					<input type="hidden" name="error_return_url"
 						value="/index.php?mid=index&amp;act=dispMemberModifyInfo">
 					<input type="hidden" name="mid" value="index">
@@ -50,52 +51,47 @@
 						<li><label for="user_name"> <em>*</em> <span>이름</span>
 						</label>
 							<div>
-								<input type="hidden" name="memName"
-									value="<%=memberDto.getMemName() %>"> 
+								<input type="hidden" name="memName" value="<%=memberDto.getMemName()%>"> 
 									<input type="text" name="memName" id="user_name"
-									value="<%=memberDto.getMemName() %>" disabled="disabled"
+									value="<%=memberDto.getMemName()%>" disabled="disabled"
 									class="app-input app-input-expand">
 							</div></li>
 
 						<li><label for="user_id"> <em>*</em> <span>아이디</span>
 						</label>
 							<div>
-								<input type="hidden" name="memName"
-									value="<%=memberDto.getMemId() %>"> 
-									<input type="text" name="memName" id="user_id" value="<%=memberDto.getMemId() %>"
+								<input type="hidden" name="memId" value="<%=memberDto.getMemId() %>"> 
+									<input type="text" name="memId" id="user_id" value="<%=memberDto.getMemId() %>"
 									disabled="disabled" class="app-input app-input-expand">
 							</div></li>
 
 						<li><label for="user_pw"> <em style="color: red">*</em>
 								비밀번호</label>
 							<div>
-								<input type="password" name="memPw" required="">
+								<input type="password" name="memPw" required>
 							</div></li>
 							
 						<li><label for="user_pw"><em style="color: red">*</em>
 								비밀번호 확인</label>
 							<div>
-								<input type="password" id="password2" required="">
+								<input type="password" id="password2" required>
 							</div></li>
 							
 						<li><label for="nick_name"><em style="color: red">*</em>
 								닉네임</label>
 							<div>
-								<input type="text" name="memNick" id="nick_name"
-									value="<%=memberDto.getMemNick()%>">
+								<input type="text" name="memNick" id="nick_name" value="<%=memberDto.getMemNick()%>">
 							</div></li>
 							
 						<li><label for="user_phone">전화번호</label>
 							<div>
-								<input type="text" name="memPhone" id="user_phone"
-									value="<%=memberDto.getMemPhone()%>">
+								<input type="text" name="memPhone" id="user_phone" value="<%=memberDto.getMemPhone()%>">
 							</div></li>
 							
 						<li><label for="user_grade"> <em>*</em>
 						 <span>등급</span>	</label>
 							<div>
-								<input type="hidden" name="memGrade"
-									value="<%=memberDto.getMemGrade() %>"> 
+								<input type="hidden" name="memGrade" value="<%=memberDto.getMemGrade() %>"> 
 									<input type="text" name="memGrade" id="user_grade"
 									value="<%=memberDto.getMemGrade() %>" disabled="disabled"
 									class="app-input app-input-expand">
@@ -104,8 +100,7 @@
 						<li><label for="user_gender"> <em>*</em> <span>성별</span>
 						</label>
 							<div>
-								<input type="hidden" name="memGender"
-									value="<%=memberDto.getMemGender() %>"> 
+								<input type="hidden" name="memGender" value="<%=memberDto.getMemGender() %>"> 
 									<input type="text" name="memGender" id="user_grade" 
 									value="<%=memberDto.getMemGender()%>"  disabled="disabled"
 									class="app-input app-input-expand">
@@ -118,13 +113,13 @@
 					</div>
 
 					<input type="hidden" name="_rx_csrf_token" value="dALfXx8EwiEO2GYj">
-				<%
-				if (request.getParameter("error") != null) {
-				%>
-				<h5>
-					<font color="red">올바른 정보 수정을 하십시오.</font>
-				</h5>
-				<%} %>
+					<%
+					if (request.getParameter("error") != null) {
+					%>
+					<h5>
+						<font color="red">올바른 정보 수정을 하십시오.</font>
+					</h5>
+					<%} %>
 				</form>
 			</div>
 		</section>

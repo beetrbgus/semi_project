@@ -1,9 +1,6 @@
 package wishFit.beans.message;
-
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 public class Msg_Pagenation {
 	//필수 데이터
 	private String uid;
@@ -28,7 +25,6 @@ public class Msg_Pagenation {
 		}
 		this.column = req.getParameter("column");
 		this.keyword = req.getParameter("keyword");
-
 	}
 	
 	//계산 메소드
@@ -56,7 +52,7 @@ public class Msg_Pagenation {
 		this.lastBlock = (this.count - 1) / this.pageSize + 1;
 		this.startBlock = (this.p - 1) / this.blockSize * this.blockSize + 1;
 		this.finishBlock = this.startBlock + (this.blockSize - 1);
-		
+
 		//list 계산
 		if(this.isSearch()) {
 			System.out.println("isSearch 들어옴");
@@ -65,7 +61,7 @@ public class Msg_Pagenation {
 			if(column.equals("sender")|| column.equals("receiver")) {
 				System.out.println("sender  들어옴 ");
 				this.list = msgDao.receiveMessage(uid, column, keyword, begin, end);
-				
+
 			}else {
 				this.list = msgDao.notReadMsgList(uid, begin, end);				
 			}
@@ -73,18 +69,15 @@ public class Msg_Pagenation {
 		}else {
 			this.list = msgDao.allMsgList(uid, this.begin, this.end);
 		}
-
 	}
 	
 	
 	public String getUid() {
 		return uid;
 	}
-
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-
 	public int getPage() {
 		return p;
 	}
@@ -161,7 +154,6 @@ public class Msg_Pagenation {
 				+ pageSize + ", blockSize=" + blockSize + ", begin=" + begin + ", end=" + end + ", startBlock="
 				+ startBlock + ", finishBlock=" + finishBlock + ", lastBlock=" + lastBlock + "]";
 	}
-
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}

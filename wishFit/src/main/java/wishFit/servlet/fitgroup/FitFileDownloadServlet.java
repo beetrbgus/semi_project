@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import wishFit.beans.firgroupimage.FitgroupImageDao;
 import wishFit.beans.firgroupimage.FitgroupImageDto;
 
@@ -32,6 +33,27 @@ public class FitFileDownloadServlet extends HttpServlet {
 			// 파일 설정
 			// 2. 파일 정보 설정
 			File dir = new File("D:\\upload\\wishfit");
+=======
+import wishFit.beans.fitgroupimage.FitgroupImageDao;
+import wishFit.beans.fitgroupimage.FitgroupImageDto;
+
+@WebServlet(urlPatterns = {"/page/fitgroup/download.kh","/fitgroup/download.kh"})
+public class FitFileDownloadServlet extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			req.setCharacterEncoding("UTF-8");
+			// 다시해야함
+			// 소모임 이미지 번호(기본키) 를 받아온다
+			int fgImageNo =Integer.parseInt(req.getParameter("fgImageNo"));
+			
+			// 단일조회
+			FitgroupImageDao fitgroupImageDao = new FitgroupImageDao();
+			FitgroupImageDto fitgroupImageDto = fitgroupImageDao.get(fgImageNo);
+			// 파일 설정
+			// 2. 파일 정보 설정
+			File dir = new File("D:/upload/wishfit");
+>>>>>>> refs/remotes/origin/master
 			File target = new File(dir, fitgroupImageDto.getFgImageSave());
 			InputStream in = new FileInputStream(target);
 			byte[] buffer = new byte[8192];

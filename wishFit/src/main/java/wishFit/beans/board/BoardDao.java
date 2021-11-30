@@ -10,7 +10,24 @@ import wishFit.util.JdbcUtils;
 
 public class BoardDao {
 	private Connection conn;
-
+	//C U D ;//저거를 조인으로 쓴다라
+	//boardNo에 넣을 시퀀스 미리 뽑아서 넣기
+	public int boardSeq() throws Exception{
+		conn = JdbcUtils.connect();
+	
+		String sql = "select board_seq.nextval from dual";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery(sql);
+		
+		
+		rs.next();
+		//다음 시퀀스 번호를 seq에 저장
+		int seq = rs.getInt("nextval");
+		
+		conn.close();
+		
+		return seq;
+	}
 	//게시글 등록 처리 / 기록용
 	public void recordWrite(BoardDto boardDto) throws Exception{
 				
@@ -151,7 +168,7 @@ public class BoardDao {
 		
 	}
 	//최신글목록 보기 기능 다오
-	public List<BoardDto> list () throws Exception{
+	public List<BoardDto> mainList () throws Exception{
 		conn=JdbcUtils.connect();
 		String sql = "select * from"
 				+ "(select rownum rn, TMP.* from"
@@ -214,20 +231,6 @@ public class BoardDao {
 	// 페이징이 가능한 목록(전체 + 조회 종류별로)
 	// 페이징에서 마지막 블록을 구하기위하여 게시글 개수를 구하는 기능(전체/검색조회별로)
 
-	// 조회수 증가 기능
-	public boolean readUpSelf(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect();
-
-		String sql = "update board set board_read = board_read + 1 where board_no = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, boardNo);
-		int result = ps.executeUpdate();
-
-		con.close();
-
-		return result > 0;
-	}
-
 	// 자기 작성글 제외 조회수 증가 기능
 	public boolean readUp(int boardNo, String memId) throws Exception {
 		Connection con = JdbcUtils.connect();
@@ -242,26 +245,25 @@ public class BoardDao {
 
 		return result > 0;
 	}
+	//댓글 개수 갱신 기능
+			public boolean refreshReplyCount(int boardNo) throws Exception{
+				Connection con = JdbcUtils.connect();
 
-	// 댓글 수 갱신 기능
-	public boolean replyCount(int boardNo) throws Exception {
-		Connection con = JdbcUtils.connect();
-
-		String sql = "update board "
-				+ "set board_reply = (select (*) count from reply where board_no = ?) where board_no = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, boardNo);
-		ps.setInt(2, boardNo);
-
-		int result = ps.executeUpdate();
-
-		con.close();
-
-		return result > 0;
-	}
-
+				String sql = "update board "
+									+ "set board_reply=(select count(*) from reply where board_no=?) "
+									+ "where board_no=?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, boardNo);
+				ps.setInt(2, boardNo);
+				int result = ps.executeUpdate();
+				
+				con.close();
+				
+				return result > 0;
+			}
+			
 	// 페이징이 가능한 목록(전체 + 조회 종류별로)
-	public List<BoardDto> listByRownum(int begin, int end) throws Exception {
+	public List<BoardImageVO> listByRownum(int begin, int end) throws Exception {
 		Connection con = JdbcUtils.connect();
 
 		String sql = "select * from (" + "select rownum rn, TMP.* from (" + "select * from board order by board_no desc"
@@ -272,31 +274,32 @@ public class BoardDao {
 
 		ResultSet rs = ps.executeQuery();
 
-		List<BoardDto> list = new ArrayList<>();
+		List<BoardImageVO> list = new ArrayList<>();
 		while (rs.next()) {
-			BoardDto boardDto = new BoardDto();
+			BoardImageVO boardImageVO = new BoardImageVO();
 
-			boardDto.setBoardNo(rs.getInt("board_no"));
-			boardDto.setBoardLargeName(rs.getString("board_large_name"));
-			boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
-			boardDto.setBoardWriter(rs.getString("board_writer"));
-			boardDto.setBoardTitle(rs.getString("board_title"));
-			boardDto.setBoardPost(rs.getString("board_post"));
-			boardDto.setBoardDate(rs.getString("board_date"));
-			boardDto.setBoardReply(rs.getInt("board_reply"));
-			boardDto.setBoardRead(rs.getInt("board_read"));
-			boardDto.setBoardLike(rs.getInt("board_like"));
-			boardDto.setBoardHate(rs.getInt("board_hate"));
+			boardImageVO.setBoardNo(rs.getInt("board_no"));
+			boardImageVO.setBoardLargeName(rs.getString("board_large_name"));
+			boardImageVO.setBoardMiddleName(rs.getString("board_middle_name"));
+			boardImageVO.setBoardWriter(rs.getString("board_writer"));
+			boardImageVO.setBoardTitle(rs.getString("board_title"));
+			boardImageVO.setBoardPost(rs.getString("board_post"));
+			boardImageVO.setBoardDate(rs.getString("board_date"));
+			boardImageVO.setBoardReply(rs.getInt("board_reply"));
+			boardImageVO.setBoardRead(rs.getInt("board_read"));
+			boardImageVO.setBoardLike(rs.getInt("board_like"));
+			boardImageVO.setBoardHate(rs.getInt("board_hate"));
 
-			list.add(boardDto);
+			list.add(boardImageVO);
 		}
 		con.close();
 
 		return list;
 	}
+	
 
 	// 페이징에서 마지막 블록을 구하기위하여 게시글 개수를 구하는 기능(전체/검색조회별로)
-	public int count() throws Exception {
+	public int count2() throws Exception {
 		Connection con = JdbcUtils.connect();
 
 		String sql = "select * count(*) from board";
@@ -313,7 +316,7 @@ public class BoardDao {
 		return count;
 	}
 
-	public int count(String column, String keyword) throws Exception {
+	public int count2(String column, String keyword) throws Exception {
 		Connection con = JdbcUtils.connect();
 
 		String sql = "select count(*) from board where instr(#1, ?) > 0";
@@ -360,4 +363,653 @@ public class BoardDao {
 
 		return list;
 	}
+    // 게시글 조회(전체 조회)/large_name만 분류
+    public List<BoardDto> listByRecord() throws Exception {
+       Connection con = JdbcUtils.connect();
+       String sql = "select * from board where board_large_name='기록' order by board_no desc";
+       PreparedStatement ps = con.prepareStatement(sql);
+       ResultSet rs = ps.executeQuery();
+       List<BoardDto> list = new ArrayList<>();
+       while (rs.next()) {
+          BoardDto boardDto = new BoardDto();
+          boardDto.setBoardNo(rs.getInt("board_no"));
+          boardDto.setBoardTitle(rs.getString("board_title"));
+          boardDto.setBoardPost(rs.getString("board_post"));
+          boardDto.setBoardDate(rs.getString("board_date"));
+          boardDto.setBoardWriter(rs.getString("board_writer"));
+          boardDto.setBoardRead(rs.getInt("board_read"));
+          boardDto.setBoardReply(rs.getInt("board_reply"));
+//       boardDto.setBoardLargeName(rs.getString("board_large_name"));
+          boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
+
+          list.add(boardDto);
+       }
+       con.close();
+       return list;
+
+    }
+
+
+//페이징 검색
+ public List<BoardImageVO> searchByRownum(String column, String keyword, int begin, int end) throws Exception {
+    conn = JdbcUtils.connect();
+
+    String sql = "select * from ("
+                      + "select rownum rn, TMP.* from ("
+                         + "select * from (select * from board where instr(#1, ?) > 0) B left outer join Image I on B.board_no = I.board_no order by B.board_no desc"
+                      + ")TMP"
+                + ") where rn between ? and ?";
+    sql = sql.replace("#1", column);
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, keyword);
+    ps.setInt(2, begin);
+    ps.setInt(3, end);
+    ResultSet rs = ps.executeQuery();
+    
+    List<BoardImageVO> list = new ArrayList<>();
+       
+       while(rs.next()) {
+          BoardImageVO boardImageVo = new BoardImageVO();
+          
+          boardImageVo.setBoardNo(rs.getInt("board_no"));
+          boardImageVo.setImageNo(rs.getInt("image_no"));
+          boardImageVo.setBoardLargeName(rs.getString("board_large_name"));
+          boardImageVo.setBoardMiddleName(rs.getString("board_middle_name"));
+          boardImageVo.setBoardTitle(rs.getString("board_title"));
+          boardImageVo.setBoardWriter(rs.getString("board_writer"));
+          boardImageVo.setBoardDate(rs.getString("board_date"));
+          boardImageVo.setBoardRead(rs.getInt("board_read"));
+          boardImageVo.setBoardLike(rs.getInt("board_like"));
+          boardImageVo.setBoardHate(rs.getInt("board_hate"));
+          
+          list.add(boardImageVo);
+    }
+    
+    conn.close();
+    
+    return list;
+ }
+ 
+ // 전체글 카운트
+ public int count() throws Exception {
+    conn = JdbcUtils.connect();
+    
+    String sql = "select count(*) from Board B left outer join image I on B.Board_no = I.image_no";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ResultSet rs = ps.executeQuery();
+    
+    rs.next();
+    
+    int count = rs.getInt(1);
+    
+    conn.close();
+    
+    return count;
+ }
+ // 전체글에서 검색글 수
+ public int count(String column, String keyword) throws Exception {
+    conn = JdbcUtils.connect();
+    
+    String sql = "select count(*) from (select * from board where instr(?, ?) > 0) B left outer join Image I on B.board_no = I.board_no";
+
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, column);
+    ps.setString(2, keyword);
+    ResultSet rs = ps.executeQuery();
+    
+    rs.next();
+    
+    int count = rs.getInt(1);
+    
+    conn.close();
+
+    return count;
+ }
+ // 대분류
+ public int largeCount(String boardLargeName) throws Exception {
+    conn = JdbcUtils.connect();
+    
+    String sql = "select count(*) from ("
+          + "select * from board where board_large_name = ?"
+          + ") B left outer join Image I on B.board_no = I.board_no";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, boardLargeName);
+    ResultSet rs = ps.executeQuery();
+    
+    rs.next();
+    
+    int largeCount = rs.getInt(1);
+    
+    conn.close();
+    
+    return largeCount;
+ }
+ // 대분류 검색
+ public int largeSearchCount(String boardLargeName, String column, String keyword) throws Exception {
+    conn = JdbcUtils.connect();
+    
+    String sql = "select count(*) from ("
+          + "select * from board where board_large_name = ? and instr(?, ?) > 0"
+          + ") B left outer join Image I on B.board_no = I.board_no";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, boardLargeName);
+    ps.setString(2, column);
+    ps.setString(3, keyword);
+    ResultSet rs = ps.executeQuery();
+    
+    rs.next();
+    
+    int largeSearchCount = rs.getInt(1);
+    
+    conn.close();
+    
+    return largeSearchCount;
+ }
+ 
+ 
+ // 중분류까지만 계산
+ public int middleCount(String boardLargeName, String boardMiddleName) throws Exception {
+    conn = JdbcUtils.connect();
+    
+    String sql = "select count(*) from (select * from board where board_large_name = ? and board_middle_name = ?) B left outer join Image I on B.board_no = I.board_no";
+
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, boardLargeName);
+    ps.setString(2, boardMiddleName);
+    ResultSet rs = ps.executeQuery();
+    
+    rs.next();
+    
+    int middleCount = rs.getInt(1);
+    
+    conn.close();
+    
+    return middleCount;
+    
+ }
+ 
+ public int likeCount(String boardLargeName, String boardMiddleName) throws Exception {
+    conn = JdbcUtils.connect();
+    
+    String sql = "select count(*) from (select * from board where board_large_name = ? and board_middle_name = '추천글') B left outer join Image I on B.board_no = I.board_no";
+
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, boardLargeName);
+    ResultSet rs = ps.executeQuery();
+    
+    rs.next();
+    
+    int likeCount = rs.getInt(1);
+    
+    conn.close();
+    
+    return likeCount;
+    
+ }
+ 
+ 
+ //완전검색
+ public int count(String boardLargeName, String boardMiddleName, String column, String keyword)throws Exception {
+    conn = JdbcUtils.connect();
+    
+    String sql = "select count(*) from ("
+          + "select * from board where board_large_name = ? and board_middle_name = ? and instr(?, ?) > 0"
+          + ") B left outer join Image I on B.board_no = I.board_no";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, boardLargeName);
+    ps.setString(2, boardMiddleName);
+    ps.setString(3, column);
+    ps.setString(4, keyword);
+    
+    ResultSet rs = ps.executeQuery();
+    
+    rs.next();
+    
+    int count = rs.getInt(1);
+    
+    conn.close();
+    
+    return count;
+ }
+ 
+ 
+ 
+ 
+ 
+ // 페이징 재작성 
+ 
+ // 대분류만 설정된 각 게시판리스트
+ public List<BoardImageVO> largeList(String boardLargeName, int begin, int end) throws Exception {
+    conn = JdbcUtils.connect();
+    
+    String sql = "select * from ("
+          + "select rownum rn, TMP.* from ("
+          + "select * from (select * from board where board_large_name = ?) B left outer join Image I on B.board_no = I.board_no order by B.board_no desc"
+          + ")TMP"
+          + ") where rn between ? and ?";
+
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, boardLargeName);
+    ps.setInt(2, begin);
+    ps.setInt(3, end);
+    
+    ResultSet rs = ps.executeQuery();
+    
+    List<BoardImageVO> list = new ArrayList<>();
+    while(rs.next()) {
+       BoardImageVO boardImageVo = new BoardImageVO();
+       
+       boardImageVo.setBoardNo(rs.getInt("board_no"));
+          boardImageVo.setImageNo(rs.getInt("image_no"));
+          boardImageVo.setBoardLargeName(rs.getString("board_large_name"));
+          boardImageVo.setBoardMiddleName(rs.getString("board_middle_name"));
+          boardImageVo.setBoardTitle(rs.getString("board_title"));
+          boardImageVo.setBoardWriter(rs.getString("board_writer"));
+          boardImageVo.setBoardDate(rs.getString("board_date"));
+          boardImageVo.setBoardRead(rs.getInt("board_read"));
+          boardImageVo.setBoardLike(rs.getInt("board_like"));
+          boardImageVo.setBoardHate(rs.getInt("board_hate"));
+          
+          list.add(boardImageVo);
+    }
+    
+    conn.close();
+    
+    return list;
+    
+ }
+ 
+       // 대분류 + 검색
+       public List<BoardImageVO> largeSearchList(String boardLargeName, String column, String keyword,  int begin, int end) throws Exception {
+          conn = JdbcUtils.connect();
+          
+          String sql = "select * from ("
+                + "select rownum rn, TMP.* from ("
+                + "select * from (select * from board where board_large_name = ? and instr(#1, ?) > 0) B left outer join Image I on B.board_no = I.board_no order by B.board_no desc"
+                + ")TMP"
+                + ") where rn between ? and ?";
+          sql = sql.replace("#1", column);
+          PreparedStatement ps = conn.prepareStatement(sql);
+          ps.setString(1, boardLargeName);
+          ps.setString(2, keyword);
+          ps.setInt(3, begin);
+          ps.setInt(4, end);
+          
+          ResultSet rs = ps.executeQuery();
+          
+          List<BoardImageVO> list = new ArrayList<>();
+          while(rs.next()) {
+             BoardImageVO boardImageVo = new BoardImageVO();
+             
+             boardImageVo.setBoardNo(rs.getInt("board_no"));
+                boardImageVo.setImageNo(rs.getInt("image_no"));
+                boardImageVo.setBoardLargeName(rs.getString("board_large_name"));
+                boardImageVo.setBoardMiddleName(rs.getString("board_middle_name"));
+                boardImageVo.setBoardTitle(rs.getString("board_title"));
+                boardImageVo.setBoardWriter(rs.getString("board_writer"));
+                boardImageVo.setBoardDate(rs.getString("board_date"));
+                boardImageVo.setBoardRead(rs.getInt("board_read"));
+                boardImageVo.setBoardLike(rs.getInt("board_like"));
+                boardImageVo.setBoardHate(rs.getInt("board_hate"));
+                
+                list.add(boardImageVo);
+          }
+          
+          conn.close();
+          
+          return list;
+          
+       }
+ 
+ 
+ // 대분류,중분류 선택하고 검색까지 한 경우
+ public List<BoardImageVO> searchList(String boardLargeName, String boardMiddleName, String column, String keyword, int begin, int end) throws Exception {
+    conn = JdbcUtils.connect();
+    
+    String sql = "select * from (select rownum rn, TMP.* from (select * from (select * from board where board_large_name = ? and board_middle_name = ? and instr(#1, ?) > 0) B left outer join Image I on B.board_no = I.board_no order by B.board_no desc)TMP) where rn between ? and ?";
+    sql = sql.replace("#1", column);
+    
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, boardLargeName);
+    ps.setString(2, boardMiddleName);
+    ps.setString(3, keyword);
+    ps.setInt(4, begin);
+    ps.setInt(5, end);
+    
+    ResultSet rs = ps.executeQuery();
+    
+    List<BoardImageVO> list = new ArrayList<>();
+    while(rs.next()) {
+       BoardImageVO boardImageVo = new BoardImageVO();
+       
+       boardImageVo.setBoardNo(rs.getInt("board_no"));
+          boardImageVo.setImageNo(rs.getInt("image_no"));
+          boardImageVo.setBoardLargeName(rs.getString("board_large_name"));
+          boardImageVo.setBoardMiddleName(rs.getString("board_middle_name"));
+          boardImageVo.setBoardTitle(rs.getString("board_title"));
+          boardImageVo.setBoardWriter(rs.getString("board_writer"));
+          boardImageVo.setBoardDate(rs.getString("board_date"));
+          boardImageVo.setBoardRead(rs.getInt("board_read"));
+          boardImageVo.setBoardLike(rs.getInt("board_like"));
+          boardImageVo.setBoardHate(rs.getInt("board_hate"));
+          
+          list.add(boardImageVo);
+    }
+    
+    conn.close();
+    
+    return list;
+    
+ }
+       // 중분류
+       public List<BoardImageVO> middleList(String boardLargeName, String boardMiddleName,  int begin, int end) throws Exception {
+          conn = JdbcUtils.connect();
+          
+          String sql = "select * from ("
+                + "select rownum rn, TMP.* from ("
+                + "select * from (select * from board where board_large_name = ? and board_middle_name = ?) B left outer join Image I on B.board_no = I.board_no order by B.board_no desc"
+                + ")TMP"
+                + ") where rn between ? and ?";
+          PreparedStatement ps = conn.prepareStatement(sql);
+          ps.setString(1, boardLargeName);
+          ps.setString(2, boardMiddleName);
+          ps.setInt(3, begin);
+          ps.setInt(4, end);
+          
+          ResultSet rs = ps.executeQuery();
+          
+          List<BoardImageVO> list = new ArrayList<>();
+          while(rs.next()) {
+             BoardImageVO boardImageVo = new BoardImageVO();
+             
+             boardImageVo.setBoardNo(rs.getInt("board_no"));
+                boardImageVo.setImageNo(rs.getInt("image_no"));
+                boardImageVo.setBoardLargeName(rs.getString("board_large_name"));
+                boardImageVo.setBoardMiddleName(rs.getString("board_middle_name"));
+                boardImageVo.setBoardTitle(rs.getString("board_title"));
+                boardImageVo.setBoardWriter(rs.getString("board_writer"));
+                boardImageVo.setBoardDate(rs.getString("board_date"));
+                boardImageVo.setBoardRead(rs.getInt("board_read"));
+                boardImageVo.setBoardLike(rs.getInt("board_like"));
+                boardImageVo.setBoardHate(rs.getInt("board_hate"));
+                
+                list.add(boardImageVo);
+          }
+          
+          conn.close();
+          
+          return list;
+          
+       }
+ 
+       
+       // 추천순
+       public List<BoardImageVO> likeList(String boardLargeName,  int begin, int end) throws Exception {
+          conn = JdbcUtils.connect();
+       
+          String sql = "select * from ("
+                + "select rownum rn, TMP.* from ("
+                + "select * from (select * from board where board_large_name = ? and board_middle_name = '추천글') B left outer join Image I on B.board_no = I.board_no order by B.board_like desc"
+                + ")TMP"
+                + ") where rn between ? and ?";
+          PreparedStatement ps = conn.prepareStatement(sql);
+          ps.setString(1, boardLargeName);
+          ps.setInt(2, begin);
+          ps.setInt(3, end);
+          
+          ResultSet rs = ps.executeQuery();
+          
+          List<BoardImageVO> list = new ArrayList<>();
+          while(rs.next()) {
+             BoardImageVO boardImageVo = new BoardImageVO();
+             
+             boardImageVo.setBoardNo(rs.getInt("board_no"));
+                boardImageVo.setImageNo(rs.getInt("image_no"));
+                boardImageVo.setBoardLargeName(rs.getString("board_large_name"));
+                boardImageVo.setBoardMiddleName(rs.getString("board_middle_name"));
+                boardImageVo.setBoardTitle(rs.getString("board_title"));
+                boardImageVo.setBoardWriter(rs.getString("board_writer"));
+                boardImageVo.setBoardDate(rs.getString("board_date"));
+                boardImageVo.setBoardRead(rs.getInt("board_read"));
+                boardImageVo.setBoardLike(rs.getInt("board_like"));
+                boardImageVo.setBoardHate(rs.getInt("board_hate"));
+                
+                list.add(boardImageVo);
+          }
+          
+          conn.close();
+          
+          return list;
+          
+       }   
+       
+       // 전체글 검색 (마켓 커뮤 등등)
+       public List<BoardImageVO> totalSearchList(String column, String keyword,  int begin, int end) throws Exception {
+          conn = JdbcUtils.connect();
+          
+          String sql = "select * from ("
+                + "select rownum rn, TMP.* from ("
+                + "select * from (select * from board where instr(#1, ?) > 0) B left outer join Image I on B.board_no = I.board_no order by B.board_no desc"
+                + ")TMP"
+                + ") where rn between ? and ?";
+          sql = sql.replace("#1", column);
+          PreparedStatement ps = conn.prepareStatement(sql);
+          ps.setString(1, keyword);
+          ps.setInt(2, begin);
+          ps.setInt(3, end);
+          
+          ResultSet rs = ps.executeQuery();
+          
+          List<BoardImageVO> list = new ArrayList<>();
+          while(rs.next()) {
+             BoardImageVO boardImageVo = new BoardImageVO();
+             
+             boardImageVo.setBoardNo(rs.getInt("board_no"));
+                boardImageVo.setImageNo(rs.getInt("image_no"));
+                boardImageVo.setBoardLargeName(rs.getString("board_large_name"));
+                boardImageVo.setBoardMiddleName(rs.getString("board_middle_name"));
+                boardImageVo.setBoardTitle(rs.getString("board_title"));
+                boardImageVo.setBoardWriter(rs.getString("board_writer"));
+                boardImageVo.setBoardDate(rs.getString("board_date"));
+                boardImageVo.setBoardRead(rs.getInt("board_read"));
+                boardImageVo.setBoardLike(rs.getInt("board_like"));
+                boardImageVo.setBoardHate(rs.getInt("board_hate"));
+                
+                list.add(boardImageVo);
+          }
+          
+          conn.close();
+          
+          return list;
+          
+       }
+     //게시글중 중분류만 조회
+     		public List<BoardDto> list2(String boardMiddleName) throws Exception {
+     			Connection con = JdbcUtils.connect();
+     			//System.out.println(boardMiddleName);
+     			String sql = "select * from board where board_middle_name=? order by board_no desc";// 최신순
+     			PreparedStatement ps = con.prepareStatement(sql);
+     			ps.setString(1, boardMiddleName);
+     			ResultSet rs = ps.executeQuery();
+
+     			List<BoardDto> list = new ArrayList<>();
+     			while (rs.next()) {
+     				BoardDto boardDto = new BoardDto();
+
+     				boardDto.setBoardNo(rs.getInt("board_no"));
+     				boardDto.setBoardWriter(rs.getString("board_writer"));
+     				boardDto.setBoardTitle(rs.getString("board_title"));
+     				boardDto.setBoardRead(rs.getInt("board_read"));
+     				boardDto.setBoardReply(rs.getInt("board_reply"));
+     				boardDto.setBoardDate(rs.getString("board_date"));
+
+     				list.add(boardDto);
+     				
+     				//System.out.println(boardDto.getBoardTitle());
+     			}
+
+     			con.close();
+
+     			return list;
+     		}
+     	// 목록 조회//전체 목록 조회
+     	   
+    		public List<BoardDto> list(String boardLargeName) throws Exception {
+    			Connection con = JdbcUtils.connect();
+
+    			String sql = "select * from board where board_large_name=? order by board_no desc";// 최신순
+    			PreparedStatement ps = con.prepareStatement(sql);
+    			ps.setString(1, boardLargeName);
+    			ResultSet rs = ps.executeQuery();
+
+    			List<BoardDto> list = new ArrayList<>();
+    			while (rs.next()) {
+    				BoardDto boardDto = new BoardDto();
+
+    				boardDto.setBoardNo(rs.getInt("board_no"));
+    				boardDto.setBoardLargeName(rs.getString("board_large_name"));
+    				boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
+    				boardDto.setBoardWriter(rs.getString("board_writer"));
+    				boardDto.setBoardTitle(rs.getString("board_title"));
+    				boardDto.setBoardPost(rs.getString("board_post"));
+    				boardDto.setBoardRead(rs.getInt("board_read"));
+    				boardDto.setBoardReply(rs.getInt("board_reply"));
+    				boardDto.setBoardDate(rs.getString("board_date"));
+    				boardDto.setBoardLike(rs.getInt("board_like"));
+    				boardDto.setBoardHate(rs.getInt("board_hate"));
+
+    				list.add(boardDto);
+    				//System.out.println(boardDto.getBoardTitle());
+    			}
+
+    			con.close();
+
+    			return list;
+    		}
+    		// 상세보기 기능
+    		public BoardDto get(int boardNo) throws Exception {
+    			Connection con = JdbcUtils.connect();
+
+
+    			String sql = "select * from board where board_no = ?";
+    			PreparedStatement ps = con.prepareStatement(sql);
+    			ps.setInt(1, boardNo);
+    			ResultSet rs = ps.executeQuery();
+
+    			BoardDto boardDto;
+    			if (rs.next()) {
+    				boardDto = new BoardDto();
+
+    				boardDto.setBoardNo(rs.getInt("board_no"));
+    				boardDto.setBoardLargeName(rs.getString("board_large_name"));
+    				boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
+    				boardDto.setBoardWriter(rs.getString("board_writer"));
+    				boardDto.setBoardDate(rs.getString("board_date"));
+    				boardDto.setBoardTitle(rs.getString("board_title"));
+    				boardDto.setBoardPost(rs.getString("board_Post"));
+    				boardDto.setBoardRead(rs.getInt("board_read"));
+    				boardDto.setBoardReply(rs.getInt("board_reply"));
+    				boardDto.setBoardLike(rs.getInt("board_like"));
+    				boardDto.setBoardHate(rs.getInt("board_hate"));
+    				
+
+    			} else {
+    				boardDto = null;
+    			}
+
+    			con.close();
+
+    			return boardDto;
+    		}
+    		//인덱스 구분 최신글(largeName 으로 구분)
+    		public List<BoardImageVO> listByLargeName(String boardLargeName) throws Exception{
+    			conn=JdbcUtils.connect();
+    			String sql = "select * from("
+    					+ "select rownum rn,TMP.* from("
+    					+ "select * from board B inner join image I on  B.board_no = I.board_no "
+    					+ "where B.board_large_name=? order by B.board_no desc)TMP) "
+    					+ "where rn between 1 and 9";
+//    			sql = sql.replace("#1", boardLargeName);
+    			PreparedStatement ps = conn.prepareStatement(sql);
+    			ps.setString(1, boardLargeName);
+    			
+    			ResultSet rs = ps.executeQuery();
+    			List<BoardImageVO> list=new ArrayList<>();;
+	    			while(rs.next()) {
+	    				BoardImageVO boardImageVO = new BoardImageVO();
+	    				
+	    				boardImageVO.setBoardNo(rs.getInt("board_no"));
+	    				boardImageVO.setImageNo(rs.getInt("image_no"));
+	    				boardImageVO.setBoardTitle(rs.getString("board_title"));
+	    				boardImageVO.setBoardWriter(rs.getString("board_title"));
+	    				boardImageVO.setBoardUpload(rs.getString("board_upload"));
+	    				
+	    				list.add(boardImageVO);
+	    			}
+    			conn.close();
+    			return list;
+    		}
+    		//인덱스 구분 최신글(largeName 으로 구분)기록용
+    		public List<BoardImageVO> listByLargeName(String boardLargeName,String boardWriter) throws Exception{
+    			conn=JdbcUtils.connect();
+    			String sql = "select * from("
+    					+ "select rownum rn,TMP.* from("
+    					+ "select * from board B inner join image I on  B.board_no = I.board_no "
+    					+ "where B.board_large_name=? and B.board_writer=? order by B.board_no desc)TMP) "
+    					+ "where rn between 1 and 9";
+//    			sql = sql.replace("#1", boardLargeName);
+    			PreparedStatement ps = conn.prepareStatement(sql);
+    			ps.setString(1, boardLargeName);
+    			ps.setString(2, boardWriter);
+    			
+    			ResultSet rs = ps.executeQuery();
+    			List<BoardImageVO> list=new ArrayList<>();;
+	    			while(rs.next()) {
+	    				BoardImageVO boardImageVO = new BoardImageVO();
+	    				
+	    				boardImageVO.setBoardNo(rs.getInt("board_no"));
+	    				boardImageVO.setImageNo(rs.getInt("image_no"));
+	    				boardImageVO.setBoardTitle(rs.getString("board_title"));
+	    				boardImageVO.setBoardWriter(rs.getString("board_title"));
+	    				boardImageVO.setBoardUpload(rs.getString("board_upload"));
+	    				
+	    				list.add(boardImageVO);
+	    			}
+    			conn.close();
+    			return list;
+    		}
+    		//인덱스 구분 최신글(largeName 으로 구분)
+    		public List<BoardDto> listByLargeName2(String boardLargeName) throws Exception{
+    			conn=JdbcUtils.connect();
+    			String sql = "select * from("
+    					+ "select rownum rn,TMP.* from("
+    					+ "select * from board where board_large_name=? order by board_no desc)TMP) "
+    					+ "where rn between 1 and 9";
+//    			sql = sql.replace("#1", boardLargeName);
+    			PreparedStatement ps = conn.prepareStatement(sql);
+    			ps.setString(1, boardLargeName);
+    			
+    			ResultSet rs = ps.executeQuery();
+    			List<BoardDto> list=new ArrayList<>();;
+	    			while(rs.next()) {
+	    				BoardDto boardDto = new BoardDto();
+	    				
+	    				boardDto.setBoardNo(rs.getInt("board_no"));
+	    				boardDto.setBoardTitle(rs.getString("board_title"));
+	    				boardDto.setBoardMiddleName(rs.getString("board_middle_name"));
+	    				boardDto.setBoardWriter(rs.getString("board_title"));
+	    				boardDto.setBoardDate(rs.getString("board_date"));
+	    				
+	    				list.add(boardDto);
+	    			}
+    			conn.close();
+    			return list;
+    		}
+    		
+       
+       
+       
+       
+       
+
 }

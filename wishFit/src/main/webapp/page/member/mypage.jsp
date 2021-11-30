@@ -10,8 +10,8 @@
 <%
 String root = request.getContextPath();
 
-String uid = (String) request.getSession().getAttribute("uid");
-System.out.println(" mypage  uid  " + uid);
+String uid = (String) session.getAttribute("uid");
+
 // 처리
 MemberDao memberDao = new MemberDao();
 MemberDto memberDto = memberDao.get(uid);

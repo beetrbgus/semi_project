@@ -2,28 +2,34 @@ package wishFit.beans.member;
 
 public class FriendDto {
 	private int friendNo;
-	private String friendReceiver;
-	private String friendSender;
+	private String friendId, friendNick;
 	private String friendDate;
-	private String friendStat;
-	
+	public FriendDto() {
+		super();
+
+	}
+	@Override
+	public String toString() {
+		return "FriendDto [friendNo=" + friendNo + ", friendId=" + friendId + ", friendNick=" + friendNick
+				+ ", friendDate=" + friendDate + "]";
+	}
 	public int getFriendNo() {
 		return friendNo;
 	}
 	public void setFriendNo(int friendNo) {
 		this.friendNo = friendNo;
 	}
-	public String getFriendReceiver() {
-		return friendReceiver;
+	public String getFriendId() {
+		return friendId;
 	}
-	public void setFriendReceiver(String friendReceiver) {
-		this.friendReceiver = friendReceiver;
+	public void setFriendId(String friendId) {
+		this.friendId = friendId;
 	}
-	public String getFriendSender() {
-		return friendSender;
+	public String getFriendNick() {
+		return friendNick;
 	}
-	public void setFriendSender(String friendSender) {
-		this.friendSender = friendSender;
+	public void setFriendNick(String friendNick) {
+		this.friendNick = friendNick;
 	}
 	public String getFriendDate() {
 		return friendDate;
@@ -31,13 +37,4 @@ public class FriendDto {
 	public void setFriendDate(String friendDate) {
 		this.friendDate = friendDate;
 	}
-	public String getFriendStat() {
-		return friendStat;
-	}
-	public void setFriendStat(String friendStat) {
-		this.friendStat = friendStat;
-	}
-
-
-	
 }

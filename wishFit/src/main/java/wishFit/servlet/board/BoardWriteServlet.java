@@ -46,7 +46,7 @@ public class BoardWriteServlet extends HttpServlet{
 			
 			//boardNo 는 미리 만들어서 부여함
 			BoardDao boardDao = new BoardDao();
-			int boardNo = CommonSql.getSequence("board_seq");
+			int boardNo = boardDao.boardSeq();
 			boardDto.setBoardNo(boardNo);
 			
 			//글작성 처리
@@ -61,27 +61,22 @@ public class BoardWriteServlet extends HttpServlet{
 				
 				File target = mRequest.getFile("attach");//파일을 꺼내기
 				imageDto.setBoardSize(target == null ? 0L : target.length());//파일크기
-				
 				ImageDao imageDao = new ImageDao();
+				int imageNo = imageDao.imageSeq();
+				imageDto.setImageNo(imageNo);
+				
+				
 				imageDao.insert(imageDto);
 				
 			}
 			
-			
-			
-			//글작성 완료 후 행당 글 상세 페이지로 이동
-			//만약 getContextPath가 들어온 주소대로 market/commu를 구분해서 나타내 준다면
-			//if문 없이 그냥 바로 한개만 쓰면 될듯?
-			
-			if(req.getParameter("board_large_name").equals("마켓")) {//위의 largeName이 market이라면
-				//resp.sendRedirect(req.getContextPath()+"/market/list.jsp?boardNo="+boardDto.getBoardNo());
-				resp.sendRedirect(req.getContextPath()+"/list.jsp?boardNo="+boardDto.getBoardNo());
-				
-			}else {//마켓이 아닌 커뮤라면
-				//resp.sendRedirect(req.getContextPath()+"/commu/list.jsp?boardNo="+boardDto.getBoardNo());
-				resp.sendRedirect(req.getContextPath()+"/list.jsp?boardNo="+boardDto.getBoardNo());
-				
+			String LargeName = mRequest.getParameter("boardLargeName");
+			if(LargeName.equals("마켓")) {
+				resp.sendRedirect(req.getContextPath()+"/page/market/detail.jsp?boardNo="+boardNo);
+			}else {
+				resp.sendRedirect(req.getContextPath()+"/page/community/detail.jsp?boardNo="+boardNo);
 			}
+			
 			
 			
 			

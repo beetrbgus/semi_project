@@ -1,7 +1,5 @@
 package wishFit.servlet.member;
-
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,19 +13,19 @@ import wishFit.beans.member.FriendVo;
 @WebServlet(urlPatterns="/page/member/insert.kh")
 public class FriendInsertServlet extends HttpServlet{
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			FriendVo friendVo = new FriendVo();
-			friendVo.setFriendNo(Integer.parseInt(req.getParameter("friendNo")));
-			friendVo.setFriendReceiver(req.getParameter("friendId"));
-			friendVo.setFriendSender(req.getParameter("friendNick"));
-			friendVo.setFriendDate(req.getParameter("friendDate"));
 			
+			FriendVo friendVo = new FriendVo();
+			String friendId = req.getParameter("friendId");
+			String uid= (String)req.getSession().getAttribute("uid");
 			// 처리
 			FriendDao friendDao = new FriendDao();
-			friendDao.plus(friendVo);
-			
-			resp.sendRedirect("friend_list.jsp");
+			int result = friendDao.get(uid, friendId);
+			if(result ==0) {
+				friendDao.plus(friendId , uid);
+			}
+			resp.sendRedirect(req.getContextPath()+"/page/member/friend_list.jsp");
 		} catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

@@ -72,4 +72,6 @@ public class MemberProfileDao {
 		
 		return memberProfileDto;
 	}
+	
+	
 }

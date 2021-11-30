@@ -12,8 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+<<<<<<< HEAD
 import wishFit.beans.firgroupimage.FitgroupImageDao;
 import wishFit.beans.firgroupimage.FitgroupImageDto;
+=======
+import wishFit.beans.fitgroupimage.FitgroupImageDao;
+import wishFit.beans.fitgroupimage.FitgroupImageDto;
+>>>>>>> refs/remotes/origin/master
 import wishFit.beans.fitgroup.FitgroupDao;
 import wishFit.beans.fitgroup.FitgroupDto;
 

@@ -7,13 +7,11 @@
 %>
 <%
 String root = request.getContextPath();
-
 String uid = (String) request.getSession().getAttribute("uid");
 System.out.println(" mypage  uid  " + uid);
 // 처리
 MemberDao memberDao = new MemberDao();
 MemberDto memberDto = memberDao.get(uid);
-
 // 프로필 이미지 조회
 MemberProfileDao memberProfileDao = new MemberProfileDao();
 MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
@@ -81,4 +79,4 @@ $(document).ready(function(){
 			<li><a href="<%=root%>/page/member/logout.kh">로그아웃</a></li>
 		</ul>
 	</div>
-</div>
+</div> 

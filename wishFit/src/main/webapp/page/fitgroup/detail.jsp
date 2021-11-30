@@ -3,8 +3,8 @@
 <%@page import="wishFit.beans.mysmallgroup.MySmallGroupDto"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.mysmallgroup.MySmallGroupDao"%>
-<%@page import="wishFit.beans.firgroupimage.FitgroupImageDto"%>
-<%@page import="wishFit.beans.firgroupimage.FitgroupImageDao"%>
+<%@page import="wishFit.beans.fitgroupimage.FitgroupImageDto"%>
+<%@page import="wishFit.beans.fitgroupimage.FitgroupImageDao"%>
 <%@page import="wishFit.beans.fitgroup.FitgroupDto"%>
 <%@page import="wishFit.beans.fitgroup.FitgroupDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -178,9 +178,9 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(fitgroupDto.getFgId());
 							<div class="tw-flex tw-items-end">
 								<div class="app-board-article-profile tw-flex tw-items-center">
 									<div class="app-profile-image app-avatar">
-									<% if(memberProfileDto != null) {%>
-										<img src="profile.kh?mpNo=<%=memberProfileDto.getMpNo() %>">
-									<% } %>
+									<%if(memberProfileDto !=null){ %>
+								<img src="profile.kh?mpNo=<%=memberProfileDto.getMpNo() %>">
+								<%} %>
 									</div>
 
 									<div class="tw-flex-1 app-profile-body">
@@ -347,13 +347,9 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(fitgroupDto.getFgId());
 <div id="popup_menu_area" tabindex="0"
 	style="top: 400px; left: 550px; display: none;">
 	<ul>
-		<li class="dispCommunicationMessages"><a href="<%=root%>/page/message/send.jsp" target="_blank">쪽지
+		<li class="dispCommunicationMessages"><a href="<%=root %>/page/message/send.jsp?msg_receiver=<%=fitgroupDto.getFgId()%>" target="_blank">쪽지
 				보내기</a></li>
-		<li class="dispCommunicationFriend"><a href="" target="_blank">친구
+		<li class="dispCommunicationFriend"><a href="<%=root %>/page/member/insert.kh?friendId=<%=fitgroupDto.getFgId()%>" target="_blank">친구
 				등록</a></li>
 	</ul>
 </div>
-
-
-
-

@@ -1,29 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<script src = "http://code.jquery.com/jquery-3.6.0.js"></script>
-<link rel = "stylesheet" type="text/css" href="../css/widget.css">
-<script src = "../css/widget.js"></script>
-<script src = "../css/record.js"></script>
-<link rel = "stylesheet" type="text/css" href="../css/commons.cs"> 
+
 <%
 	String root = request.getContextPath();
 %> 
+<script src = "http://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel = "stylesheet" type="text/css" href="<%=root %>/page/css/widget.css">
+<script src = "<%=root %>/page/js/widget.js"></script>
+<script src = "<%=root %>/page/js/record.js"></script>
+<link rel = "stylesheet" type="text/css" href="<%=root %>/page/css/commons.cs"> 
 
 <form class="record-form" action="my_record.jsp" method="get">
 	<input type="hidden" name="year">
 	<input type="hidden" name="month">
 </form>
+<script>
+	$(function(){
+		$(".app-sidebar-left__nav__child").hide();
+		
+		$(".app-sidebar-left__nav__item").click(function(){
+			$(this).next().slideToggle(300);
+			$(".app-sidebar-left__nav__item").not(this).next().slideUp(300);
+			return false;
+		});
+		$(".app-sidebar-left__nav__item").eq(0).trigger("click");		
+	});
+</script>
     
     
 <!-- 왼쪽 사이드 바 -->
-<script>
-$(document).ready(function(){
-	$(".app-sidebar-left.app-custom-scroll > nav > ul > li").click(function(){
-		$("li.active open").find("li").removeClass("active open");
-		/* $(this).removeClass("active open"); */
-	});
-});
-</script>
+
 <div class="app-layout">
    <!--#Meta:layouts/slow/components/sidebar-left/sidebar-left.scss?$__Context->themeConfig->variables-->
    <aside id="app-sidebar-left" class="app-layout__sidebar-left">
@@ -39,9 +45,9 @@ $(document).ready(function(){
                   </div>
 
                </li>
-               <li class="open">
+               <li class="">
                   <div class="app-sidebar-left__nav__item">
-                     <a href="<%=root %>/page/record/my_record.jsp"> <span>내 기록</span>
+                     <a href="<%=root %>/page/record/my_record.jsp?now=record"> <span>내 기록</span>
                      </a>
                      <ion-icon name="chevron-down-outline" class="app-sidebar-left__nav__more md hydrated" role="img" aria-label="chevron down outline">
                         <div class="icon-inner">
@@ -51,81 +57,50 @@ $(document).ready(function(){
                   </div>
 
                   <ul class="app-sidebar-left__nav__child">
-<%--                      <li><a href="<%=root %>/page/record/my_record.jsp?boardMiddleName=일자별">일자별</a></li> --%>
-<!--                       <li><button>일자별</button></li> -->
-<%--                      <li><a href="<%=root %>/page/record/my_record.jsp?boardMiddleName=소모임">소모임</a></li> --%>
-<%--                      <li><a href="<%=root %>/page/recordmy_record.jsp?boardMiddleName=식단">식단</a></li> --%>
-	                  	<li><button class="reset-record"><span>전체</span></button></li>
+                  	
+<!-- 	                  	<li><button class="reset-record"><span>전체</span></button></li> -->
 						<li><button class="daily-record"><span>일자별</span></button></li>
 						<li><button class="fitgroup-record"><span>소모임</span></button></li>
 						<li><button class="diet-record"><span>식단</span></button></li>
                   </ul>
                </li>
-               <li class="active">
+               <li class="">
                   <div class="app-sidebar-left__nav__item">
-                     <a href="infomation.html"> <span>커뮤니티</span>
+                     <a href="<%=request.getContextPath() %>/page/community/list.jsp?now=commu"> <span>커뮤니티</span>
                      </a>
                      <ion-icon name="chevron-down-outline"
                         class="app-sidebar-left__nav__more"> </ion-icon>
                   </div>
                   <ul class="app-sidebar-left__nav__child">
-                     <li><a href="news.html">새로운소식</a></li>
-                     <li><a href="experience.html">용품/대회후기</a></li>
-                     <li><a href="competition.html">대회소식(생활운동)</a></li>
-                     <li><a href="useful.html">유용한사이트</a></li>
-                     <li><a href="tip.html">나만의팁</a></li>
+                    <li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardLargeName=커뮤니티">전체</a></li>
+					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=유머">유머</a></li>
+					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=질문">질문</a></li>
+					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=운동인증">운동인증</a></li>
+					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=코디">코디</a></li>
+					<li><a href="<%=request.getContextPath() %>/page/community/list.jsp?boardMiddleName=추천글">추천글</a></li>
                   </ul>
                </li>
                <li class="">
                   <div class="app-sidebar-left__nav__item">
-                     <a href="small.html"> <span>소모임</span>
+                     <a href="<%=request.getContextPath() %>/page/fitgroup/list.jsp"> <span>소모임</span>
                      </a>
                      <ion-icon name="chevron-down-outline"
                         class="app-sidebar-left__nav__more"> </ion-icon>
                   </div>
-
-						<ul class="app-sidebar-left__nav__child">
-							<li><a href="swim.html">수영</a></li>
-							<li><a href="bike.html">자전거</a></li>
-							<li><a href="run.html">달리기</a></li>
-							<li><a href="hiking.html">등산</a></li>
-							<li><a href="fitness.html">홈트짐트</a></li>
-							<li><a href="Pilates.html">필라테스/요가</a></li>
-							<li><a href="golf.html">골프</a></li>
-							<li><a href="skate.html">스케이트(빙상)</a></li>
-						</ul>
 					</li>
 					<li class="">
 						<div class="app-sidebar-left__nav__item">
-							<a href="#"> <span>마켓</span>
+							<a href="<%=request.getContextPath() %>/page/market/list.jsp"> <span>마켓</span>
 							</a>
 							<ion-icon name="chevron-down-outline"
 								class="app-sidebar-left__nav__more"> </ion-icon>
 						</div>
 
 						<ul class="app-sidebar-left__nav__child">
-							<li><a href="elitecom.html">대회소식(엘리트)</a></li>
-							<li><a href="elitefree.html">자유게시판(엘리트)</a></li>
-							<li><a href="counseling.html">진로고민상담</a></li>
-							<li><a href="parents.html">학부모게시판</a></li>
-							<li><a href="career.html">구인구직</a></li>
+							<li><a href="<%=request.getContextPath() %>/page/market/sellList.jsp">판매</a></li>
+							<li><a href="<%=request.getContextPath() %>/page/market/buyList.jsp">구매</a></li>
 						</ul>
 					</li>
-					<li class="">
-						<div class="app-sidebar-left__nav__item">
-							<a href="#"> <span>운영사항</span>
-							</a>
-							<ion-icon name="chevron-down-outline"
-								class="app-sidebar-left__nav__more"> </ion-icon>
-						</div>
-
-                  <ul class="app-sidebar-left__nav__child">
-                     <li><a href="notice.html">안내사항</a></li>
-                     <li><a href="event.html">이벤트</a></li>
-                     <li><a href="suggest.html">개선/건의</a></li>
-                     <li><a href="call112.html">신고</a></li>
-                  </ul>
-               </li>
             </ul>
          </nav>
          <div class="app-card app-sidebar-left__nav" style="margin:0px 0px 0px ">

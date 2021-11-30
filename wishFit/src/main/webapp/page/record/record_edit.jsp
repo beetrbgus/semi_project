@@ -8,9 +8,12 @@
 <!-- 좌측 사이드 -->
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
 <!-- 입력 -->
+<<<<<<< HEAD
 =======
 	pageEncoding="UTF-8"%>
 <%--입력 --%>
+>>>>>>> refs/remotes/origin/master
+=======
 >>>>>>> refs/remotes/origin/master
 <%
 int boardNo = Integer.parseInt(request.getParameter("boardNo"));
