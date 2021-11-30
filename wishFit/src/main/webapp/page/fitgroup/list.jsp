@@ -1,13 +1,5 @@
 <%@page import="wishFit.beans.fitgroup.Pagination"%>
 <%@page import="wishFit.beans.member.MemberProfileDto"%>
-<<<<<<< HEAD
-<%@page import="wishFit.beans.member.MemberProfileDao"%>
-<%@page import="java.util.List"%>
-<%@page import="wishFit.beans.fitgroup.FitImageVO"%>
-<%@page import="wishFit.beans.fitgroup.FitgroupDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8	"
-	pageEncoding="UTF-8"%>
-=======
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.member.MemberProfileDao"%>
 <%@page import="wishFit.beans.fitgroup.FitImageVO"%>
@@ -19,10 +11,8 @@
 String root = request.getContextPath(); 
 %>
 <!-- 헤더 -->
->>>>>>> refs/remotes/origin/master
 <jsp:include page="/template/header.jsp"></jsp:include>
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
-<<<<<<< HEAD
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript"
@@ -35,20 +25,6 @@ String root = request.getContextPath();
 			center : new kakao.maps.LatLng(37.5339851357212, 126.897094049199),
 			level : 8
 		};
-
-=======
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=229c9e937f7dfe922976a86a9a2b723b&libraries=services"></script>
-<script>
-	$(function() {
-		//지도 생성 준비 코드
-		var container = document.querySelector("#map");
-		var options = {
-			center : new kakao.maps.LatLng(37.5339851357212, 126.897094049199),
-			level : 8
-		};
->>>>>>> refs/remotes/origin/master
 		//지도 생성 코드
 		var map = new kakao.maps.Map(container, options);
 
@@ -133,73 +109,6 @@ String root = request.getContextPath();
 	});
 </script>
 
-
-<<<<<<< HEAD
-<%
-String root = request.getContextPath();
-%>
-<link rel="stylesheet" type="text/css" href="../css/commons.css">
-<link rel="stylesheet"
-	href="<%=root%>/resources/files/cache/assets/compiled/92b01c3552e164431c570224468c40fb97bd6173.default.scssdedd.css" />
-<link rel="stylesheet"
-	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.base.scssdedd.css?20210328011802" />
-<link rel="stylesheet"
-	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.extra-form.scssdedd.css?20210328011802" />
-<link rel="stylesheet"
-	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.header.scssdedd.css?20210328011802" />
-<link rel="stylesheet"
-	href="<%=root%>/resources/files/cache/assets/compiled/30c99582913487f13af4d99470eb98e0b33c0ca2.status-icon.scssdedd.css?20210328011802" />
-<link rel="stylesheet"
-	href="<%=root%>/resources/files/cache/assets/compiled/782e3367956a91b8978627b8dfd50ebfe1c577b9.card.scssdedd.css?20210328011802" />
-<link rel="stylesheet"
-	href="<%=root%>/resources/files/cache/assets/compiled/782e3367956a91b8978627b8dfd50ebfe1c577b9.base.scssdedd.css?20210328011802" />
-<style>
-:root { -
-	-aside-width: 17.625rem;
-}
-#search-input{
-width:88%;
-height:30px;
-border :3px solid black;
-border-radius :5px;
-}
-#search-submit{
-width:30px;
-height:35px;
-}
-</style>
-<%
-FitgroupDao fitgroupDao = new FitgroupDao();
-=======
->>>>>>> refs/remotes/origin/master
-
-<<<<<<< HEAD
-String fgLocation = request.getParameter("fgLocation");
-
-//isSearch = 검색을 실행하는 것
-boolean isSearch = fgLocation != null && !fgLocation.equals("");
-String title;
-
-
-
-FitImageVO fitImageVo = new FitImageVO();
-List<FitImageVO> list ;
-if(isSearch){
-	list = fitgroupDao.detailAll(fgLocation);
-}else{
-	list=fitgroupDao.listAll();
-}
-MemberProfileDao memberProfileDao = new MemberProfileDao();
-
-//페이지네이션
-Pagination pagination = new Pagination(request);
-pagination.calculate(); 
-
-//로그인 상태인지 확인
-%>
-
-%>
-=======
 <link rel="stylesheet" type="text/css" href="../css/commons.css">
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/92b01c3552e164431c570224468c40fb97bd6173.default.scssdedd.css" />
@@ -256,9 +165,6 @@ pagination.calculate();
 
 //로그인 상태인지 확인
 %>
-
-
->>>>>>> refs/remotes/origin/master
 
 
 <form>
