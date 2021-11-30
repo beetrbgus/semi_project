@@ -1,3 +1,4 @@
+<%@page import="wishFit.beans.member.MemberProfileDto"%>
 <%@page import="wishFit.beans.message.MessageVo"%>
 <%@page import="java.util.List"%>
 <%@page import="wishFit.beans.message.Msg_Pagenation"%>
@@ -14,6 +15,7 @@
 	msg_Pagenation.setUid(uid);
 	msg_Pagenation.calculate();
 	List<MessageVo> msglist = msg_Pagenation.getList();
+	
 %>
 <link rel="stylesheet"
 	href="<%=root%>/resources/files/cache/assets/compiled/255b6902485612c74d806c3142450a55116bc82e.signup-form.scssb2cb.css"
@@ -34,80 +36,43 @@
 	
 	<div class="app-clearfix">
 		<section class="app-member">
-			<div class="app-member-side">
-				<div class="app-member-card app-member-profile">
-					<div class="app-member-card-body">
-						<div class="app-avatar tw-mb-2">
-							<!--  회원 프로필 사진 -->
-							<img src="/modules/member/skins/slow/img/ic_profile_default.png"
-								alt="profile_image">
-						</div>
-
-						<div>
-							<!-- 회원등급 -->
-							<span class="tw-text-primary tw-text-xs tw-mb-1">회원등급</span>
-							<!-- 닉네임 -->
-							<div class="tw-font-bold tw-mb-1">닉네임</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="app-member-card app-member-menu">
-					<ul>
-						<li><a href="/index.php?act=dispMemberInfo&amp;mid=community">회원정보
-								보기</a></li>
-						<li ><a
-							href="/index.php?act=dispMemberScrappedDocument&amp;mid=community"
-						>스크랩 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberSavedDocument&amp;mid=community"
-						>저장함 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberOwnDocument&amp;mid=community"
-						>작성 글 보기</a></li>
-						<li><a
-							href="/index.php?act=dispMemberOwnComment&amp;mid=community"
-						>작성 댓글 보기</a></li>
-						<li ><a
-							href="/index.php?act=dispMemberActiveLogins&amp;mid=community"
-						>자동 로그인 관리</a></li>
-						<li class="app-active"><a
-							href="/index.php?act=dispCommunicationMessages&amp;mid=community"
-						>쪽지함 보기</a></li>
-						<li><a
-							href="/index.php?act=dispCommunicationFriend&amp;mid=community"
-						>친구 보기</a></li>
-						<li><a
-							href="/index.php?act=dispSocialxeSnsManage&amp;mid=community"
-						>SNS 관리</a></li>
-					</ul>
-				</div>
-			</div>
+			<%-- 마이페이지 왼쪽것 --%>
+			<jsp:include page="/page/message/myPageLeftSide.jsp"></jsp:include>
 			<div class="app-member-content">
 				<div class="app-member-card">
 					<div class="app-member-card-header">
-						<h1>스크랩 보기</h1>
-						<span>1</span>
+						<h1>쪽지</h1>
+						<span><%=msg_Pagenation.getCount() %></span>
 					</div>
-
+					<form method="post" action="">
 					<div class="app-member-card-body">
 						<div class="tw-flex tw-items-center">
 							<div class="app-select tw-mr-3">
-								<select id="scrap_folder_list">
-									<option value="sender" selected="selected">받은 쪽지</option>
-									<option value="1123">보낸 쪽지</option>
-									<option value="1123">기본 폴더</option>
+								<select id="scrap_folder_list" onchange="if(this.value) location.href=(this.value)">
+									<option>쪽지함 선택</option>
+									<option value="./listmsg.jsp">받은 쪽지</option>
+									<option value="./listmsg.jsp?column=sender&keyword=<%=uid%>">보낸 쪽지</option>
 								</select>
 								<ion-icon name="chevron-down-outline" role="img" class="md hydrated" aria-label="chevron down outline"></ion-icon>
 							</div>
 						</div>
 					</div>
+					</form>
+					<script>
+					$(document).ready(function(){
+						$(".app-button").on("click",function(){
+							let msgNo = $(this).parent("li").find("div>input").val();
+							location.href="./delete.kh?msgNo="+msgNo ; 
+						});						
+					});
+					</script>
 					<div class="app-member-card-body tw-pt-0">
 						<ul class="app-member-list">
 							<% for(MessageVo messageVo :msglist){  %>
 							<li class="tw-flex tw-items-center">
 								<div class="tw-flex-1">
 									<!-- 쪽지 제목 -->
+									<input type="hidden" value="<%=messageVo.getMsg_no()%>"> 
 									<a class="tw-text-sm tw-mb-1" href="<%=root %>/page/message/detail.jsp?msg_no=<%=messageVo.getMsg_no() %>" 
 										target="_blank"><%=messageVo.getMsgCon_title() %></a>
 
@@ -119,10 +84,12 @@
 										<span class="tw-text-xs tw-text-gray-700 tw-mr-3"><%=messageVo.getMsg_sendTime() %></span>
 									</div>
 								</div>
-
-								<button class="app-button" type="button" onclick="">
+								<% if(!messageVo.getMsg_sender().equals(uid)){ %>
+								<button class="app-button" type="button">
 									삭제
 								</button>
+								<% } %>
+			
 							</li>
 							<% } %>
 						</ul>

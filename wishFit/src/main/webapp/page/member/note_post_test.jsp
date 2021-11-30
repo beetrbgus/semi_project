@@ -13,7 +13,7 @@
     %>
     <%
     	FitgroupDao fitgroupDao = new FitgroupDao();
-    	List<FitgroupDto> fitgroupMine = fitgroupDao.fitgroupMine("fg_id",uid);
+//     	List<FitgroupDto> fitgroupMine = fitgroupDao.fitgroupMine("fg_id",uid);
     %>
     
 
@@ -34,12 +34,12 @@
 			<td><%=boardDto.getBoardDate() %></td>
 		</tr>
 		<%} %>
-		<%for(FitgroupDto fitgroupDto : fitgroupMine){ %>
-			<tr>
-				<td><%=fitgroupDto.getFgNo() %></td>
-				<td><%=fitgroupDto.getFgTitle() %></td>
-				<td><%=fitgroupDto.getFgStarttime()%></td> <!-- 작성일 ? -->
-			</tr>
-		<%} %>
+<%-- 		<%for(FitgroupDto fitgroupDto : fitgroupMine){ %> --%>
+<!-- 			<tr> -->
+<%-- 				<td><%=fitgroupDto.getFgNo() %></td> --%>
+<%-- 				<td><%=fitgroupDto.getFgTitle() %></td> --%>
+<%-- 				<td><%=fitgroupDto.getFgStarttime()%></td> <!-- 작성일 ? --> --%>
+<!-- 			</tr> -->
+<%-- 		<%} %> --%>
 		</tbody>
 </table>

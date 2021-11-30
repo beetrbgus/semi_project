@@ -1,5 +1,3 @@
-<%@page import="wishFit.beans.board.BoardImageVO"%>
-<%@page import="wishFit.beans.board.BoardDao"%>
 <%@page import="wishFit.beans.board.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
@@ -8,19 +6,10 @@
 <!-- 좌측 사이드 -->
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
 <!-- 입력 -->
-=======
-	pageEncoding="UTF-8"%>
-<%--입력 --%>
->>>>>>> refs/remotes/origin/master
 <%
-int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-//아이디 가져오기
-String boardWriter = (String)request.getAttribute("uid");
 String root = request.getContextPath();
-
-BoardDao boardDao = new BoardDao();
-BoardImageVO boardImageVO = boardDao.detail(boardNo);
-String recordDate = boardImageVO.getBoardDate().substring(0,10); 
+//작성자 session으로 받아오기
+String boardWriter=(String)session.getAttribute("uid");
 
 %>
 <style>
@@ -37,7 +26,9 @@ String recordDate = boardImageVO.getBoardDate().substring(0,10);
 		border : 1px solid #e9ecef;
 	}
 </style>
-
+<script>
+    document.querySelector(".currentDate").value= new Date().toISOString().slice(0, 10);
+</script>
 <link rel="stylesheet"  href="<%=root %>/resources/files/cache/assets/board_edit/board_edit_file_container_style.css">
 <main class="app-content app-clearfix">
    <div class="app-clearfix">
@@ -67,11 +58,9 @@ String recordDate = boardImageVO.getBoardDate().substring(0,10);
          </div>
          <div class="app-card">
             <div class="app-board-section app-board-section-padding">
-               <form action="record_edit.kh" method="post" enctype="multipart/form-data"
+               <form action="#" method="post" enctype="multipart/form-data"
                   onsubmit="return procFilter(this, window.insert)"
                   class="ed write-form inner-container">
-                  <!-- 히든으로 작성자 아이디 (세션) 보내기 -->
-                  <input type="hidden" name="boardWriter" value="<%=boardWriter %>">
                   <input type="hidden" name="mid" value="coordiboard"> <input
                      type="hidden" name="content" value=""> <input
                      type="hidden" name="document_srl" value="">
@@ -80,27 +69,18 @@ String recordDate = boardImageVO.getBoardDate().substring(0,10);
                      <div class="app-select sm:tw-mb-3 sm:tw-w-full tw-mr-3">
                      <!-- 중분류 -->
                         <select name="boardMiddleName" >
-                        	<%if(boardImageVO.getBoardMiddleName().equals("일자별")){ %>
-                           <option selected>일자별</option>
+                        	<option selected>선택</option>
+                           <option >일자별</option>
                            <option >소모임</option>
                            <option >식단</option>
-                           <%}else if(boardImageVO.getBoardMiddleName().equals("소모임")){ %>
-                           <option>일자별</option>
-                           <option selected >소모임</option>
-                           <option >식단</option>
-                           <%} else{%>
-                           <option>일자별</option>
-                           <option>소모임</option>
-                           <option selected >식단</option>
-                           <%} %>
                         </select>
                         <ion-icon name="chevron-down-outline" role="img"
                            class="md hydrated" aria-label="chevron down outline"></ion-icon>
                      </div>
-                     <input type="hidden" name="boardNo" value="<%=boardNo%>">
+                     <input type="hidden" name="boardNo" value="">
                          <input type="text"
                         name="boardTitle" class="app-input tw-flex-1 sm:tw-w-full"
-                        value="<%=boardImageVO.getBoardTitle() %>" autocomplete="off" >
+                        value="" autocomplete="off" placeholder="제목 작성">
                   </div>
                   <div class="app-board-editor-wrap tw-mb-3">
                      <!-- css -->
@@ -120,16 +100,15 @@ String recordDate = boardImageVO.getBoardDate().substring(0,10);
                            aria-labelledby="cke_editor1_arialbl">
                            <!-- 내용 작성 부분 -->
                            <textarea name="boardPost" required class="form-input" 
-                              rows="10" cols="80" placeholder="내용 작성"><%=boardImageVO.getBoardPost() %></textarea>
+                              rows="10" cols="80" placeholder="내용 작성"></textarea>
                               
                         </div>
-                        
+                        <!-- 날짜 작성 부분 -->
+                        <div class="app-board-editor-wrap tw-mb-3 app-input">
+                        	<input type="date" name="boardDate" required class="currentDate form-date">
+                        </div>
                         
                      </div>
-                     <!-- 날짜 작성 부분 -->
-                        <div class="app-board-editor-wrap tw-mb-3 app-input" style="padding:0.5rem 0.5rem">
-                        	<input type="date" name="boardDate" required class="currentDate form-date" value="<%=recordDate%>">
-                        </div>
                      <p class="editor_autosaved_message autosave_message"
                         id="editor_autosaved_message_1">&nbsp;</p>
                      <!--#JSPLUGIN:jquery.fileupload-->
@@ -141,11 +120,6 @@ String recordDate = boardImageVO.getBoardDate().substring(0,10);
                               <input id="xe-fileupload" type="file" name="attach" accept="image/*"
                               class="fileupload-processing form-data" name="Filedata"
                               data-auto-upload="true" data-editor-sequence="1" multiple="">
-                              <%if(boardImageVO.getImageNo()!=0){ %>
-								<span>현재 파일 : <%=boardImageVO.getBoardUpload() %></span>
-			<%} else{%>
-				<span>이미지 파일 없음</span>
-			<%} %>
                 </div>
                      </div>
                   </div>
@@ -162,7 +136,7 @@ String recordDate = boardImageVO.getBoardDate().substring(0,10);
                         <div class="tw-flex-1"></div>
                         <div class="tw-flex">
                            <%-- 취소버튼 --%>
-                            <a href="<%=root %>/page/record/my_record.jsp" class="app-button tw-mr-2 sm:tw-flex-1">취소</a>
+                            <a href="/my_record.jsp" class="app-button tw-mr-2 sm:tw-flex-1">취소</a>
                            <%-- 수정버튼 --%>
                            <button type="submit" value="수정"
                               class="app-button primary sm:tw-flex-1">등록</button>

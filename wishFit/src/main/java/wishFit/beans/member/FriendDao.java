@@ -70,11 +70,12 @@ public class FriendDao {
 		conn = JdbcUtils.connect();
 		
 		String sql = "insert into friend  values("
-				+ "friend_seq.nextval, ? , ? , sysdate , ?";
+				+ "friend_seq.nextval, ? , ? , sysdate , ?)";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, friendDto.getFriendReceiver());
 		ps.setString(2, friendDto.getFriendSender());
 		ps.setString(3, "친구");
+		ps.execute();
 		conn.close();
 	}
 	// 친구 수 구하기

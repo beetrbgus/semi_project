@@ -13,7 +13,6 @@ import wishFit.beans.notification.NotificationDto;
 @WebServlet(urlPatterns = "/noticreate.kh")
 public class NotificationCreateServlet extends HttpServlet {
 	
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		NotificationDto notificationDto = new NotificationDto();

@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import wishFit.beans.member.MemberProfileDao;
 import wishFit.beans.member.MemberProfileDto;
 
-@WebServlet(urlPatterns="/profile.kh")
+
+@WebServlet(urlPatterns={"/page/fitgroup/profile.kh","/profile.kh"})
 public class MemberProfileServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

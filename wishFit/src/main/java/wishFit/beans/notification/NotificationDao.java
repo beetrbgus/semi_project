@@ -30,8 +30,8 @@ public class NotificationDao {
 		ps.setString(1, notificationVo.getNoti_ref());
 		ps.setInt(2, notificationVo.getNoti_refval());
 		ps.setString(3, notificationVo.getNoti_sender());
-		ps.setString(3, notificationVo.getNoti_receiver());
-		ps.setString(4, notificationVo.getNoti_message());
+		ps.setString(4, notificationVo.getNoti_receiver());
+		ps.setString(5, notificationVo.getNoti_message());
 
 		ps.execute();
 		conn.close();
