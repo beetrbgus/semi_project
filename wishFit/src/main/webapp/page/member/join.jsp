@@ -16,87 +16,6 @@
     <jsp:include page="/template/leftSide.jsp"></jsp:include> 
     
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
-    // 아이디 중복 가능 script
-    	$(function(){
-    		$("input[name=memId]").on("input",function(){
-    			var input = $("input[name=memId]").val();
-    			$.ajax({
-    				url = "http://localhost:8080/wishFIt/page/member/ajax_id_check.kh";
-    				type : "get";
-    				data:{
-    					memId : inputId
-    				},
-    				// 완료 처리
-    				success : function(resp){
-    					if(resp == "NNNNY"){
-    						$("input[name=memId]").next().text("아이디 사용 가능");
-    					} else if(resp == "NNNNN"){
-    						$("input[name=memId]").next().text("아이디 사용 불가능");
-    					}
-    				},
-    				error : function(error){
-    					
-    				}
-    			});
-    		});
-    	});
-    // 닉네임 중복 확인
-    		$(function(){
-    			$("input[name=memNick]").on("input",function(){
-    				var input = $("input[name=memNick]").val();
-    				$.ajax({
-    					ur="";
-    					type:"get";
-    					data:{
-    						memNick: inputNick
-    					},
-    					success: function(resp){
-    						if(resp == "NNNNY"){
-    							$("input[name=memNick]").next().text("닉네임 사용 가능");
-    						} else if{
-    							$("input[name=memNick]").next().text("닉네임 중복 불가능");
-    						}
-    					},
-    					error : function(errror){
-    						
-    					}
-    				});
-    			});
-    		});
-    
-    	// 비밀번호 확인
-    	function pw2Check(){
-    		var pwInput = document.querySelector("input[name=memPw]");
-        	var pw2Input = document.querySelector("input[name=memPw2]");
-        	var notice = pw2Input.nextElementSibling;
-        	
-        	if(pwInput.values.Iength > 0 && pwInput.value == pw2Input.value){
-        		app-error.textContent = "";
-        		return true;
-        	}
-        	else{
-        		app-error.textContent = "비밀번호가 일치하지 않습니다.";
-        		return false;
-        	}
-    	}
-    	
-    	// 아이디 regex
-    	function idCheck(){
-            var regex = /^[a-z][a-z0-9-_]{5,19}$/;
-            var input = document.querySelector("input[name=memId]");
-            var app-error = input.nextElementSibling;
-
-            if(regex.test(input.value)){
-            	app-error.textContent = "";
-                return true;
-            }
-            else{
-            	app-error.textContent = "특수문자를 제외한 영어 소문자, 숫자 포함한 6자리~20자리";
-                return false;
-            }
-        }
-    </script>
     
     <section class="app-member">
     <div class="app-member-content tw-pl-0">
@@ -451,7 +370,7 @@
               <em>*</em>
               <span>아이디</span>
             </label>
-            <input type="text" name="memId" id="user_id" value="" required="" onblur="idCheck();">
+            <input type="text" name="memId" id="user_id" value="" required="" >
             
             <div class="app-error">
 				특수문자를 제외한 영어 소문자, 숫자 포함한 6자리~20자리
@@ -463,7 +382,7 @@
               <em>*</em>
               <span>비밀번호</span>
             </label>
-            <input class="hi input input-default" type="password" name="memPw" id="password" value="" required="" onblur="pwCheck()">
+            <input class="hi input input-default" type="password" name="memPw" id="password" value="" required="" ">
             <p class="app-error">영어 대/소문자, 숫자, 특수문자를 포함한 8자리 ~ 30자리</p>
           </li>
           
@@ -472,7 +391,7 @@
               <em>*</em>
               <span>비밀번호 확인</span>
             </label>
-            <input type="password" id="password2" name="memPw2" value="" required="" onblur="pw2Check()">
+            <input type="password" id="password2" name="memPw2" value="" required="">
             <p class="app-error"></p>
           </li>
           
