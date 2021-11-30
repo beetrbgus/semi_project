@@ -9,11 +9,11 @@ public class Friend_Pagination {
 	private String uid;
 	private int p;
 	private int count;
-	
+
 	//선택 데이터
 	private String column; // sender , receiver , readtime
 	private String keyword;
-	
+
 	//생성자를 이용하여 필수 데이터를 설정하도록 구현
 	public Friend_Pagination(HttpServletRequest req) {
 		try {
@@ -24,13 +24,13 @@ public class Friend_Pagination {
 		}
 		catch(Exception e) {
 			this.p = 1;
-			
+
 		}
 		this.column = req.getParameter("column");
 		this.keyword = req.getParameter("keyword");
 
 	}
-	
+
 	//계산 메소드
 	private int pageSize = 10;
 	private int blockSize = 10;
@@ -38,21 +38,21 @@ public class Friend_Pagination {
 	private int startBlock, finishBlock, lastBlock;
 	private List<FriendVo> list;
 	public void calculate() throws Exception {
-		
+
 		//count 계산
 		FriendDao friendDao = new FriendDao();
 
 		this.count = friendDao.count(uid);
-		
+
 		//rownum 계산
 		this.end = this.p * this.pageSize;
 		this.begin = this.end - (this.pageSize - 1);
-		
+
 		//block 계산
 		this.lastBlock = (this.count - 1) / this.pageSize + 1;
 		this.startBlock = (this.p - 1) / this.blockSize * this.blockSize + 1;
 		this.finishBlock = this.startBlock + (this.blockSize - 1);
-		
+
 		//list 계산
 		this.list = friendDao.friendmine(uid, this.begin, this.end);
 		System.out.println("count    : " + count);
@@ -64,8 +64,8 @@ public class Friend_Pagination {
 		System.out.println("isNextAvailable   : " + isNextAvailable() );
 		System.out.println("isNextAvailable   : " + isPreviousAvailable() );
 	}
-	
-	
+
+
 	public String getUid() {
 		return uid;
 	}
@@ -107,7 +107,7 @@ public class Friend_Pagination {
 	public int getLastBlock() {
 		return lastBlock;
 	}
-	
+
 	//추가 : 이전이 존재하나요?
 	public boolean isPreviousAvailable() {
 		return this.startBlock > 1;
@@ -128,7 +128,7 @@ public class Friend_Pagination {
 	public int getNextBlock() {
 		return this.finishBlock + 1;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Pagination [p=" + p + ", count=" + count + ", column=" + column + ", keyword=" + keyword + ", pageSize="

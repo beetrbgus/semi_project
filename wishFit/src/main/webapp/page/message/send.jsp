@@ -8,18 +8,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 %>
- 
+ 
 <!-- 헤더 -->
 <jsp:include page="/template/header.jsp"></jsp:include>
 <%
 String root = request.getContextPath();
-
-String uid = (String) request.getSession().getAttribute("uid");
+String uid = (String)request.getSession().getAttribute("uid");
+String receiver = request.getParameter("msg_receiver");
 System.out.println(" mypage  uid  " + uid);
 // 처리
 MemberDao memberDao = new MemberDao();
 MemberDto memberDto = memberDao.get(uid);
-
 // 프로필 이미지 조회
 MemberProfileDao memberProfileDao = new MemberProfileDao();
 MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
@@ -45,7 +44,6 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 }
-
 .app-article-toolbar .app-board-container {
 	display: flex;
 	justify-content: flex-end;
@@ -54,13 +52,6 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(uid);
 	padding-bottom: 1rem;
 }
 </style>
-<script>
-function messageValid(){
-	$("#msgBtn").click(function(){
-		$("#messageform").submit();
-	});
-}
-</script>
 <main class="app-content app-clearfix">
 	<div class="app-article-toolbar">
 		<div class="app-board-container">
@@ -83,7 +74,7 @@ function messageValid(){
 			<%-- 마이페이지 왼쪽것 --%>
 			<jsp:include page="/page/message/myPageLeftSide.jsp"></jsp:include>
 			<form action="send.kh" method="post" id="messageform">
-			<input type="hidden" name ="receiver" value="<%=request.getParameter("receiver")%>">
+			<input type="hidden" name ="receiver" value="<%=receiver%>">
 			<input type="hidden" name ="sender" value="<%=uid%>">
 			<div class="app-member-content">
 				<div class="app-member-card">
@@ -93,7 +84,8 @@ function messageValid(){
 
 					<div class="app-member-card-body">
 						<div class="app-board-article-profile tw-flex tw-items-center">
-							
+
+
 						</div>
 						<div class="tw-flex tw-items-center"></div>
 					</div>
@@ -105,7 +97,7 @@ function messageValid(){
 					<div class="app-member-card-body tw-flex tw-items-center">
 						<input type="text" class="folder_name app-input tw-mr-2"
 							style="margin: 0; display: none" >
-						<button type="button" id="msgBtn" class="app-button">전송</button>
+						<button type="submit" id="msgBtn" class="app-button">전송</button>
 						
 					</div>
 				</div>
@@ -115,7 +107,7 @@ function messageValid(){
 	</div>
 	<jsp:include page="/template/footer.jsp"></jsp:include>
 </main>
- 
-<!-- 우측 사이드  -->
+ 
+<!-- 우측 사이드  -->
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>

@@ -1,5 +1,4 @@
 package wishFit.beans.message;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,15 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import wishFit.util.JdbcUtils;
-
 public class MessageDao {
 	Connection conn;
-
 	// 쪽지 보내기
 	public void send(MessageVo messageVo) throws Exception {
-
 		conn = JdbcUtils.connect();
 		conn.setAutoCommit(false);
 		try {
@@ -32,18 +27,14 @@ public class MessageDao {
 			conn.close();
 		}
 	}
-
 	public void insertMessage(Connection conn, MessageVo messageVo) throws Exception {
-
 		String sql = "insert into Message values(? , ?, ? , sysdate, null)";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, messageVo.getMsg_no());
 		ps.setString(2, messageVo.getMsg_receiver());
 		ps.setString(3, messageVo.getMsg_sender());
-
 		ps.execute();
 	}
-
 	public void sendMessageContext(Connection conn, MessageVo messageVo) throws Exception {
 		// 메세지 내용 입력
 		String sql = "insert into MessageContext values(msgcon_seq.nextval, ? ,? ,? )";
@@ -53,7 +44,6 @@ public class MessageDao {
 		ps.setString(3, messageVo.getMsgCon_text());
 		ps.execute();
 	}
-
 	// 쪽지 삭제
 	public void deleteMessage(int msg_no, String mem_id) throws Exception {
 		conn = JdbcUtils.connect();
@@ -61,12 +51,9 @@ public class MessageDao {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, msg_no);
 		ps.setString(2, mem_id);
-
 		ps.execute();
-
 		conn.close();
 	}
-
 	// 메세지 상세보기
 	public MessageVo detailMessage(int msg_no, String uid) throws Exception {
 		conn = JdbcUtils.connect();
@@ -85,7 +72,6 @@ public class MessageDao {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, msg_no);
 		ps.setString(2, uid);
-
 		ResultSet rs = ps.executeQuery();
 		MessageVo messageVo = new MessageVo();
 		if (rs.next()) {
@@ -103,7 +89,6 @@ public class MessageDao {
 		conn.close();
 		return messageVo;
 	}
-
 	// 안 읽은 메세지 갯수 가져오기.
 	public int getNotReadCount(String mem_id) throws Exception {
 
@@ -120,7 +105,6 @@ public class MessageDao {
 		conn.close();
 		return notRead;
 	}
-
 	// 검색어 있는 쪽지 갯수 세기
 	public int count(String uid, String column, String keyword) throws Exception {
 		conn = JdbcUtils.connect();
@@ -131,15 +115,12 @@ public class MessageDao {
 		PreparedStatement ps = conn.prepareCall(sql);
 		ps.setString(1, keyword);
 		ps.setString(2, uid);
-
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int result = rs.getInt(1);
 		conn.close();
-
 		return result;
 	}
-
 	// 전체 쪽지 갯수 세기
 	public int count(String uid) throws Exception {
 		conn = JdbcUtils.connect();
@@ -147,12 +128,10 @@ public class MessageDao {
 				+ "    messageContext msgcon on msg.no = msgcon.msg_no " + "    where receiver = ?";
 		PreparedStatement ps = conn.prepareCall(sql);
 		ps.setString(1, uid);
-
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int result = rs.getInt(1);
 		conn.close();
-
 		return result;
 	}
 	// 전체 메세지 목록
@@ -180,7 +159,6 @@ public class MessageDao {
 		ps.setInt(3, end);
 		
 		ResultSet rs = ps.executeQuery();
-
 		List<MessageVo> list = new ArrayList<MessageVo>();
 		System.out.println("MessageDao      while 전 " );
 		while (rs.next()) {
@@ -196,18 +174,15 @@ public class MessageDao {
 			messageVo.setMsgCon_text(rs.getString("msg_text"));
 			messageVo.setMsg_sendTime(rs.getString("msg_sendTime"));
 			messageVo.setMsg_readTime(rs.getString("msg_readtime"));
-
 			list.add(messageVo);
 		}
 		System.out.println("MessageDao      while 후 " );
 		conn.close();
 		return list;
 	}
-
 	// 안읽은 메세지 목록
 	public List<MessageVo> notReadMsgList(String mem_id, int begin, int end) throws Exception {
 		conn = JdbcUtils.connect();
-
 		String sql = 
 					"select *  from ( "
 				+ "		select rownum rn, TMP.* from ( "
@@ -225,9 +200,7 @@ public class MessageDao {
 		ps.setString(1, mem_id);
 		ps.setInt(2, begin);
 		ps.setInt(3, end);
-
 		ResultSet rs = ps.executeQuery();
-
 		List<MessageVo> list = new ArrayList<MessageVo>();
 		while (rs.next()) {
 			MessageVo messageVo = new MessageVo();
@@ -269,6 +242,7 @@ public class MessageDao {
 
 		ResultSet rs = ps.executeQuery();
 		List<MessageVo> result = new ArrayList<MessageVo>();
+
 		System.out.println();
 		while (rs.next()) {
 			MessageVo messageVo = new MessageVo();
@@ -280,7 +254,9 @@ public class MessageDao {
 			messageVo.setMem_nick(rs.getString("mem_nick"));
 			messageVo.setMsgCon_title(rs.getString("title"));
 			messageVo.setMsgCon_text(rs.getString("text"));
+
 			result.add(messageVo);
+
 		}
 		conn.close();
 
@@ -295,7 +271,6 @@ public class MessageDao {
 		ps.setString(2, uid);
 		int result = ps.executeUpdate();
 		conn.close();
-		
-	}
 
+	}
 }

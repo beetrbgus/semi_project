@@ -1,42 +1,53 @@
-package wishFit.beans.friend;
-
-public class FriendDto {
-	private int no;
-	private String receiver;
-	private String sender;
-	private String reg_date;  
-	private String stat;
-	
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
-	}
-	public String getStat() {
-		return stat;
-	}
-	public void setStat(String stat) {
-		this.stat = stat;
-	}
-	public String getReceiver() {
-		return receiver;
-	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
-	}
-	public String getSender() {
-		return sender;
-	}
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
-	public String getReg_date() {
-		return reg_date;
-	}
-	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date;
-	}
-
-	
-}
+//package wishFit.beans.friend;
+//
+//public class FriendDto {
+//	private int friendNo;
+//	private String friendId, friendNick;
+//	private String friendReceiver;
+//	private String friendSender;
+//	private String friendDate;
+//	public FriendDto() {
+//		super();
+//
+//	}
+//	@Override
+//	public String toString() {
+//		return "FriendDto [friendNo=" + friendNo + ", friendId=" + friendId + ", friendNick=" + friendNick
+//				+ ", friendDate=" + friendDate + "]";
+//	}
+//	private String friendStat;
+//
+//	public int getFriendNo() {
+//		return friendNo;
+//	}
+//	public void setFriendNo(int friendNo) {
+//		this.friendNo = friendNo;
+//	}
+//	public String getFriendReceiver() {
+//		return friendReceiver;
+//	}
+//	public void setFriendReceiver(String friendReceiver) {
+//		this.friendReceiver = friendReceiver;
+//	}
+//	public String getFriendSender() {
+//		return friendSender;
+//	}
+//	public void setFriendSender(String friendSender) {
+//		this.friendSender = friendSender;
+//	}
+//	public String getFriendDate() {
+//		return friendDate;
+//	}
+//	public void setFriendDate(String friendDate) {
+//		this.friendDate = friendDate;
+//	}
+//	public String getFriendStat() {
+//		return friendStat;
+//	}
+//	public void setFriendStat(String friendStat) {
+//		this.friendStat = friendStat;
+//	}
+//
+//
+//
+//}

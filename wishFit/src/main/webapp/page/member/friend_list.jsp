@@ -16,12 +16,12 @@
 	String friendId = request.getParameter("friendId");
 	
 	FriendDao friendDao = new FriendDao();
+	
 	Friend_Pagination friendPage = new Friend_Pagination(request);
 	friendPage.setUid(uid);	
 	friendPage.calculate();
 	List<FriendVo> friendMine = friendPage.getList();
 	System.out.println("friendMine.size()     : "+friendMine.size());
-
 %>
 <!-- 헤더 -->
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -42,7 +42,8 @@
 <jsp:include page="/template/leftSide.jsp"></jsp:include>
 
 <main class="app-content app-clearfix">
-	
+
+
 	<div class="app-clearfix">
 		<section class="app-member">
 			<%-- 마이페이지 왼쪽것 --%>
@@ -56,7 +57,7 @@
 					<form method="post" action="">
 					<div class="app-member-card-body">
 						<div class="tw-flex tw-items-center">
-							
+
 						</div>
 					</div>
 					</form>
@@ -81,17 +82,17 @@
 									<div class="tw-flex tw-items-center tw-flex-wrap">
 										<!-- 닉네임 -->
 										<span class="tw-text-xs tw-text-gray-700 tw-mr-3"><%=friendVo.getFriendNick() %></span>
-									
+
 										<!-- 받은 ? 날짜 -->
 										<span class="tw-text-xs tw-text-gray-700 tw-mr-3"><%=friendVo.getFriendDate() %></span>
 									</div>
 								</div>
-								
+
 								<button class="app-button" type="button">
 									삭제
 								</button>
-								
-			
+
+
 							</li>
 							<% } %>
 						</ul>
@@ -126,7 +127,7 @@
 	</div>
 	<jsp:include page="/template/footer.jsp"></jsp:include>
 </main>
- 
-<!-- 우측 사이드  -->
+
+<!-- 우측 사이드  -->
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
-<jsp:include page="/template/bottomNav.jsp"></jsp:include>
+<jsp:include page="/template/bottomNav.jsp"></jsp:include> 

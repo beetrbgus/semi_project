@@ -1,5 +1,16 @@
+<%@page import="wishFit.beans.board.BoardDto"%>
+<%@page import="wishFit.beans.fitgroupimage.FitgroupImageDto"%>
+<%@page import="wishFit.beans.fitgroupimage.FitgroupImageDao"%>
+<%@page import="java.util.List"%>
+<%@page import="wishFit.beans.board.BoardImageVO"%>
+<%@page import="wishFit.beans.board.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
+%>
+<%
+	String root = request.getContextPath();
+	BoardDao boardDao = new BoardDao();
+
 %>
 
 <!-- 헤더 -->
@@ -12,11 +23,9 @@
 	<!-- 배너 부분. 인덱스 부분만 필요. -->
 	<div class="app-main-banner swiper-container">
 		<div class="swiper-wrapper">
-			<a class="swiper-slide" href="notice/170.html" target="_blank"> <img
-				class="app-main-banner-bg"
-				src="files/attach/images/113/4f0e42b21e6955439e25b0d32ac915c4.jpg"
-				alt="오픈했어요!"
-			>
+			<a class="swiper-slide" href="<%=root%>/index.jsp" target="_blank"> <img class="app-main-banner-bg" 
+			src="https://sweatee.co.kr/files/attach/images/113/4f0e42b21e6955439e25b0d32ac915c4.jpg" 
+			alt="오픈했어요!">
 
 				<div class="app-main-banner-body">
 					<div class="app-main-banner__container">
@@ -72,12 +81,12 @@
 			<div class="app-widgetstyle-wrap" style="height: 100%">
 				<div class="app-widgetstyle-card app-card">
 					<div class="app-widgetstyle-header">
-						<div class="tw-text-base tw-font-bold">오늘의 운동</div>
+						<div class="tw-text-base tw-font-bold">내 기록</div>
 
 						<div class="tw-flex-1"></div>
 
 						<a class="app-button primary app-button-xs"
-							href="certifyboard.html"
+							href="<%=root %>/page/record/my_record.jsp"
 						>더보기</a>
 					</div>
 
@@ -89,19 +98,29 @@
 								<ul class="app-widget-content app-gallery"
 									style="grid-template-columns: repeat(3, 1fr);"
 								>
-									<li><a href="certifyboard/1061.html#0">
+								<!-- 이 부분 반복 -->
+								<%
+									String boardLargeName  = "기록";
+									String boardWriter=(String)session.getAttribute("uid");
+									List<BoardImageVO> list = boardDao.listByLargeName(boardLargeName,boardWriter);
+									for(BoardImageVO boardImageVO : list){
+								%>
+									<li><a href="<%=root %>/page/record/record_detail.jsp?boardNo=<%=boardImageVO.getBoardNo()%>">
 											<div class="app-thumbnail">
+											<%if(boardImageVO.getImageNo()!=0){ %>
 												<img
-													src="files/thumbnails/061/001/100x75.cropfa77.jpg?20210424151650"
-													srcset="https://sweatee.co.kr/files/thumbnails/061/001/200x150.crop.jpg?20210424151640 2x"
-													alt="글 제목" width="100" height="75" style=""
+													src="board/download.kh?imageNo=<%=boardImageVO.getImageNo() %>" 
+													  style="width:100px; height:150px;"
 												>
-												<!--  -->
+												<%}else{ %>
+													<img src = "<%=root %>/resources/common/img/no_image.gif" style="width:100px;height:150px">
+												<%} %>
 											</div>
 											<div class="app-gallery-body">
 												<div class="app-meta"></div>
 											</div>
 									</a></li>
+									<%} %>
 
 								</ul>
 							</div>
@@ -117,7 +136,7 @@
 			<div class="app-widgetstyle-wrap" style="height: 100%">
 				<div class="app-widgetstyle-card app-card">
 					<div class="app-widgetstyle-header">
-						<div class="tw-text-base tw-font-bold">오늘의 운코</div>
+						<div class="tw-text-base tw-font-bold">소모임</div>
 
 						<div class="tw-flex-1"></div>
 
@@ -134,20 +153,28 @@
 								<ul class="app-widget-content app-gallery"
 									style="grid-template-columns: repeat(3, 1fr);"
 								>
-									<li><a href="coordiboard/1023.html#0">
+								<% 
+								FitgroupImageDao fitgroupImageDao = new FitgroupImageDao();
+								List<FitgroupImageDto> list2 = fitgroupImageDao.findIndex();
+								for( FitgroupImageDto fitgroupImageDto: list2){
+								%>
+									<li><a href="<%=root %>/page/fitgroup/detail.jsp?fgNo=<%=fitgroupImageDto.getFgNo()%>">
 											<div class="app-thumbnail">
+											<%if(fitgroupImageDto.getFgImageNo()!=0){ %>
 												<img
-													src="files/thumbnails/023/001/100x75.cropa184.jpg?20210422210405"
-													srcset="https://sweatee.co.kr/files/thumbnails/023/001/200x150.crop.jpg?20210422210357 2x"
-													alt="수영완료 !" width="100" height="75" style=""
+													src="fitgroup/download.kh?fgImageNo=<%=fitgroupImageDto.getFgImageNo() %>"
+													style="width:100px; height:150px;"
 												>
+												<%}else{ %>
+													<img src = "<%=root %>/resources/common/img/no_image.gif" style="width:100px;height:150px">
+												<%} %>
 												<!--  -->
 											</div>
 											<div class="app-gallery-body">
 												<div class="app-meta"></div>
 											</div>
 									</a></li>
-
+									<%} %>
 								</ul>
 							</div>
 						</div>
@@ -180,11 +207,11 @@
 			<div class="app-widgetstyle-wrap" style="height: 100%">
 				<div class="app-widgetstyle-card app-card">
 					<div class="app-widgetstyle-header">
-						<div class="tw-text-base tw-font-bold">새로운 소식</div>
+						<div class="tw-text-base tw-font-bold">커뮤니티</div>
 
 						<div class="tw-flex-1"></div>
 
-						<a class="app-button primary app-button-xs" href="infomation.html">더보기</a>
+						<a class="app-button primary app-button-xs" href="<%=root%>/page/community/list.jsp">더보기</a>
 					</div>
 
 					<div class="app-clearfix">
@@ -193,23 +220,30 @@
 							<div class="app-widget-content-main">
 								<!--#Meta:widgets/content/skins/slow/templates/normal/normal.scss?$__Context->themeConfig->variables-->
 								<ul class="app-widget-content app-widget-content-normal">
-									<li><a href="news/1106.html">
+								<!-- 반복부분 -->
+								<%
+									boardLargeName="커뮤니티";
+									List<BoardDto> list3 = boardDao.listByLargeName2(boardLargeName);
+									for(BoardDto boardDto : list3){
+								%>
+									<li><a href="<%=root%>/page/community/detail.jsp?boardNo=<%=boardDto.getBoardNo()%>">
 											<div class="tw-flex tw-items-center tw-flex-wrap">
 												<div class="tw-mr-3">
 
 													<span
 														class="tw-text-sm tw-font-bold tw-text-gray-700 tw-mr-1"
 														style="color: !important;"
-													>자전거</span>
+													><%=boardDto.getBoardMiddleName()%></span>
 
-													<span class="tw-text-sm">가민 가정의 달 맞이 특별 프로모션 세일</span>
+													<span class="tw-text-sm"><%=boardDto.getBoardTitle()%></span>
 												</div>
 											</div>
 											<div>
-												<span class="tw-text-xs tw-text-gray-700 tw-mr-2">스웻티뉴스</span>
-												<span class="tw-text-xs tw-text-gray-700">2021-05-04</span>
+											<%String boardTime = boardDto.getBoardDate().substring(0,10);%>
+												<span class="tw-text-xs tw-text-gray-700"><%=boardTime%></span>
 											</div>
 									</a></li>
+									<%} %>
 
 								</ul>
 							</div>
@@ -225,11 +259,11 @@
 			<div class="app-widgetstyle-wrap" style="height: 100%">
 				<div class="app-widgetstyle-card app-card">
 					<div class="app-widgetstyle-header">
-						<div class="tw-text-base tw-font-bold">스웻티마켓</div>
+						<div class="tw-text-base tw-font-bold">마켓</div>
 
 						<div class="tw-flex-1"></div>
 
-						<a class="app-button primary app-button-xs" href="market.html">더보기</a>
+						<a class="app-button primary app-button-xs" href="<%=root%>/page/market/list.jsp">더보기</a>
 					</div>
 
 					<div class="app-clearfix">
@@ -238,18 +272,25 @@
 							<div class="app-widget-content-main">
 								<!--#Meta:widgets/content/skins/slow/templates/normal/normal.scss?$__Context->themeConfig->variables-->
 								<ul class="app-widget-content app-widget-content-normal">
-									<li><a href="sell/1139.html">
+								<!-- 여기 반복 -->
+								<%
+									boardLargeName="마켓";
+									List<BoardDto> list4 = boardDao.listByLargeName2(boardLargeName);
+									for(BoardDto boardDto : list4){
+								%>
+									<li><a href="<%=root%>/page/market/detail.jsp?boardNo=<%=boardDto.getBoardNo()%>">
 											<div class="tw-flex tw-items-center tw-flex-wrap">
 												<div class="tw-mr-3">
 
-													<span class="tw-text-sm">123</span>
+													<span class="tw-text-sm"><%=boardDto.getBoardTitle()%></span>
 												</div>
 											</div>
 											<div>
-												<span class="tw-text-xs tw-text-gray-700 tw-mr-2">포카리스웻티</span>
-												<span class="tw-text-xs tw-text-gray-700">2021-10-18</span>
+												<span class="tw-text-xs tw-text-gray-700 tw-mr-2"><%=boardDto.getBoardMiddleName() %></span>
+												<span class="tw-text-xs tw-text-gray-700"><%=boardDto.getBoardDate().substring(0,10)%></span>
 											</div>
 									</a></li>
+									<%} %>
 
 								</ul>
 						

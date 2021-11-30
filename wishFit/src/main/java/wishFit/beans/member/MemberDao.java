@@ -38,7 +38,6 @@ public class MemberDao {
 		ps.setString(9,memberDto.getMemPwA());
 		ps.execute();
 		
-		System.out.print("들어옴");
 		conn.close();
 	}
 	//로그인 
@@ -72,15 +71,13 @@ public class MemberDao {
 		if (result) {
 			
 			memberDto = new MemberDto();
-			
+
 			memberDto.setMemId(rs.getString("mem_id"));
 			memberDto.setMemPw(rs.getString("mem_pw"));
 			memberDto.setMemNick(rs.getString("mem_nick"));
 			memberDto.setMemGrade(rs.getString("mem_grade"));
 			memberDto.setMemBirth(rs.getString("mem_birth"));
 			memberDto.setMemGender(rs.getString("mem_gender"));
-			memberDto.setMemPwQ(rs.getString("mem_pw_q"));
-			memberDto.setMemPwA(rs.getString("mem_pw_a"));
 			memberDto.setMemName(rs.getString("mem_name"));
 			memberDto.setMemPhone(rs.getString("mem_phone"));
 			memberDto.setMemReport(rs.getInt("mem_report"));
@@ -90,6 +87,8 @@ public class MemberDao {
 			memberDto = null;
 		}
 		con.close();
+		
+	
 		return memberDto;
 	}
 
@@ -112,7 +111,6 @@ public class MemberDao {
 	//정보 수정
 	public boolean edit(MemberDto memberDto) throws Exception {
 		Connection conn = JdbcUtils.connect();
-		System.out.println(memberDto);
 		String sql="update member "
 				+ "set "
 					+ "mem_pw=?,"
@@ -127,6 +125,12 @@ public class MemberDao {
 		ps.setString(3, memberDto.getMemPhone());
 		ps.setString(4, memberDto.getMemId());
 		
+		System.out.println(memberDto.getMemId());
+		System.out.println(memberDto.getMemPw());
+		System.out.println(memberDto.getMemNick());
+		System.out.println(memberDto.getMemGender());
+		System.out.println(memberDto.getMemPhone());
+		System.out.println(memberDto.getMemName());
 		int result = ps.executeUpdate();
 
 		conn.close();

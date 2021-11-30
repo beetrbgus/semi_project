@@ -16,6 +16,10 @@ public class MemberEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
+			// 프로필 사진 삭제 후 수정 : 
+			
+			
 			req.setCharacterEncoding("UTF-8");
 			
 			MemberDto memberDto = new MemberDto();
