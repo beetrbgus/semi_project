@@ -96,44 +96,7 @@ public class FriendDao {
 				result = 0;
 				System.out.println("엘스가 떠버렸넹");
 			}
-
-<<<<<<< HEAD
-		int result = ps.executeUpdate();
-		
-		conn.close();
-		return result > 0;
-	}
-	//친구 추가
-	public void plus(FriendVo friendDto) throws Exception{
-		conn = JdbcUtils.connect();
-		
-		String sql = "insert into friend  values("
-				+ "friend_seq.nextval, ? , ? , sysdate , ?)";
-		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(1, friendDto.getFriendReceiver());
-		ps.setString(2, friendDto.getFriendSender());
-		ps.setString(3, "친구");
-		ps.execute();
-		conn.close();
-	}
-	// 친구 수 구하기
-	public int count(String uid) throws Exception{
-		conn = JdbcUtils.connect();
-		String sql = "select count(*) from friend where receiver = ?";
-		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(1, uid);
-		
-		ResultSet rs = ps.executeQuery();
-		int result;
-		if(rs.next()) {
-			result = rs.getInt(1);
-			System.out.println("FreindDao :   result   "  + result);
-		}else {
-			result = 0;
-			System.out.println("엘스가 떠버렸넹");
-=======
 			return result;
->>>>>>> refs/remotes/origin/master
 		}
 		public int get(String uid,String mid) throws Exception{
 			conn = JdbcUtils.connect();
