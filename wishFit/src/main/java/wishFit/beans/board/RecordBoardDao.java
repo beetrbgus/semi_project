@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import wishFit.util.CommonSql;
+import wishFit.util.JdbcUtils;
 
 public class RecordBoardDao {
 	//기록조회파트

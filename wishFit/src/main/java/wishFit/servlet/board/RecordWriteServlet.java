@@ -50,8 +50,8 @@ public class RecordWriteServlet extends HttpServlet{
 			boardDto.setBoardWriter(mRequest.getParameter("boardWriter"));
 			
 			
+
 			int boardNo = boardDao.boardSeq();
-//			int boardNo = GetSeq.getSequence("board_seq");
 			boardDto.setBoardNo(boardNo);
 			
 			//글 등록

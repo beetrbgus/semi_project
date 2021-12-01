@@ -8,12 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
-import wishFit.beans.fitgroupimage.FitgroupImageDao;
-import wishFit.beans.fitgroupimage.FitgroupImageDto;
 import wishFit.beans.fitgroup.FitgroupDao;
 import wishFit.beans.fitgroup.FitgroupDto;
 
@@ -29,8 +23,6 @@ public class FitUpdateServlet extends HttpServlet {
 			int fgNo = Integer.parseInt(req.getParameter("fgNo"));
 			System.out.println(fgNo);
 			FitgroupDto fitgroupDto = new FitgroupDto();
-			//req.getSession().setAttribute("ses", memId);
-			//fitgroupDt.setFgId((String)req.getSession().getAttribute("ses"));
 			
 			fitgroupDto.setFgNo(Integer.parseInt(req.getParameter("fgNo")));
 			fitgroupDto.setExcateName(req.getParameter("excateName"));

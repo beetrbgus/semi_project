@@ -232,3 +232,4 @@ String root = request.getContextPath();
 </main>
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>
+>>>>>>> refs/remotes/origin/master

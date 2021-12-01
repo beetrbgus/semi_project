@@ -21,22 +21,16 @@ public class MemberLoginServlet extends HttpServlet{
 			String memPw = req.getParameter("memPw");
 			
 			MemberDao memberDao = new MemberDao();
-			MemberDto memberDto = new MemberDto();
-			memberDto = memberDao.login(memId, memPw);
-			
-			 
-			boolean login = memberDto.getMemId() !=null || !memberDto.getMemId().equals("");
-			if(login) {
-
+			MemberDto memberDto = memberDao.login(memId , memPw);
+			System.out.println(memberDto);
+			if(memberDto != null) {
 				req.getSession().setAttribute("uid", memId);
-				req.getSession().setAttribute("grade", memberDto.getMemGrade()); //관리자
-				
-				resp.getWriter().write(memId);
-			} 
+				req.getSession().setAttribute("grade", memberDto.getMemGrade());
+				resp.sendRedirect(req.getContextPath());
+			}
 		}	catch(Exception e) {
 			e.printStackTrace();
-			
+			resp.sendError(500);
 		}
-		
 	}
 }

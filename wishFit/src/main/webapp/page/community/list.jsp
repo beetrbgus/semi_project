@@ -286,3 +286,4 @@ String root = request.getContextPath();
 
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>
+>>>>>>> refs/remotes/origin/master

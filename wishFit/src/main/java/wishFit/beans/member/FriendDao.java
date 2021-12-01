@@ -96,7 +96,6 @@ public class FriendDao {
 				result = 0;
 				System.out.println("엘스가 떠버렸넹");
 			}
-
 			return result;
 		}
 		public int get(String uid,String mid) throws Exception{

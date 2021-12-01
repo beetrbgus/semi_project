@@ -10,7 +10,7 @@ String root = request.getContextPath();
 %>
 <!-- 받아놔야 하는 것 boardNo / member의 memId(session) -->
  <%
-	 int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
    	String boardWriter = (String)session.getAttribute("uid"); 
    	//String boardWriter=request.getParameter("boardWriter");
  %>
@@ -228,6 +228,7 @@ String root = request.getContextPath();
 				등록</a></li>
 	</ul>
 </div>
+>>>>>>> refs/remotes/origin/master
 <jsp:include page="/template/rightSide.jsp"></jsp:include>
 <jsp:include page="/template/bottomNav.jsp"></jsp:include>
 

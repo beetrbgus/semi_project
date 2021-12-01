@@ -353,7 +353,3 @@ MemberProfileDto memberProfileDto = memberProfileDao.get(fitgroupDto.getFgId());
 				등록</a></li>
 	</ul>
 </div>
-
-
-
-

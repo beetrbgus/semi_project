@@ -7,19 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wishFit.util.JdbcUtils;
-
-// 마이페이지 - 작성 글 목록 보기
+import wishFit.beans.firgroupimage.FitgroupImageDao;
+import wishFit.beans.firgroupimage.FitgroupImageDto;
+//마이페이지 - 작성 글 목록 보기
 public class FitgroupDao {
-	public List<FitgroupDto> fitgroupMine(String column, String keyword) throws Exception{
+//전체조회
+	public List<FitgroupDto> list() throws Exception {
 		Connection con = JdbcUtils.connect();
-		
-		String sql = "select * from fitgroup where #1 = ? order by fg_no desc";
-		
-		sql = sql.replace("#1", column);
+		String sql = "select * from fitgroup where fg_starttime>sysdate";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
-		
 		List<FitgroupDto> list = new ArrayList<>();
 		while (rs.next()) {
 			FitgroupDto fitgroupDto = new FitgroupDto();
@@ -29,6 +26,8 @@ public class FitgroupDao {
 			fitgroupDto.setExcateName(rs.getString("excate_name"));
 			fitgroupDto.setFgTitle(rs.getString("fg_title"));
 			fitgroupDto.setFgIntro(rs.getString("fg_intro"));
+			fitgroupDto.setFgStarttime(rs.getString("fg_starttime"));
+			fitgroupDto.setFgEndtime(rs.getString("fg_endtime"));
 			fitgroupDto.setFgLocation(rs.getString("fg_location"));
 			fitgroupDto.setFgLatitude(rs.getString("fg_latitude"));
 			fitgroupDto.setFgLongtitude(rs.getString("fg_longitude"));
@@ -37,9 +36,9 @@ public class FitgroupDao {
 			list.add(fitgroupDto);
 		}
 		con.close();
-		
 		return list;
 	}
+
 	//vo를 활용한 전체 조회
 		public List<FitImageVO> listAll() throws Exception {
 			Connection con = JdbcUtils.connect();

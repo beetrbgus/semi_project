@@ -60,7 +60,11 @@
 					$(document).ready(function(){
 						$(".app-button").on("click",function(){
 							let msgNo = $(this).parent("li").find("div>input").val();
+<<<<<<< HEAD
+							location.href="./delete.kh?msgNo="+msgNo ; 
+=======
 							location.href="./delete.kh?msgNo="+msgNo ;
+>>>>>>> refs/remotes/origin/master
 						});						
 					});
 					</script>
@@ -70,8 +74,13 @@
 							<li class="tw-flex tw-items-center">
 								<div class="tw-flex-1">
 									<!-- 쪽지 제목 -->
+<<<<<<< HEAD
+									<input type="hidden" value="<%=messageVo.getMsg_no()%>"> 
+									<a class="tw-text-sm tw-mb-1" href="<%=root %>/page/message/detail.jsp?msg_no=<%=messageVo.getMsg_no() %>" 
+=======
 									<input type="hidden" value="<%=messageVo.getMsg_no()%>">
 									<a class="tw-text-sm tw-mb-1" href="<%=root %>/page/message/detail.jsp?msg_no=<%=messageVo.getMsg_no() %>"
+>>>>>>> refs/remotes/origin/master
 										target="_blank"><%=messageVo.getMsgCon_title() %></a>
 									<!-- 쪽지 하단 -->
 									<div class="tw-flex tw-items-center tw-flex-wrap">

@@ -169,8 +169,4 @@ public class ImageDao {
 		return  list;
 		
 	}
-	
-	
-	
-	
 }

@@ -315,6 +315,7 @@ FitgroupDto fitgroupDto = fitgroupDao.detail(fgNo);
                         <div class="tw-flex">
                            <%-- 취소버튼 --%>
                             <a href="detail.jsp?fgNo=<%=fgNo %>" class="app-button tw-mr-2 sm:tw-flex-1">취소</a>
+>>>>>>> refs/remotes/origin/master
                            <%-- 수정버튼 --%>
  							<button id="fgBtn" type="submit" class="app-button primary sm:tw-flex-1">등록</button>	
                         </div>
